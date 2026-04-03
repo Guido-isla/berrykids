@@ -51,7 +51,7 @@ export default function Header() {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Zoeken..."
                 autoFocus
-                className="w-36 rounded-full border border-[#E0D8D2] bg-white px-3 py-1.5 text-sm outline-none focus:border-[#E85A5A] sm:w-48"
+                className="w-full rounded-full border border-[#E0D8D2] bg-white px-3 py-2 text-sm outline-none focus:border-[#E85A5A] sm:w-48"
               />
               <button
                 type="button"

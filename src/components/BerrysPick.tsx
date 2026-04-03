@@ -49,7 +49,7 @@ export default function BerrysPick({ event, reason }: { event: EventWithImage; r
             </span>
           </div>
 
-          <h2 className="mt-2 text-2xl font-extrabold leading-snug text-white sm:text-3xl">
+          <h2 className="mt-2 text-xl font-extrabold leading-snug text-white sm:text-2xl md:text-3xl">
             {event.title}
           </h2>
 

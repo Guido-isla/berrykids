@@ -50,7 +50,7 @@ export default function WeekView({ events }: { events: Event[] }) {
             <button
               key={i}
               onClick={() => setSelectedIdx(i)}
-              className={`flex shrink-0 flex-col items-center rounded-xl border px-4 py-3 transition-all ${
+              className={`flex shrink-0 flex-col items-center rounded-xl border px-2.5 py-2 transition-all sm:px-4 sm:py-3 ${
                 selectedIdx === i
                   ? "border-[#E85A5A] bg-[#E85A5A] text-white shadow-sm"
                   : "border-[#E0D8D2] bg-white text-[#2B2B2B] hover:border-[#E85A5A]/40"

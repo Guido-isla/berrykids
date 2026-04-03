@@ -47,7 +47,7 @@ export default function Sidebar({
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm">
       {/* Berry's day plan — takes the whole card */}
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
         <div className="mb-3 flex items-center gap-3">
           <div className="animate-berry-bounce shrink-0">
             <Image
@@ -67,7 +67,7 @@ export default function Sidebar({
           {lines.map((line, i) => (
             <p
               key={i}
-              className={`text-[13px] leading-relaxed ${
+              className={`text-xs leading-relaxed sm:text-[13px] ${
                 line.startsWith("☀️") || line.startsWith("🌤️") || line.startsWith("☕") || line.startsWith("🌷") || line.startsWith("❄️") || line.startsWith("🍂") || line.startsWith("☀")
                   ? "rounded-lg bg-[#FFF8F4] px-3 py-2 text-[#2B2B2B]"
                   : i === 0
@@ -95,11 +95,11 @@ export default function Sidebar({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="je@email.nl"
-              className="min-w-0 flex-1 rounded-full border border-[#F0E6E0] bg-[#FFF8F4] px-3 py-1.5 text-xs outline-none focus:border-[#E85A5A]"
+              className="min-w-0 flex-1 rounded-full border border-[#F0E6E0] bg-[#FFF8F4] px-3 py-2.5 text-xs outline-none focus:border-[#E85A5A]"
             />
             <button
               type="submit"
-              className="shrink-0 rounded-full bg-[#E85A5A] px-3 py-1.5 text-xs font-bold text-white hover:bg-[#D04A4A]"
+              className="shrink-0 rounded-full bg-[#E85A5A] px-4 py-2.5 text-xs font-bold text-white hover:bg-[#D04A4A]"
             >
               📬
             </button>

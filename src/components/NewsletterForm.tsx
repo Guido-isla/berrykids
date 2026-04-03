@@ -27,11 +27,11 @@ export default function NewsletterForm({ variant = "default" }: { variant?: "def
         type="email"
         required
         placeholder="je@email.nl"
-        className="min-w-0 flex-1 rounded-full border border-[#F0E6E0] bg-white px-4 py-2.5 text-sm outline-none transition-colors placeholder:text-[#999] focus:border-[#E85A5A]"
+        className="min-w-0 flex-1 rounded-full border border-[#F0E6E0] bg-white px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#999] focus:border-[#E85A5A]"
       />
       <button
         type="submit"
-        className="shrink-0 rounded-full bg-[#E85A5A] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#D04A4A]"
+        className="shrink-0 rounded-full bg-[#E85A5A] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#D04A4A]"
       >
         {variant === "hero" ? "Aanmelden" : "Inschrijven"}
       </button>

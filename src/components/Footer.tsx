@@ -11,7 +11,7 @@ export default function Footer() {
               De leukste uitjes en activiteiten voor gezinnen in de regio Haarlem.
             </p>
           </div>
-          <div className="flex gap-8 text-sm">
+          <div className="flex gap-4 text-sm sm:gap-8">
             <div className="space-y-2">
               <p className="text-xs font-bold uppercase tracking-wider text-[#999]">Ontdek</p>
               <Link href="/" className="block text-[#6B6B6B] transition-colors hover:text-[#2B2B2B]">Dit weekend</Link>

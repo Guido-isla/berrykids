@@ -120,7 +120,7 @@ export default async function EventPage({ params }: Props) {
             </div>
 
             {/* Title */}
-            <h1 className="mt-4 text-2xl font-extrabold leading-snug text-[#2B2B2B] sm:text-3xl">
+            <h1 className="mt-4 text-xl font-extrabold leading-snug text-[#2B2B2B] sm:text-2xl md:text-3xl">
               {event.title}
             </h1>
 
@@ -250,7 +250,7 @@ export default async function EventPage({ params }: Props) {
           <h2 className="mb-5 text-lg font-bold text-[#2B2B2B]">
             Meer in {event.area}
           </h2>
-          <div className="grid gap-5 sm:grid-cols-3">
+          <div className="grid gap-3 sm:gap-5 sm:grid-cols-3">
             {related.map((e) => (
               <EventCard key={e.slug} event={e} />
             ))}

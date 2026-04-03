@@ -34,7 +34,7 @@ function Pill({
   return (
     <button
       onClick={onClick}
-      className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-all ${
+      className={`shrink-0 rounded-full px-4 py-2.5 text-sm font-semibold transition-all ${
         active
           ? "bg-[#E85A5A] text-white"
           : "bg-white text-[#6B6B6B] hover:bg-[#FFF0EE] hover:text-[#E85A5A]"

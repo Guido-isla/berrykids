@@ -17,11 +17,11 @@ export default function TheaterAgenda() {
         {upcoming.map((show, i) => (
           <div
             key={i}
-            className={`flex items-start gap-4 p-5 ${
+            className={`flex items-start gap-2 p-4 sm:gap-4 sm:p-5 ${
               i < upcoming.length - 1 ? "border-b border-[#F0E6E0]" : ""
             }`}
           >
-            <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl bg-[#FDF1EA]">
+            <div className="flex h-12 w-12 shrink-0 sm:h-14 sm:w-14 flex-col items-center justify-center rounded-xl bg-[#FDF1EA]">
               <span className="text-xs font-bold uppercase text-[#E85A5A]">
                 {formatShortDate(show.date).split(" ")[0]}
               </span>

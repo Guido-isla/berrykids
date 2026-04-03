@@ -120,7 +120,7 @@ export default function VakantiesPage() {
                 <span className="text-xs font-bold uppercase tracking-wider opacity-80">
                   26 april – 9 mei 2026
                 </span>
-                <h2 className="mt-1 text-2xl font-extrabold sm:text-3xl">
+                <h2 className="mt-1 text-xl font-extrabold sm:text-2xl md:text-3xl">
                   🌷 Meivakantie — jouw weekplan
                 </h2>
                 <p className="mt-2 max-w-lg text-sm opacity-90">
@@ -145,9 +145,9 @@ export default function VakantiesPage() {
                 key={i}
                 className="overflow-hidden rounded-2xl bg-white shadow-sm"
               >
-                <div className="flex items-stretch">
+                <div className="flex flex-col sm:flex-row sm:items-stretch">
                   {/* Day label */}
-                  <div className="flex w-20 shrink-0 flex-col items-center justify-center bg-[#FFF8F4] p-3 sm:w-28">
+                  <div className="flex w-full shrink-0 flex-row items-center gap-2 bg-[#FFF8F4] p-3 sm:w-24 sm:flex-col sm:justify-center sm:gap-0">
                     <span className="text-2xl">{plan.emoji}</span>
                     <span className="mt-1 text-center text-[10px] font-bold uppercase leading-tight text-[#E85A5A] sm:text-xs">
                       {plan.theme}

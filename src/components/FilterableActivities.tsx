@@ -21,7 +21,7 @@ function Pill({ label, active, onClick }: { label: string; active: boolean; onCl
   return (
     <button
       onClick={onClick}
-      className={`shrink-0 rounded-full border px-3.5 py-2 text-sm font-semibold transition-all ${
+      className={`shrink-0 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all ${
         active
           ? "border-[#E85A5A] bg-[#E85A5A] text-white shadow-sm"
           : "border-[#E0D8D2] bg-white text-[#2B2B2B] hover:border-[#E85A5A]/40 hover:bg-[#FFF0EE]"
