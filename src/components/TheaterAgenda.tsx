@@ -7,9 +7,9 @@ export default function TheaterAgenda() {
   if (upcoming.length === 0) return null;
 
   return (
-    <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
-      <div className="mb-5 flex items-center justify-between">
-        <h2 className="text-xl font-extrabold text-[#2B2B2B]">
+    <section>
+      <div className="mb-4">
+        <h2 className="text-lg font-extrabold text-[#2B2B2B]">
           🎭 Theater &amp; concerten
         </h2>
       </div>

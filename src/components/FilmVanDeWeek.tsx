@@ -5,8 +5,8 @@ export default function FilmVanDeWeek() {
   const film = getFilmVanDeWeek();
 
   return (
-    <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
-      <h2 className="mb-5 text-xl font-extrabold text-[#2B2B2B]">
+    <section>
+      <h2 className="mb-4 text-lg font-extrabold text-[#2B2B2B]">
         🎬 Film van de week
       </h2>
       <div className="overflow-hidden rounded-2xl bg-white shadow-sm sm:flex">
