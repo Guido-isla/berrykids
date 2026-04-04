@@ -39,72 +39,76 @@ export default async function Home() {
   const ctx = await getSiteContext();
 
   const withImg = all.filter((e) => e.image !== "/berry-icon.png");
-  const hero = withImg[0];
-  const subPicks = withImg.slice(1, 5);
+  const subPicks = withImg.slice(0, 3);
   const freeEvents = withImg.filter((e) => e.free).slice(0, 3);
   const indoorEvents = withImg.filter((e) => e.indoor).slice(0, 3);
   const sportAct = resolveAct(activities.filter((a) => a.category === "sport").slice(0, 3));
   const cultAct = resolveAct(activities.filter((a) => a.category === "cultuur" || a.category === "indoor").slice(0, 3));
 
+  const topPick = withImg[0];
   // Berry tip — short
   let berryTip = "Scroll naar beneden voor de leukste tips deze week!";
-  if (ctx.calendar.holidayName?.includes("Paas") && hero) {
-    berryTip = `Fijne Pasen! 🥚 Tip: ${hero.title} — ${whyLine(hero.title, hero.free, hero.indoor).toLowerCase()}.`;
+  if (ctx.calendar.holidayName?.includes("Paas") && topPick) {
+    berryTip = `Fijne Pasen! 🥚 Tip: ${topPick.title} — ${whyLine(topPick.title, topPick.free, topPick.indoor).toLowerCase()}.`;
   } else if (ctx.weather.isRainy && indoorEvents[0]) {
     berryTip = `Het regent 🌧️ Ga naar ${indoorEvents[0].title} — lekker binnen!`;
-  } else if (ctx.weather.isGoodWeather && hero) {
-    berryTip = `${ctx.weather.current.temp}°C en zonnig! Tip: ${hero.title}. Ga eropuit!`;
-  } else if (hero) {
-    berryTip = `Mijn tip: ${hero.title} in ${hero.location}. ${hero.free ? "Gratis!" : ""}`;
+  } else if (ctx.weather.isGoodWeather && topPick) {
+    berryTip = `${ctx.weather.current.temp}°C en zonnig! Tip: ${topPick.title}. Ga eropuit!`;
+  } else if (topPick) {
+    berryTip = `Mijn tip: ${topPick.title} in ${topPick.location}. ${topPick.free ? "Gratis!" : ""}`;
   }
 
   return (
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* ===== HERO — full bleed, Time Out exact ===== */}
-      {hero && (
-        <Link href={`/event/${hero.slug}`} className="group block">
-          <div className="relative h-[75vh] min-h-[500px]">
-            <Image
-              src={hero.resolvedImage || hero.image}
-              alt={hero.title}
-              fill
-              sizes="100vw"
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.15) 100%)" }} />
-            <div className="absolute inset-x-0 bottom-0 px-5 pb-10 pt-20 sm:px-10 lg:px-16">
-              <div className="mx-auto max-w-[1200px]">
-                <p className="text-sm font-bold text-[#E85A5A]">{hero.category}</p>
-                <h1 className="mt-3 max-w-3xl font-extrabold leading-[1.1] text-white" style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>
-                  {hero.title}: {whyLine(hero.title, hero.free, hero.indoor).toLowerCase()}
-                </h1>
-                <span className="mt-5 inline-block rounded-full bg-[#E85A5A] px-7 py-3 text-sm font-bold text-white transition-colors group-hover:bg-[#D04A4A]">
-                  Lees meer
-                </span>
-              </div>
-            </div>
+      {/* ===== HERO — Haarlem city photo with branding ===== */}
+      <div className="relative h-[75vh] min-h-[500px]">
+        <Image
+          src="/photos/haarlem-hero.jpg"
+          alt="Haarlem"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.1) 100%)" }} />
+        <div className="absolute inset-x-0 bottom-0 px-5 pb-12 pt-20 sm:px-10 lg:px-16">
+          <div className="mx-auto max-w-[1200px]">
+            <p className="text-sm font-bold text-[#E85A5A]">
+              {ctx.calendar.todayLabel} · {ctx.weather.current.icon} {ctx.weather.current.temp}°C
+            </p>
+            <h1 className="mt-3 max-w-3xl font-extrabold leading-[1.05] text-white" style={{ fontSize: "clamp(2.2rem, 5vw, 3.8rem)" }}>
+              De leukste dingen om te doen met kinderen in Haarlem
+            </h1>
+            <p className="mt-3 max-w-lg text-base text-white/80 sm:text-lg">
+              Elke week vers: events, activiteiten en tips voor gezinnen in Haarlem e.o.
+            </p>
+            <Link href="#dit-weekend" className="mt-5 inline-block rounded-full bg-[#E85A5A] px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-[#D04A4A]">
+              Bekijk dit weekend
+            </Link>
           </div>
-        </Link>
-      )}
+        </div>
+      </div>
 
-      {/* ===== SUB-PICKS — 4 columns, Time Out exact ===== */}
+      {/* ===== SUB-PICKS — 3 events, Time Out exact ===== */}
       <div className="border-b border-[#E5E5E5]">
-        <div className="mx-auto grid max-w-[1200px] grid-cols-2 sm:grid-cols-4">
+        <div className="mx-auto grid max-w-[1200px] grid-cols-1 sm:grid-cols-3">
           {subPicks.map((e, i) => (
             <Link
               key={e.slug}
               href={`/event/${e.slug}`}
-              className={`group p-5 transition-colors hover:bg-[#F9F9F9] sm:p-6 ${i < 3 ? "border-r border-[#E5E5E5]" : ""}`}
+              className={`group p-5 transition-colors hover:bg-[#F9F9F9] sm:p-6 ${i < 2 ? "border-b border-[#E5E5E5] sm:border-b-0 sm:border-r" : ""}`}
             >
-              <div className="mb-3 h-[3px] w-10 bg-[#E85A5A]" />
+              <div className="mb-3 flex gap-0">
+                <div className={`h-[3px] w-5 ${i === 0 ? "bg-[#E85A5A]" : "bg-[#1A1A1A]"}`} />
+                <div className="h-[3px] w-5 bg-[#E5E5E5]" />
+              </div>
               <p className="text-[15px] font-bold leading-snug text-[#1A1A1A] group-hover:text-[#E85A5A]">
                 {e.title}
               </p>
               <p className="mt-1.5 text-[13px] text-[#666]">
-                {formatShortDate(e.date)} · {e.free ? "Gratis" : e.price || e.location}
+                {formatShortDate(e.date)} · {e.location} · {e.free ? "Gratis" : e.price || ""}
               </p>
             </Link>
           ))}
