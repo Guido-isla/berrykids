@@ -14,7 +14,7 @@ export default function ActivityCard({ activity }: { activity: ActivityWithImage
       rel={activity.website ? "noopener noreferrer" : undefined}
       className="group block h-full"
     >
-      <article className="h-full overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md">
+      <article className="h-full overflow-hidden rounded-2xl bg-white shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-shadow hover:shadow-[0_4px_20px_rgba(0,0,0,0.12)]">
         <div className="relative aspect-[3/2] overflow-hidden">
           <Image
             src={src}
@@ -48,17 +48,17 @@ export default function ActivityCard({ activity }: { activity: ActivityWithImage
             </span>
           </div>
 
-          <h3 className="text-base font-bold leading-snug text-[#2B2B2B] transition-colors group-hover:text-[#E85A5A]">
+          <h3 className="text-lg font-bold leading-snug text-[#1A1A1A] transition-colors group-hover:text-[#E85A5A]">
             {activity.title}
           </h3>
 
-          <p className="mt-1 text-sm text-[#999]">{activity.location}</p>
+          <p className="mt-1 text-sm text-[#444]">{activity.location}</p>
 
           {activity.openingHours && (
             <p className="mt-0.5 text-sm text-[#6B6B6B]">{activity.openingHours}</p>
           )}
 
-          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#6B6B6B]">
+          <p className="mt-1.5 truncate text-sm text-[#666]">
             {activity.description}
           </p>
 

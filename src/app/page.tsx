@@ -79,7 +79,7 @@ export default async function Home() {
             {ctx.weather.current.icon} {ctx.weather.current.temp}°C · {ctx.calendar.todayLabel} · Haarlem e.o.
           </p>
 
-          <h1 className="mt-2 text-2xl font-extrabold leading-tight text-[#2B2B2B] sm:text-3xl lg:text-4xl">
+          <h1 className="mt-2 text-2xl font-extrabold leading-tight text-[#1A1A1A] sm:text-3xl lg:text-4xl">
             Dit weekend met kinderen
           </h1>
 
@@ -88,28 +88,32 @@ export default async function Home() {
             {/* #1 — Big hero card */}
             {hero && (
               <Link href={`/event/${hero.slug}`} className="group block">
-                <div className="relative overflow-hidden rounded-2xl bg-[#2B2B2B] shadow-md">
+                <div className="relative overflow-hidden rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.12)]">
                   <div className="relative aspect-[4/3] sm:aspect-[16/10]">
                     <Image
                       src={hero.resolvedImage || hero.image}
                       alt={hero.title}
                       fill
                       sizes="(max-width: 1024px) 100vw, 60vw"
-                      className="object-cover opacity-70 transition-transform duration-500 group-hover:scale-[1.02]"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                       priority
                     />
                   </div>
-                  <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
+                  {/* Strong gradient overlay */}
+                  <div
+                    className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6"
+                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%)" }}
+                  >
                     <span className="mb-2 inline-flex w-fit items-center gap-1 rounded-full bg-[#E85A5A] px-2.5 py-1 text-[11px] font-bold text-white">
                       ⭐ Beste keuze
                     </span>
                     <h2 className="text-xl font-extrabold text-white sm:text-2xl">
                       {hero.title}
                     </h2>
-                    <p className="mt-1 text-sm text-white/80">
+                    <p className="mt-1 text-sm font-medium text-white">
                       {formatShortDate(hero.date)} · {hero.location}
                     </p>
-                    <p className="mt-1 text-sm font-medium italic text-white/90">
+                    <p className="mt-1 text-sm italic text-white/90">
                       &ldquo;{getWhyLine(hero)}&rdquo;
                     </p>
                     <div className="mt-2 flex flex-wrap gap-2">
@@ -131,7 +135,7 @@ export default async function Home() {
                 <Link
                   key={event.slug}
                   href={`/event/${event.slug}`}
-                  className="group block overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md"
+                  className="group block overflow-hidden rounded-2xl bg-white shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-shadow hover:shadow-[0_4px_20px_rgba(0,0,0,0.12)]"
                 >
                   <div className="relative aspect-[4/3]">
                     <Image
@@ -142,19 +146,19 @@ export default async function Home() {
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                     {event.free && (
-                      <span className="absolute right-2 top-2 rounded-full bg-[#6FAF3A] px-2 py-0.5 text-[10px] font-bold text-white">
+                      <span className="absolute right-2 top-2 rounded-full bg-[#2B9A3E] px-2 py-0.5 text-[10px] font-bold text-white shadow">
                         Gratis
                       </span>
                     )}
                   </div>
                   <div className="p-3">
-                    <h3 className="text-sm font-bold leading-snug text-[#2B2B2B] group-hover:text-[#E85A5A]">
+                    <h3 className="text-sm font-bold leading-snug text-[#1A1A1A] group-hover:text-[#E85A5A]">
                       {event.title}
                     </h3>
-                    <p className="mt-0.5 text-[11px] text-[#6B6B6B]">
+                    <p className="mt-0.5 text-xs text-[#444]">
                       {formatShortDate(event.date)} · {event.indoor ? "Binnen" : "Buiten"}
                     </p>
-                    <p className="mt-1 text-[11px] italic text-[#999]">
+                    <p className="mt-1 text-xs italic text-[#666]">
                       {getWhyLine(event)}
                     </p>
                   </div>
