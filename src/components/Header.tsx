@@ -12,14 +12,25 @@ export default function Header() {
     <header className="border-b border-[#F0E6E0] bg-white/80 backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3 sm:px-8">
         <div className="flex items-center gap-6">
-          <Link href="/">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src="/berry-icon.png"
               alt="Berry Kids"
-              width={56}
-              height={56}
-              className="h-14 w-auto"
+              width={48}
+              height={48}
+              className="h-12 w-auto"
             />
+            <div className="hidden sm:block">
+              <Image
+                src="/logo-text.png"
+                alt="Berry Kids"
+                width={100}
+                height={28}
+                className="h-6 w-auto"
+              />
+              <p className="text-[10px] font-semibold text-[#E85A5A]">📍 Haarlem e.o.</p>
+            </div>
+            <p className="text-[10px] font-semibold text-[#E85A5A] sm:hidden">📍 Haarlem</p>
           </Link>
           <nav className="hidden items-center gap-4 text-sm font-medium text-[#6B6B6B] md:flex">
             <Link href="/" className="transition-colors hover:text-[#E85A5A]">

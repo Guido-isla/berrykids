@@ -206,22 +206,89 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Quick picks — semantic categories */}
+      <section className="mx-auto max-w-6xl px-5 py-8 sm:px-8">
+        <h2 className="mb-4 text-lg font-extrabold text-[#1A1A1A]">Snel kiezen</h2>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {(() => {
+            const free = eventsWithImages.find((e) => e.free && e.image !== "/berry-icon.png");
+            const indoor = eventsWithImages.find((e) => e.indoor && e.image !== "/berry-icon.png");
+            const outdoor = eventsWithImages.find((e) => !e.indoor && e.image !== "/berry-icon.png");
+            const popular = top5[1] || eventsWithImages[0];
+            return [
+              { label: "⭐ Beste keuze", event: top5[0], color: "bg-[#FFF3E0] text-[#E65100]" },
+              { label: "💸 Gratis", event: free, color: "bg-[#E8F5E9] text-[#2E7D32]" },
+              { label: "🌧️ Regenproof", event: indoor, color: "bg-[#E3F2FD] text-[#1565C0]" },
+              { label: "☀️ Buiten", event: outdoor, color: "bg-[#FFF8E1] text-[#F57F17]" },
+            ].filter((q) => q.event).map((q) => (
+              <Link
+                key={q.label}
+                href={`/event/${q.event!.slug}`}
+                className="group rounded-2xl bg-white p-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-shadow hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)]"
+              >
+                <span className={`inline-block rounded-full px-2 py-0.5 text-[11px] font-bold ${q.color}`}>
+                  {q.label}
+                </span>
+                <h3 className="mt-2 text-sm font-bold text-[#1A1A1A] group-hover:text-[#E85A5A]">
+                  {q.event!.title}
+                </h3>
+                <p className="mt-0.5 text-xs text-[#444]">
+                  {formatShortDate(q.event!.date)} · {q.event!.location}
+                </p>
+              </Link>
+            ));
+          })()}
+        </div>
+      </section>
+
       {/* Film + Theater — side by side */}
-      <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
+      <div className="mx-auto max-w-6xl px-5 py-6 sm:px-8">
         <div className="grid gap-6 lg:grid-cols-2">
           <FilmVanDeWeek />
           <TheaterAgenda />
         </div>
       </div>
 
-      {/* All events with filters */}
+      {/* All events with day strip + filters */}
       <main className="mx-auto max-w-6xl px-5 pb-10 sm:px-8">
-        <h2 className="mb-2 text-xl font-extrabold text-[#2B2B2B]">
+        <h2 className="mb-2 text-xl font-extrabold text-[#1A1A1A]">
           Alle events
         </h2>
-        <p className="mb-4 text-sm text-[#6B6B6B]">
+        <p className="mb-4 text-sm text-[#444]">
           {eventsWithImages.length} activiteiten in de regio Haarlem
         </p>
+
+        {/* Day strip */}
+        <div className="mb-4 flex gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+          {(() => {
+            const days: { label: string; date: string }[] = [];
+            const now = new Date();
+            for (let i = 0; i < 10; i++) {
+              const d = new Date(now);
+              d.setDate(now.getDate() + i);
+              const dayNames = ["zo", "ma", "di", "wo", "do", "vr", "za"];
+              const label = i === 0 ? "Vandaag" : i === 1 ? "Morgen" : `${dayNames[d.getDay()]} ${d.getDate()}`;
+              days.push({ label, date: d.toISOString().split("T")[0] });
+            }
+            return days.map((day) => {
+              const count = events.filter((e) => e.date === day.date).length;
+              return (
+                <span
+                  key={day.date}
+                  className={`shrink-0 rounded-full px-3 py-2 text-xs font-semibold transition-colors ${
+                    count > 0
+                      ? "bg-white text-[#1A1A1A] shadow-sm"
+                      : "bg-[#F5F0ED] text-[#999]"
+                  }`}
+                >
+                  {day.label}
+                  {count > 0 && <span className="ml-1 text-[#E85A5A]">({count})</span>}
+                </span>
+              );
+            });
+          })()}
+        </div>
+
         <FilterableEvents events={eventsWithImages} />
       </main>
 
