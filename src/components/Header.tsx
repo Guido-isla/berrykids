@@ -9,30 +9,29 @@ export default function Header() {
   const [query, setQuery] = useState("");
 
   return (
-    <header className="border-b border-[#F0E6E0] bg-white/80 backdrop-blur-sm">
+    <header className="border-b border-[#F0EBE6]">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3 sm:px-8">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2">
             <Image
               src="/berry-icon.png"
               alt="Berry Kids"
-              width={48}
-              height={48}
-              className="h-12 w-auto"
+              width={40}
+              height={40}
+              className="h-10 w-auto"
             />
             <div className="hidden sm:block">
               <Image
                 src="/logo-text.png"
                 alt="Berry Kids"
-                width={100}
-                height={28}
-                className="h-6 w-auto"
+                width={90}
+                height={24}
+                className="h-5 w-auto"
               />
-              <p className="text-[10px] font-semibold text-[#E85A5A]">📍 Haarlem e.o.</p>
+              <p className="text-[10px] font-semibold text-[#E85A5A]">Haarlem e.o.</p>
             </div>
-            <p className="text-[10px] font-semibold text-[#E85A5A] sm:hidden">📍 Haarlem</p>
           </Link>
-          <nav className="hidden items-center gap-4 text-sm font-medium text-[#6B6B6B] md:flex">
+          <nav className="hidden items-center gap-5 text-sm font-semibold text-[#1A1A1A] md:flex">
             <Link href="/" className="transition-colors hover:text-[#E85A5A]">
               Dit weekend
             </Link>
@@ -45,14 +44,12 @@ export default function Header() {
           </nav>
         </div>
         <div className="flex items-center gap-3">
-          {/* Search */}
           {searchOpen ? (
             <form
               action="/"
               className="flex items-center gap-2"
               onSubmit={(e) => {
                 e.preventDefault();
-                // For now redirect with query param
                 window.location.href = `/?q=${encodeURIComponent(query)}`;
               }}
             >
@@ -62,12 +59,12 @@ export default function Header() {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Zoeken..."
                 autoFocus
-                className="w-full rounded-full border border-[#E0D8D2] bg-white px-3 py-2 text-sm outline-none focus:border-[#E85A5A] sm:w-48"
+                className="w-full rounded-lg border border-[#E0D8D2] px-3 py-2 text-sm outline-none focus:border-[#E85A5A] sm:w-48"
               />
               <button
                 type="button"
                 onClick={() => { setSearchOpen(false); setQuery(""); }}
-                className="text-[#6B6B6B] hover:text-[#2B2B2B]"
+                className="text-[#666] hover:text-[#1A1A1A]"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -77,7 +74,7 @@ export default function Header() {
           ) : (
             <button
               onClick={() => setSearchOpen(true)}
-              className="text-[#6B6B6B] transition-colors hover:text-[#2B2B2B]"
+              className="text-[#666] transition-colors hover:text-[#1A1A1A]"
               aria-label="Zoeken"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
@@ -86,18 +83,9 @@ export default function Header() {
             </button>
           )}
 
-          {/* Language toggle */}
-          <div className="hidden text-xs font-medium text-[#6B6B6B] sm:flex sm:items-center sm:gap-1">
-            <span className="font-bold text-[#2B2B2B]">NL</span>
-            <span>/</span>
-            <button className="transition-colors hover:text-[#2B2B2B]">EN</button>
-          </div>
-
-          <div className="h-5 w-px bg-[#E0D8D2]" />
-
           <a
             href="#newsletter"
-            className="rounded-full bg-[#E85A5A] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#D04A4A]"
+            className="rounded-full bg-[#E85A5A] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#D04A4A]"
           >
             Nieuwsbrief
           </a>

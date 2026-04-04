@@ -9,8 +9,8 @@ html {
 }
 
 body {
-  background: #FFF8F4;
-  color: #2B2B2B;
+  background: #FFFFFF;
+  color: #1A1A1A;
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -28,18 +28,13 @@ body {
 
 /* News ticker animation */
 @keyframes ticker {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .animate-ticker {
   animation: ticker 30s linear infinite;
 }
-
 .animate-ticker:hover {
   animation-play-state: paused;
 }
@@ -47,19 +42,17 @@ body {
 /* Berry mascot bounce */
 @keyframes berry-bounce {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-4px); }
 }
-
 .animate-berry-bounce {
-  animation: berry-bounce 2s ease-in-out infinite;
+  animation: berry-bounce 2.5s ease-in-out infinite;
 }
 
-/* Speech bubble fade in */
+/* Fade in */
 @keyframes berry-fade-in {
-  0% { opacity: 0; transform: translateY(8px); }
+  0% { opacity: 0; transform: translateY(6px); }
   100% { opacity: 1; transform: translateY(0); }
 }
-
 .animate-berry-fade-in {
-  animation: berry-fade-in 0.6s ease-out forwards;
+  animation: berry-fade-in 0.5s ease-out forwards;
 }

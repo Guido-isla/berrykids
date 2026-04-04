@@ -4,342 +4,269 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NewsTicker from "@/components/NewsTicker";
 import NewsletterForm from "@/components/NewsletterForm";
-import FilterableEvents from "@/components/FilterableEvents";
+import EventCard from "@/components/EventCard";
 import FilmVanDeWeek from "@/components/FilmVanDeWeek";
 import TheaterAgenda from "@/components/TheaterAgenda";
-import EventCard from "@/components/EventCard";
 import { getScrapedEvents } from "@/data/events-loader";
 import { resolveEventImages } from "@/lib/photos";
 import { getSiteContext } from "@/lib/context";
-import { generateBerryDayPlan } from "@/lib/berry-brain";
-import { activities } from "@/data/activities";
 import { formatShortDate } from "@/lib/dates";
 
-function getWhyLine(event: { title: string; free: boolean; indoor: boolean; description?: string }): string {
+function getWhyLine(event: { title: string; free: boolean; indoor: boolean }): string {
   const lines: Record<string, string> = {
-    "Mike & Molly vieren feest": "Meezingen, lachen en dansen — altijd een hit",
-    "Taartrovers Cinemini": "Eerste bioscoopje! Kort, rustig en speciaal voor peuters",
-    "Kweekmarkt": "Struinen tussen de kramen, proeven en snuffelen",
-    "OPLOS Festival": "Hiphop, dans en workshops — energie kwijt!",
-    "Paasontbijt": "Gezellig ontbijten met het hele gezin voor het festival",
+    "Mike & Molly": "Meezingen, lachen en dansen — altijd een hit",
+    "Taartrovers": "Eerste bioscoopje! Kort en speciaal voor peuters",
+    "Kweekmarkt": "Struinen, proeven en snuffelen tussen de kramen",
+    "OPLOS": "Hiphop, dans en workshops — energie kwijt!",
+    "Paasontbijt": "Gezellig ontbijten voor het festival begint",
     "Kunstspeeltuin": "Zelf bouwen en ontdekken, geen regels",
-    "Vilt": "Rustig, zintuiglijk — perfect voor je allerkleinste",
+    "Vilt": "Rustig en zintuiglijk — perfect voor je allerkleinste",
     "Okapi": "Muzikaal landschap van klank en klei",
-    "Stilte": "Betoverend voor baby's — zachte klanken en licht",
+    "Stilte": "Betoverend — zachte klanken en licht voor baby's",
     "Houtje": "Grappig theater dat kleintjes helemaal meepakt",
-    "Mijn vlek": "Woordloos, visueel — werkt in elke taal",
-    "Nekandinskie": "Bouw mee aan een nieuwe wereld",
+    "Mijn vlek": "Woordloos en visueel — werkt in elke taal",
+    "Springer": "Natuur ontdekken met alle zintuigen",
     "Koningsconcert": "Het Kennemer Jeugdorkest in actie",
-    "De gele duikmachine": "Beatles voor kinderen — magisch!",
-    "Springer Festival": "Natuur ontdekken met alle zintuigen",
+    "gele duikmachine": "Beatles voor kinderen — magisch!",
   };
   for (const [key, val] of Object.entries(lines)) {
     if (event.title.includes(key)) return val;
   }
   if (event.free && !event.indoor) return "Gratis en lekker buiten";
-  if (event.free && event.indoor) return "Gratis en lekker binnen";
+  if (event.free) return "Gratis en lekker binnen";
   if (event.indoor) return "Regenproof en gezellig";
   return "Leuk voor het hele gezin";
 }
 
-function getEffort(event: { indoor: boolean; free: boolean; url?: string }): { label: string; color: string } {
-  if (event.free && !event.url) return { label: "🟢 Loop binnen", color: "text-[#6FAF3A]" };
-  if (event.free) return { label: "🟢 Gratis · loop binnen", color: "text-[#6FAF3A]" };
-  if (event.url) return { label: "🟡 Tickets nodig", color: "text-[#D97706]" };
-  return { label: "🟢 Geen reservering", color: "text-[#6FAF3A]" };
-}
-
 export default async function Home() {
   const events = getScrapedEvents();
-  const eventsWithImages = resolveEventImages(events);
+  const all = resolveEventImages(events);
   const ctx = await getSiteContext();
-  const berryTip = generateBerryDayPlan(ctx, events, activities, ctx.season.suggestions);
 
-  // Top 5 with images and descriptions
-  const top5 = eventsWithImages
-    .filter((e) => e.description && e.description.length > 15 && e.image !== "/berry-icon.png")
-    .slice(0, 5);
-
-  const hero = top5[0];
-  const rest = top5.slice(1);
-
-  // Berry's one clear recommendation
-  const berryChoice = hero;
+  // Categorize
+  const withImage = all.filter((e) => e.image !== "/berry-icon.png");
+  const hero = withImage[0];
+  const freeEvents = withImage.filter((e) => e.free).slice(0, 3);
+  const indoorEvents = withImage.filter((e) => e.indoor).slice(0, 3);
+  const weekendEvents = withImage.slice(0, 6);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <NewsTicker label={ctx.ticker.label} />
       <Header />
 
-      {/* HERO */}
-      <section className="bg-[#FDF1EA]">
-        <div className="mx-auto max-w-6xl px-5 py-8 sm:px-8 sm:py-10">
-          {/* Context line */}
-          <p className="text-sm font-semibold text-[#E85A5A]">
-            {ctx.weather.current.icon} {ctx.weather.current.temp}°C · {ctx.calendar.todayLabel} · Haarlem e.o.
-          </p>
-
-          <h1 className="mt-2 text-2xl font-extrabold leading-tight text-[#1A1A1A] sm:text-3xl lg:text-4xl">
-            Dit weekend met kinderen
-          </h1>
-
-          {/* Hero grid: #1 big + #2-5 small */}
-          <div className="mt-6 grid gap-4 lg:grid-cols-[3fr_2fr]">
-            {/* #1 — Big hero card */}
-            {hero && (
-              <Link href={`/event/${hero.slug}`} className="group block">
-                <div className="relative overflow-hidden rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.12)]">
-                  <div className="relative aspect-[4/3] sm:aspect-[16/10]">
-                    <Image
-                      src={hero.resolvedImage || hero.image}
-                      alt={hero.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 60vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                      priority
-                    />
-                  </div>
-                  {/* Strong gradient overlay */}
-                  <div
-                    className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6"
-                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%)" }}
-                  >
-                    <span className="mb-2 inline-flex w-fit items-center gap-1 rounded-full bg-[#E85A5A] px-2.5 py-1 text-[11px] font-bold text-white">
-                      ⭐ Beste keuze
-                    </span>
-                    <h2 className="text-xl font-extrabold text-white sm:text-2xl">
-                      {hero.title}
-                    </h2>
-                    <p className="mt-1 text-sm font-medium text-white">
-                      {formatShortDate(hero.date)} · {hero.location}
-                    </p>
-                    <p className="mt-1 text-sm italic text-white/90">
-                      &ldquo;{getWhyLine(hero)}&rdquo;
-                    </p>
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      <span className={`text-xs font-semibold ${getEffort(hero).color} rounded-full bg-white/20 px-2 py-0.5 backdrop-blur-sm`}>
-                        {getEffort(hero).label}
-                      </span>
-                      <span className="rounded-full bg-white/20 px-2 py-0.5 text-xs text-white backdrop-blur-sm">
-                        {hero.indoor ? "🏠 Binnen" : "☀️ Buiten"}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            )}
-
-            {/* #2-5 — Small grid */}
-            <div className="grid grid-cols-2 gap-3">
-              {rest.map((event, i) => (
-                <Link
-                  key={event.slug}
-                  href={`/event/${event.slug}`}
-                  className="group block overflow-hidden rounded-2xl bg-white shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-shadow hover:shadow-[0_4px_20px_rgba(0,0,0,0.12)]"
-                >
-                  <div className="relative aspect-[4/3]">
-                    <Image
-                      src={event.resolvedImage || event.image}
-                      alt={event.title}
-                      fill
-                      sizes="(max-width: 1024px) 50vw, 20vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                    {event.free && (
-                      <span className="absolute right-2 top-2 rounded-full bg-[#2B9A3E] px-2 py-0.5 text-[10px] font-bold text-white shadow">
-                        Gratis
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-3">
-                    <h3 className="text-sm font-bold leading-snug text-[#1A1A1A] group-hover:text-[#E85A5A]">
-                      {event.title}
-                    </h3>
-                    <p className="mt-0.5 text-xs text-[#444]">
-                      {formatShortDate(event.date)} · {event.indoor ? "Binnen" : "Buiten"}
-                    </p>
-                    <p className="mt-1 text-xs italic text-[#666]">
-                      {getWhyLine(event)}
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Berry decision helper + newsletter — compact bar */}
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {/* Berry: "Twijfel? Doe dit:" */}
-            {berryChoice && (
-              <div className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-sm">
-                <div className="animate-berry-bounce shrink-0">
-                  <Image src="/berry-wink.png" alt="" width={40} height={40} className="h-10 w-auto" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#E85A5A]">
-                    Twijfel? Doe dit:
-                  </p>
-                  <p className="mt-0.5 text-sm text-[#2B2B2B]">
-                    Ga naar{" "}
-                    <Link href={`/event/${berryChoice.slug}`} className="font-bold text-[#E85A5A] underline decoration-[#E85A5A]/30 underline-offset-2">
-                      {berryChoice.title}
-                    </Link>
-                    {" "}— {getWhyLine(berryChoice).toLowerCase()}.
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* Newsletter */}
-            <div className="rounded-2xl bg-white p-4 shadow-sm">
-              <p className="text-sm font-bold text-[#2B2B2B]">
-                Elke vrijdag deze tips in je inbox
-              </p>
-              <p className="mt-0.5 text-[11px] text-[#6B6B6B]">
-                5 tips. Geen zoeken. Gewoon gaan.
-              </p>
-              <div className="mt-2">
-                <NewsletterForm variant="hero" />
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* HERO — editorial, one big story */}
+      <section className="mx-auto max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14">
+        <p className="text-sm font-semibold text-[#E85A5A]">
+          {ctx.weather.current.icon} {ctx.weather.current.temp}°C · {ctx.calendar.todayLabel}
+        </p>
+        <h1 className="mt-1 text-3xl font-extrabold leading-tight text-[#1A1A1A] sm:text-4xl lg:text-5xl">
+          Dit weekend met kinderen in Haarlem
+        </h1>
+        <p className="mt-2 max-w-xl text-base text-[#666]">
+          De beste uitjes, events en activiteiten — elke week vers geselecteerd.
+        </p>
       </section>
 
-      {/* Quick picks — semantic categories */}
-      <section className="mx-auto max-w-6xl px-5 py-8 sm:px-8">
-        <h2 className="mb-4 text-lg font-extrabold text-[#1A1A1A]">Snel kiezen</h2>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {(() => {
-            const free = eventsWithImages.find((e) => e.free && e.image !== "/berry-icon.png");
-            const indoor = eventsWithImages.find((e) => e.indoor && e.image !== "/berry-icon.png");
-            const outdoor = eventsWithImages.find((e) => !e.indoor && e.image !== "/berry-icon.png");
-            const popular = top5[1] || eventsWithImages[0];
-            return [
-              { label: "⭐ Beste keuze", event: top5[0], color: "bg-[#FFF3E0] text-[#E65100]" },
-              { label: "💸 Gratis", event: free, color: "bg-[#E8F5E9] text-[#2E7D32]" },
-              { label: "🌧️ Regenproof", event: indoor, color: "bg-[#E3F2FD] text-[#1565C0]" },
-              { label: "☀️ Buiten", event: outdoor, color: "bg-[#FFF8E1] text-[#F57F17]" },
-            ].filter((q) => q.event).map((q) => (
-              <Link
-                key={q.label}
-                href={`/event/${q.event!.slug}`}
-                className="group rounded-2xl bg-white p-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-shadow hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)]"
-              >
-                <span className={`inline-block rounded-full px-2 py-0.5 text-[11px] font-bold ${q.color}`}>
-                  {q.label}
-                </span>
-                <h3 className="mt-2 text-sm font-bold text-[#1A1A1A] group-hover:text-[#E85A5A]">
-                  {q.event!.title}
-                </h3>
-                <p className="mt-0.5 text-xs text-[#444]">
-                  {formatShortDate(q.event!.date)} · {q.event!.location}
+      {/* Hero card — one dominant pick */}
+      {hero && (
+        <section className="mx-auto max-w-6xl px-5 pt-8 sm:px-8">
+          <Link href={`/event/${hero.slug}`} className="group block">
+            <div className="relative overflow-hidden rounded-2xl">
+              <div className="relative aspect-[21/9] sm:aspect-[2.5/1]">
+                <Image
+                  src={hero.resolvedImage || hero.image}
+                  alt={hero.title}
+                  fill
+                  sizes="100vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                  priority
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%)" }}
+                />
+              </div>
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+                <p className="text-xs font-bold uppercase tracking-wider text-white/70">
+                  {hero.category} · {formatShortDate(hero.date)}
                 </p>
-              </Link>
-            ));
-          })()}
+                <h2 className="mt-1 text-2xl font-extrabold text-white sm:text-3xl lg:text-4xl">
+                  {hero.title}
+                </h2>
+                <p className="mt-1 max-w-lg text-sm text-white/90 sm:text-base">
+                  {getWhyLine(hero)}. {hero.location}.
+                  {hero.free ? " Gratis." : ""}
+                </p>
+              </div>
+            </div>
+          </Link>
+        </section>
+      )}
+
+      {/* Berry's tip — compact inline */}
+      <section className="mx-auto max-w-6xl px-5 pt-8 sm:px-8">
+        <div className="flex items-center gap-3 rounded-xl border border-[#F0EBE6] bg-[#FDFBF9] p-4">
+          <div className="animate-berry-bounce shrink-0">
+            <Image src="/berry-wink.png" alt="" width={36} height={36} className="h-9 w-auto" />
+          </div>
+          <p className="text-sm text-[#1A1A1A]">
+            <span className="font-bold text-[#E85A5A]">Berry&apos;s tip:</span>{" "}
+            {hero ? (
+              <>
+                Ga naar{" "}
+                <Link href={`/event/${hero.slug}`} className="font-bold text-[#E85A5A] underline decoration-[#E85A5A]/30 underline-offset-2 hover:text-[#D04A4A]">
+                  {hero.title}
+                </Link>{" "}— {getWhyLine(hero).toLowerCase()}.
+              </>
+            ) : (
+              "Scroll naar beneden voor alle tips."
+            )}
+          </p>
         </div>
       </section>
 
-      {/* Film + Theater — side by side */}
-      <div className="mx-auto max-w-6xl px-5 py-6 sm:px-8">
-        <div className="grid gap-6 lg:grid-cols-2">
+      {/* SECTION: Dit weekend */}
+      <section className="mx-auto max-w-6xl px-5 pt-16 sm:px-8">
+        <div className="mb-8">
+          <h2 className="text-2xl font-extrabold text-[#1A1A1A]">Dit weekend</h2>
+          <p className="mt-1 text-sm text-[#666]">
+            {weekendEvents.length} events in Haarlem e.o.
+          </p>
+        </div>
+        <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          {weekendEvents.map((event) => (
+            <EventCard key={event.slug} event={event} />
+          ))}
+        </div>
+      </section>
+
+      {/* NEWSLETTER — editorial break */}
+      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+        <div className="rounded-2xl bg-[#FAFAFA] p-8 sm:p-12">
+          <div className="mx-auto max-w-lg text-center">
+            <p className="text-xs font-bold uppercase tracking-wider text-[#E85A5A]">
+              Elke vrijdag om 15:00
+            </p>
+            <h2 className="mt-2 text-2xl font-extrabold text-[#1A1A1A] sm:text-3xl">
+              Weekend gepland in 2 minuten
+            </h2>
+            <p className="mt-2 text-sm text-[#666]">
+              De 5 leukste dingen om te doen met kinderen dit weekend. Geen zoeken. Gewoon gaan.
+            </p>
+            <div className="mt-5">
+              <NewsletterForm />
+            </div>
+            <p className="mt-2 text-xs text-[#999]">
+              2.340+ ouders · gratis · altijd opzegbaar
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION: Gratis eropuit */}
+      {freeEvents.length > 0 && (
+        <section className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="mb-8">
+            <h2 className="text-2xl font-extrabold text-[#1A1A1A]">Gratis eropuit</h2>
+            <p className="mt-1 text-sm text-[#666]">
+              Leuke dingen die niks kosten
+            </p>
+          </div>
+          <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {freeEvents.map((event) => (
+              <EventCard key={event.slug + "-free"} event={event} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* SECTION: Bij slecht weer */}
+      {indoorEvents.length > 0 && (
+        <section className="mx-auto max-w-6xl px-5 pt-16 sm:px-8">
+          <div className="mb-8">
+            <h2 className="text-2xl font-extrabold text-[#1A1A1A]">Bij slecht weer</h2>
+            <p className="mt-1 text-sm text-[#666]">
+              Regenproof en gezellig — lekker binnen
+            </p>
+          </div>
+          <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {indoorEvents.map((event) => (
+              <EventCard key={event.slug + "-indoor"} event={event} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Film + Theater */}
+      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+        <div className="grid gap-8 lg:grid-cols-2">
           <FilmVanDeWeek />
           <TheaterAgenda />
         </div>
       </div>
 
-      {/* All events with day strip + filters */}
-      <main className="mx-auto max-w-6xl px-5 pb-10 sm:px-8">
-        <h2 className="mb-2 text-xl font-extrabold text-[#1A1A1A]">
-          Alle events
-        </h2>
-        <p className="mb-4 text-sm text-[#444]">
-          {eventsWithImages.length} activiteiten in de regio Haarlem
-        </p>
-
-        {/* Day strip */}
-        <div className="mb-4 flex gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-          {(() => {
-            const days: { label: string; date: string }[] = [];
-            const now = new Date();
-            for (let i = 0; i < 10; i++) {
-              const d = new Date(now);
-              d.setDate(now.getDate() + i);
-              const dayNames = ["zo", "ma", "di", "wo", "do", "vr", "za"];
-              const label = i === 0 ? "Vandaag" : i === 1 ? "Morgen" : `${dayNames[d.getDay()]} ${d.getDate()}`;
-              days.push({ label, date: d.toISOString().split("T")[0] });
-            }
-            return days.map((day) => {
-              const count = events.filter((e) => e.date === day.date).length;
-              return (
-                <span
-                  key={day.date}
-                  className={`shrink-0 rounded-full px-3 py-2 text-xs font-semibold transition-colors ${
-                    count > 0
-                      ? "bg-white text-[#1A1A1A] shadow-sm"
-                      : "bg-[#F5F0ED] text-[#999]"
-                  }`}
-                >
-                  {day.label}
-                  {count > 0 && <span className="ml-1 text-[#E85A5A]">({count})</span>}
-                </span>
-              );
-            });
-          })()}
-        </div>
-
-        <FilterableEvents events={eventsWithImages} />
-      </main>
-
-      {/* Vacation banner */}
-      <section className="mx-auto max-w-6xl px-5 pb-8 sm:px-8">
-        <a href="/vakanties" className="group block overflow-hidden rounded-2xl bg-gradient-to-r from-[#E85A5A] to-[#F4845F] p-6 text-white shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider opacity-80">26 april – 9 mei</span>
-              <h2 className="mt-1 text-xl font-extrabold sm:text-2xl">Meivakantie komt eraan</h2>
-              <p className="mt-1 max-w-md text-sm opacity-90">Dagplannen, surfcamps en meer.</p>
-            </div>
-            <span className="hidden shrink-0 rounded-full bg-white/20 px-4 py-2 text-sm font-semibold group-hover:bg-white/30 sm:block">
-              Bekijk dagplannen →
-            </span>
-          </div>
-        </a>
+      {/* Meivakantie banner */}
+      <section className="mx-auto max-w-6xl px-5 sm:px-8">
+        <Link href="/vakanties" className="group block rounded-2xl bg-[#1A1A1A] p-8 text-white transition-colors hover:bg-[#2B2B2B] sm:p-10">
+          <p className="text-xs font-bold uppercase tracking-wider text-[#E85A5A]">
+            26 april – 9 mei
+          </p>
+          <h2 className="mt-2 text-2xl font-extrabold sm:text-3xl">
+            Meivakantie — jouw weekplan
+          </h2>
+          <p className="mt-2 max-w-md text-sm text-white/70">
+            Dagplannen, surfcamps en meer. Twee weken geen school, twee weken vol.
+          </p>
+          <span className="mt-4 inline-block text-sm font-bold text-[#E85A5A]">
+            Bekijk dagplannen →
+          </span>
+        </Link>
       </section>
 
       {/* Altijd leuk */}
-      <section className="mx-auto max-w-6xl px-5 pb-12 sm:px-8">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-extrabold text-[#2B2B2B]">Altijd leuk</h2>
-          <a href="/activiteiten" className="text-sm font-semibold text-[#E85A5A] hover:text-[#D04A4A]">Alles →</a>
+      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+        <div className="mb-8 flex items-end justify-between">
+          <div>
+            <h2 className="text-2xl font-extrabold text-[#1A1A1A]">Altijd leuk</h2>
+            <p className="mt-1 text-sm text-[#666]">
+              Sportclubs, musea en kinderboerderijen — elk moment
+            </p>
+          </div>
+          <Link href="/activiteiten" className="text-sm font-bold text-[#E85A5A] hover:text-[#D04A4A]">
+            Alles bekijken →
+          </Link>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { icon: "⚽", label: "Sport", count: "6 clubs" },
-            { icon: "🎨", label: "Cultuur", count: "3 musea" },
-            { icon: "🐑", label: "Dieren", count: "2 boerderijen" },
-            { icon: "🏠", label: "Indoor", count: "3 plekken" },
-          ].map((cat) => (
-            <a key={cat.label} href="/activiteiten" className="flex items-center gap-3 rounded-xl bg-white p-4 shadow-sm hover:shadow-md">
-              <span className="text-xl">{cat.icon}</span>
+            { icon: "⚽", label: "Sport", sub: "6 clubs" },
+            { icon: "🎨", label: "Cultuur", sub: "3 musea" },
+            { icon: "🐑", label: "Dieren", sub: "2 boerderijen" },
+            { icon: "🏠", label: "Indoor", sub: "3 plekken" },
+          ].map((c) => (
+            <Link key={c.label} href="/activiteiten" className="flex items-center gap-4 rounded-xl border border-[#F0EBE6] p-5 transition-colors hover:border-[#E85A5A]/30 hover:bg-[#FDFBF9]">
+              <span className="text-2xl">{c.icon}</span>
               <div>
-                <p className="text-sm font-bold text-[#2B2B2B]">{cat.label}</p>
-                <p className="text-xs text-[#6B6B6B]">{cat.count}</p>
+                <p className="font-bold text-[#1A1A1A]">{c.label}</p>
+                <p className="text-sm text-[#666]">{c.sub}</p>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </section>
 
       {/* Bottom newsletter */}
-      <section id="newsletter" className="bg-[#FDF1EA]">
-        <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
+      <section id="newsletter" className="border-t border-[#F0EBE6] bg-[#FAFAFA]">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
           <div className="mx-auto max-w-md text-center">
-            <Image src="/berry-icon.png" alt="" width={40} height={40} className="mx-auto mb-3 h-auto" />
-            <h2 className="text-xl font-extrabold text-[#2B2B2B]">Weekend sorted. Elke vrijdag.</h2>
-            <p className="mt-1 text-sm text-[#6B6B6B]">5 tips. Geen zoeken. Gewoon gaan.</p>
-            <div className="mt-4">
+            <Image src="/berry-wink.png" alt="" width={40} height={40} className="mx-auto mb-4 h-10 w-auto" />
+            <h2 className="text-2xl font-extrabold text-[#1A1A1A]">
+              Weekend sorted
+            </h2>
+            <p className="mt-1 text-sm text-[#666]">
+              Elke vrijdag om 15:00. De 5 beste tips. Klaar.
+            </p>
+            <div className="mt-5">
               <NewsletterForm />
             </div>
           </div>
