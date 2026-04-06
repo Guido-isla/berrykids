@@ -223,7 +223,7 @@ export const activities: Activity[] = [
     price: "€40 per les",
     free: false,
     website: "https://www.pepsports.com",
-    image: "https://images.unsplash.com/photo-1502680390548-bdbac40ae4e7?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&q=80",
     googlePlaceId: "ChIJYQgu9TvsxUcREPAlvvECxlM",
     availableMonths: [5, 6, 7, 8, 9],
     verified: true,
@@ -488,7 +488,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     price: "Vanaf €9",
     free: false,
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=800&q=80",
     verified: true,
   },
   {
@@ -623,7 +623,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     price: "Vanaf €5",
     free: false,
-    image: "https://images.unsplash.com/photo-1587654780291-39c9404d7dd0?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80",
     verified: true,
   },
 
@@ -696,7 +696,7 @@ export const activities: Activity[] = [
     ageMin: 4,
     price: "Vanaf €6 per spel",
     free: false,
-    image: "https://images.unsplash.com/photo-1562535375-fc6ee5c2e13f?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
     verified: true,
   },
 
@@ -741,7 +741,7 @@ export const activities: Activity[] = [
     free: false,
     website: "https://www.linnaeushof.nl",
     openingHours: "Apr-okt, dagelijks 10:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1595174513668-aadb0b258ea3?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=800&q=80",
     availableMonths: [4, 5, 6, 7, 8, 9, 10],
     verified: true,
   },
@@ -778,7 +778,7 @@ export const activities: Activity[] = [
     price: "€0,50 per persoon",
     free: false,
     website: "https://burchttercleeff.nl",
-    image: "https://images.unsplash.com/photo-1564429238961-bf8f8d7fdbea?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1560807707-8cc77767d783?w=800&q=80",
     verified: true,
   },
   {
@@ -812,7 +812,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     free: true,
     website: "https://speeltuindepapegaai.nl",
-    image: "https://images.unsplash.com/photo-1587691592099-24045b1e0f2b?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1472745433479-4556f22e32c2?w=800&q=80",
     verified: true,
   },
   {
@@ -882,7 +882,7 @@ export const activities: Activity[] = [
     free: true,
     openingHours: "Za-zo 13:00 – 17:00",
     website: "https://www.artisklas-haarlem.nl",
-    image: "https://images.unsplash.com/photo-1504450874802-0ba2bcd659e0?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1497752531616-c3afd9760a11?w=800&q=80",
     verified: true,
   },
   {
@@ -897,7 +897,7 @@ export const activities: Activity[] = [
     ageLabel: "Alle leeftijden",
     free: true,
     website: "https://www.hertenkampbloemendaal.nl",
-    image: "https://images.unsplash.com/photo-1484406566174-437a054e28c0?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800&q=80",
     verified: true,
   },
   {
@@ -1352,7 +1352,7 @@ export const activities: Activity[] = [
     price: "Vanaf €18,50",
     free: false,
     website: "https://shop.bakingtime.nl",
-    image: "https://images.unsplash.com/photo-1486427944544-d2c246c4df4d?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1483546363825-7ebf25fb7513?w=800&q=80",
     verified: true,
   },
 
