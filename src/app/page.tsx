@@ -89,10 +89,23 @@ export default async function Home() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* ===== HERO — Situation-driven, Berry decides ===== */}
+      {/* ===== WEATHER DECISION BAR ===== */}
+      <div className="mx-auto max-w-[1200px] px-5 pt-5 sm:px-10">
+        <div className="flex items-center gap-3 rounded-xl bg-[#F0ECE8] px-5 py-3">
+          <span className="text-[22px] leading-none">{ctx.weather.current.icon}</span>
+          <div>
+            <p className="text-[14px] font-bold text-[#1A1A1A]">
+              {ctx.weather.current.temp}°C · {ctx.weather.current.description}
+            </p>
+            <p className="text-[13px] text-[#666]">{ctx.berryPick.reason}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* ===== HERO — Berry's #1 pick + alternatives ===== */}
       <HeroSlideshow
         slides={heroSlides}
-        heading={situationHeading}
+        heading="Doe dit vandaag"
         dateLine={ctx.calendar.todayLabel}
       />
 

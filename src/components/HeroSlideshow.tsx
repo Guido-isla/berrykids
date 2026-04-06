@@ -44,23 +44,23 @@ function HeroTile({
         style={{
           background: large
             ? "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)"
-            : "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 60%, transparent 100%)",
+            : "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.15) 100%)",
         }}
       />
-      <div className={`absolute inset-x-0 bottom-0 ${large ? "p-6 sm:p-8" : "p-4 sm:p-5"}`}>
+      <div className={`absolute inset-x-0 bottom-0 ${large ? "p-6 sm:p-8" : "p-3 sm:p-4"}`}>
         <p
-          className={`font-bold uppercase tracking-wide text-[#E85A5A] ${
-            large ? "text-[13px]" : "text-[11px]"
+          className={`font-bold uppercase tracking-wide ${
+            large ? "text-[13px] text-[#E85A5A]" : "text-[10px] text-[#E85A5A] drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
           }`}
         >
           {slide.category}
           {slide.free && " · Gratis"}
         </p>
         <h2
-          className={`mt-1.5 font-extrabold leading-[1.1] tracking-tight text-white ${
+          className={`mt-1 font-extrabold leading-[1.1] tracking-tight text-white ${
             large
               ? "text-[clamp(1.5rem,3.5vw,2.6rem)]"
-              : "text-[clamp(0.95rem,1.8vw,1.15rem)]"
+              : "text-[clamp(0.85rem,1.6vw,1.05rem)] drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]"
           }`}
         >
           {slide.title}
@@ -134,13 +134,13 @@ export default function HeroSlideshow({
 
   return (
     <div className="mx-auto max-w-[1200px] px-5 pt-6 sm:px-10">
-      {/* Editorial heading */}
-      <div className="mb-4 flex items-end justify-between">
+      {/* Decision heading */}
+      <div className="mb-3 flex items-end justify-between">
         <div>
-          <h1 className="text-[clamp(1.6rem,3vw,2.2rem)] font-extrabold tracking-tight text-[#1A1A1A]">
+          <p className="text-[12px] font-bold uppercase tracking-wider text-[#E85A5A]">{dateLine}</p>
+          <h1 className="mt-1 text-[clamp(1.4rem,2.5vw,1.8rem)] font-extrabold tracking-tight text-[#1A1A1A]">
             {heading}
           </h1>
-          <p className="mt-0.5 text-[13px] font-semibold text-[#888]">{dateLine}</p>
         </div>
         {/* Slide indicators — desktop top-right */}
         {slideCount > 1 && (
