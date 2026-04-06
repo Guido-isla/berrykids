@@ -17,13 +17,17 @@ import { generateBerryDayPlan } from "@/lib/berry-brain";
 import { formatShortDate } from "@/lib/dates";
 
 export default async function Home() {
-  const events = getScrapedEvents();
-  const all = resolveEventImages(events);
+  const allEvents = getScrapedEvents();
+  const todayEvents = getDayPlanEvents();
   const ctx = await getSiteContext();
 
-  const withImg = all.filter((e) => e.image !== "/berry-icon.png");
-  const outdoorEvents = withImg.filter((e) => !e.indoor);
-  const indoorEvents = withImg.filter((e) => e.indoor);
+  // Hero + Vandaag: only today/weekend events with images
+  const todayWithImg = resolveEventImages(todayEvents).filter((e) => e.image !== "/berry-icon.png");
+  // Fallback section + lower page: all upcoming events
+  const allWithImg = resolveEventImages(allEvents).filter((e) => e.image !== "/berry-icon.png");
+
+  const outdoorEvents = todayWithImg.filter((e) => !e.indoor);
+  const indoorEvents = todayWithImg.filter((e) => e.indoor);
 
   // ===== DECISION ENGINE =====
   // Berry picks based on situation, not taxonomy
@@ -31,10 +35,10 @@ export default async function Home() {
   const primaryEvents = preferIndoor
     ? [...indoorEvents, ...outdoorEvents]
     : [...outdoorEvents, ...indoorEvents];
-  const topPick = primaryEvents[0] || withImg[0];
+  const topPick = primaryEvents[0] || todayWithImg[0];
   const alternatives = primaryEvents.slice(1, 4);
 
-  // Hero slides: top pick first, then alternatives — weather-sorted
+  // Hero slides: top pick first, then alternatives — today only
   const heroSlides = [topPick, ...alternatives].filter(Boolean).slice(0, 4).map((e) => ({
     slug: e.slug,
     title: e.title,
@@ -71,10 +75,12 @@ export default async function Home() {
     }
   }
 
-  // Fallback events: whatever situation doesn't prefer
+  // Fallback: opposite weather direction from today's events, or upcoming if few today
+  const allOutdoor = allWithImg.filter((e) => !e.indoor);
+  const allIndoor = allWithImg.filter((e) => e.indoor);
   const fallbackEvents = preferIndoor
-    ? outdoorEvents.slice(0, 3)
-    : indoorEvents.slice(0, 3);
+    ? allOutdoor.slice(0, 3)
+    : allIndoor.slice(0, 3);
   const fallbackLabel = preferIndoor
     ? "Als het toch opklaart"
     : "Als het weer omslaat";
