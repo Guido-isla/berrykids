@@ -16,6 +16,9 @@ import { resolveEventImages as resolveAct } from "@/lib/photos";
 import { generateBerryDayPlan } from "@/lib/berry-brain";
 import { formatShortDate } from "@/lib/dates";
 
+// Revalidate every 30 minutes — keeps weather, events and dagplan fresh
+export const revalidate = 1800;
+
 export default async function Home() {
   const allEvents = getScrapedEvents();
   const todayEvents = getDayPlanEvents();

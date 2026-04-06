@@ -58,7 +58,7 @@ export type WeatherData = {
 
 let weatherCache: WeatherData | null = null;
 let cacheTime = 0;
-const CACHE_TTL = 60 * 60 * 1000; // 1 hour
+const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
 
 export async function getWeather(): Promise<WeatherData> {
   // Return cache if fresh
@@ -70,7 +70,7 @@ export async function getWeather(): Promise<WeatherData> {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${HAARLEM_LAT}&longitude=${HAARLEM_LNG}&current=temperature_2m,rain,weather_code&daily=temperature_2m_max,rain_sum,weather_code&forecast_days=5&timezone=Europe/Amsterdam`;
 
     const res = await fetch(url, {
-      next: { revalidate: 3600 }, // Next.js cache: 1 hour
+      next: { revalidate: 1800 }, // Next.js cache: 30 min
     });
 
     if (!res.ok) throw new Error(`Weather API: ${res.status}`);
