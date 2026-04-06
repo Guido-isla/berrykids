@@ -146,18 +146,13 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ===== BESTE KEUZES NU — situation-sorted top events ===== */}
+      {/* ===== VANDAAG — Berry's top picks, no explanation ===== */}
       <section className="bg-[#FAF8F6] py-20">
         <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
-          <h2 className="mb-2 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
+          <h2 className="mb-8 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
             <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
-            Beste keuzes nu
+            Vandaag
           </h2>
-          <p className="mb-8 text-[14px] text-[#666]">
-            {preferIndoor
-              ? "Gesorteerd op binnen — want het weer vraagt erom"
-              : "Gesorteerd op buiten — maak gebruik van dit weer"}
-          </p>
           <div className="grid gap-8 lg:grid-cols-[5fr_2fr]">
             <div>
               {primaryEvents[0] && <EventCard event={primaryEvents[0]} />}
