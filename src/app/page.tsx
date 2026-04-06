@@ -119,21 +119,21 @@ export default async function Home() {
       )}
 
       {/* ===== BERRY'S DAY PLAN — the decision engine ===== */}
-      <section className="mx-auto max-w-[1200px] px-5 py-10 sm:px-10">
-        <div className="flex items-start gap-4">
+      <section className="mx-auto max-w-[1200px] px-5 py-8 sm:py-10 sm:px-10">
+        <div className="flex items-start gap-3 sm:gap-4">
           <div className="animate-berry-bounce shrink-0 pt-1">
-            <Image src="/berry-wink.png" alt="" width={48} height={48} className="h-12 w-auto" />
+            <Image src="/berry-wink.png" alt="" width={40} height={40} className="h-10 w-auto sm:h-12" />
           </div>
           <div className="flex-1">
-            <h2 className="text-[20px] font-extrabold tracking-tight text-[#1A1A1A]">
+            <h2 className="text-[18px] font-extrabold tracking-tight text-[#1A1A1A] sm:text-[20px]">
               Berry&apos;s dagplan
             </h2>
-            <div className="mt-3 space-y-2">
+            <div className="mt-2 space-y-1.5 sm:mt-3 sm:space-y-2">
               {planLines.map((line, i) => {
                 // Parse [text](href) links in the line
                 const parts = line.split(/\[([^\]]+)\]\(([^)]+)\)/);
                 return (
-                  <p key={i} className="text-[15px] leading-relaxed text-[#444]">
+                  <p key={i} className={`text-[14px] leading-relaxed text-[#444] sm:text-[15px] ${i >= 3 ? "hidden sm:block" : ""}`}>
                     {parts.length === 1 ? (
                       line
                     ) : (
@@ -167,13 +167,10 @@ export default async function Home() {
             Vandaag
           </h2>
           <div className="grid gap-8 lg:grid-cols-[5fr_2fr]">
-            <div>
-              {primaryEvents[0] && <EventCard event={primaryEvents[0]} />}
-              <div className="mt-8 grid gap-x-6 gap-y-8 sm:grid-cols-2">
-                {primaryEvents.slice(1, 5).map((e) => (
-                  <EventCard key={e.slug} event={e} />
-                ))}
-              </div>
+            <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2">
+              {primaryEvents.slice(1, 7).map((e) => (
+                <EventCard key={e.slug} event={e} />
+              ))}
             </div>
             <div className="hidden lg:block">
               <p className="mb-1.5 text-[10px] uppercase tracking-widest text-[#CCC]">Advertentie</p>

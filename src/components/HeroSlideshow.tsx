@@ -133,9 +133,9 @@ export default function HeroSlideshow({
     .slice(0, 3);
 
   return (
-    <div className="mx-auto max-w-[1200px] px-5 pt-6 sm:px-10">
+    <div className="mx-auto max-w-[1200px] pt-4 sm:px-10 sm:pt-6">
       {/* Decision heading */}
-      <div className="mb-3 flex items-end justify-between">
+      <div className="mb-3 flex items-end justify-between px-5 sm:px-0">
         <div>
           <p className="text-[12px] font-bold uppercase tracking-wider text-[#E85A5A]">{dateLine}</p>
           <h1 className="mt-1 text-[clamp(1.4rem,2.5vw,1.8rem)] font-extrabold tracking-tight text-[#1A1A1A]">
@@ -168,7 +168,7 @@ export default function HeroSlideshow({
         role="region"
         aria-label="Uitgelichte evenementen"
         aria-roledescription="carousel"
-        className="overflow-hidden rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#E85A5A] focus-visible:ring-offset-2"
+        className="overflow-hidden sm:rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#E85A5A] focus-visible:ring-offset-2"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onFocus={() => setPaused(true)}
@@ -177,7 +177,7 @@ export default function HeroSlideshow({
         <div className="grid grid-cols-1 gap-[3px] bg-white md:grid-cols-[3fr_1fr] md:grid-rows-3">
           {/* Main hero — spans all 3 rows */}
           <div
-            className="relative aspect-[4/3] md:row-span-3 md:aspect-auto md:min-h-[480px]"
+            className="relative aspect-[16/9] md:row-span-3 md:aspect-auto md:min-h-[480px]"
             aria-live="polite"
           >
             <HeroTile slide={mainSlide} large active />
