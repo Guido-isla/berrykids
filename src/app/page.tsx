@@ -132,7 +132,7 @@ export default async function Home() {
       <section className="mx-auto max-w-[1200px] px-5 py-8 sm:py-10 sm:px-10">
         <div className="flex items-start gap-3 sm:gap-4">
           <div className="animate-berry-bounce shrink-0 pt-1">
-            <Image src="/berry-wink.png" alt="" width={40} height={40} className="h-10 w-auto sm:h-12" />
+            <Image src="/berry-wink.png" alt="" width={80} height={80} className="h-16 w-auto sm:h-20" />
           </div>
           <div className="flex-1">
             <h2 className="text-[18px] font-extrabold tracking-tight text-[#1A1A1A] sm:text-[20px]">
