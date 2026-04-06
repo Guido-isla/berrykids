@@ -19,6 +19,7 @@ export type Activity = {
   googlePlaceId?: string;
   seekingMembers?: boolean;
   featured?: boolean;
+  availableMonths?: number[]; // 1-12; absent = year-round
 };
 
 export const activities: Activity[] = [
@@ -36,10 +37,11 @@ export const activities: Activity[] = [
     ageMin: 6,
     price: "Vanaf €35 per les",
     free: false,
-    website: "https://pimmulder.nl",
+    website: "https://www.pimmuldersurfschool.nl",
     image: "https://images.unsplash.com/photo-1502680390548-bdbac40ae4e7?w=800&q=80",
     googlePlaceId: "ChIJNUDJVnPsxUcRrQsH_h7FlMg",
     seekingMembers: true,
+    availableMonths: [5, 6, 7, 8, 9],
   },
   {
     slug: "padel-haarlem",
@@ -268,5 +270,6 @@ export const activities: Activity[] = [
     image: "https://images.unsplash.com/photo-1502680390548-bdbac40ae4e7?w=800&q=80",
     googlePlaceId: "ChIJYQgu9TvsxUcREPAlvvECxlM",
     seekingMembers: true,
+    availableMonths: [5, 6, 7, 8, 9],
   },
 ];

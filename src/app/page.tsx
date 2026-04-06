@@ -8,7 +8,7 @@ import FilmVanDeWeek from "@/components/FilmVanDeWeek";
 import TheaterAgenda from "@/components/TheaterAgenda";
 import ActivityCard from "@/components/ActivityCard";
 import HeroSlideshow from "@/components/HeroSlideshow";
-import { getScrapedEvents } from "@/data/events-loader";
+import { getScrapedEvents, getDayPlanEvents } from "@/data/events-loader";
 import { resolveEventImages } from "@/lib/photos";
 import { getSiteContext } from "@/lib/context";
 import { activities } from "@/data/activities";
@@ -45,7 +45,8 @@ export default async function Home() {
   }));
 
   // Berry's day plan from berry-brain.ts
-  const dayPlan = generateBerryDayPlan(ctx, events, activities, ctx.season.suggestions);
+  const dayPlanEvents = getDayPlanEvents();
+  const dayPlan = generateBerryDayPlan(ctx, dayPlanEvents, activities, ctx.season.suggestions);
 
   // Situational heading — Berry decides, not the user
   let situationHeading = `${ctx.weather.current.temp}°C ${ctx.weather.current.icon} — ${ctx.berryPick.reason.toLowerCase()}`;

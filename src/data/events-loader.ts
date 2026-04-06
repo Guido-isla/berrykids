@@ -7,6 +7,7 @@
 
 import scrapedData from "./scraped-events.json";
 import type { Event } from "./events";
+import { getDateRange, isInDateRange } from "@/lib/dates";
 
 type ScrapedEvent = {
   source: string;
@@ -22,6 +23,18 @@ type ScrapedEvent = {
   category?: string;
   tags?: string[];
 };
+
+function resolveImageUrl(url: string | undefined, ticketUrl: string | undefined): string {
+  if (!url) return "/berry-icon.png";
+  if (url.startsWith("https://") || url.startsWith("http://")) return url;
+  if (url.startsWith("/") && ticketUrl) {
+    try {
+      const origin = new URL(ticketUrl).origin;
+      return `${origin}${url}`;
+    } catch { /* fall through */ }
+  }
+  return "/berry-icon.png";
+}
 
 function slugify(text: string): string {
   return text
@@ -48,7 +61,7 @@ function scrapedToEvent(s: ScrapedEvent): Event {
     ageMin: parseAgeMin(s.ageLabel),
     ageMax: parseAgeMax(s.ageLabel),
     indoor: guessIndoor(s),
-    image: s.imageUrl && s.imageUrl.startsWith("https://") ? s.imageUrl : "/berry-icon.png",
+    image: resolveImageUrl(s.imageUrl, s.ticketUrl),
     category: mapCategory(s.category),
     url: s.ticketUrl,
   };
@@ -121,4 +134,31 @@ export function getScrapedEvents(): (Event & { isNew?: boolean })[] {
       isNew: e.date >= now && e.date <= nextWeekStr,
     }))
     .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+/**
+ * Events happening TODAY only (or within a multi-day event's range).
+ */
+export function getTodayEvents(): Event[] {
+  const today = new Date().toISOString().split("T")[0];
+  return getScrapedEvents().filter(
+    (e) => e.date === today || (e.endDate && today >= e.date && today <= e.endDate)
+  );
+}
+
+/**
+ * Events happening this weekend (Fri-Sun).
+ */
+export function getWeekendEvents(): Event[] {
+  const range = getDateRange("weekend");
+  return getScrapedEvents().filter((e) => isInDateRange(e.date, range));
+}
+
+/**
+ * Events for Berry's dagplan: today on weekdays, this weekend on Fri-Sun.
+ */
+export function getDayPlanEvents(): Event[] {
+  const day = new Date().getDay();
+  const isWeekend = day === 0 || day === 5 || day === 6;
+  return isWeekend ? getWeekendEvents() : getTodayEvents();
 }
