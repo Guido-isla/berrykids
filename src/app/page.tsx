@@ -46,7 +46,7 @@ export default async function Home() {
   const sportAct = resolveAct(activities.filter((a) => a.category === "sport").slice(0, 3));
   const cultAct = resolveAct(activities.filter((a) => a.category === "cultuur" || a.category === "indoor").slice(0, 3));
 
-  const heroSlides = withImg.slice(0, 5).map((e) => ({
+  const heroSlides = withImg.slice(0, 4).map((e) => ({
     slug: e.slug,
     title: e.title,
     category: e.category,
@@ -75,6 +75,7 @@ export default async function Home() {
       {/* ===== HERO — Rotating event slideshow ===== */}
       <HeroSlideshow
         slides={heroSlides}
+        heading="Dit weekend in Haarlem"
         dateLine={`${ctx.calendar.todayLabel} · ${ctx.weather.current.icon} ${ctx.weather.current.temp}°C`}
       />
 

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 type HeroSlide = {
   slug: string;
@@ -18,9 +18,11 @@ const INTERVAL = 5000;
 function HeroTile({
   slide,
   large,
+  active,
 }: {
   slide: HeroSlide;
   large?: boolean;
+  active?: boolean;
 }) {
   return (
     <Link
@@ -32,7 +34,9 @@ function HeroTile({
         alt={slide.title}
         fill
         sizes={large ? "(max-width: 768px) 100vw, 60vw" : "(max-width: 768px) 50vw, 20vw"}
-        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        className={`object-cover transition-transform duration-500 group-hover:scale-[1.03] ${
+          large && active ? "animate-ken-burns" : ""
+        }`}
         priority={large}
       />
       <div
@@ -73,45 +77,110 @@ function HeroTile({
 
 export default function HeroSlideshow({
   slides,
+  heading,
   dateLine,
 }: {
   slides: HeroSlide[];
+  heading: string;
   dateLine: string;
 }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const slideCount = Math.max(slides.length - 3, 1);
 
   const next = useCallback(() => {
-    setActive((i) => (i + 1) % Math.max(slides.length - 3, 1));
-  }, [slides.length]);
+    setActive((i) => (i + 1) % slideCount);
+  }, [slideCount]);
 
+  const prev = useCallback(() => {
+    setActive((i) => (i - 1 + slideCount) % slideCount);
+  }, [slideCount]);
+
+  // Auto-rotate, respecting reduced motion
   useEffect(() => {
-    if (paused || slides.length <= 4) return;
+    if (paused || slideCount <= 1) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
     const id = setInterval(next, INTERVAL);
     return () => clearInterval(id);
-  }, [paused, next, slides.length]);
+  }, [paused, next, slideCount]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        next();
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        prev();
+      }
+    }
+
+    el.addEventListener("keydown", handleKey);
+    return () => el.removeEventListener("keydown", handleKey);
+  }, [next, prev]);
 
   const mainSlide = slides[active];
-  const sideSlides = slides.slice(active + 1, active + 4).concat(
-    // wrap around if needed
-    slides.slice(0, Math.max(0, active + 4 - slides.length))
-  ).slice(0, 3);
+  const sideSlides = slides
+    .slice(active + 1, active + 4)
+    .concat(slides.slice(0, Math.max(0, active + 4 - slides.length)))
+    .slice(0, 3);
 
   return (
     <div className="mx-auto max-w-[1200px] px-5 pt-6 sm:px-10">
-      {/* Date line */}
-      <p className="mb-3 text-[13px] font-semibold text-[#888]">{dateLine}</p>
+      {/* Editorial heading */}
+      <div className="mb-4 flex items-end justify-between">
+        <div>
+          <h1 className="text-[clamp(1.6rem,3vw,2.2rem)] font-extrabold tracking-tight text-[#1A1A1A]">
+            {heading}
+          </h1>
+          <p className="mt-0.5 text-[13px] font-semibold text-[#888]">{dateLine}</p>
+        </div>
+        {/* Slide indicators — desktop top-right */}
+        {slideCount > 1 && (
+          <div className="hidden items-center gap-1.5 sm:flex">
+            {Array.from({ length: slideCount }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                aria-label={`Ga naar slide ${i + 1}`}
+                className={`h-[3px] rounded-full transition-all ${
+                  i === active
+                    ? "w-6 bg-[#E85A5A]"
+                    : "w-3 bg-[#1A1A1A]/20 hover:bg-[#1A1A1A]/40"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
 
-      {/* Grid: 1 large + 3 small, tight gap, rounded outer */}
+      {/* Grid: 1 large + 3 small */}
       <div
-        className="overflow-hidden rounded-2xl"
+        ref={containerRef}
+        tabIndex={0}
+        role="region"
+        aria-label="Uitgelichte evenementen"
+        aria-roledescription="carousel"
+        className="overflow-hidden rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#E85A5A] focus-visible:ring-offset-2"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
       >
         <div className="grid grid-cols-1 gap-[3px] bg-white md:grid-cols-[3fr_1fr] md:grid-rows-3">
           {/* Main hero — spans all 3 rows */}
-          <div className="relative aspect-[16/10] md:row-span-3 md:aspect-auto md:min-h-[480px]">
-            <HeroTile slide={mainSlide} large />
+          <div
+            className="relative aspect-[16/10] md:row-span-3 md:aspect-auto md:min-h-[480px]"
+            aria-live="polite"
+          >
+            <HeroTile slide={mainSlide} large active />
           </div>
 
           {/* 3 side tiles */}
@@ -122,6 +191,24 @@ export default function HeroSlideshow({
           ))}
         </div>
       </div>
+
+      {/* Slide indicators — mobile bottom */}
+      {slideCount > 1 && (
+        <div className="mt-3 flex justify-center gap-1.5 sm:hidden">
+          {Array.from({ length: slideCount }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              aria-label={`Ga naar slide ${i + 1}`}
+              className={`h-[3px] rounded-full transition-all ${
+                i === active
+                  ? "w-6 bg-[#E85A5A]"
+                  : "w-3 bg-[#1A1A1A]/20 hover:bg-[#1A1A1A]/40"
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
