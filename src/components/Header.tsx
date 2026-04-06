@@ -25,7 +25,7 @@ export default function Header() {
           <div className="flex items-center gap-5">
             {searchOpen ? (
               <form className="flex items-center gap-2" onSubmit={(e) => { e.preventDefault(); window.location.href = `/?q=${encodeURIComponent(query)}`; }}>
-                <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Zoeken..." autoFocus className="w-48 border-b-2 border-[#1A1A1A] bg-transparent px-1 py-1 text-sm outline-none" />
+                <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Zoeken..." autoFocus className="w-32 sm:w-48 border-b-2 border-[#1A1A1A] bg-transparent px-1 py-1 text-sm outline-none" />
                 <button type="button" onClick={() => { setSearchOpen(false); setQuery(""); }} className="text-[#666]">✕</button>
               </form>
             ) : (
@@ -33,7 +33,7 @@ export default function Header() {
                 Zoeken
               </button>
             )}
-            <a href="#newsletter" className="text-xs font-bold uppercase tracking-wider text-[#1A1A1A] hover:text-[#E85A5A]">
+            <a href="#newsletter" className={`text-xs font-bold uppercase tracking-wider text-[#1A1A1A] hover:text-[#E85A5A] ${searchOpen ? "hidden sm:inline" : ""}`}>
               Nieuwsbrief
             </a>
           </div>

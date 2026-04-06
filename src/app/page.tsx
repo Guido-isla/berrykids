@@ -91,7 +91,7 @@ export default async function Home() {
 
       {/* ===== WEATHER DECISION BAR ===== */}
       <div className="mx-auto max-w-[1200px] px-5 pt-5 sm:px-10">
-        <div className="flex items-center gap-3 rounded-xl bg-[#F0ECE8] px-5 py-3">
+        <div className="flex items-center gap-3 rounded-xl bg-[#F0ECE8] px-4 py-2.5 sm:px-5 sm:py-3">
           <span className="text-[22px] leading-none">{ctx.weather.current.icon}</span>
           <div>
             <p className="text-[14px] font-bold text-[#1A1A1A]">
@@ -160,7 +160,7 @@ export default async function Home() {
       </section>
 
       {/* ===== VANDAAG — Berry's top picks, no explanation ===== */}
-      <section className="bg-[#FAF8F6] py-20">
+      <section className="bg-[#FAF8F6] py-12 sm:py-20">
         <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
           <h2 className="mb-8 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
             <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
@@ -175,7 +175,7 @@ export default async function Home() {
                 ))}
               </div>
             </div>
-            <div>
+            <div className="hidden lg:block">
               <p className="mb-1.5 text-[10px] uppercase tracking-widest text-[#CCC]">Advertentie</p>
               <div className="flex h-[600px] items-center justify-center rounded bg-[#F0ECE8] text-[13px] text-[#CCC]">
                 Advertentie
@@ -186,7 +186,7 @@ export default async function Home() {
       </section>
 
       {/* ===== NEWSLETTER ===== */}
-      <section className="mx-auto max-w-[1200px] px-5 py-20 sm:px-10">
+      <section className="mx-auto max-w-[1200px] px-5 py-12 sm:py-20 sm:px-10">
         <div className="rounded-2xl bg-[#FAFAFA] p-8 sm:p-12">
           <div className="mx-auto max-w-lg text-center">
             <p className="text-[11px] font-bold uppercase tracking-widest text-[#E85A5A]">Elke vrijdag om 15:00</p>
@@ -200,7 +200,7 @@ export default async function Home() {
 
       {/* ===== FALLBACK — if weather changes ===== */}
       {fallbackEvents.length > 0 && (
-        <section className="mx-auto max-w-[1200px] px-5 py-20 sm:px-10">
+        <section className="mx-auto max-w-[1200px] px-5 py-12 sm:py-20 sm:px-10">
           <h2 className="mb-8 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
             <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
             {fallbackLabel}
@@ -212,7 +212,7 @@ export default async function Home() {
       )}
 
       {/* ===== FILM + THEATER ===== */}
-      <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-10">
+      <div className="mx-auto max-w-[1200px] px-5 py-12 sm:py-20 sm:px-10">
         <div className="grid gap-8 lg:grid-cols-2">
           <FilmVanDeWeek />
           <TheaterAgenda />
@@ -226,7 +226,7 @@ export default async function Home() {
       </div>
 
       {/* ===== MEER ONTDEKKEN — activities, demoted ===== */}
-      <section className="bg-[#FAF8F6] py-20">
+      <section className="bg-[#FAF8F6] py-12 sm:py-20">
         <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
           <h2 className="mb-8 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
             <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
@@ -239,7 +239,7 @@ export default async function Home() {
       </section>
 
       {/* ===== MEIVAKANTIE ===== */}
-      <section className="mx-auto max-w-[1200px] px-5 py-20 sm:px-10">
+      <section className="mx-auto max-w-[1200px] px-5 py-12 sm:py-20 sm:px-10">
         <Link href="/vakanties" className="group block rounded-2xl bg-[#1A1A1A] p-8 text-white hover:bg-[#2A2A2A] sm:p-10">
           <p className="text-[11px] font-bold uppercase tracking-widest text-[#E85A5A]">26 april – 9 mei</p>
           <h2 className="mt-2 text-[26px] font-extrabold tracking-tight">Meivakantie — jouw weekplan</h2>

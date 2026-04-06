@@ -33,7 +33,7 @@ function HeroTile({
         src={slide.image}
         alt={slide.title}
         fill
-        sizes={large ? "(max-width: 768px) 100vw, 60vw" : "(max-width: 768px) 50vw, 20vw"}
+        sizes={large ? "(max-width: 768px) 100vw, 75vw" : "25vw"}
         className={`object-cover transition-transform duration-500 group-hover:scale-[1.03] ${
           large && active ? "animate-ken-burns" : ""
         }`}
@@ -50,7 +50,7 @@ function HeroTile({
       <div className={`absolute inset-x-0 bottom-0 ${large ? "p-6 sm:p-8" : "p-3 sm:p-4"}`}>
         <p
           className={`font-bold uppercase tracking-wide ${
-            large ? "text-[13px] text-[#E85A5A]" : "text-[10px] text-[#E85A5A] drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+            large ? "text-[14px] text-[#E85A5A]" : "text-[11px] text-[#E85A5A] drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
           }`}
         >
           {slide.category}
@@ -177,15 +177,15 @@ export default function HeroSlideshow({
         <div className="grid grid-cols-1 gap-[3px] bg-white md:grid-cols-[3fr_1fr] md:grid-rows-3">
           {/* Main hero — spans all 3 rows */}
           <div
-            className="relative aspect-[16/10] md:row-span-3 md:aspect-auto md:min-h-[480px]"
+            className="relative aspect-[4/3] md:row-span-3 md:aspect-auto md:min-h-[480px]"
             aria-live="polite"
           >
             <HeroTile slide={mainSlide} large active />
           </div>
 
-          {/* 3 side tiles */}
+          {/* 3 side tiles — hidden on mobile */}
           {sideSlides.map((s) => (
-            <div key={s.slug} className="relative aspect-[16/9] md:aspect-auto">
+            <div key={s.slug} className="relative hidden md:block md:aspect-auto">
               <HeroTile slide={s} />
             </div>
           ))}
