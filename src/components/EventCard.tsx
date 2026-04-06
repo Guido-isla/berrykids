@@ -13,8 +13,8 @@ export default function EventCard({ event }: { event: EventWithImage }) {
   const src = event.resolvedImage || event.image;
 
   return (
-    <Link href={`/event/${event.slug}`} className="group block">
-      <article className="h-full">
+    <Link href={`/event/${event.slug}`} className="group block min-w-0">
+      <article className="h-full min-w-0">
         <div className="relative aspect-[3/2] overflow-hidden rounded-xl">
           <Image
             src={src}

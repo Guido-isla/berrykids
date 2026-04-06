@@ -167,8 +167,8 @@ export default async function Home() {
             <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
             Vandaag
           </h2>
-          <div className="grid gap-8 lg:grid-cols-[5fr_2fr]">
-            <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[5fr_2fr]">
+            <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-2 sm:gap-x-6">
               {primaryEvents.slice(1, 7).map((e) => (
                 <EventCard key={e.slug} event={e} />
               ))}
