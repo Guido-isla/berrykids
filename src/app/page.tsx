@@ -133,7 +133,7 @@ export default async function Home() {
                 <Image src="/berry-wink.png" alt="" width={64} height={64} className="h-14 w-auto" />
               </div>
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-wider text-[#E85A5A]">{ctx.calendar.todayLabel}</p>
+                <p className="text-[12px] font-semibold lowercase tracking-wide text-[#E85A5A]">{dayPlan.vibe}</p>
                 <h1 className="text-[clamp(1.6rem,3vw,2.2rem)] font-extrabold tracking-tight text-[#1A1A1A]">
                   Doe dit vandaag
                 </h1>
@@ -168,6 +168,7 @@ export default async function Home() {
             {tomorrowFlip && (
               <p className="mt-3 text-[12px] font-semibold text-[#888]">{tomorrowFlip}</p>
             )}
+            <p className="mt-2 text-[11px] text-[#BBB]">Nieuw weekendplan vrijdag om 15:00</p>
           </div>
 
           {/* RIGHT: #1 pick card — large */}
@@ -187,13 +188,13 @@ export default async function Home() {
                   Berry&apos;s #1
                 </div>
                 <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                  <p className="text-[11px] font-bold uppercase tracking-wide text-[#E85A5A] drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]">
-                    {topPick.category}{topPick.free && " · Gratis"}
+                  <p className="text-[13px] font-semibold text-white/80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]">
+                    {dayPlan.whyNow}
                   </p>
                   <h2 className="mt-1 text-[clamp(1.2rem,2.5vw,1.8rem)] font-extrabold leading-[1.1] tracking-tight text-white">
                     {topPick.title}
                   </h2>
-                  <p className="mt-1 text-[13px] text-white/60">{topPick.location}</p>
+                  <p className="mt-1 text-[12px] text-white/50">{topPick.location} · {topPick.category}{topPick.free ? " · Gratis" : ""}</p>
                 </div>
               </div>
             </Link>

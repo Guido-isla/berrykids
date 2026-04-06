@@ -13,6 +13,8 @@ import type { SeasonSuggestion } from "@/data/dutch-calendar";
 export type BerryTip = {
   message: string;
   mood: "sunny" | "rainy" | "festive" | "chill" | "excited";
+  vibe: string; // lowercase mood label, e.g. "zonnige paasmaandag"
+  whyNow: string; // one-line reason for the #1 pick
 };
 
 /** Filter activities to those available this month */
@@ -71,60 +73,93 @@ export function generateBerryDayPlan(
     (a) => a.activity.title !== eventPick?.title
   )?.activity || scoredActivities[0]?.activity || null;
 
-  // --- Build the message ---
+  // --- Build the message — conversational, opinionated, first person ---
 
   let opener = "";
-  let planIntro = "";
 
   if (calendar.holidayName?.includes("Paas")) {
     opener = "Fijne Pasen! 🥚";
-    planIntro = "Mijn dagplan voor vandaag:";
   } else if (calendar.holidayName === "Koningsdag") {
     opener = "Fijne Koningsdag! 🧡";
-    planIntro = "Dit is mijn oranje dagplan:";
   } else if (calendar.isSchoolVacation) {
     opener = `${calendar.vacationName}!`;
-    planIntro = "Geen school — dit is mijn plan:";
   } else if (calendar.isLongWeekend) {
     opener = `${calendar.longWeekendName}!`;
-    planIntro = "Lang weekend, extra tijd. Mijn plan:";
   } else if (weather.isRainy) {
-    opener = "Het regent 🌧️ maar geen probleem.";
-    planIntro = "Mijn binnendag-plan:";
+    opener = "Regendag — maar ik heb iets voor je.";
   } else if (weather.isGoodWeather) {
-    opener = `${weather.current.temp}°C en ${weather.current.description.toLowerCase()} — heerlijk!`;
-    planIntro = "Mijn plan voor vandaag:";
+    opener = `${weather.current.temp}°C en ${weather.current.description.toLowerCase()}. Ga eropuit.`;
   } else {
     opener = `${weather.current.icon} ${weather.current.temp}°C vandaag.`;
-    planIntro = "Mijn dagplan:";
   }
 
-  // Morning: event (only if we have one for today)
+  // Morning: event — conversational, with opinion
   let morning = "";
   if (eventPick) {
-    morning = `☀️ Ochtend: [${eventPick.title}](/event/${eventPick.slug}) in ${eventPick.location}.${eventPick.time ? ` Om ${eventPick.time}.` : ""} ${eventPick.free ? "Gratis!" : ""}`;
+    const timeNote = eventPick.time ? ` Ga voor ${eventPick.time}, dan is het nog rustig.` : "";
+    const freeNote = eventPick.free ? " En het is gratis." : "";
+    morning = `Ga naar [${eventPick.title}](/event/${eventPick.slug}) in ${eventPick.location}.${timeNote}${freeNote}`;
   }
 
-  // Afternoon: activity — always link to Berry's own page
+  // Afternoon: activity — opinion-first, not description
   let afternoon = "";
   if (activityPick) {
-    afternoon = `🌤️ Middag: [${activityPick.title}](/activiteiten#${activityPick.slug}) — ${activityPick.description.slice(0, 80)}.${activityPick.free ? " Gratis!" : ""}`;
+    const tip = activityPick.tip || activityPick.description.slice(0, 70);
+    afternoon = `Daarna: [${activityPick.title}](/activiteiten/${activityPick.slug}). ${tip}`;
   }
 
-  // Seasonal closing
+  // Closing — personal, not generic
   const seasonTip = seasonSuggestions[0];
   let closing = "";
-  if (seasonTip && weather.isGoodWeather) {
-    closing = `${season.emoji} Bonustip: [${seasonTip.title.toLowerCase()}](/tips/${seasonTip.slug}) — ${seasonTip.description.slice(0, 60)}.`;
-  } else if (weather.isRainy) {
-    closing = "☕ En daarna warme chocomel op de bank — verdiend!";
+  if (weather.isRainy) {
+    closing = "En daarna warme chocomel. Verdiend.";
+  } else if (seasonTip && weather.isGoodWeather) {
+    closing = `Oh, en: [${seasonTip.title.toLowerCase()}](/tips/${seasonTip.slug}) is ook een aanrader nu.`;
   } else {
-    closing = "Klinkt als een goede dag!";
+    closing = "Goede dag wordt dit.";
+  }
+
+  // --- Vibe label (lowercase, Spotify-style) ---
+  const dayNames = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
+  const dayName = dayNames[new Date().getDay()];
+  let vibe = "";
+  if (calendar.holidayName?.includes("Paas")) {
+    vibe = weather.isGoodWeather ? `zonnige paas${dayName}` : `gezellige paas${dayName}`;
+  } else if (calendar.holidayName === "Koningsdag") {
+    vibe = "oranje koningsdag";
+  } else if (calendar.isSchoolVacation) {
+    vibe = weather.isGoodWeather ? `buitendag ${calendar.vacationName?.toLowerCase()}` : `binnendag ${calendar.vacationName?.toLowerCase()}`;
+  } else if (weather.isRainy) {
+    vibe = `binnenblijf-${dayName}`;
+  } else if (weather.isGoodWeather && weather.current.temp >= 18) {
+    vibe = `warme ${dayName} buitendag`;
+  } else if (weather.isGoodWeather) {
+    vibe = `eerste-zonnedag-${dayName}`;
+  } else if (weather.current.temp < 8) {
+    vibe = `koude ${dayName} — warm binnen`;
+  } else {
+    vibe = `rustige ${dayName}`;
+  }
+
+  // --- "Waarom nu" for the #1 pick ---
+  let whyNow = "";
+  if (eventPick) {
+    if (weather.isGoodWeather && !eventPick.indoor) {
+      whyNow = `${weather.current.temp}°C en droog — perfect om eropuit te gaan`;
+    } else if (weather.isRainy && eventPick.indoor) {
+      whyNow = "Het regent, maar hier zit je warm en droog";
+    } else if (eventPick.free) {
+      whyNow = "Gratis, gezellig, en vandaag in de buurt";
+    } else if (calendar.holidayName) {
+      whyNow = `${calendar.holidayName} — iets bijzonders vandaag`;
+    } else {
+      whyNow = "Berry's beste keuze voor vandaag";
+    }
   }
 
   // Assemble — skip empty lines
   const lines = [
-    `${opener} ${planIntro}`,
+    opener,
     morning,
     afternoon,
     closing,
@@ -133,8 +168,10 @@ export function generateBerryDayPlan(
   // If no events AND no activities, give a simple message
   if (!eventPick && !activityPick) {
     return {
-      message: `${opener} Vandaag geen specifieke evenementen gepland. Scroll naar beneden voor activiteiten in de buurt!`,
+      message: `${opener} Vandaag geen evenementen, maar scroll naar beneden — er is genoeg te doen.`,
       mood: weather.isRainy ? "rainy" : "chill",
+      vibe,
+      whyNow: weather.isGoodWeather ? "Lekker weer, ga naar buiten" : "Genoeg te doen binnen",
     };
   }
 
@@ -172,6 +209,8 @@ export function generateBerryDayPlan(
     return {
       message: msgLines.join("\n\n"),
       mood: weather.isGoodWeather ? "sunny" : weather.isRainy ? "rainy" : "chill",
+      vibe,
+      whyNow: topFree ? `${topFree.title} — altijd goed` : "Genoeg te doen in de buurt",
     };
   }
 
@@ -184,5 +223,7 @@ export function generateBerryDayPlan(
         : weather.isGoodWeather
           ? "sunny"
           : "chill",
+    vibe,
+    whyNow,
   };
 }
