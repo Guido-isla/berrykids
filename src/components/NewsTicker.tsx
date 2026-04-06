@@ -19,14 +19,14 @@ export default function NewsTicker({ label = "DIT WEEKEND" }: { label?: string }
   const doubled = `${tickerText}     ★     ${tickerText}     ★     `;
 
   return (
-    <div className="overflow-hidden bg-[#E85A5A] text-white">
+    <div className="overflow-hidden border-b border-black/[0.06] bg-[#1A1A1A] text-white">
       <div className="relative flex items-center py-2">
-        <span className="shrink-0 bg-[#D04A4A] px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
+        <span className="shrink-0 rounded-sm bg-[#E85A5A] px-3 py-0.5 text-xs font-bold uppercase tracking-wider">
           {label}
         </span>
         <div className="ml-3 flex-1 overflow-hidden">
           <div className="animate-ticker flex whitespace-nowrap">
-            <span className="text-sm font-medium">{doubled}</span>
+            <span className="text-sm font-medium text-white/70">{doubled}</span>
           </div>
         </div>
       </div>
