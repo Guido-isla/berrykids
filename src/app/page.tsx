@@ -92,6 +92,22 @@ export default async function Home() {
   const sportAct = resolveAct(activities.filter((a) => a.category === "sport").slice(0, 3));
   const cultAct = resolveAct(activities.filter((a) => a.category === "cultuur" || a.category === "indoor").slice(0, 3));
 
+  // "Ook goed vandaag" — 3 alternatives (mix of events + activities)
+  const alsoGood = primaryEvents.slice(1, 4);
+  // If fewer than 3 events, fill with weather-matched activities
+  const verifiedActs = resolveAct(
+    activities.filter((a) => a.verified && (!a.availableMonths || a.availableMonths.includes(new Date().getMonth() + 1)))
+  );
+  const matchedActs = preferIndoor
+    ? verifiedActs.filter((a) => a.category === "indoor" || a.category === "cultuur")
+    : verifiedActs.filter((a) => a.category === "natuur" || a.category === "dieren" || a.category === "sport");
+  while (alsoGood.length < 3 && matchedActs.length > 0) {
+    const act = matchedActs.shift()!;
+    if (!alsoGood.some((e) => e.title === act.title)) {
+      alsoGood.push({ ...act, date: "", time: "", indoor: act.category === "indoor" || act.category === "cultuur", slug: act.slug, image: act.resolvedImage || act.image } as typeof primaryEvents[0]);
+    }
+  }
+
   // Parse day plan message into structured lines
   const planLines = dayPlan.message.split("\n\n").filter(Boolean);
 
@@ -99,57 +115,40 @@ export default async function Home() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* ===== WEATHER DECISION BAR ===== */}
-      <div className="mx-auto max-w-[1200px] px-5 pt-5 sm:px-10">
-        <div className="flex items-center gap-3 rounded-xl bg-[#F0ECE8] px-4 py-2.5 sm:px-5 sm:py-3">
-          <span className="text-[22px] leading-none">{ctx.weather.current.icon}</span>
-          <div>
-            <p className="text-[14px] font-bold text-[#1A1A1A]">
-              {ctx.weather.current.temp}°C · {ctx.weather.current.description}
-            </p>
-            <p className="text-[13px] text-[#666]">{ctx.berryPick.reason}</p>
-          </div>
+      {/* ===== ATF — Berry's decision + #1 pick + alternatives ===== */}
+      <section className="mx-auto max-w-[1200px] px-5 pt-5 sm:px-10">
+        {/* Weather chip */}
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#F0ECE8] px-4 py-2">
+          <span className="text-[18px] leading-none">{ctx.weather.current.icon}</span>
+          <span className="text-[13px] font-bold text-[#1A1A1A]">{ctx.weather.current.temp}°C · {ctx.weather.current.description}</span>
+          <span className="text-[12px] text-[#888]">— {ctx.berryPick.reason.toLowerCase()}</span>
         </div>
-      </div>
 
-      {/* ===== HERO — Berry's #1 pick + alternatives ===== */}
-      <HeroSlideshow
-        slides={heroSlides}
-        heading="Doe dit vandaag"
-        dateLine={ctx.calendar.todayLabel}
-      />
-
-      {/* ===== TOMORROW FLIP — urgency from forecast ===== */}
-      {tomorrowFlip && (
-        <div className="mx-auto max-w-[1200px] px-5 pt-4 sm:px-10">
-          <div className="rounded-xl bg-[#1A1A1A] px-5 py-3">
-            <p className="text-center text-[14px] font-semibold text-white/80">{tomorrowFlip}</p>
-          </div>
-        </div>
-      )}
-
-      {/* ===== BERRY'S DAY PLAN — the decision engine ===== */}
-      <section className="mx-auto max-w-[1200px] px-5 py-8 sm:py-10 sm:px-10">
-        <div className="flex items-start gap-3 sm:gap-4">
-          <div className="animate-berry-bounce shrink-0 pt-1">
-            <Image src="/berry-wink.png" alt="" width={80} height={80} className="h-16 w-auto sm:h-20" />
-          </div>
-          <div className="flex-1">
-            <h2 className="text-[18px] font-extrabold tracking-tight text-[#1A1A1A] sm:text-[20px]">
-              Berry&apos;s dagplan
-            </h2>
-            <div className="mt-2 space-y-1.5 sm:mt-3 sm:space-y-2">
-              {planLines.map((line, i) => {
-                // Parse [text](href) links in the line
+        {/* Berry message + #1 card side by side */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[5fr_7fr]">
+          {/* LEFT: Berry's message */}
+          <div className="flex flex-col justify-center">
+            <div className="flex items-center gap-3">
+              <div className="animate-berry-bounce shrink-0">
+                <Image src="/berry-wink.png" alt="" width={64} height={64} className="h-14 w-auto" />
+              </div>
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#E85A5A]">{ctx.calendar.todayLabel}</p>
+                <h1 className="text-[clamp(1.6rem,3vw,2.2rem)] font-extrabold tracking-tight text-[#1A1A1A]">
+                  Doe dit vandaag
+                </h1>
+              </div>
+            </div>
+            <div className="mt-4 space-y-1.5 rounded-xl bg-[#F0ECE8] p-4">
+              {planLines.slice(0, 3).map((line, i) => {
                 const parts = line.split(/\[([^\]]+)\]\(([^)]+)\)/);
                 return (
-                  <p key={i} className={`text-[14px] leading-relaxed text-[#444] sm:text-[15px] ${i >= 3 ? "hidden sm:block" : ""}`}>
+                  <p key={i} className="text-[13px] leading-relaxed text-[#444]">
                     {parts.length === 1 ? (
                       line
                     ) : (
                       parts.map((part, j) => {
                         if (j % 3 === 1) {
-                          // Link text
                           const href = parts[j + 1];
                           return (
                             <Link key={j} href={href} className="font-bold text-[#E85A5A] hover:underline">
@@ -157,7 +156,7 @@ export default async function Home() {
                             </Link>
                           );
                         }
-                        if (j % 3 === 2) return null; // href, already consumed
+                        if (j % 3 === 2) return null;
                         return <span key={j}>{part}</span>;
                       })
                     )}
@@ -165,8 +164,72 @@ export default async function Home() {
                 );
               })}
             </div>
+            {/* Tomorrow flip — inline */}
+            {tomorrowFlip && (
+              <p className="mt-3 text-[12px] font-semibold text-[#888]">{tomorrowFlip}</p>
+            )}
           </div>
+
+          {/* RIGHT: #1 pick card — large */}
+          {topPick && (
+            <Link href={`/event/${topPick.slug}`} className="group block">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl sm:aspect-[16/10]">
+                <Image
+                  src={topPick.resolvedImage || topPick.image}
+                  alt={topPick.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  priority
+                />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.05) 50%, transparent 100%)" }} />
+                <div className="absolute left-4 top-4 rounded-full bg-[#E85A5A] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+                  Berry&apos;s #1
+                </div>
+                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-[#E85A5A] drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]">
+                    {topPick.category}{topPick.free && " · Gratis"}
+                  </p>
+                  <h2 className="mt-1 text-[clamp(1.2rem,2.5vw,1.8rem)] font-extrabold leading-[1.1] tracking-tight text-white">
+                    {topPick.title}
+                  </h2>
+                  <p className="mt-1 text-[13px] text-white/60">{topPick.location}</p>
+                </div>
+              </div>
+            </Link>
+          )}
         </div>
+
+        {/* "Ook goed vandaag" — 3 compact alternatives */}
+        {alsoGood.length > 0 && (
+          <div className="mt-5">
+            <p className="mb-3 text-[12px] font-bold uppercase tracking-wider text-[#999]">Ook goed vandaag</p>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {alsoGood.slice(0, 3).map((e) => (
+                <Link key={e.slug} href={e.date ? `/event/${e.slug}` : `/activiteiten/${e.slug}`} className="group flex gap-3 rounded-xl bg-[#FAF8F6] p-3 transition-colors hover:bg-[#F0ECE8]">
+                  <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg sm:h-20 sm:w-20">
+                    <Image
+                      src={e.resolvedImage || e.image}
+                      alt={e.title}
+                      fill
+                      sizes="80px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col justify-center min-w-0">
+                    <p className="text-[10px] font-bold uppercase tracking-wide text-[#E85A5A]">
+                      {e.category}{e.free && " · Gratis"}
+                    </p>
+                    <h3 className="text-[14px] font-bold leading-snug tracking-tight text-[#1A1A1A] group-hover:text-[#E85A5A]">
+                      {e.title}
+                    </h3>
+                    <p className="text-[12px] text-[#888] truncate">{e.location}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* ===== VANDAAG — Berry's top picks, no explanation ===== */}
