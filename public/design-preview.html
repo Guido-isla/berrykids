@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berry Kids — DESIGN.md Impact Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #F5F5F5; color: #333; }
+
+  .page-header {
+    background: #1A1A1A;
+    color: white;
+    padding: 40px 32px;
+    text-align: center;
+  }
+  .page-header h1 { font-family: 'Nunito', sans-serif; font-size: 28px; font-weight: 800; }
+  .page-header p { margin-top: 8px; font-size: 14px; color: rgba(255,255,255,0.6); }
+
+  .comparison { max-width: 1300px; margin: 0 auto; padding: 40px 24px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+
+  .panel {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .panel-label {
+    padding: 12px 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .panel-label.before { background: #F0F0F0; color: #999; }
+  .panel-label.after { background: #E85A5A; color: white; }
+
+  .panel-body { padding: 24px; }
+
+  /* ---- BEFORE styles (generic, no design system) ---- */
+  .before-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 16px;
+    font-family: 'Inter', sans-serif;
+  }
+  .before-card .cat { font-size: 11px; color: #888; text-transform: uppercase; }
+  .before-card h3 { font-size: 16px; font-weight: 600; color: #333; margin-top: 4px; }
+  .before-card p { font-size: 13px; color: #777; margin-top: 4px; }
+  .before-card .btn {
+    display: inline-block; margin-top: 12px; padding: 8px 16px;
+    background: #333; color: white; border-radius: 4px; font-size: 13px;
+    text-decoration: none;
+  }
+
+  .before-heading { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 600; color: #333; margin-bottom: 12px; }
+  .before-heading span { display: none; }
+
+  .before-nav {
+    background: #333; padding: 10px 16px; border-radius: 4px;
+    display: flex; gap: 16px;
+  }
+  .before-nav a { color: white; font-size: 12px; text-decoration: none; font-weight: 500; }
+
+  .before-input {
+    display: flex; gap: 8px;
+  }
+  .before-input input {
+    flex: 1; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px;
+    font-size: 13px; outline: none;
+  }
+  .before-input button {
+    padding: 8px 16px; background: #333; color: white; border: none;
+    border-radius: 4px; font-size: 13px; cursor: pointer;
+  }
+
+  .before-badge { display: inline-block; padding: 2px 8px; background: #eee; border-radius: 4px; font-size: 11px; color: #666; }
+
+  .before-section-block { background: #f9f9f9; padding: 20px; border-radius: 4px; text-align: center; }
+
+  /* ---- AFTER styles (with DESIGN.md) ---- */
+  .after-card {
+    font-family: 'Nunito', sans-serif;
+  }
+  .after-card .img {
+    height: 140px;
+    background: linear-gradient(135deg, #F0ECE8 0%, #E85A5A33 100%);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .after-card .img::after {
+    content: '📸'; font-size: 32px; position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3;
+  }
+  .after-card .cat {
+    font-size: 12px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.8px; color: #E85A5A;
+  }
+  .after-card h3 {
+    font-size: 18px; font-weight: 700; color: #1A1A1A; margin-top: 4px;
+    line-height: 1.25;
+  }
+  .after-card p { font-size: 14px; color: #444; margin-top: 4px; }
+  .after-card .btn {
+    display: inline-block; margin-top: 12px; padding: 10px 24px;
+    background: #E85A5A; color: white; border-radius: 999px;
+    font-size: 13px; font-weight: 700; text-decoration: none;
+  }
+
+  .after-heading {
+    font-family: 'Nunito', sans-serif; font-size: 26px; font-weight: 800;
+    color: #1A1A1A; margin-bottom: 12px; display: flex; align-items: center; gap: 12px;
+  }
+  .after-heading span {
+    display: inline-block; width: 40px; height: 3px; background: #E85A5A;
+  }
+
+  .after-nav {
+    background: #E85A5A; padding: 10px 16px; border-radius: 999px;
+    display: flex; gap: 24px;
+  }
+  .after-nav a {
+    color: white; font-family: 'Nunito', sans-serif; font-size: 12px;
+    text-decoration: none; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  .after-input {
+    display: flex; gap: 8px;
+  }
+  .after-input input {
+    flex: 1; padding: 12px 16px; border: 1px solid #F0E6E0; border-radius: 999px;
+    font-size: 14px; font-family: 'Nunito', sans-serif; outline: none;
+  }
+  .after-input input:focus { border-color: #E85A5A; }
+  .after-input button {
+    padding: 12px 20px; background: #E85A5A; color: white; border: none;
+    border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .after-badge-group { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .after-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 600; font-family: 'Nunito', sans-serif;
+  }
+  .after-badge.sub { background: #FFD6D6; color: #E85A5A; }
+  .after-badge.free { background: rgba(139,195,74,0.15); color: #6FAF3A; }
+  .after-badge.age { background: #F0E6E0; color: #6B6B6B; }
+
+  .after-section-block {
+    background: #FAFAFA; padding: 24px; border-radius: 16px; text-align: center;
+    font-family: 'Nunito', sans-serif;
+  }
+  .after-section-block .label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; color: #E85A5A;
+  }
+  .after-section-block h3 { font-size: 22px; font-weight: 800; color: #1A1A1A; margin-top: 6px; }
+  .after-section-block p { font-size: 14px; color: #666; margin-top: 4px; }
+
+  /* Hero comparison */
+  .before-hero {
+    background: #eee; height: 200px; border-radius: 4px; position: relative;
+    display: flex; align-items: flex-end; padding: 20px;
+  }
+  .before-hero h2 { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 600; color: #333; }
+
+  .after-hero {
+    background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 55%, transparent 100%),
+                linear-gradient(135deg, #E85A5A22, #F0ECE8);
+    height: 200px; border-radius: 16px; position: relative;
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 24px;
+    overflow: hidden;
+  }
+  .after-hero .cat {
+    font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px; color: #E85A5A;
+  }
+  .after-hero h2 {
+    font-family: 'Nunito', sans-serif; font-size: 24px; font-weight: 800;
+    color: white; line-height: 1.1; margin-top: 4px;
+  }
+  .after-hero .meta { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 6px; font-family: 'Nunito'; }
+  .after-hero .btn {
+    display: inline-block; margin-top: 10px; padding: 8px 20px;
+    background: #E85A5A; color: white; border-radius: 999px;
+    font-size: 12px; font-weight: 700; font-family: 'Nunito'; width: fit-content;
+  }
+
+  /* Berry mascot */
+  .after-berry {
+    display: flex; align-items: flex-start; gap: 12px; margin-top: 16px;
+  }
+  .after-berry .icon { font-size: 32px; }
+  .after-berry .bubble {
+    background: #F0ECE8; border-radius: 16px; padding: 12px 16px;
+    font-family: 'Nunito', sans-serif; font-size: 14px; color: #1A1A1A;
+    max-width: 280px; position: relative;
+  }
+  .after-berry .bubble::before {
+    content: ''; position: absolute; left: -8px; top: 14px;
+    border: 7px solid transparent; border-right-color: #F0ECE8;
+  }
+
+  /* Color swatches */
+  .swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+  .swatch {
+    width: 48px; height: 48px; border-radius: 12px; position: relative;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  .swatch-label { font-size: 10px; color: #999; text-align: center; margin-top: 4px; }
+
+  .note {
+    background: #FDF1EA;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    color: #1A1A1A;
+    margin-top: 24px;
+    line-height: 1.6;
+  }
+  .note strong { color: #E85A5A; }
+
+  @media (max-width: 768px) {
+    .split { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>DESIGN.md Impact Preview</h1>
+  <p>Left: what AI generates without a design system &nbsp;·&nbsp; Right: what AI generates with Berry Kids DESIGN.md</p>
+</div>
+
+<div class="comparison">
+
+  <!-- 1. EVENT CARD -->
+  <p class="section-label">Event Card</p>
+  <div class="split">
+    <div class="panel">
+      <div class="panel-label before">Without DESIGN.md</div>
+      <div class="panel-body">
+        <div class="before-card">
+          <div class="cat">Festival</div>
+          <h3>Paasmarkt op de Grote Markt</h3>
+          <p>5 april · Grote Markt · Gratis</p>
+          <a href="#" class="btn">Read more</a>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-label after">With DESIGN.md</div>
+      <div class="panel-body">
+        <div class="after-card">
+          <div class="img"></div>
+          <div class="cat">Festival · Gratis</div>
+          <h3>Paasmarkt op de Grote Markt</h3>
+          <p>5 april · Grote Markt</p>
+          <a href="#" class="btn">Lees meer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. SECTION HEADING -->
+  <p class="section-label">Section Heading</p>
+  <div class="split">
+    <div class="panel">
+      <div class="panel-label before">Without DESIGN.md</div>
+      <div class="panel-body">
+        <div class="before-heading"><span></span>Dit weekend</div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-label after">With DESIGN.md</div>
+      <div class="panel-body">
+        <div class="after-heading"><span></span>Dit weekend</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. NAVIGATION -->
+  <p class="section-label">Navigation Bar</p>
+  <div class="split">
+    <div class="panel">
+      <div class="panel-label before">Without DESIGN.md</div>
+      <div class="panel-body">
+        <div class="before-nav">
+          <a href="#">Dit weekend</a>
+          <a href="#">Activiteiten</a>
+          <a href="#">Vakanties</a>
+          <a href="#">Event insturen</a>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-label after">With DESIGN.md</div>
+      <div class="panel-body">
+        <div class="after-nav">
+          <a href="#">Dit weekend</a>
+          <a href="#">Activiteiten</a>
+          <a href="#">Vakanties</a>
+          <a href="#">Event insturen</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. NEWSLETTER INPUT -->
+  <p class="section-label">Newsletter Form</p>
+  <div class="split">
+    <div class="panel">
+      <div class="panel-label before">Without DESIGN.md</div>
+      <div class="panel-body">
+        <div class="before-section-block">
+          <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">Subscribe to our newsletter</h3>
+          <div class="before-input">
+            <input type="email" placeholder="your@email.com" />
+            <button>Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-label after">With DESIGN.md</div>
+      <div class="panel-body">
+        <div class="after-section-block">
+          <div class="label">Elke vrijdag om 15:00</div>
+          <h3>Weekend gepland in 2 minuten</h3>
+          <p>De 5 leukste tips. Geen zoeken. Gewoon gaan.</p>
+          <div class="after-input" style="margin-top:12px;">
+            <input type="email" placeholder="je@email.nl" />
+            <button>Inschrijven</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. BADGES -->
+  <p class="section-label">Activity Badges</p>
+  <div class="split">
+    <div class="panel">
+      <div class="panel-label before">Without DESIGN.md</div>
+      <div class="panel-body">
+        <span class="before-badge">Tennis</span>
+        <span class="before-badge">Free</span>
+        <span class="before-badge">4-12 jaar</span>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-label after">With DESIGN.md</div>
+      <div class="panel-body">
+        <div class="after-badge-group">
+          <span class="after-badge sub">Tennis</span>
+          <span class="after-badge free">Gratis</span>
+          <span class="after-badge age">4–12 jaar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. HERO -->
+  <p class="section-label">Hero Section</p>
+  <div class="split">
+    <div class="panel">
+      <div class="panel-label before">Without DESIGN.md</div>
+      <div class="panel-body">
+        <div class="before-hero">
+          <h2>Easter Market at Grote Markt</h2>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-label after">With DESIGN.md</div>
+      <div class="panel-body">
+        <div class="after-hero">
+          <div class="cat">Festival · Gratis</div>
+          <h2>Paasmarkt op de Grote Markt</h2>
+          <div class="meta">Zaterdag 5 april · ☀️ 14°C · Grote Markt</div>
+          <div class="btn">Lees meer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. BERRY MASCOT -->
+  <p class="section-label">Berry Mascot Moment</p>
+  <div class="split">
+    <div class="panel">
+      <div class="panel-label before">Without DESIGN.md</div>
+      <div class="panel-body">
+        <p style="font-size:14px;color:#666;padding:12px;background:#f5f5f5;border-radius:4px;">
+          💡 Tip: Check out the Easter Market this weekend — it's free!
+        </p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-label after">With DESIGN.md</div>
+      <div class="panel-body">
+        <div class="after-berry">
+          <div class="icon">🍓</div>
+          <div class="bubble">
+            Fijne Pasen! 🥚 Tip: Paasmarkt op de Grote Markt — struinen en proeven tussen de kramen.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. COLOR PALETTE -->
+  <p class="section-label">Color Palette — Defined by DESIGN.md</p>
+  <div class="panel" style="margin-bottom: 40px;">
+    <div class="panel-label after">Berry Kids Design Tokens</div>
+    <div class="panel-body">
+      <div class="swatches">
+        <div>
+          <div class="swatch" style="background:#E85A5A;"></div>
+          <div class="swatch-label">Berry Red</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#D04A4A;"></div>
+          <div class="swatch-label">Hover</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#1A1A1A;"></div>
+          <div class="swatch-label">Text</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#444;"></div>
+          <div class="swatch-label">Body</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#666;"></div>
+          <div class="swatch-label">Muted</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#F0ECE8;"></div>
+          <div class="swatch-label">Latte</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#FDF1EA;"></div>
+          <div class="swatch-label">Blush</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#FFF8F4;"></div>
+          <div class="swatch-label">Cream</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#FFD6D6;"></div>
+          <div class="swatch-label">Red Light</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#F0E6E0;"></div>
+          <div class="swatch-label">Warm Bdr</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#FAFAFA;"></div>
+          <div class="swatch-label">Snow</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#6FAF3A;"></div>
+          <div class="swatch-label">Free</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>What's happening here:</strong> Without a DESIGN.md, an AI agent defaults to generic Inter/system font, squared corners, dark buttons, cold grays, and generic English copy. With Berry Kids' DESIGN.md, every component gets the right font (Nunito 700–800), warm palette (#F0ECE8, #E85A5A), pill-shaped buttons, rounded cards, Dutch copy, the Berry mascot speech bubble pattern, and editorial section markers — all without any extra prompting.
+  </div>
+
+</div>
+
+</body>
+</html>

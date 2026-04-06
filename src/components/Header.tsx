@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <>
       {/* Top nav */}
-      <header className="border-b border-[#E5E5E5]">
+      <header className="border-b border-black/[0.06]">
         <div className="mx-auto flex max-w-[1200px] items-center justify-between px-5 py-2.5">
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center gap-2">

@@ -29,7 +29,7 @@ export default function EventCard({ event }: { event: EventWithImage }) {
             {event.category}
             {event.free && " · Gratis"}
           </p>
-          <h3 className="mt-1 text-lg font-bold leading-snug text-[#1A1A1A] transition-colors group-hover:text-[#E85A5A]">
+          <h3 className="mt-1 text-lg font-bold leading-snug tracking-tight text-[#1A1A1A] transition-colors group-hover:text-[#E85A5A]">
             {event.title}
           </h3>
           <p className="mt-1 text-sm text-[#444]">

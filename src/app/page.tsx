@@ -7,6 +7,7 @@ import EventCard from "@/components/EventCard";
 import FilmVanDeWeek from "@/components/FilmVanDeWeek";
 import TheaterAgenda from "@/components/TheaterAgenda";
 import ActivityCard from "@/components/ActivityCard";
+import HeroSlideshow from "@/components/HeroSlideshow";
 import { getScrapedEvents } from "@/data/events-loader";
 import { resolveEventImages } from "@/lib/photos";
 import { getSiteContext } from "@/lib/context";
@@ -45,6 +46,15 @@ export default async function Home() {
   const sportAct = resolveAct(activities.filter((a) => a.category === "sport").slice(0, 3));
   const cultAct = resolveAct(activities.filter((a) => a.category === "cultuur" || a.category === "indoor").slice(0, 3));
 
+  const heroSlides = withImg.slice(0, 5).map((e) => ({
+    slug: e.slug,
+    title: e.title,
+    category: e.category,
+    image: e.resolvedImage || e.image,
+    location: e.location,
+    free: e.free,
+  }));
+
   const topPick = withImg[0];
   // Berry tip — short
   let berryTip = "Scroll naar beneden voor de leukste tips deze week!";
@@ -62,58 +72,12 @@ export default async function Home() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* ===== HERO — Haarlem city photo with branding ===== */}
-      <div className="relative h-[75vh] min-h-[500px]">
-        <Image
-          src="/photos/haarlem-hero.jpg"
-          alt="Haarlem"
-          fill
-          sizes="100vw"
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.1) 100%)" }} />
-        <div className="absolute inset-x-0 bottom-0 px-5 pb-12 pt-20 sm:px-10 lg:px-16">
-          <div className="mx-auto max-w-[1200px]">
-            <p className="text-sm font-bold text-[#E85A5A]">
-              {ctx.calendar.todayLabel} · {ctx.weather.current.icon} {ctx.weather.current.temp}°C
-            </p>
-            <h1 className="mt-3 max-w-3xl font-extrabold leading-[1.05] text-white" style={{ fontSize: "clamp(2.2rem, 5vw, 3.8rem)" }}>
-              De leukste dingen om te doen met kinderen in Haarlem
-            </h1>
-            <p className="mt-3 max-w-lg text-base text-white/80 sm:text-lg">
-              Elke week vers: events, activiteiten en tips voor gezinnen in Haarlem e.o.
-            </p>
-            <Link href="#dit-weekend" className="mt-5 inline-block rounded-full bg-[#E85A5A] px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-[#D04A4A]">
-              Bekijk dit weekend
-            </Link>
-          </div>
-        </div>
-      </div>
+      {/* ===== HERO — Rotating event slideshow ===== */}
+      <HeroSlideshow
+        slides={heroSlides}
+        dateLine={`${ctx.calendar.todayLabel} · ${ctx.weather.current.icon} ${ctx.weather.current.temp}°C`}
+      />
 
-      {/* ===== SUB-PICKS — 3 events, Time Out exact ===== */}
-      <div className="border-b border-[#E5E5E5]">
-        <div className="mx-auto grid max-w-[1200px] grid-cols-1 sm:grid-cols-3">
-          {subPicks.map((e, i) => (
-            <Link
-              key={e.slug}
-              href={`/event/${e.slug}`}
-              className={`group p-5 transition-colors hover:bg-[#F9F9F9] sm:p-6 ${i < 2 ? "border-b border-[#E5E5E5] sm:border-b-0 sm:border-r" : ""}`}
-            >
-              <div className="mb-3 flex gap-0">
-                <div className={`h-[3px] w-5 ${i === 0 ? "bg-[#E85A5A]" : "bg-[#1A1A1A]"}`} />
-                <div className="h-[3px] w-5 bg-[#E5E5E5]" />
-              </div>
-              <p className="text-[15px] font-bold leading-snug text-[#1A1A1A] group-hover:text-[#E85A5A]">
-                {e.title}
-              </p>
-              <p className="mt-1.5 text-[13px] text-[#666]">
-                {formatShortDate(e.date)} · {e.location} · {e.free ? "Gratis" : e.price || ""}
-              </p>
-            </Link>
-          ))}
-        </div>
-      </div>
 
       {/* ===== BERRY SPEECH BUBBLE ===== */}
       <div className="mx-auto max-w-[1200px] px-5 py-8 sm:px-10">
@@ -132,7 +96,7 @@ export default async function Home() {
 
       {/* ===== FILTERS — "Wat te doen in Haarlem" ===== */}
       <div className="mx-auto max-w-[1200px] px-5 pb-10 sm:px-10">
-        <h2 className="text-center text-[28px] font-extrabold text-[#1A1A1A]">
+        <h2 className="text-center text-[28px] font-extrabold tracking-tight text-[#1A1A1A]">
           Wat te doen in Haarlem
         </h2>
         <div className="mt-5 flex justify-center gap-3">
@@ -153,8 +117,8 @@ export default async function Home() {
       </div>
 
       {/* ===== DIT WEEKEND — Time Out grid ===== */}
-      <section className="mx-auto max-w-[1200px] px-5 sm:px-10">
-        <h2 className="mb-8 text-[26px] font-extrabold text-[#1A1A1A]">
+      <section className="mx-auto max-w-[1200px] px-5 pt-4 sm:px-10">
+        <h2 className="mb-8 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
           <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
           Dit weekend
         </h2>
@@ -177,11 +141,11 @@ export default async function Home() {
       </section>
 
       {/* ===== NEWSLETTER ===== */}
-      <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-10">
+      <section className="mx-auto max-w-[1200px] px-5 py-20 sm:px-10">
         <div className="rounded-2xl bg-[#FAFAFA] p-8 sm:p-12">
           <div className="mx-auto max-w-lg text-center">
             <p className="text-[11px] font-bold uppercase tracking-widest text-[#E85A5A]">Elke vrijdag om 15:00</p>
-            <h2 className="mt-2 text-[26px] font-extrabold text-[#1A1A1A]">Weekend gepland in 2 minuten</h2>
+            <h2 className="mt-2 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">Weekend gepland in 2 minuten</h2>
             <p className="mt-2 text-[14px] text-[#666]">De 5 leukste tips. Geen zoeken. Gewoon gaan.</p>
             <div className="mt-5"><NewsletterForm /></div>
             <p className="mt-2 text-[12px] text-[#999]">2.340+ ouders · gratis</p>
@@ -191,19 +155,21 @@ export default async function Home() {
 
       {/* ===== GRATIS ===== */}
       {freeEvents.length > 0 && (
-        <section className="mx-auto max-w-[1200px] px-5 sm:px-10">
-          <h2 className="mb-8 text-[26px] font-extrabold text-[#1A1A1A]">
-            <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
-            Gratis eropuit
-          </h2>
-          <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-            {freeEvents.map((e) => <EventCard key={e.slug + "-f"} event={e} />)}
+        <section className="bg-[#FAF8F6] py-20">
+          <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
+            <h2 className="mb-8 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
+              <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
+              Gratis eropuit
+            </h2>
+            <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+              {freeEvents.map((e) => <EventCard key={e.slug + "-f"} event={e} />)}
+            </div>
           </div>
         </section>
       )}
 
       {/* ===== FILM + THEATER ===== */}
-      <div className="mx-auto max-w-[1200px] px-5 py-16 sm:px-10">
+      <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-10">
         <div className="grid gap-8 lg:grid-cols-2">
           <FilmVanDeWeek />
           <TheaterAgenda />
@@ -212,13 +178,15 @@ export default async function Home() {
 
       {/* ===== BIJ REGEN ===== */}
       {indoorEvents.length > 0 && (
-        <section className="mx-auto max-w-[1200px] px-5 sm:px-10">
-          <h2 className="mb-8 text-[26px] font-extrabold text-[#1A1A1A]">
-            <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
-            Bij slecht weer
-          </h2>
-          <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-            {indoorEvents.map((e) => <EventCard key={e.slug + "-i"} event={e} />)}
+        <section className="bg-[#FAF8F6] py-20">
+          <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
+            <h2 className="mb-8 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
+              <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
+              Bij slecht weer
+            </h2>
+            <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+              {indoorEvents.map((e) => <EventCard key={e.slug + "-i"} event={e} />)}
+            </div>
           </div>
         </section>
       )}
@@ -230,8 +198,8 @@ export default async function Home() {
       </div>
 
       {/* ===== SPORT ===== */}
-      <section className="mx-auto max-w-[1200px] px-5 pb-16 sm:px-10">
-        <h2 className="mb-8 text-[26px] font-extrabold text-[#1A1A1A]">
+      <section className="mx-auto max-w-[1200px] px-5 py-20 sm:px-10">
+        <h2 className="mb-8 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
           <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
           Sport & buiten
         </h2>
@@ -241,8 +209,8 @@ export default async function Home() {
       </section>
 
       {/* ===== CULTUUR ===== */}
-      <section className="mx-auto max-w-[1200px] px-5 pb-16 sm:px-10">
-        <h2 className="mb-8 text-[26px] font-extrabold text-[#1A1A1A]">
+      <section className="mx-auto max-w-[1200px] px-5 py-20 sm:px-10">
+        <h2 className="mb-8 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
           <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
           Cultuur & musea
         </h2>
@@ -252,21 +220,21 @@ export default async function Home() {
       </section>
 
       {/* ===== MEIVAKANTIE ===== */}
-      <section className="mx-auto max-w-[1200px] px-5 pb-16 sm:px-10">
+      <section className="mx-auto max-w-[1200px] px-5 py-20 sm:px-10">
         <Link href="/vakanties" className="group block bg-[#1A1A1A] p-8 text-white hover:bg-[#2A2A2A] sm:p-10">
           <p className="text-[11px] font-bold uppercase tracking-widest text-[#E85A5A]">26 april – 9 mei</p>
-          <h2 className="mt-2 text-[26px] font-extrabold">Meivakantie — jouw weekplan</h2>
+          <h2 className="mt-2 text-[26px] font-extrabold tracking-tight">Meivakantie — jouw weekplan</h2>
           <p className="mt-2 max-w-md text-[14px] text-white/60">Dagplannen, surfcamps en meer.</p>
           <span className="mt-4 inline-block text-[14px] font-bold text-[#E85A5A]">Bekijk dagplannen →</span>
         </Link>
       </section>
 
       {/* ===== BOTTOM NEWSLETTER ===== */}
-      <section id="newsletter" className="border-t border-[#E5E5E5] bg-[#FAFAFA]">
+      <section id="newsletter" className="border-t border-black/[0.06] bg-[#FAF8F6]">
         <div className="mx-auto max-w-[1200px] px-5 py-16 sm:px-10">
           <div className="mx-auto max-w-md text-center">
             <Image src="/berry-wink.png" alt="" width={36} height={36} className="mx-auto mb-3 h-9 w-auto" />
-            <h2 className="text-[26px] font-extrabold text-[#1A1A1A]">Weekend sorted</h2>
+            <h2 className="text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">Weekend sorted</h2>
             <p className="mt-1 text-[14px] text-[#666]">Elke vrijdag om 15:00. 5 tips. Klaar.</p>
             <div className="mt-5"><NewsletterForm /></div>
           </div>

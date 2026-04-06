@@ -14,7 +14,7 @@ export default function ActivityCard({ activity }: { activity: ActivityWithImage
       rel={activity.website ? "noopener noreferrer" : undefined}
       className="group block h-full"
     >
-      <article className="h-full overflow-hidden rounded-2xl bg-white shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-shadow hover:shadow-[0_4px_20px_rgba(0,0,0,0.12)]">
+      <article className="h-full overflow-hidden rounded-2xl bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_6px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.08)] transition-shadow hover:shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_4px_8px_rgba(0,0,0,0.06),0_8px_24px_rgba(0,0,0,0.12)]">
         <div className="relative aspect-[3/2] overflow-hidden">
           <Image
             src={src}
@@ -48,7 +48,7 @@ export default function ActivityCard({ activity }: { activity: ActivityWithImage
             </span>
           </div>
 
-          <h3 className="text-lg font-bold leading-snug text-[#1A1A1A] transition-colors group-hover:text-[#E85A5A]">
+          <h3 className="text-lg font-bold leading-snug tracking-tight text-[#1A1A1A] transition-colors group-hover:text-[#E85A5A]">
             {activity.title}
           </h3>
 
