@@ -15,10 +15,10 @@ export default function Header() {
         <div className="mx-auto flex max-w-[1200px] items-center justify-between px-5 py-2.5">
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center gap-2">
-              <Image src="/berry-icon.png" alt="" width={36} height={36} className="h-9 w-auto" />
+              <Image src="/berry-icon.png" alt="" width={48} height={48} className="h-12 w-auto" />
               <div>
-                <Image src="/logo-text.png" alt="Berry Kids" width={80} height={22} className="h-[18px] w-auto" />
-                <p className="text-[9px] font-bold uppercase tracking-wider text-[#E85A5A]">Haarlem e.o.</p>
+                <Image src="/logo-text.png" alt="Berry Kids" width={100} height={28} className="h-[24px] w-auto" />
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[#E85A5A]">Haarlem e.o.</p>
               </div>
             </Link>
           </div>
