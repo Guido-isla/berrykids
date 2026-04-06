@@ -18,6 +18,7 @@ export type TheaterShow = {
   price: string;
   description: string;
   ticketUrl?: string;
+  imageUrl?: string;
 };
 
 export const filmVanDeWeek: FilmShowtime = {

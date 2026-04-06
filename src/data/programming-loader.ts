@@ -50,6 +50,7 @@ export function getAllTheaterShows(): TheaterShow[] {
       price: s.price || "Zie website",
       description: s.description || "",
       ticketUrl: s.ticketUrl,
+      imageUrl: s.imageUrl && s.imageUrl.startsWith("https://") ? s.imageUrl : undefined,
     });
   }
 
