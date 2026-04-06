@@ -138,11 +138,41 @@ export function generateBerryDayPlan(
     };
   }
 
-  // If no events but we have an activity
+  // If no events — rescore activities with heavy free+outdoor bias
   if (!eventPick) {
+    const freeOutdoor = available
+      .filter((a) => a.free && (a.category === "natuur" || a.category === "dieren" || a.category === "sport"))
+      .sort((a, b) => scoreActivity(b, ctx) - scoreActivity(a, ctx));
+    const freeIndoor = available
+      .filter((a) => a.free && (a.category === "indoor" || a.category === "cultuur"))
+      .sort((a, b) => scoreActivity(b, ctx) - scoreActivity(a, ctx));
+
+    const topFree = weather.isGoodWeather
+      ? freeOutdoor[0] || freeIndoor[0] || activityPick
+      : freeIndoor[0] || freeOutdoor[0] || activityPick;
+    const altFree = weather.isGoodWeather
+      ? freeOutdoor[1] || freeIndoor[0]
+      : freeIndoor[1] || freeOutdoor[0];
+
+    const topLink = topFree?.website || "/activiteiten";
+    const topLine = topFree
+      ? `👉 [${topFree.title}](${topLink}) — ${topFree.description.slice(0, 80)}. Gratis!`
+      : "";
+    const altLine = altFree
+      ? `Of: [${altFree.title}](${altFree.website || "/activiteiten"}) — ${altFree.description.slice(0, 60)}.`
+      : "";
+
+    const noEventOpener = weather.isGoodWeather
+      ? `${opener} Geen agenda nodig — ga lekker naar buiten:`
+      : weather.isRainy
+        ? `${opener} Geen evenementen, maar genoeg te doen binnen:`
+        : `${opener} Geen evenementen vandaag, maar dit kan altijd:`;
+
+    const msgLines = [noEventOpener, topLine, altLine, closing].filter(Boolean);
+
     return {
-      message: `${opener} Geen evenementen vandaag, maar dit kan altijd:\n\n${afternoon}\n\n${closing}`,
-      mood: weather.isRainy ? "rainy" : "chill",
+      message: msgLines.join("\n\n"),
+      mood: weather.isGoodWeather ? "sunny" : weather.isRainy ? "rainy" : "chill",
     };
   }
 
