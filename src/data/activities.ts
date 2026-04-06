@@ -451,7 +451,7 @@ export const activities: Activity[] = [
     price: "€5,50 / kinderen €4",
     free: false,
     website: "https://www.sro.nl/sportplaza-groenendaal/",
-    image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=800&q=80",
     verified: true,
   },
 
@@ -488,7 +488,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     price: "Vanaf €9",
     free: false,
-    image: "https://www.kidsproof.nl/blog_images/Haarlem/Speelkasteel-Glijbaan_geel_blauw.jpg",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
     verified: true,
   },
   {
@@ -520,7 +520,7 @@ export const activities: Activity[] = [
     ageMin: 1,
     ageMax: 6,
     free: true,
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1596997000103-e597b3ca50df?w=800&q=80",
     verified: true,
   },
   {
@@ -536,7 +536,7 @@ export const activities: Activity[] = [
     ageMin: 2,
     ageMax: 10,
     free: true,
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=800&q=80",
     verified: true,
   },
 
@@ -588,7 +588,7 @@ export const activities: Activity[] = [
     ageMin: 6,
     free: true,
     openingHours: "Wo-zo 13:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=800&q=80",
     verified: true,
   },
   {
@@ -605,7 +605,7 @@ export const activities: Activity[] = [
     price: "€10 / kinderen gratis",
     free: false,
     openingHours: "Di-zo 11:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=800&q=80",
     verified: true,
   },
   {
@@ -643,7 +643,7 @@ export const activities: Activity[] = [
     price: "Vanaf €8",
     free: false,
     website: "https://www.ballorig.nl",
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?w=800&q=80",
     verified: true,
   },
   {
@@ -660,7 +660,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     price: "Vanaf €9",
     free: false,
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=800&q=80",
     verified: true,
   },
 
@@ -678,7 +678,7 @@ export const activities: Activity[] = [
     price: "€5 / kinderen €3,50",
     free: false,
     website: "https://www.sro.nl",
-    image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=800&q=80",
     verified: true,
   },
 
@@ -696,7 +696,7 @@ export const activities: Activity[] = [
     ageMin: 4,
     price: "Vanaf €6 per spel",
     free: false,
-    image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1562535375-fc6ee5c2e13f?w=800&q=80",
     verified: true,
   },
 
@@ -741,7 +741,7 @@ export const activities: Activity[] = [
     free: false,
     website: "https://www.linnaeushof.nl",
     openingHours: "Apr-okt, dagelijks 10:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1595174513668-aadb0b258ea3?w=800&q=80",
     availableMonths: [4, 5, 6, 7, 8, 9, 10],
     verified: true,
   },
@@ -760,7 +760,7 @@ export const activities: Activity[] = [
     price: "Kleine entree",
     free: false,
     website: "https://speeltuingroenendaal.nl",
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1472745433479-4556f22e32c2?w=800&q=80",
     verified: true,
   },
   {
@@ -778,7 +778,7 @@ export const activities: Activity[] = [
     price: "€0,50 per persoon",
     free: false,
     website: "https://burchttercleeff.nl",
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1564429238961-bf8f8d7fdbea?w=800&q=80",
     verified: true,
   },
   {
@@ -795,7 +795,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     free: true,
     website: "https://www.jeugdlandhaarlem.nl",
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1575783970733-1aaedde1db74?w=800&q=80",
     verified: true,
   },
   {
@@ -812,7 +812,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     free: true,
     website: "https://speeltuindepapegaai.nl",
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1587691592099-24045b1e0f2b?w=800&q=80",
     verified: true,
   },
   {
@@ -829,7 +829,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     free: true,
     website: "https://speeltuindeeenhoorn.nl",
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=800&q=80",
     verified: true,
   },
   {
@@ -846,7 +846,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     free: true,
     website: "https://speeltuinelba.nl",
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1560807707-8cc77767d783?w=800&q=80",
     verified: true,
   },
   {
@@ -864,7 +864,7 @@ export const activities: Activity[] = [
     price: "Kleine entree",
     free: false,
     website: "https://www.speeltuinsantpoort.nl",
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80",
     verified: true,
   },
 
@@ -882,7 +882,7 @@ export const activities: Activity[] = [
     free: true,
     openingHours: "Za-zo 13:00 – 17:00",
     website: "https://www.artisklas-haarlem.nl",
-    image: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1504450874802-0ba2bcd659e0?w=800&q=80",
     verified: true,
   },
   {
@@ -897,7 +897,7 @@ export const activities: Activity[] = [
     ageLabel: "Alle leeftijden",
     free: true,
     website: "https://www.hertenkampbloemendaal.nl",
-    image: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1484406566174-437a054e28c0?w=800&q=80",
     verified: true,
   },
   {
@@ -912,7 +912,7 @@ export const activities: Activity[] = [
     ageLabel: "Alle leeftijden",
     free: true,
     website: "https://www.velsen.nl/park-en-kinderboerderij-velserbeek",
-    image: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&q=80",
     verified: true,
   },
 
@@ -932,7 +932,7 @@ export const activities: Activity[] = [
     free: false,
     website: "https://www.hetdolhuys.nl",
     openingHours: "Di-zo 10:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=800&q=80",
     verified: true,
   },
   {
@@ -950,7 +950,7 @@ export const activities: Activity[] = [
     free: false,
     website: "https://www.molenadriaan.nl",
     openingHours: "Ma-za 10:00 – 17:00, zo 12:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1533669955142-6a73332af4db?w=800&q=80",
     verified: true,
   },
   {
@@ -966,7 +966,7 @@ export const activities: Activity[] = [
     free: true,
     openingHours: "Zo 12:00 – 18:00",
     website: "https://www.draaiorgelmuseum.org",
-    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=800&q=80",
     verified: true,
   },
   {
@@ -985,7 +985,7 @@ export const activities: Activity[] = [
     free: false,
     website: "https://www.haarlemmermeermuseum.nl",
     openingHours: "Di-zo 10:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?w=800&q=80",
     verified: true,
   },
   {
@@ -1001,7 +1001,7 @@ export const activities: Activity[] = [
     free: true,
     openingHours: "Wo, za, zo 14:00 – 17:00",
     website: "https://www.juttersmuseum.nl",
-    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800&q=80",
     verified: true,
   },
   {
@@ -1019,7 +1019,7 @@ export const activities: Activity[] = [
     price: "Kleine entree",
     free: false,
     website: "https://www.pietervermeulenmuseum.nl",
-    image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&q=80",
     verified: true,
   },
   {
@@ -1035,7 +1035,7 @@ export const activities: Activity[] = [
     price: "€5 / kinderen gratis",
     free: false,
     website: "https://www.bavo.nl",
-    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=800&q=80",
     verified: true,
   },
 
@@ -1053,7 +1053,7 @@ export const activities: Activity[] = [
     price: "€10 – €13",
     free: false,
     website: "https://www.pathe.nl/bioscopen/pathe-haarlem",
-    image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=800&q=80",
     verified: true,
   },
   {
@@ -1069,7 +1069,7 @@ export const activities: Activity[] = [
     price: "€10 – €12",
     free: false,
     website: "https://kinepolis.nl/bioscopen/kinepolis-haarlem/",
-    image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800&q=80",
     verified: true,
   },
   {
@@ -1085,7 +1085,7 @@ export const activities: Activity[] = [
     price: "€10 – €12",
     free: false,
     website: "https://filmkoepel.nl",
-    image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80",
     verified: true,
   },
   {
@@ -1102,7 +1102,7 @@ export const activities: Activity[] = [
     price: "Vanaf €10",
     free: false,
     website: "https://stadsschouwburghaarlem.nl",
-    image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=800&q=80",
     verified: true,
   },
   {
@@ -1119,7 +1119,7 @@ export const activities: Activity[] = [
     price: "Vanaf €8",
     free: false,
     website: "https://philhaarlem.nl",
-    image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80",
     verified: true,
   },
 
@@ -1138,7 +1138,7 @@ export const activities: Activity[] = [
     price: "€17,50 (intro, onder 18)",
     free: false,
     website: "https://www.boulderhaldefabriek.nl",
-    image: "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=800&q=80",
     verified: true,
   },
   {
@@ -1156,7 +1156,7 @@ export const activities: Activity[] = [
     price: "Vanaf €20 per persoon",
     free: false,
     website: "https://haarlem.letsescape.nl",
-    image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1509515837298-2c67a3933321?w=800&q=80",
     verified: true,
   },
   {
@@ -1173,7 +1173,7 @@ export const activities: Activity[] = [
     price: "Pannenkoeken vanaf €8",
     free: false,
     website: "https://www.pannenkoekenparadijs.nl",
-    image: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80",
     verified: true,
   },
   {
@@ -1192,7 +1192,7 @@ export const activities: Activity[] = [
     price: "€3 per bezoek",
     free: false,
     website: "https://www.ontdekplek.nl",
-    image: "https://images.unsplash.com/photo-1587654780291-39c9404d7dd0?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=800&q=80",
     verified: true,
   },
 
@@ -1210,7 +1210,7 @@ export const activities: Activity[] = [
     price: "€15 – €22 (dagkaart)",
     free: false,
     website: "https://www.centerparcs.nl",
-    image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&q=80",
     verified: true,
   },
   {
@@ -1226,7 +1226,7 @@ export const activities: Activity[] = [
     ageLabel: "Alle leeftijden",
     free: true,
     website: "https://www.np-zuidkennemerland.nl",
-    image: "https://images.unsplash.com/photo-1500259571355-332da5cb07aa?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=800&q=80",
     availableMonths: [5, 6, 7, 8, 9],
     verified: true,
   },
@@ -1244,7 +1244,7 @@ export const activities: Activity[] = [
     ageLabel: "Alle leeftijden",
     free: true,
     website: "https://buitenplaatsbeeckestijn.nl",
-    image: "https://images.unsplash.com/photo-1500259571355-332da5cb07aa?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80",
     verified: true,
   },
   {
@@ -1259,7 +1259,7 @@ export const activities: Activity[] = [
     ageLabel: "Alle leeftijden",
     free: true,
     website: "https://visithaarlemmermeer.nl",
-    image: "https://images.unsplash.com/photo-1500259571355-332da5cb07aa?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
     verified: true,
   },
 
@@ -1279,7 +1279,7 @@ export const activities: Activity[] = [
     free: false,
     website: "https://www.midgetgolfbaanhaarlem.nl",
     availableMonths: [4, 5, 6, 7, 8, 9, 10],
-    image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=800&q=80",
     verified: true,
   },
   {
@@ -1297,7 +1297,7 @@ export const activities: Activity[] = [
     free: true,
     website: "https://supkidshaarlem.nl",
     availableMonths: [5, 6, 7, 8, 9],
-    image: "https://images.unsplash.com/photo-1502680390548-bdbac40ae4e7?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1526188717906-ab4a2f949f26?w=800&q=80",
     verified: true,
   },
   {
@@ -1315,7 +1315,7 @@ export const activities: Activity[] = [
     free: false,
     website: "https://klimpark21.nl",
     availableMonths: [4, 5, 6, 7, 8, 9, 10, 11],
-    image: "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=800&q=80",
     verified: true,
   },
 
@@ -1333,7 +1333,7 @@ export const activities: Activity[] = [
     price: "Pannenkoeken vanaf €8",
     free: false,
     website: "https://www.onderdeplatanen.nl",
-    image: "https://images.unsplash.com/photo-1559526324-593bc073d938?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=800&q=80",
     verified: true,
   },
 
@@ -1352,7 +1352,7 @@ export const activities: Activity[] = [
     price: "Vanaf €18,50",
     free: false,
     website: "https://shop.bakingtime.nl",
-    image: "https://images.unsplash.com/photo-1587654780291-39c9404d7dd0?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1486427944544-d2c246c4df4d?w=800&q=80",
     verified: true,
   },
 
@@ -1370,7 +1370,7 @@ export const activities: Activity[] = [
     price: "€12 – €20 / kinderen €11,50",
     free: false,
     website: "https://haarlemcanaltours.com",
-    image: "https://images.unsplash.com/photo-1500259571355-332da5cb07aa?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=80",
     verified: true,
   },
 ];
