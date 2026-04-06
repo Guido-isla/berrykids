@@ -53,8 +53,9 @@ export function generateBerryDayPlan(
   const { weather, calendar, season } = ctx;
   const currentMonth = new Date().getMonth() + 1;
 
-  // --- Filter activities by season ---
-  const available = getAvailableActivities(allActivities, currentMonth);
+  // --- Filter: only verified + available this month ---
+  const verified = allActivities.filter((a) => a.verified);
+  const available = getAvailableActivities(verified, currentMonth);
 
   // --- Score and pick best event ---
   const scoredEvents = events
@@ -104,11 +105,10 @@ export function generateBerryDayPlan(
     morning = `☀️ Ochtend: [${eventPick.title}](/event/${eventPick.slug}) in ${eventPick.location}.${eventPick.time ? ` Om ${eventPick.time}.` : ""} ${eventPick.free ? "Gratis!" : ""}`;
   }
 
-  // Afternoon: activity
+  // Afternoon: activity — always link to Berry's own page
   let afternoon = "";
   if (activityPick) {
-    const actLink = activityPick.website || "/activiteiten";
-    afternoon = `🌤️ Middag: [${activityPick.title}](${actLink}) — ${activityPick.description.slice(0, 80)}.${activityPick.free ? " Gratis!" : ""}`;
+    afternoon = `🌤️ Middag: [${activityPick.title}](/activiteiten#${activityPick.slug}) — ${activityPick.description.slice(0, 80)}.${activityPick.free ? " Gratis!" : ""}`;
   }
 
   // Seasonal closing
@@ -154,12 +154,11 @@ export function generateBerryDayPlan(
       ? freeOutdoor[1] || freeIndoor[0]
       : freeIndoor[1] || freeOutdoor[0];
 
-    const topLink = topFree?.website || "/activiteiten";
     const topLine = topFree
-      ? `👉 [${topFree.title}](${topLink}) — ${topFree.description.slice(0, 80)}. Gratis!`
+      ? `👉 [${topFree.title}](/activiteiten#${topFree.slug}) — ${topFree.description.slice(0, 80)}. Gratis!`
       : "";
     const altLine = altFree
-      ? `Of: [${altFree.title}](${altFree.website || "/activiteiten"}) — ${altFree.description.slice(0, 60)}.`
+      ? `Of: [${altFree.title}](/activiteiten#${altFree.slug}) — ${altFree.description.slice(0, 60)}.`
       : "";
 
     const noEventOpener = weather.isGoodWeather
