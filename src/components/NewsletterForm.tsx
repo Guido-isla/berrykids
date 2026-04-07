@@ -13,7 +13,7 @@ export default function NewsletterForm({ variant = "default" }: { variant?: "def
   if (submitted) {
     return (
       <div className={`rounded-2xl ${variant === "hero" ? "bg-white/60 p-4" : "bg-[#FDF1EA] p-6"} text-center`}>
-        <p className="text-lg font-bold text-[#2B2B2B]">Je bent erbij! 🍓</p>
+        <p className="text-lg font-bold text-[#2D2D2D]">Je bent erbij! 🍓</p>
         <p className="mt-1 text-sm text-[#6B6B6B]">
           We sturen je elke week de leukste tips.
         </p>

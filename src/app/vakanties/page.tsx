@@ -100,8 +100,8 @@ export default function VakantiesPage() {
 
       {/* Hero */}
       <section className="bg-gradient-to-b from-[#FDF1EA] to-[#FFF8F4]">
-        <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8 sm:py-14">
-          <h1 className="text-3xl font-extrabold leading-tight text-[#2B2B2B] sm:text-4xl">
+        <div className="mx-auto max-w-[880px] px-5 py-10 sm:px-8 sm:py-14">
+          <h1 className="text-3xl font-extrabold leading-tight text-[#2D2D2D] sm:text-4xl">
             Schoolvakanties
           </h1>
           <p className="mt-2 max-w-lg text-base text-[#6B6B6B] sm:text-lg">
@@ -110,20 +110,20 @@ export default function VakantiesPage() {
         </div>
       </section>
 
-      <main className="mx-auto max-w-6xl px-5 py-8 sm:px-8">
+      <main className="mx-auto max-w-[880px] px-5 py-8 sm:px-8">
 
         {/* Meivakantie — fully planned out */}
         <section>
-          <div className="mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-[#E85A5A] to-[#F4845F] p-6 text-white sm:p-8">
+          <div className="mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-[#F4A09C] to-[#FFD8B0] p-6 sm:p-8">
             <div className="flex items-start justify-between">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider opacity-80">
+                <span className="text-xs font-bold uppercase tracking-wider text-white">
                   26 april – 9 mei 2026
                 </span>
-                <h2 className="mt-1 text-xl font-extrabold sm:text-2xl md:text-3xl">
+                <h2 className="mt-1 text-xl font-extrabold text-[#2D2D2D] sm:text-2xl md:text-3xl">
                   🌷 Meivakantie — jouw weekplan
                 </h2>
-                <p className="mt-2 max-w-lg text-sm opacity-90">
+                <p className="mt-2 max-w-lg text-sm text-[#2D2D2D]/70">
                   Twee weken geen school! Berry heeft voor elke dag een plan gemaakt.
                   Mix en match — of gebruik het als inspiratie.
                 </p>
@@ -149,23 +149,23 @@ export default function VakantiesPage() {
                   {/* Day label */}
                   <div className="flex w-full shrink-0 flex-row items-center gap-2 bg-[#FFF8F4] p-3 sm:w-24 sm:flex-col sm:justify-center sm:gap-0">
                     <span className="text-2xl">{plan.emoji}</span>
-                    <span className="mt-1 text-center text-[10px] font-bold uppercase leading-tight text-[#E85A5A] sm:text-xs">
+                    <span className="mt-1 text-center text-xs font-bold uppercase leading-tight text-[#F4A09C]">
                       {plan.theme}
                     </span>
                   </div>
 
                   {/* Content */}
                   <div className="flex-1 p-4 sm:p-5">
-                    <p className="text-xs font-bold text-[#999]">{plan.day}</p>
+                    <p className="text-xs font-bold text-[#6B6B6B]">{plan.day}</p>
 
                     <div className="mt-2 space-y-2">
                       <div className="rounded-lg bg-[#FFF8F4] px-3 py-2">
-                        <p className="text-[13px] text-[#2B2B2B]">
+                        <p className="text-[13px] text-[#2D2D2D]">
                           <span className="font-bold">☀️ Ochtend:</span> {plan.morning}
                         </p>
                       </div>
                       <div className="rounded-lg bg-[#FFF8F4] px-3 py-2">
-                        <p className="text-[13px] text-[#2B2B2B]">
+                        <p className="text-[13px] text-[#2D2D2D]">
                           <span className="font-bold">🌤️ Middag:</span> {plan.afternoon}
                         </p>
                       </div>
@@ -182,7 +182,7 @@ export default function VakantiesPage() {
 
           {/* CTA: sport activities for meivakantie */}
           <div className="mt-10">
-            <h3 className="mb-4 text-lg font-extrabold text-[#2B2B2B]">
+            <h3 className="mb-4 text-lg font-extrabold text-[#2D2D2D]">
               Sportcamps in de meivakantie
             </h3>
             <div className="grid gap-5 sm:grid-cols-3">
@@ -198,7 +198,7 @@ export default function VakantiesPage() {
 
         {/* Zomervakantie preview */}
         <section>
-          <h2 className="text-2xl font-extrabold text-[#2B2B2B]">
+          <h2 className="text-2xl font-extrabold text-[#2D2D2D]">
             ☀️ Zomervakantie
           </h2>
           <p className="mt-1 text-sm text-[#6B6B6B]">
@@ -209,7 +209,7 @@ export default function VakantiesPage() {
             {SUMMER_PREVIEW.map((item) => (
               <div key={item.title} className="rounded-2xl bg-white p-5 shadow-sm">
                 <span className="text-2xl">{item.emoji}</span>
-                <h3 className="mt-2 font-bold text-[#2B2B2B]">{item.title}</h3>
+                <h3 className="mt-2 font-bold text-[#2D2D2D]">{item.title}</h3>
                 <p className="mt-1 text-sm text-[#6B6B6B]">{item.text}</p>
               </div>
             ))}
@@ -220,21 +220,21 @@ export default function VakantiesPage() {
         <div className="my-12 border-t border-[#F0E6E0]" />
 
         <section>
-          <h2 className="mb-4 text-lg font-extrabold text-[#2B2B2B]">
+          <h2 className="mb-4 text-lg font-extrabold text-[#2D2D2D]">
             Later dit jaar
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl bg-white p-5 shadow-sm">
               <p className="text-lg">🍂</p>
-              <h3 className="mt-1 font-bold text-[#2B2B2B]">Herfstvakantie</h3>
+              <h3 className="mt-1 font-bold text-[#2D2D2D]">Herfstvakantie</h3>
               <p className="text-sm text-[#6B6B6B]">17 – 25 oktober 2026</p>
-              <p className="mt-1 text-sm text-[#999]">Tips komen in september</p>
+              <p className="mt-1 text-sm text-[#6B6B6B]">Tips komen in september</p>
             </div>
             <div className="rounded-2xl bg-white p-5 shadow-sm">
               <p className="text-lg">❄️</p>
-              <h3 className="mt-1 font-bold text-[#2B2B2B]">Kerstvakantie</h3>
+              <h3 className="mt-1 font-bold text-[#2D2D2D]">Kerstvakantie</h3>
               <p className="text-sm text-[#6B6B6B]">19 dec – 3 januari 2027</p>
-              <p className="mt-1 text-sm text-[#999]">Tips komen in november</p>
+              <p className="mt-1 text-sm text-[#6B6B6B]">Tips komen in november</p>
             </div>
           </div>
         </section>
@@ -248,7 +248,7 @@ export default function VakantiesPage() {
             height={48}
             className="mx-auto mb-3 h-auto"
           />
-          <h2 className="text-xl font-extrabold text-[#2B2B2B]">
+          <h2 className="text-xl font-extrabold text-[#2D2D2D]">
             Vakantietips in je inbox
           </h2>
           <p className="mt-1 text-sm text-[#6B6B6B]">

@@ -23,7 +23,7 @@ function getAvailableActivities(all: Activity[], month: number): Activity[] {
 }
 
 /** Score an event based on weather fit, cost, and data quality */
-function scoreEvent(event: Event, ctx: SiteContext): number {
+export function scoreEvent(event: Event, ctx: SiteContext): number {
   let score = 0;
   if (ctx.weather.isRainy && event.indoor) score += 4;
   if (ctx.weather.isGoodWeather && !event.indoor) score += 4;
@@ -35,7 +35,7 @@ function scoreEvent(event: Event, ctx: SiteContext): number {
 }
 
 /** Score an activity based on weather fit */
-function scoreActivity(activity: Activity, ctx: SiteContext): number {
+export function scoreActivity(activity: Activity, ctx: SiteContext): number {
   let score = 0;
   const isIndoorCat = activity.category === "indoor" || activity.category === "cultuur";
   const isOutdoorCat = activity.category === "sport" || activity.category === "natuur" || activity.category === "dieren";

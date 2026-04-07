@@ -10,7 +10,7 @@ export default function BerrysPick({ event, reason }: { event: EventWithImage; r
 
   return (
     <Link href={`/event/${event.slug}`} className="group block h-full">
-      <div className="relative h-full overflow-hidden rounded-2xl bg-[#2B2B2B] shadow-sm transition-shadow hover:shadow-md">
+      <div className="relative h-full overflow-hidden rounded-2xl bg-[#2D2D2D] shadow-sm transition-shadow hover:shadow-md">
         {/* Background image */}
         <Image
           src={src}
@@ -23,7 +23,7 @@ export default function BerrysPick({ event, reason }: { event: EventWithImage; r
         {/* Content overlay */}
         <div className="relative flex h-full min-h-[320px] flex-col justify-end p-6 sm:p-8">
           <div className="flex flex-wrap items-center gap-2 self-start">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E85A5A] px-3 py-1 text-xs font-bold text-white">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F4A09C] px-3 py-1 text-xs font-bold text-white">
               <Image src="/berry-wink.png" alt="" width={16} height={16} className="h-4 w-auto" />
               Berry&apos;s Pick
             </span>

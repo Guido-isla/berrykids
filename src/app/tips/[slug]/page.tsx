@@ -50,7 +50,7 @@ export default async function TipPage({ params }: Props) {
         {/* Back link */}
         <Link
           href="/"
-          className="mb-6 inline-flex items-center gap-1 text-sm text-[#6B6B6B] transition-colors hover:text-[#2B2B2B]"
+          className="mb-6 inline-flex items-center gap-1 text-sm text-[#6B6B6B] transition-colors hover:text-[#2D2D2D]"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -68,7 +68,7 @@ export default async function TipPage({ params }: Props) {
             className="object-cover"
             priority
           />
-          <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-sm font-bold text-[#2B2B2B] backdrop-blur-sm">
+          <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-sm font-bold text-[#2D2D2D] backdrop-blur-sm">
             {tip.seasonEmoji} {tip.seasonName}tip
           </div>
         </div>
@@ -83,7 +83,7 @@ export default async function TipPage({ params }: Props) {
                   Gratis
                 </span>
               ) : (
-                <span className="rounded-full bg-[#FFD6D6] px-3 py-1 text-sm font-semibold text-[#E85A5A]">
+                <span className="rounded-full bg-[#FFE9EA] px-3 py-1 text-sm font-semibold text-[#F4A09C]">
                   Betaald
                 </span>
               )}
@@ -92,32 +92,32 @@ export default async function TipPage({ params }: Props) {
               </span>
             </div>
 
-            <h1 className="mt-4 text-2xl font-extrabold leading-snug text-[#2B2B2B] sm:text-3xl">
+            <h1 className="mt-4 text-2xl font-extrabold leading-snug text-[#2D2D2D] sm:text-3xl">
               {tip.title}
             </h1>
 
             <div className="mt-3 flex items-center gap-2 text-sm text-[#6B6B6B]">
-              <svg className="h-5 w-5 shrink-0 text-[#E85A5A]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <svg className="h-5 w-5 shrink-0 text-[#F4A09C]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z" />
               </svg>
-              <p className="text-[#2B2B2B]">{tip.location}</p>
+              <p className="text-[#2D2D2D]">{tip.location}</p>
             </div>
 
-            <p className="mt-6 text-base leading-relaxed text-[#2B2B2B]">
+            <p className="mt-6 text-base leading-relaxed text-[#2D2D2D]">
               {tip.fullDescription}
             </p>
 
             {/* Tips */}
             {tip.tips.length > 0 && (
               <div className="mt-6 rounded-xl bg-[#FDF1EA] p-5">
-                <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#E85A5A]">
+                <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#F4A09C]">
                   Tips
                 </h2>
                 <ul className="space-y-2">
                   {tip.tips.map((t, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-[#2B2B2B]">
-                      <span className="mt-0.5 text-[#E85A5A]">•</span>
+                    <li key={i} className="flex items-start gap-2 text-sm text-[#2D2D2D]">
+                      <span className="mt-0.5 text-[#F4A09C]">•</span>
                       {t}
                     </li>
                   ))}
@@ -142,24 +142,24 @@ export default async function TipPage({ params }: Props) {
             </div>
 
             <div className="rounded-2xl bg-white p-5 shadow-sm">
-              <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#999]">
+              <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#6B6B6B]">
                 Details
               </h3>
               <dl className="space-y-2 text-sm">
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Locatie</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Locatie</dt>
                   <dd className="text-[#6B6B6B]">{tip.location}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Leeftijd</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Leeftijd</dt>
                   <dd className="text-[#6B6B6B]">{tip.ageLabel}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Prijs</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Prijs</dt>
                   <dd className="text-[#6B6B6B]">{tip.free ? "Gratis" : "Betaald"}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Seizoen</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Seizoen</dt>
                   <dd className="text-[#6B6B6B]">{tip.seasonEmoji} {tip.seasonName}</dd>
                 </div>
               </dl>
@@ -169,7 +169,7 @@ export default async function TipPage({ params }: Props) {
               href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-full items-center justify-center gap-2 rounded-full border border-[#E0D8D2] px-4 py-2.5 text-sm font-semibold text-[#2B2B2B] transition-colors hover:border-[#E85A5A] hover:text-[#E85A5A]"
+              className="flex w-full items-center justify-center gap-2 rounded-full border border-[#E0D8D2] px-4 py-2.5 text-sm font-semibold text-[#2D2D2D] transition-colors hover:border-[#F4A09C] hover:text-[#F4A09C]"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -183,7 +183,7 @@ export default async function TipPage({ params }: Props) {
         {/* Related activities */}
         {relatedWithImages.length > 0 && (
           <section className="mt-14 border-t border-[#F0E6E0] pt-8">
-            <h2 className="mb-5 text-lg font-bold text-[#2B2B2B]">
+            <h2 className="mb-5 text-lg font-bold text-[#2D2D2D]">
               Gerelateerde activiteiten
             </h2>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -196,7 +196,7 @@ export default async function TipPage({ params }: Props) {
 
         {/* Newsletter */}
         <section className="mt-14 rounded-2xl bg-[#FDF1EA] px-6 py-8 text-center">
-          <h2 className="text-xl font-extrabold text-[#2B2B2B]">
+          <h2 className="text-xl font-extrabold text-[#2D2D2D]">
             Meer seizoenstips?
           </h2>
           <p className="mt-1 text-sm text-[#6B6B6B]">

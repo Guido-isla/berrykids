@@ -36,8 +36,8 @@ function Pill({
       onClick={onClick}
       className={`shrink-0 rounded-full px-4 py-2.5 text-sm font-semibold transition-all ${
         active
-          ? "bg-[#E85A5A] text-white"
-          : "bg-white text-[#6B6B6B] hover:bg-[#FFF0EE] hover:text-[#E85A5A]"
+          ? "bg-[#F4A09C] text-white"
+          : "bg-white text-[#6B6B6B] hover:bg-[#FFF0EE] hover:text-[#F4A09C]"
       }`}
     >
       {label}
@@ -85,7 +85,7 @@ export default function FilterableEvents({ events }: { events: EventWithImage[] 
               <span className="mx-1 text-[#E0D8D2]">|</span>
               <button
                 onClick={() => setFilters(DEFAULT_FILTERS)}
-                className="shrink-0 text-xs font-semibold text-[#E85A5A] hover:text-[#D04A4A]"
+                className="shrink-0 text-xs font-semibold text-[#F4A09C] hover:text-[#E88E8A]"
               >
                 Reset
               </button>
@@ -97,13 +97,13 @@ export default function FilterableEvents({ events }: { events: EventWithImage[] 
       {/* Results */}
       <div className="mt-4">
         <p className="mb-4 text-sm text-[#6B6B6B]">
-          <span className="font-bold text-[#2B2B2B]">{filtered.length}</span>{" "}
+          <span className="font-bold text-[#2D2D2D]">{filtered.length}</span>{" "}
           {filtered.length === 1 ? "activiteit" : "activiteiten"} gevonden
         </p>
 
         {filtered.length === 0 ? (
           <div className="rounded-2xl bg-white p-10 text-center shadow-sm">
-            <p className="text-lg font-bold text-[#2B2B2B]">
+            <p className="text-lg font-bold text-[#2D2D2D]">
               Geen activiteiten gevonden
             </p>
             <p className="mt-1 text-sm text-[#6B6B6B]">
@@ -111,7 +111,7 @@ export default function FilterableEvents({ events }: { events: EventWithImage[] 
             </p>
             <button
               onClick={() => setFilters(DEFAULT_FILTERS)}
-              className="mt-4 rounded-full bg-[#E85A5A] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#D04A4A]"
+              className="mt-4 rounded-full bg-[#F4A09C] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#E88E8A]"
             >
               Toon alle activiteiten
             </button>

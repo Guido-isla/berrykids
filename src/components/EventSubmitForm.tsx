@@ -38,7 +38,7 @@ export default function EventSubmitForm() {
           height={64}
           className="mx-auto mb-4 h-auto"
         />
-        <h2 className="text-2xl font-extrabold text-[#2B2B2B]">
+        <h2 className="text-2xl font-extrabold text-[#2D2D2D]">
           Bedankt! 🍓
         </h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-[#6B6B6B]">
@@ -47,7 +47,7 @@ export default function EventSubmitForm() {
         </p>
         <a
           href="/"
-          className="mt-6 inline-block rounded-full bg-[#E85A5A] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#D04A4A]"
+          className="mt-6 inline-block rounded-full bg-[#F4A09C] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#E88E8A]"
         >
           Terug naar Berry Kids
         </a>
@@ -59,13 +59,13 @@ export default function EventSubmitForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Event info */}
       <fieldset className="rounded-2xl bg-white p-6 shadow-sm">
-        <legend className="mb-4 text-sm font-bold uppercase tracking-wider text-[#999]">
+        <legend className="mb-4 text-sm font-bold uppercase tracking-wider text-[#6B6B6B]">
           Over het event
         </legend>
 
         <div className="space-y-4">
           <div>
-            <label htmlFor="title" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+            <label htmlFor="title" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
               Naam event *
             </label>
             <input
@@ -74,13 +74,13 @@ export default function EventSubmitForm() {
               type="text"
               required
               placeholder="bv. Paasmarkt op de Grote Markt"
-              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E85A5A]"
+              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#F4A09C]"
             />
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="date" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+              <label htmlFor="date" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
                 Datum *
               </label>
               <input
@@ -88,25 +88,25 @@ export default function EventSubmitForm() {
                 name="date"
                 type="date"
                 required
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E85A5A]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
               />
             </div>
             <div>
-              <label htmlFor="endDate" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
-                Einddatum <span className="font-normal text-[#999]">(optioneel)</span>
+              <label htmlFor="endDate" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
+                Einddatum <span className="font-normal text-[#6B6B6B]">(optioneel)</span>
               </label>
               <input
                 id="endDate"
                 name="endDate"
                 type="date"
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E85A5A]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
               />
             </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="timeStart" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+              <label htmlFor="timeStart" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
                 Begintijd *
               </label>
               <input
@@ -114,24 +114,24 @@ export default function EventSubmitForm() {
                 name="timeStart"
                 type="time"
                 required
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E85A5A]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
               />
             </div>
             <div>
-              <label htmlFor="timeEnd" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+              <label htmlFor="timeEnd" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
                 Eindtijd
               </label>
               <input
                 id="timeEnd"
                 name="timeEnd"
                 type="time"
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E85A5A]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="location" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+            <label htmlFor="location" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
               Locatie *
             </label>
             <input
@@ -140,12 +140,12 @@ export default function EventSubmitForm() {
               type="text"
               required
               placeholder="bv. Grote Markt, Haarlem"
-              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E85A5A]"
+              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#F4A09C]"
             />
           </div>
 
           <div>
-            <label htmlFor="description" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+            <label htmlFor="description" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
               Beschrijving *
             </label>
             <textarea
@@ -154,19 +154,19 @@ export default function EventSubmitForm() {
               required
               rows={4}
               placeholder="Kort en wervend — wat maakt dit event leuk voor gezinnen?"
-              className="w-full resize-none rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E85A5A]"
+              className="w-full resize-none rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#F4A09C]"
             />
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
             <div>
-              <label htmlFor="ageRange" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+              <label htmlFor="ageRange" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
                 Leeftijd
               </label>
               <select
                 id="ageRange"
                 name="ageRange"
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E85A5A]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
               >
                 <option value="all">Alle leeftijden</option>
                 <option value="0-3">0 – 3 jaar</option>
@@ -178,7 +178,7 @@ export default function EventSubmitForm() {
               </select>
             </div>
             <div>
-              <label htmlFor="price" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+              <label htmlFor="price" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
                 Prijs
               </label>
               <input
@@ -186,17 +186,17 @@ export default function EventSubmitForm() {
                 name="price"
                 type="text"
                 placeholder="Gratis / €7,50"
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E85A5A]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#F4A09C]"
               />
             </div>
             <div>
-              <label htmlFor="setting" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+              <label htmlFor="setting" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
                 Binnen/Buiten
               </label>
               <select
                 id="setting"
                 name="setting"
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E85A5A]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
               >
                 <option value="outdoor">Buiten</option>
                 <option value="indoor">Binnen</option>
@@ -206,7 +206,7 @@ export default function EventSubmitForm() {
           </div>
 
           <div>
-            <label htmlFor="website" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+            <label htmlFor="website" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
               Website / ticket link
             </label>
             <input
@@ -214,21 +214,21 @@ export default function EventSubmitForm() {
               name="website"
               type="url"
               placeholder="https://"
-              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E85A5A]"
+              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#F4A09C]"
             />
           </div>
 
           {/* Photo upload */}
           <div>
-            <label className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
-              Foto <span className="font-normal text-[#999]">(sterk aanbevolen)</span>
+            <label className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
+              Foto <span className="font-normal text-[#6B6B6B]">(sterk aanbevolen)</span>
             </label>
-            <p className="mb-2 text-xs text-[#999]">
+            <p className="mb-2 text-xs text-[#6B6B6B]">
               Een goede foto maakt het verschil. Liefst een sfeerbeeld van het event, geen logo.
             </p>
             <label
               htmlFor="photo"
-              className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E0D8D2] bg-[#FDFAF8] p-6 transition-colors hover:border-[#E85A5A]"
+              className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E0D8D2] bg-[#FDFAF8] p-6 transition-colors hover:border-[#F4A09C]"
             >
               {imagePreview ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -242,7 +242,7 @@ export default function EventSubmitForm() {
                   <svg className="mb-2 h-8 w-8 text-[#BBB]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z" />
                   </svg>
-                  <span className="text-sm text-[#999]">Klik om een foto te uploaden</span>
+                  <span className="text-sm text-[#6B6B6B]">Klik om een foto te uploaden</span>
                   <span className="text-xs text-[#BBB]">JPG, PNG — max 5MB</span>
                 </>
               )}
@@ -261,14 +261,14 @@ export default function EventSubmitForm() {
 
       {/* Contact info */}
       <fieldset className="rounded-2xl bg-white p-6 shadow-sm">
-        <legend className="mb-4 text-sm font-bold uppercase tracking-wider text-[#999]">
+        <legend className="mb-4 text-sm font-bold uppercase tracking-wider text-[#6B6B6B]">
           Jouw gegevens
         </legend>
 
         <div className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="contactName" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+              <label htmlFor="contactName" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
                 Naam *
               </label>
               <input
@@ -276,11 +276,11 @@ export default function EventSubmitForm() {
                 name="contactName"
                 type="text"
                 required
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E85A5A]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
               />
             </div>
             <div>
-              <label htmlFor="contactEmail" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+              <label htmlFor="contactEmail" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
                 E-mail *
               </label>
               <input
@@ -288,12 +288,12 @@ export default function EventSubmitForm() {
                 name="contactEmail"
                 type="email"
                 required
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E85A5A]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
               />
             </div>
           </div>
           <div>
-            <label htmlFor="organization" className="mb-1 block text-sm font-semibold text-[#2B2B2B]">
+            <label htmlFor="organization" className="mb-1 block text-sm font-semibold text-[#2D2D2D]">
               Organisatie
             </label>
             <input
@@ -301,7 +301,7 @@ export default function EventSubmitForm() {
               name="organization"
               type="text"
               placeholder="bv. Stichting Haarlemse Markten"
-              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E85A5A]"
+              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#F4A09C]"
             />
           </div>
         </div>
@@ -311,11 +311,11 @@ export default function EventSubmitForm() {
         <button
           type="submit"
           disabled={state === "submitting"}
-          className="rounded-full bg-[#E85A5A] px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#D04A4A] disabled:opacity-50"
+          className="rounded-full bg-[#F4A09C] px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#E88E8A] disabled:opacity-50"
         >
           {state === "submitting" ? "Versturen..." : "Event insturen"}
         </button>
-        <p className="mt-3 text-xs text-[#999]">
+        <p className="mt-3 text-xs text-[#6B6B6B]">
           We reviewen elk event handmatig. Plaatsing binnen 2 werkdagen.
         </p>
       </div>

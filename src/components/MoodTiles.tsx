@@ -23,7 +23,7 @@ export default function MoodTiles() {
         >
           <span className="text-[28px]">{m.emoji}</span>
           <span className="mt-1 text-[13px] font-extrabold">{m.label}</span>
-          <span className="mt-0.5 text-[10px] font-semibold opacity-70">{m.sub}</span>
+          <span className="mt-0.5 text-[11px] font-semibold opacity-70">{m.sub}</span>
         </Link>
       ))}
     </div>

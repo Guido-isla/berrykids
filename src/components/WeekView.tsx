@@ -33,7 +33,7 @@ export default function WeekView({ events }: { events: Event[] }) {
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
-      <h2 className="mb-5 text-xl font-extrabold text-[#2B2B2B]">
+      <h2 className="mb-5 text-xl font-extrabold text-[#2D2D2D]">
         📅 Per dag
       </h2>
 
@@ -52,8 +52,8 @@ export default function WeekView({ events }: { events: Event[] }) {
               onClick={() => setSelectedIdx(i)}
               className={`flex shrink-0 flex-col items-center rounded-xl border px-2.5 py-2 transition-all sm:px-4 sm:py-3 ${
                 selectedIdx === i
-                  ? "border-[#E85A5A] bg-[#E85A5A] text-white shadow-sm"
-                  : "border-[#E0D8D2] bg-white text-[#2B2B2B] hover:border-[#E85A5A]/40"
+                  ? "border-[#F4A09C] bg-[#F4A09C] text-white shadow-sm"
+                  : "border-[#E0D8D2] bg-white text-[#2D2D2D] hover:border-[#F4A09C]/40"
               }`}
             >
               <span className="text-xs font-bold uppercase">
@@ -62,7 +62,7 @@ export default function WeekView({ events }: { events: Event[] }) {
               <span className="text-lg font-extrabold leading-tight">{day.getDate()}</span>
               {eventCount > 0 && (
                 <span className={`mt-1 text-[10px] font-semibold ${
-                  selectedIdx === i ? "text-white/80" : "text-[#E85A5A]"
+                  selectedIdx === i ? "text-white/80" : "text-[#F4A09C]"
                 }`}>
                   {eventCount} {eventCount === 1 ? "event" : "events"}
                 </span>
@@ -76,7 +76,7 @@ export default function WeekView({ events }: { events: Event[] }) {
       {dayEvents.length === 0 ? (
         <p className="text-sm text-[#6B6B6B]">
           Geen events op {formatShortDate(selectedDate)}. Bekijk onze{" "}
-          <a href="/activiteiten" className="font-semibold text-[#E85A5A]">
+          <a href="/activiteiten" className="font-semibold text-[#F4A09C]">
             vaste activiteiten
           </a>.
         </p>
@@ -89,7 +89,7 @@ export default function WeekView({ events }: { events: Event[] }) {
               className="flex items-center gap-4 rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
             >
               <div className="flex-1">
-                <h3 className="font-bold text-[#2B2B2B]">{event.title}</h3>
+                <h3 className="font-bold text-[#2D2D2D]">{event.title}</h3>
                 <p className="mt-0.5 text-sm text-[#6B6B6B]">
                   {event.time} · {event.location}
                 </p>

@@ -64,7 +64,7 @@ export default async function ActivityPage({ params }: Props) {
         {/* Back link */}
         <Link
           href="/activiteiten"
-          className="mb-6 inline-flex items-center gap-1 text-sm text-[#6B6B6B] transition-colors hover:text-[#2B2B2B]"
+          className="mb-6 inline-flex items-center gap-1 text-sm text-[#6B6B6B] transition-colors hover:text-[#2D2D2D]"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -95,7 +95,7 @@ export default async function ActivityPage({ params }: Props) {
           <div>
             {/* Badges */}
             <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-full bg-[#FFD6D6] px-3 py-1 text-sm font-semibold text-[#E85A5A]">
+              <span className="rounded-full bg-[#FFE9EA] px-3 py-1 text-sm font-semibold text-[#F4A09C]">
                 {activity.subcategory}
               </span>
               {activity.free ? (
@@ -113,32 +113,32 @@ export default async function ActivityPage({ params }: Props) {
             </div>
 
             {/* Title */}
-            <h1 className="mt-4 text-xl font-extrabold leading-snug text-[#2B2B2B] sm:text-2xl md:text-3xl">
+            <h1 className="mt-4 text-xl font-extrabold leading-snug text-[#2D2D2D] sm:text-2xl md:text-3xl">
               {activity.title}
             </h1>
 
             {/* Location & hours */}
             <div className="mt-4 space-y-2">
               <div className="flex items-center gap-3 text-sm">
-                <svg className="h-5 w-5 shrink-0 text-[#E85A5A]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <svg className="h-5 w-5 shrink-0 text-[#F4A09C]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z" />
                 </svg>
-                <p className="text-[#2B2B2B]">{activity.location}</p>
+                <p className="text-[#2D2D2D]">{activity.location}</p>
               </div>
               {activity.openingHours && (
                 <div className="flex items-center gap-3 text-sm">
-                  <svg className="h-5 w-5 shrink-0 text-[#E85A5A]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <svg className="h-5 w-5 shrink-0 text-[#F4A09C]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                   </svg>
-                  <p className="text-[#2B2B2B]">{activity.openingHours}</p>
+                  <p className="text-[#2D2D2D]">{activity.openingHours}</p>
                 </div>
               )}
             </div>
 
             {/* Description */}
             <div className="mt-6">
-              <p className="text-base leading-relaxed text-[#2B2B2B]">
+              <p className="text-base leading-relaxed text-[#2D2D2D]">
                 {activity.description}
               </p>
             </div>
@@ -147,7 +147,7 @@ export default async function ActivityPage({ params }: Props) {
             {activity.tip && (
               <div className="mt-4 rounded-xl bg-[#FDF1EA] px-4 py-3">
                 <p className="text-sm text-[#6B6B6B]">
-                  <span className="font-bold text-[#2B2B2B]">Tip</span> — {activity.tip}
+                  <span className="font-bold text-[#2D2D2D]">Tip</span> — {activity.tip}
                 </p>
               </div>
             )}
@@ -159,7 +159,7 @@ export default async function ActivityPage({ params }: Props) {
                   href={activity.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-[#E85A5A] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#D04A4A]"
+                  className="rounded-full bg-[#F4A09C] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#E88E8A]"
                 >
                   Website →
                 </a>
@@ -168,7 +168,7 @@ export default async function ActivityPage({ params }: Props) {
                 href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border border-[#E0D8D2] px-4 py-2.5 text-sm font-semibold text-[#2B2B2B] transition-colors hover:border-[#E85A5A] hover:text-[#E85A5A]"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#E0D8D2] px-4 py-2.5 text-sm font-semibold text-[#2D2D2D] transition-colors hover:border-[#F4A09C] hover:text-[#F4A09C]"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -198,30 +198,30 @@ export default async function ActivityPage({ params }: Props) {
 
             {/* Details card */}
             <div className="rounded-2xl bg-white p-5 shadow-sm">
-              <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#999]">
+              <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#6B6B6B]">
                 Details
               </h3>
               <dl className="space-y-2 text-sm">
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Locatie</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Locatie</dt>
                   <dd className="text-[#6B6B6B]">{activity.location}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Prijs</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Prijs</dt>
                   <dd className="text-[#6B6B6B]">{activity.free ? "Gratis" : activity.price}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Leeftijd</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Leeftijd</dt>
                   <dd className="text-[#6B6B6B]">{activity.ageLabel}</dd>
                 </div>
                 {activity.openingHours && (
                   <div>
-                    <dt className="font-semibold text-[#2B2B2B]">Openingstijden</dt>
+                    <dt className="font-semibold text-[#2D2D2D]">Openingstijden</dt>
                     <dd className="text-[#6B6B6B]">{activity.openingHours}</dd>
                   </div>
                 )}
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Seizoen</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Seizoen</dt>
                   <dd className="text-[#6B6B6B]">{seasonLabel}</dd>
                 </div>
               </dl>
@@ -231,7 +231,7 @@ export default async function ActivityPage({ params }: Props) {
 
         {/* Related activities */}
         <section className="mt-14 border-t border-[#F0E6E0] pt-8">
-          <h2 className="mb-5 text-lg font-bold text-[#2B2B2B]">
+          <h2 className="mb-5 text-lg font-bold text-[#2D2D2D]">
             Meer {activity.subcategory.toLowerCase()}
           </h2>
           <div className="grid gap-3 sm:gap-5 sm:grid-cols-3">
@@ -243,7 +243,7 @@ export default async function ActivityPage({ params }: Props) {
 
         {/* Newsletter */}
         <section className="mt-14 rounded-2xl bg-[#FDF1EA] px-6 py-8 text-center">
-          <h2 className="text-xl font-extrabold text-[#2B2B2B]">
+          <h2 className="text-xl font-extrabold text-[#2D2D2D]">
             Elke week de beste tips
           </h2>
           <p className="mt-1 text-sm text-[#6B6B6B]">

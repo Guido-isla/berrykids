@@ -73,7 +73,16 @@ export async function getWeather(): Promise<WeatherData> {
       next: { revalidate: 1800 }, // Next.js cache: 30 min
     });
 
-    if (!res.ok) throw new Error(`Weather API: ${res.status}`);
+    if (!res.ok) {
+      console.warn(`Weather API returned ${res.status}, using fallback`);
+      return weatherCache ?? {
+        current: { temp: 14, rain: 0, weatherCode: 2, description: "Half bewolkt", icon: "⛅" },
+        forecast: [],
+        isGoodWeather: false,
+        isRainy: false,
+        fetchedAt: new Date().toISOString(),
+      };
+    }
 
     const data = await res.json();
 

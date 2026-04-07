@@ -16,7 +16,7 @@ export default function EventCard({ event }: { event: EventWithImage }) {
   return (
     <Link href={`/event/${event.slug}`} className="group block min-w-0">
       <article className="h-full min-w-0">
-        <div className="relative aspect-[3/2] overflow-hidden rounded-xl">
+        <div className="relative aspect-[3/2] overflow-hidden rounded-[20px]">
           <Image
             src={src}
             alt={event.title}
@@ -32,10 +32,10 @@ export default function EventCard({ event }: { event: EventWithImage }) {
           )}
         </div>
         <div className="mt-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#E85A5A]">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[#F4A09C]">
             {event.category}
           </p>
-          <h3 className="mt-1 text-lg font-bold leading-snug tracking-tight text-[#1A1A1A] transition-colors group-hover:text-[#E85A5A]">
+          <h3 className="mt-1 text-lg font-bold leading-snug tracking-tight text-[#2D2D2D] transition-colors group-hover:text-[#F4A09C]">
             {event.title}
           </h3>
           <p className="mt-1 text-sm text-[#444]">

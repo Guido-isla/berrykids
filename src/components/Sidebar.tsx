@@ -34,7 +34,7 @@ export default function Sidebar({
             key={i}
             href={match[2]}
             target={isExternal ? "_blank" : undefined}
-            className="font-bold text-[#E85A5A] underline decoration-[#E85A5A]/30 underline-offset-2 transition-colors hover:text-[#D04A4A]"
+            className="font-bold text-[#F4A09C] underline decoration-[#F4A09C]/30 underline-offset-2 transition-colors hover:text-[#E88E8A]"
           >
             {match[1]}
           </Link>
@@ -58,7 +58,7 @@ export default function Sidebar({
               className="h-[52px] w-auto drop-shadow-sm"
             />
           </div>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#E85A5A]">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#F4A09C]">
             Berry&apos;s dagplan
           </span>
         </div>
@@ -69,10 +69,10 @@ export default function Sidebar({
               key={i}
               className={`text-xs leading-relaxed sm:text-[13px] ${
                 line.startsWith("☀️") || line.startsWith("🌤️") || line.startsWith("☕") || line.startsWith("🌷") || line.startsWith("❄️") || line.startsWith("🍂") || line.startsWith("☀")
-                  ? "rounded-lg bg-[#FFF8F4] px-3 py-2 text-[#2B2B2B]"
+                  ? "rounded-lg bg-[#FFF8F4] px-3 py-2 text-[#2D2D2D]"
                   : i === 0
-                    ? "font-semibold text-[#2B2B2B]"
-                    : "text-[#2B2B2B]"
+                    ? "font-semibold text-[#2D2D2D]"
+                    : "text-[#2D2D2D]"
               }`}
             >
               {renderLine(line)}
@@ -80,7 +80,7 @@ export default function Sidebar({
           ))}
         </div>
 
-        <p className="mt-3 text-[10px] text-[#999]">{weatherLine}</p>
+        <p className="mt-3 text-[10px] text-[#6B6B6B]">{weatherLine}</p>
       </div>
 
       {/* Newsletter — tiny bottom bar */}
@@ -95,11 +95,11 @@ export default function Sidebar({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="je@email.nl"
-              className="min-w-0 flex-1 rounded-full border border-[#F0E6E0] bg-[#FFF8F4] px-3 py-2.5 text-xs outline-none focus:border-[#E85A5A]"
+              className="min-w-0 flex-1 rounded-full border border-[#F0E6E0] bg-[#FFF8F4] px-3 py-2.5 text-xs outline-none focus:border-[#F4A09C]"
             />
             <button
               type="submit"
-              className="shrink-0 rounded-full bg-[#E85A5A] px-4 py-2.5 text-xs font-bold text-white hover:bg-[#D04A4A]"
+              className="shrink-0 rounded-full bg-[#F4A09C] px-4 py-2.5 text-xs font-bold text-white hover:bg-[#E88E8A]"
             >
               📬
             </button>

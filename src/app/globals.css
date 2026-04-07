@@ -91,3 +91,12 @@ body {
 .animate-berry-fade-in {
   animation: berry-fade-in 0.5s ease-out forwards;
 }
+
+/* Detail card fade-up for TopFiveHero */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.35s ease forwards;
+}

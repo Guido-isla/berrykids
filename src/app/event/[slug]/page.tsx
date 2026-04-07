@@ -68,7 +68,7 @@ export default async function EventPage({ params }: Props) {
         {/* Back link */}
         <Link
           href="/"
-          className="mb-6 inline-flex items-center gap-1 text-sm text-[#6B6B6B] transition-colors hover:text-[#2B2B2B]"
+          className="mb-6 inline-flex items-center gap-1 text-sm text-[#6B6B6B] transition-colors hover:text-[#2D2D2D]"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -104,7 +104,7 @@ export default async function EventPage({ params }: Props) {
                   Gratis
                 </span>
               ) : (
-                <span className="rounded-full bg-[#FFD6D6] px-3 py-1 text-sm font-semibold text-[#E85A5A]">
+                <span className="rounded-full bg-[#FFE9EA] px-3 py-1 text-sm font-semibold text-[#F4A09C]">
                   {event.price}
                 </span>
               )}
@@ -120,18 +120,18 @@ export default async function EventPage({ params }: Props) {
             </div>
 
             {/* Title */}
-            <h1 className="mt-4 text-xl font-extrabold leading-snug text-[#2B2B2B] sm:text-2xl md:text-3xl">
+            <h1 className="mt-4 text-xl font-extrabold leading-snug text-[#2D2D2D] sm:text-2xl md:text-3xl">
               {event.title}
             </h1>
 
             {/* Date, time, location */}
             <div className="mt-4 space-y-2">
               <div className="flex items-center gap-3 text-sm">
-                <svg className="h-5 w-5 shrink-0 text-[#E85A5A]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <svg className="h-5 w-5 shrink-0 text-[#F4A09C]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
                 </svg>
                 <div>
-                  <p className="font-semibold text-[#2B2B2B]">
+                  <p className="font-semibold text-[#2D2D2D]">
                     {formatLongDate(event.date)}
                     {event.endDate && ` – ${formatLongDate(event.endDate)}`}
                   </p>
@@ -139,17 +139,17 @@ export default async function EventPage({ params }: Props) {
                 </div>
               </div>
               <div className="flex items-center gap-3 text-sm">
-                <svg className="h-5 w-5 shrink-0 text-[#E85A5A]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <svg className="h-5 w-5 shrink-0 text-[#F4A09C]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z" />
                 </svg>
-                <p className="text-[#2B2B2B]">{event.location}</p>
+                <p className="text-[#2D2D2D]">{event.location}</p>
               </div>
             </div>
 
             {/* Description */}
             <div className="mt-6">
-              <p className="text-base leading-relaxed text-[#2B2B2B]">
+              <p className="text-base leading-relaxed text-[#2D2D2D]">
                 {event.description}
               </p>
             </div>
@@ -158,7 +158,7 @@ export default async function EventPage({ params }: Props) {
             {event.tip && (
               <div className="mt-4 rounded-xl bg-[#FDF1EA] px-4 py-3">
                 <p className="text-sm text-[#6B6B6B]">
-                  <span className="font-bold text-[#2B2B2B]">Tip</span> — {event.tip}
+                  <span className="font-bold text-[#2D2D2D]">Tip</span> — {event.tip}
                 </p>
               </div>
             )}
@@ -170,7 +170,7 @@ export default async function EventPage({ params }: Props) {
                   href={event.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-[#E85A5A] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#D04A4A]"
+                  className="rounded-full bg-[#F4A09C] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#E88E8A]"
                 >
                   Meer info & tickets →
                 </a>
@@ -179,7 +179,7 @@ export default async function EventPage({ params }: Props) {
                 href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border border-[#E0D8D2] px-4 py-2.5 text-sm font-semibold text-[#2B2B2B] transition-colors hover:border-[#E85A5A] hover:text-[#E85A5A]"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#E0D8D2] px-4 py-2.5 text-sm font-semibold text-[#2D2D2D] transition-colors hover:border-[#F4A09C] hover:text-[#F4A09C]"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -209,35 +209,35 @@ export default async function EventPage({ params }: Props) {
 
             {/* Quick info card */}
             <div className="rounded-2xl bg-white p-5 shadow-sm">
-              <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#999]">
+              <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#6B6B6B]">
                 Details
               </h3>
               <dl className="space-y-2 text-sm">
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Datum</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Datum</dt>
                   <dd className="text-[#6B6B6B]">
                     {formatLongDate(event.date)}
                     {event.endDate && ` – ${formatLongDate(event.endDate)}`}
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Tijd</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Tijd</dt>
                   <dd className="text-[#6B6B6B]">{event.time}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Locatie</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Locatie</dt>
                   <dd className="text-[#6B6B6B]">{event.location}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Prijs</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Prijs</dt>
                   <dd className="text-[#6B6B6B]">{event.free ? "Gratis" : event.price}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Leeftijd</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Leeftijd</dt>
                   <dd className="text-[#6B6B6B]">{event.ageLabel}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2B2B2B]">Binnen/Buiten</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">Binnen/Buiten</dt>
                   <dd className="text-[#6B6B6B]">{event.indoor ? "Binnen" : "Buiten"}</dd>
                 </div>
               </dl>
@@ -247,7 +247,7 @@ export default async function EventPage({ params }: Props) {
 
         {/* Related events */}
         <section className="mt-14 border-t border-[#F0E6E0] pt-8">
-          <h2 className="mb-5 text-lg font-bold text-[#2B2B2B]">
+          <h2 className="mb-5 text-lg font-bold text-[#2D2D2D]">
             Meer in {event.area}
           </h2>
           <div className="grid gap-3 sm:gap-5 sm:grid-cols-3">
@@ -259,7 +259,7 @@ export default async function EventPage({ params }: Props) {
 
         {/* Newsletter */}
         <section className="mt-14 rounded-2xl bg-[#FDF1EA] px-6 py-8 text-center">
-          <h2 className="text-xl font-extrabold text-[#2B2B2B]">
+          <h2 className="text-xl font-extrabold text-[#2D2D2D]">
             Elke week de beste tips
           </h2>
           <p className="mt-1 text-sm text-[#6B6B6B]">

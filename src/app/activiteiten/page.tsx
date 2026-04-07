@@ -23,8 +23,8 @@ export default function ActiviteitenPage() {
 
       {/* Hero */}
       <section className="bg-[#FDF1EA]">
-        <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8 sm:py-14">
-          <h1 className="text-3xl font-extrabold leading-tight text-[#2B2B2B] sm:text-4xl">
+        <div className="mx-auto max-w-[880px] px-5 py-10 sm:px-8 sm:py-14">
+          <h1 className="text-3xl font-extrabold leading-tight text-[#2D2D2D] sm:text-4xl">
             Activiteiten voor kinderen
           </h1>
           <p className="mt-2 max-w-lg text-base text-[#6B6B6B] sm:text-lg">
@@ -33,15 +33,15 @@ export default function ActiviteitenPage() {
         </div>
       </section>
 
-      <main className="mx-auto max-w-6xl px-5 py-8 sm:px-8">
+      <main className="mx-auto max-w-[880px] px-5 py-8 sm:px-8">
         <FilterableActivities activities={activitiesWithImages} />
       </main>
 
       {/* Newsletter */}
       <section id="newsletter" className="bg-[#FDF1EA]">
-        <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8">
+        <div className="mx-auto max-w-[880px] px-5 py-14 sm:px-8">
           <div className="mx-auto max-w-md text-center">
-            <h2 className="text-2xl font-extrabold text-[#2B2B2B]">
+            <h2 className="text-2xl font-extrabold text-[#2D2D2D]">
               Elke week de beste tips in je inbox
             </h2>
             <p className="mt-2 text-sm text-[#6B6B6B]">

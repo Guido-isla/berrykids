@@ -14,7 +14,7 @@ export default function SeasonalSuggestions({
 }) {
   return (
     <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
-      <h2 className="mb-2 text-xl font-extrabold text-[#2B2B2B]">
+      <h2 className="mb-2 text-xl font-extrabold text-[#2D2D2D]">
         {seasonEmoji} {seasonName} in Haarlem
       </h2>
       <p className="mb-5 text-sm text-[#6B6B6B]">
@@ -42,7 +42,7 @@ export default function SeasonalSuggestions({
               )}
             </div>
             <div className="p-4">
-              <h3 className="font-bold text-[#2B2B2B] transition-colors group-hover:text-[#E85A5A]">
+              <h3 className="font-bold text-[#2D2D2D] transition-colors group-hover:text-[#F4A09C]">
                 {s.title}
               </h3>
               <p className="mt-1 text-sm text-[#6B6B6B]">{s.description}</p>

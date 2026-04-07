@@ -11,10 +11,10 @@ export default function PrivacyPage() {
     <div className="min-h-screen">
       <Header />
       <main className="mx-auto max-w-3xl px-5 py-12 sm:px-8">
-        <h1 className="text-3xl font-extrabold text-[#2B2B2B]">Privacybeleid</h1>
+        <h1 className="text-3xl font-extrabold text-[#2D2D2D]">Privacybeleid</h1>
         <p className="mt-2 text-sm text-[#6B6B6B]">Laatst bijgewerkt: 3 april 2026</p>
 
-        <div className="mt-8 space-y-6 text-sm leading-relaxed text-[#2B2B2B]">
+        <div className="mt-8 space-y-6 text-sm leading-relaxed text-[#2D2D2D]">
           <section>
             <h2 className="text-lg font-bold">1. Wie zijn wij</h2>
             <p className="mt-2 text-[#6B6B6B]">

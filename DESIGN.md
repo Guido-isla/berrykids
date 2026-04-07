@@ -85,26 +85,40 @@ Cold:   linear-gradient(175deg, #E0F5F0 0%, #C8EAE0 40%, #B8E0D4 100%)
 
 ## 4. Component System
 
-### A. Berry Zone (ATF — above the fold)
+### A. Header
+- Berry icon (40px) + "Berry Kids" brand text (16px, extrabold, coral `#F4A09C`)
+- Location pill: "Haarlem e.o." with pin SVG, `bg-[#2D2D2D]/[0.06]`, 10px bold
+- Nav links: "Activiteiten", "Vakanties", "Zoeken" (12px, bold, 25% opacity, coral on hover)
+- Inline search: coral bottom-border input, toggled by Zoeken button
+- Desktop only: nav links hidden on mobile, search always visible
+
+### B. Berry Zone (ATF — above the fold)
 - Full pastel gradient background (weather-reactive)
 - Blurred white blobs for organic depth
 - Sparkle animations (subtle, 3s cycle)
-- Contains: nav, Berry row, speech bubble, hero card
+- **Grid texture:** subtle 60px line pattern at `opacity: 0.04` for depth
+- **Colored blob accent:** weather-tinted blur blob (peach/purple/teal) at `blur(80px)`
+- **Floating emoji objects:** 8 per weather mood, desktop only (`hidden sm:block`)
+  - Sunny: 🌳🚲🍦🦌🌊☀️🌻🪁
+  - Rainy: ☕🎨📚🧩🎬🎭🖍️🧸
+  - Cold: 🧤🏊🎪🎭⛸️🍫🧣🎵
+  - Varying blur (0–2px), opacity (0.15–0.3), staggered `floatObject` animation
+- Contains: header, Berry row, speech bubble, hero card
 - Ends with wave divider SVG curving into content zone
 
-### B. Berry Row
+### C. Berry Row
 - Berry avatar: ~100px, `drop-shadow(0 6px 16px rgba(244,160,156,0.3))`
 - Animated: gentle bob `4s ease-in-out infinite`
 - Next to avatar: vibe label (coral) + headline (dark)
 - Weather chip: frosted glass pill, far right
 
-### C. Speech Bubble
+### D. Speech Bubble
 - White card, `border-radius: 24px`, shadow `0 2px 16px rgba(0,0,0,0.04)`
 - Triangle pointer `::before` pointing up to Berry
 - Berry speaks in first person with opinions
 - "After" line for the afternoon suggestion (lighter text)
 
-### D. Hero Card (Berry's #1)
+### E. Hero Card (Berry's #1)
 - `border-radius: 24px`, shadow `0 4px 24px rgba(0,0,0,0.06)`
 - Image: 280px height, gradient overlay bottom
 - "Berry's #1" tag: coral pill top-left
@@ -113,13 +127,13 @@ Cold:   linear-gradient(175deg, #E0F5F0 0%, #C8EAE0 40%, #B8E0D4 100%)
 - Bottom bar: title + meta left, CTA button right
 - Hover: `translateY(-3px)`, image `scale(1.04)` over 5s
 
-### E. Mood Tiles (below fold)
+### F. Mood Tiles (below fold)
 - `border-radius: 20px`, unique pastel bg per mood
 - Emoji (28px) + label (13px bold) + subtitle (10px)
 - 3-column grid desktop, 2-column mobile
 - Hover: `translateY(-3px)` + subtle shadow
 
-### F. Activity Cards
+### G. Activity Cards
 - `border-radius: 20px`, white bg
 - Shadow: `0 1px 8px rgba(0,0,0,0.04)`
 - Image top (120-140px), optional "Gratis" pill
@@ -127,7 +141,7 @@ Cold:   linear-gradient(175deg, #E0F5F0 0%, #C8EAE0 40%, #B8E0D4 100%)
 - Hover: lift + shadow increase
 - Heart save button on image
 
-### G. Wave Divider
+### H. Wave Divider
 ```html
 <svg viewBox="0 0 1440 50" preserveAspectRatio="none">
   <path d="M0,18 C320,50 720,0 1440,28 L1440,50 L0,50 Z" fill="#FFF9F0"/>
@@ -148,6 +162,7 @@ Cold:   linear-gradient(175deg, #E0F5F0 0%, #C8EAE0 40%, #B8E0D4 100%)
 - Hero image: `scale(1.04)`, `5s ease-out` on hover
 - Weather transition: `0.6s ease` on background gradient
 - CTA hover: `translateY(-1px)`, `0.2s ease`
+- Floating objects: `floatObject` keyframes, 6–10s per object, staggered delays, gentle vertical drift
 
 ## 7. Berry's Voice
 Berry speaks in three modes, mixed per context:
@@ -190,7 +205,7 @@ Berry speaks in three modes, mixed per context:
 - Hero image: 200px height
 - Mood grid: 2 columns
 - Alt cards: 1 column
-- Hide weather chip and nav links
+- Hide weather chip, nav links, and floating emoji objects
 - Speech text: 14px
 
 ### Desktop
@@ -198,4 +213,7 @@ Berry speaks in three modes, mixed per context:
 - Hero image: 280px height
 - Mood grid: 3 columns
 - Alt cards: 2 columns
-- Show weather chip and nav links
+- Show weather chip, nav links, and floating emoji objects
+
+## 10. Brand Assets
+- **Favicon:** Berry mascot icon (`src/app/icon.png`), replaces default Next.js favicon

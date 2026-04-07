@@ -43,14 +43,14 @@ function HeroTile({
         className="absolute inset-0"
         style={{
           background: large
-            ? "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)"
-            : "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.15) 100%)",
+            ? "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)"
+            : "linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%)",
         }}
       />
       <div className={`absolute inset-x-0 bottom-0 ${large ? "p-6 sm:p-8" : "p-3 sm:p-4"}`}>
         <p
           className={`font-bold uppercase tracking-wide ${
-            large ? "text-[14px] text-[#E85A5A]" : "text-[11px] text-[#E85A5A] drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+            large ? "text-[14px] text-[#F4A09C]" : "text-[11px] text-[#F4A09C] drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
           }`}
         >
           {slide.category}
@@ -66,7 +66,7 @@ function HeroTile({
           {slide.title}
         </h2>
         {large && (
-          <span className="mt-4 inline-block rounded-full bg-[#E85A5A] px-6 py-2.5 text-[13px] font-bold text-white transition-colors group-hover:bg-[#D04A4A]">
+          <span className="mt-4 inline-block rounded-full bg-[#F4A09C] px-6 py-2.5 text-[13px] font-bold text-white transition-colors group-hover:bg-[#E88E8A]">
             Lees meer
           </span>
         )}
@@ -137,8 +137,8 @@ export default function HeroSlideshow({
       {/* Decision heading */}
       <div className="mb-3 flex items-end justify-between px-5 sm:px-0">
         <div>
-          <p className="text-[12px] font-bold uppercase tracking-wider text-[#E85A5A]">{dateLine}</p>
-          <h1 className="mt-1 text-[clamp(1.4rem,2.5vw,1.8rem)] font-extrabold tracking-tight text-[#1A1A1A]">
+          <p className="text-[12px] font-bold uppercase tracking-wider text-[#F4A09C]">{dateLine}</p>
+          <h1 className="mt-1 text-[clamp(1.4rem,2.5vw,1.8rem)] font-extrabold tracking-tight text-[#2D2D2D]">
             {heading}
           </h1>
         </div>
@@ -152,8 +152,8 @@ export default function HeroSlideshow({
                 aria-label={`Ga naar slide ${i + 1}`}
                 className={`h-[3px] rounded-full transition-all ${
                   i === active
-                    ? "w-6 bg-[#E85A5A]"
-                    : "w-3 bg-[#1A1A1A]/20 hover:bg-[#1A1A1A]/40"
+                    ? "w-6 bg-[#F4A09C]"
+                    : "w-3 bg-[#2D2D2D]/20 hover:bg-[#2D2D2D]/40"
                 }`}
               />
             ))}
@@ -168,7 +168,7 @@ export default function HeroSlideshow({
         role="region"
         aria-label="Uitgelichte evenementen"
         aria-roledescription="carousel"
-        className="overflow-hidden sm:rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#E85A5A] focus-visible:ring-offset-2"
+        className="overflow-hidden sm:rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#F4A09C] focus-visible:ring-offset-2"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onFocus={() => setPaused(true)}
@@ -202,8 +202,8 @@ export default function HeroSlideshow({
               aria-label={`Ga naar slide ${i + 1}`}
               className={`h-[3px] rounded-full transition-all ${
                 i === active
-                  ? "w-6 bg-[#E85A5A]"
-                  : "w-3 bg-[#1A1A1A]/20 hover:bg-[#1A1A1A]/40"
+                  ? "w-6 bg-[#F4A09C]"
+                  : "w-3 bg-[#2D2D2D]/20 hover:bg-[#2D2D2D]/40"
               }`}
             />
           ))}

@@ -53,7 +53,7 @@ export default function SituationHero({
     <>
       {/* Situation pills */}
       <div className="mb-4">
-        <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-[#999]">Vandaag voelt als</p>
+        <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-[#6B6B6B]">Vandaag voelt als</p>
         <SituationPills onChange={setSituation} defaultSituation={defaultSituation} />
       </div>
 
@@ -69,7 +69,7 @@ export default function SituationHero({
             priority
           />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.05) 50%, transparent 100%)" }} />
-          <div className="absolute left-4 top-4 rounded-full bg-[#E85A5A] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+          <div className="absolute left-4 top-4 rounded-full bg-[#F4A09C] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
             Berry&apos;s #1
           </div>
           <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
@@ -99,13 +99,13 @@ export default function SituationHero({
                 <Image src={item.image} alt={item.title} fill sizes="80px" className="object-cover" />
               </div>
               <div className="flex min-w-0 flex-col justify-center">
-                <p className="text-[10px] font-bold uppercase tracking-wide text-[#E85A5A]">
+                <p className="text-[10px] font-bold uppercase tracking-wide text-[#F4A09C]">
                   {item.category}{item.free ? " · Gratis" : ""}
                 </p>
-                <h3 className="text-[14px] font-bold leading-snug tracking-tight text-[#1A1A1A] group-hover:text-[#E85A5A]">
+                <h3 className="text-[14px] font-bold leading-snug tracking-tight text-[#2D2D2D] group-hover:text-[#F4A09C]">
                   {item.title}
                 </h3>
-                <p className="truncate text-[12px] text-[#888]">{item.location}</p>
+                <p className="truncate text-[12px] text-[#6B6B6B]">{item.location}</p>
               </div>
             </Link>
           ))}
