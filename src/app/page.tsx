@@ -10,6 +10,7 @@ import ActivityCard from "@/components/ActivityCard";
 import BerryZone from "@/components/BerryZone";
 import MoodTiles from "@/components/MoodTiles";
 import SaveButton from "@/components/SaveButton";
+import WeatherChip from "@/components/WeatherChip";
 import { getScrapedEvents, getDayPlanEvents } from "@/data/events-loader";
 import { resolveEventImages } from "@/lib/photos";
 import { getSiteContext } from "@/lib/context";
@@ -101,9 +102,18 @@ export default async function Home() {
                 Doe dit vandaag
               </h1>
             </div>
-            <div className="hidden items-center gap-1.5 rounded-full bg-white/50 px-3.5 py-1.5 text-[13px] font-bold text-[#2D2D2D] shadow-sm backdrop-blur-sm sm:flex">
-              {ctx.weather.current.icon} {ctx.weather.current.temp}°C
-            </div>
+            <WeatherChip
+              icon={ctx.weather.current.icon}
+              temp={ctx.weather.current.temp}
+              description={ctx.weather.current.description}
+              reason={ctx.berryPick.reason}
+              forecast={ctx.weather.forecast.slice(1, 5).map((d) => ({
+                icon: d.icon,
+                day: ["zo","ma","di","wo","do","vr","za"][new Date(d.date + "T00:00:00").getDay()],
+                tempMax: d.tempMax,
+                isRainy: d.isRainy,
+              }))}
+            />
           </div>
 
           {/* Speech bubble */}
