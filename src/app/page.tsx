@@ -238,7 +238,7 @@ export default async function Home() {
             <p className="text-[11px] font-bold uppercase tracking-widest text-[#F4A09C]">Elke vrijdag om 15:00</p>
             <h2 className="mt-2 text-[24px] font-extrabold tracking-tight text-[#2D2D2D]">Weekend gepland in 2 minuten</h2>
             <p className="mt-2 text-[14px] text-[#6B6B6B]">De 5 leukste tips. Geen zoeken. Gewoon gaan.</p>
-            <div className="mt-5"><NewsletterForm /></div>
+            <div className="mt-5"><NewsletterForm variant="personalize" /></div>
             <p className="mt-2 text-[12px] text-[#A09488]">2.340+ ouders · gratis</p>
           </div>
         </div>

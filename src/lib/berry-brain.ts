@@ -46,6 +46,52 @@ export function scoreActivity(activity: Activity, ctx: SiteContext): number {
   return score;
 }
 
+/** Boost a base score with family profile data (client-side) */
+export function scoreWithProfile(
+  baseScore: number,
+  item: {
+    ageMin?: number;
+    ageMax?: number;
+    subcategory?: string;
+    category?: string;
+    free?: boolean;
+  },
+  profile: { kids: { age: number; interests: string[] }[]; area: string }
+): number {
+  // Lazy import to avoid circular deps — these are pure functions
+  const { fitsAge, matchesInterest } = require("@/lib/personalization");
+  let boost = 0;
+
+  if (profile.kids.length === 0) return baseScore;
+
+  // Age fit: +5 if fits youngest, +3 if fits any other
+  const youngest = Math.min(...profile.kids.map((k) => k.age));
+  const fitsYoungest = fitsAge(item.ageMin, item.ageMax, youngest);
+  const fitsAny = profile.kids.some((k) => fitsAge(item.ageMin, item.ageMax, k.age));
+
+  if (fitsYoungest) {
+    boost += 5;
+  } else if (fitsAny) {
+    boost += 3;
+  } else {
+    boost -= 3; // Penalize activities that don't fit any kid
+  }
+
+  // Age spread bonus: "Alle leeftijden" great for multi-kid families
+  if (item.ageMin === undefined && item.ageMax === undefined && profile.kids.length >= 2) {
+    boost += 3;
+  }
+
+  // Interest match: +4 if matches any kid's interests
+  const allInterests = profile.kids.flatMap((k) => k.interests);
+  const sub = item.subcategory || item.category || "";
+  if (allInterests.length > 0 && matchesInterest(sub, allInterests)) {
+    boost += 4;
+  }
+
+  return baseScore + boost;
+}
+
 export function generateBerryDayPlan(
   ctx: SiteContext,
   events: Event[],
