@@ -1,281 +1,201 @@
-# Design System: Berry Kids
+# Design System: Berry Kids (v2 — Soft Pastel)
 
 ## 1. Visual Theme & Atmosphere
 
-Berry Kids is a warm, editorial kids-activity guide for families in Haarlem — think a local Time Out for parents, not a corporate listings site. The design is photography-forward with a clean white canvas where event and activity photos do the heavy lifting. The brand accent Berry Red (`#E85A5A`) is warm and playful — softer than a hard red, approachable without being childish.
+Berry Kids feels like a warm friend texting you on Saturday morning. The design lives in an illustrated, pastel world — like a children's book for adults. Soft, dreamy, organic. Every screen should feel handmade, not engineered.
 
-The typography uses Nunito — a rounded sans-serif that feels friendly and readable at every size, set with `font-extrabold` (800) for headings and `font-bold` (700) for emphasis. The roundedness of Nunito echoes the brand's playful warmth without crossing into cartoon territory. This is a site parents trust, not a kids' game.
+Berry the mascot is the heart of the experience. Not an icon in the corner — Berry is present, animated, speaking directly to you. The interface IS Berry's world.
 
-The overall density is magazine-like: generous whitespace between sections, full-bleed hero imagery, and a rhythm of editorial blocks (hero → picks → newsletter → themed sections). The Berry mascot appears sparingly — a subtle wink, not an animated distraction. The warm neutral `#F0ECE8` (latte) is used for speech bubbles and soft surfaces, giving the site a cozy, tactile feel distinct from cold grays.
+**Core principle:** Every visual element should help a parent decide in < 3 seconds.
 
 **Key Characteristics:**
-- Clean white canvas (`#FFFFFF`) with Berry Red (`#E85A5A`) as singular brand accent
-- Nunito — rounded sans-serif, always bold (700) or extrabold (800) for headings
-- Photography-first: event images are the hero content, never decorative
-- Warm neutrals: `#F0ECE8` (latte), `#F0E6E0` (warm border), `#FDF1EA` (blush surface)
-- No pure black — text uses `#1A1A1A` (warm near-black)
-- Generous border-radius: `rounded-2xl` (16px) on cards and containers
-- Magazine-paced vertical rhythm — sections breathe, users browse
-- Berry mascot is subtle — small icon, speech bubble, never dominant
-- Red category nav bar — editorial navigation like Time Out
-- Section headings use a red bar accent (`h-[3px] w-10 bg-[#E85A5A]`) before the title
+- Soft pastel gradients that shift with weather (peach, lavender, mint)
+- Berry mascot at ~100px, prominent and animated
+- Nunito — rounded, warm, the only font
+- White cards floating on pastel backgrounds — depth through contrast
+- Organic shapes: blurred blobs, wave dividers, rounded everything
+- No sharp edges, no hard lines, no pure black
+- Voice mixes warm friend + confident guide + playful helper
+- Photography inside cards, illustrations/color for the world around them
 
-## 2. Color Palette & Roles
+**The ONE thing someone remembers:** "It felt like a friend"
+
+**Berry NEVER feels like:** Kidsproof / listing site. This is next-gen social exploration with AI.
+
+## 2. Color Palette
 
 ### Primary Brand
-- **Berry Red** (`#E85A5A`): Primary CTA, nav bar background, category labels, section accents, links on hover
-- **Berry Red Hover** (`#D04A4A`): Pressed/hover state for red buttons and links
-- **Berry Red Light** (`#FFD6D6`): Badge/pill backgrounds for subcategory tags
+- **Berry Coral** (`#F4A09C`): Primary CTA, links, badges, Berry's glow
+- **Berry Coral Hover** (`#E88E8A`): Pressed/hover state
+- **Berry Coral Soft** (`#FFE9EA`): Light backgrounds, tags
 
-### Text Scale
-- **Near Black** (`#1A1A1A`): Primary text, headings — warm, never cold
-- **Dark Gray** (`#2B2B2B`): Secondary heading variant (film, newsletter)
-- **Body Gray** (`#444`): Secondary body text (dates, locations)
-- **Muted Gray** (`#666`): Descriptions, truncated text
-- **Caption Gray** (`#6B6B6B`): Captions, metadata, opening hours
-- **Placeholder** (`#999`): Input placeholders, subscriber counts
-- **Whisper** (`#CCC`): Ad labels, decorative text
-- **Ghost** (`#BBB`): Copyright, minimal UI text
+### Weather-Reactive Backgrounds (THE EDGE)
+```
+Sunny:  linear-gradient(175deg, #FFF3E0 0%, #FFE4C4 40%, #FFD8B0 100%)
+Rainy:  linear-gradient(175deg, #EDE7F6 0%, #D5CCF0 40%, #C5B8E8 100%)
+Cold:   linear-gradient(175deg, #E0F5F0 0%, #C8EAE0 40%, #B8E0D4 100%)
+```
 
-### Surfaces & Borders
-- **White** (`#FFFFFF`): Page background, card surfaces
-- **Latte** (`#F0ECE8`): Berry speech bubble, warm surface blocks
-- **Blush** (`#FDF1EA`): Newsletter success state, warm highlights
-- **Cream** (`#FFF8F4`): Film time slot pills
-- **Snow** (`#FAFAFA`): Newsletter section backgrounds
-- **Ash** (`#F5F5F5`): Ad placeholders, neutral surfaces
-- **Warm Border** (`#F0E6E0`): Input borders, pill borders
-- **Light Border** (`#E5E5E5`): Section dividers, header border
-- **Footer Border** (`#F0EBE6`): Footer top border
+### Mood Tile Colors
+- **Buiten:** bg `#FFF3E0`, text `#A67A40`
+- **Binnen:** bg `#EDE7F6`, text `#7B6BA0`
+- **Energie:** bg `#FFE8E8`, text `#C06060`
+- **Rustig:** bg `#E8F0FF`, text `#5B7090`
+- **Gratis:** bg `#E8F8ED`, text `#4A8060`
+- **Speciaal:** bg `#FFF0E5`, text `#B07040`
 
-### Semantic
-- **Free Green** (`#6FAF3A`): "Gratis" badge text
-- **Free Green BG** (`#8BC34A` at 15%): "Gratis" badge background
+### Neutrals
+- **Text Primary:** `#2D2D2D` (warm dark, never pure black)
+- **Text Secondary:** `#6B6B6B`
+- **Text Muted:** `#BBB`
+- **Text Whisper:** `#D4C8BE`
+- **Background:** `#FFF9F0` (warm cream, never pure white)
+- **Card Surface:** `#FFFFFF`
+- **Border:** `rgba(0,0,0,0.04)` (whisper borders)
+- **Free Badge:** `#7BC67F` on cards, `#4A8060` text in tiles
 
-### Overlays & Shadows
-- **Card Shadow** (`0 2px 12px rgba(0,0,0,0.08)`): Default card elevation
-- **Card Hover Shadow** (`0 4px 20px rgba(0,0,0,0.12)`): Hover state lift
-- **Hero Gradient**: `linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)` — text readability on photos
+### Decorative
+- **Blobs:** `rgba(255,255,255,0.25)` with `blur(40px)`
+- **Sparkles:** `rgba(255,255,255,0.5)` with twinkle animation
+- **Frosted glass:** `rgba(255,255,255,0.5)` with `backdrop-filter: blur(8px)`
 
-## 3. Typography Rules
+## 3. Typography
 
-### Font Family
-- **Primary**: `Nunito` via `next/font/google`, variable `--font-nunito`
-- **Fallbacks**: `ui-sans-serif, system-ui, -apple-system, sans-serif`
-- **Rendering**: `-webkit-font-smoothing: antialiased`
+### Font
+- **Only font:** `Nunito` via Google Fonts
+- **Weights:** 400 (body), 600 (emphasis), 700 (bold), 800 (headings), 900 (hero)
+- **Never use:** Inter, Roboto, Arial, system-ui as primary
 
-### Hierarchy
+### Scale
+| Role | Size | Weight | Notes |
+|------|------|--------|-------|
+| Hero headline | `clamp(24px, 4vw, 34px)` | 900 | Tight tracking `-0.8px` |
+| Section label | 11px | 700 | Uppercase, `letter-spacing: 1.5px`, color `#D4C8BE` |
+| Card title | 15–18px | 800 | Tracking `-0.2px` |
+| Speech text | 15px | 600 | `line-height: 1.5` |
+| Vibe label | 13px | 700 | Berry Coral color, lowercase |
+| Body | 14px | 600 | |
+| Meta | 12px | 600 | Color `#BBB` |
+| Micro | 10–11px | 700 | Uppercase for badges/tags |
 
-| Role | Size | Weight | Line Height | Extra | Notes |
-|------|------|--------|-------------|-------|-------|
-| Hero Title | `clamp(1.6rem, 4vw, 2.8rem)` | 800 (extrabold) | 1.08 | — | Hero slideshow main event |
-| Section Heading | 26px | 800 (extrabold) | normal | Red bar prefix | `"Dit weekend"`, `"Gratis eropuit"` |
-| Card Title | 18px (`text-lg`) | 700 (bold) | snug (1.25) | Hover → Berry Red | Event and activity card titles |
-| Sub-heading | 28px | 800 (extrabold) | normal | Centered | `"Wat te doen in Haarlem"` |
-| Newsletter Title | 26px | 800 (extrabold) | normal | — | CTA sections |
-| Body | 14px (`text-sm`) | 400 | 1.6 (relaxed) | — | Descriptions, paragraphs |
-| Category Label | 12px (`text-xs`) | 600 (semibold) | normal | Uppercase, wide tracking | `"Festival · Gratis"` |
-| Section Label | 11px | 700 (bold) | normal | Uppercase, widest tracking | `"Elke vrijdag om 15:00"` |
-| Nav Links | 12px (`text-xs`) | 700 (bold) | normal | Uppercase, wider tracking | Header + red category bar |
-| Meta | 13px | 400–600 | normal | — | Dates, locations, prices |
-| Micro | 10px | 400 | normal | Uppercase, widest tracking | Ad labels |
-| Badge | 12px (`text-xs`) | 600–700 | normal | — | Tag pills |
+### Rules
+- No long paragraphs. Ever.
+- Line height: 1.05 for headlines, 1.5 for speech/body
+- Berry's voice uses full sentences, not data points
 
-### Principles
-- **Always bold or extrabold for headings** — Nunito's rounded forms need weight to feel substantial. Never use weight 400 for titles.
-- **Uppercase + tracking for labels** — category labels, nav links, and section labels always use `uppercase tracking-wider` or `tracking-widest` for editorial feel.
-- **Responsive hero type** — use `clamp()` for hero titles to scale fluidly. Never use fixed px for hero-level text.
-- **Hover color shifts** — headings and links transition to Berry Red on hover for interactive warmth.
+## 4. Component System
 
-## 4. Component Stylings
+### A. Berry Zone (ATF — above the fold)
+- Full pastel gradient background (weather-reactive)
+- Blurred white blobs for organic depth
+- Sparkle animations (subtle, 3s cycle)
+- Contains: nav, Berry row, speech bubble, hero card
+- Ends with wave divider SVG curving into content zone
 
-### Buttons
+### B. Berry Row
+- Berry avatar: ~100px, `drop-shadow(0 6px 16px rgba(244,160,156,0.3))`
+- Animated: gentle bob `4s ease-in-out infinite`
+- Next to avatar: vibe label (coral) + headline (dark)
+- Weather chip: frosted glass pill, far right
 
-**Primary (Berry Red)**
-- Background: `#E85A5A`
-- Text: `#FFFFFF`, 14px, font-bold or font-semibold
-- Padding: `px-6 py-2.5` (standard) or `px-7 py-3` (hero)
-- Radius: `rounded-full` (pill shape)
-- Hover: `#D04A4A`
-- Usage: CTAs, newsletter submit, hero "Lees meer"
+### C. Speech Bubble
+- White card, `border-radius: 24px`, shadow `0 2px 16px rgba(0,0,0,0.04)`
+- Triangle pointer `::before` pointing up to Berry
+- Berry speaks in first person with opinions
+- "After" line for the afternoon suggestion (lighter text)
 
-**Filter Pills**
-- Background: `#E85A5A`
-- Text: `#FFFFFF`, 13px, font-bold
-- Padding: `px-6 py-2.5`
-- Radius: `rounded-full`
-- Always pill-shaped, always Berry Red
+### D. Hero Card (Berry's #1)
+- `border-radius: 24px`, shadow `0 4px 24px rgba(0,0,0,0.06)`
+- Image: 280px height, gradient overlay bottom
+- "Berry's #1" tag: coral pill top-left
+- Heart save button: frosted circle top-right
+- Info pills on image: frosted glass `rgba(255,255,255,0.2)`
+- Bottom bar: title + meta left, CTA button right
+- Hover: `translateY(-3px)`, image `scale(1.04)` over 5s
 
-### Cards
+### E. Mood Tiles (below fold)
+- `border-radius: 20px`, unique pastel bg per mood
+- Emoji (28px) + label (13px bold) + subtitle (10px)
+- 3-column grid desktop, 2-column mobile
+- Hover: `translateY(-3px)` + subtle shadow
 
-**Event Card**
-- Background: none (image + text below)
-- Image: `aspect-[3/2]`, `rounded-xl`, `object-cover`
-- Image hover: `scale-[1.03]` with 500ms transition
-- Title: 18px bold, hover → Berry Red
-- Meta: Berry Red category label (uppercase) above title
-- Details: 14px `#444` (date, location)
+### F. Activity Cards
+- `border-radius: 20px`, white bg
+- Shadow: `0 1px 8px rgba(0,0,0,0.04)`
+- Image top (120-140px), optional "Gratis" pill
+- Body: category (coral uppercase), title (bold), location (muted)
+- Hover: lift + shadow increase
+- Heart save button on image
 
-**Activity Card**
-- Background: `#FFFFFF`
-- Radius: `rounded-2xl`
-- Shadow: `0 2px 12px rgba(0,0,0,0.08)`
-- Hover shadow: `0 4px 20px rgba(0,0,0,0.12)`
-- Image: `aspect-[3/2]`, no radius (contained by card)
-- Badge pills below image in `p-4`
-- Subcategory: `#FFD6D6` bg, `#E85A5A` text
-- Age label: `#F0E6E0` bg, `#6B6B6B` text
+### G. Wave Divider
+```html
+<svg viewBox="0 0 1440 50" preserveAspectRatio="none">
+  <path d="M0,18 C320,50 720,0 1440,28 L1440,50 L0,50 Z" fill="#FFF9F0"/>
+</svg>
+```
 
-**Hero Tile (Magazine Grid)**
-- Full-bleed image with gradient overlay
-- Text positioned `absolute bottom-0`, white on dark gradient
-- Category in Berry Red, uppercase, 11–13px bold
-- Title in white, extrabold, responsive clamp sizing
-- Large tile gets "Lees meer" button
-- 3px white gaps between tiles, outer `rounded-2xl`
+## 5. Spacing (8px grid)
+- Section padding: `24–32px`
+- Card gap: `12px`
+- Card internal padding: `14–20px`
+- Berry zone inner: max-width `880px`
+- Content zone: max-width `880px`
 
-### Inputs
-- Background: `#FFFFFF`
-- Border: `1px solid #F0E6E0`
-- Focus border: `#E85A5A`
-- Radius: `rounded-full`
-- Padding: `px-4 py-3`
-- Placeholder: `#999`
+## 6. Motion
+- Berry bob: `4s ease-in-out infinite`, translateY 0→-8px, rotate -1→1deg
+- Sparkle twinkle: `3s ease-in-out infinite`, opacity 0.3→0.8, scale 0.8→1.2
+- Card hover: `translateY(-3px)`, `0.2s ease`
+- Hero image: `scale(1.04)`, `5s ease-out` on hover
+- Weather transition: `0.6s ease` on background gradient
+- CTA hover: `translateY(-1px)`, `0.2s ease`
 
-### Navigation
+## 7. Berry's Voice
+Berry speaks in three modes, mixed per context:
+- **Warm friend:** "Wij zouden de pannenkoeken nemen." Uses "wij", casual.
+- **Confident guide:** "Ga hierheen. Nu. Om 10:00 is het nog rustig."
+- **Playful helper:** Emoji in the "after" line. "pannenkoeken in de duinen 🥞"
 
-**Header**
-- White background, `border-b border-[#E5E5E5]`
-- Berry icon (36px) + logo text left, search + newsletter right
-- Search/newsletter links: 12px bold uppercase, hover → Berry Red
+### Copy rules:
+- First person: Berry says "ik" and "wij"
+- Short sentences. Max 2 lines per thought.
+- Opinions, not descriptions: "Het allerbeste van Haarlem bij regen" not "Vrij toegankelijk museum met..."
+- Vibe labels are lowercase Spotify-style: "zonnige paasmaandag", "binnenblijf-dinsdag"
 
-**Category Bar**
-- Background: `#E85A5A` (full-width red bar)
-- Links: white, 12px bold uppercase, `tracking-wider`
-- Horizontal scrollable with hidden scrollbar
-- Hover: `white/80`
-
-### Berry Mascot
-- Size: 48px (speech bubble) or 36px (newsletter)
-- Animation: gentle bounce (`berry-bounce`, 2.5s ease-in-out infinite)
-- Speech bubble: `#F0ECE8` background, `rounded-2xl`, with CSS triangle pointer
-- Fade-in animation on bubble text
-
-### Section Pattern
-- Heading with red bar: `<span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />` before title text
-- Consistent: 26px extrabold `#1A1A1A`
-- Bottom spacing: `mb-8`
-
-## 5. Layout Principles
-
-### Container & Spacing
-- Max width: `max-w-[1200px]` with `mx-auto`
-- Horizontal padding: `px-5` (mobile), `sm:px-10` (tablet+)
-- Section vertical spacing: `py-16` between major sections, `py-8–10` for lighter breaks
-- Card grid gap: `gap-x-6 gap-y-8`
-
-### Grid Patterns
-- **Hero grid**: `grid-cols-[3fr_1fr]` with 3 stacked rows on right, 3px gaps
-- **Event grid**: `lg:grid-cols-[5fr_2fr]` — content + sidebar ad
-- **Card grids**: `sm:grid-cols-2 lg:grid-cols-3` — responsive 1→2→3 columns
-- **Film + Theater**: `lg:grid-cols-2` — side by side
-
-### Whitespace Philosophy
-- **Magazine pacing**: Large vertical padding between sections creates a leisurely, editorial browsing rhythm. Parents are scanning between kid tasks — the layout should feel calm, not dense.
-- **Image prominence**: Event cards use 3:2 aspect ratios to give photos room to breathe. The hero grid uses near-fullscreen images.
-- **Section separation**: Sections are separated by whitespace, not borders (except header/footer). The red bar + bold title is the only visual section marker.
-
-### Border Radius Scale
-- **Subtle** (default): Image corners on event cards (`rounded-xl` = 12px)
-- **Standard**: Cards, containers, speech bubbles (`rounded-2xl` = 16px)
-- **Pill**: All buttons, inputs, filter tags (`rounded-full`)
-- **Hero container**: `rounded-2xl` on the outer magazine grid
-
-## 6. Depth & Elevation
-
-| Level | Treatment | Use |
-|-------|-----------|-----|
-| Flat (Level 0) | No shadow | Page background, event cards (image + text) |
-| Subtle (Level 1) | `shadow-sm` | Film card, inline containers |
-| Card (Level 2) | `0 2px 12px rgba(0,0,0,0.08)` | Activity cards, elevated containers |
-| Hover (Level 3) | `0 4px 20px rgba(0,0,0,0.12)` | Card hover state |
-
-**Shadow Philosophy**: Berry Kids uses shadows sparingly. Event cards have no shadow — just image + text on white. Activity cards use a soft shadow because they're self-contained containers. The shadow is warm (low opacity black, generous blur) to match the brand's friendly tone. Never use hard or dark shadows.
-
-## 7. Do's and Don'ts
+## 8. Do's and Don'ts
 
 ### Do
-- Use `#1A1A1A` (warm near-black) for text — never pure `#000000`
-- Use Berry Red (`#E85A5A`) for CTAs, nav bar, labels, and accents — it's the one brand color
-- Use Nunito at weight 700–800 for all headings — roundedness needs weight
-- Use `rounded-full` for all buttons and inputs — pill shapes are core
-- Use `rounded-2xl` for cards and containers — generous rounding
-- Use photography as the primary content — images are always the hero
-- Use warm neutrals (`#F0ECE8`, `#FDF1EA`) for surface variation — never cold grays
-- Use the red bar prefix (`h-[3px] w-10 bg-[#E85A5A]`) before section headings
-- Use uppercase + tracking for category labels and nav links
-- Keep the Berry mascot small (36–48px) and subtle
+- Use pastel gradients for the ATF background
+- Keep Berry prominent (~100px) and animated
+- Use organic shapes (blobs, waves, rounded everything)
+- Write like a friend, not a database
+- Use `border-radius: 20-24px` on all cards
+- Use frosted glass (`backdrop-filter: blur`) for overlays
+- Keep shadows very soft (`rgba(0,0,0,0.04-0.06)`)
+- Use `#FFF9F0` cream as page background
 
 ### Don't
-- Don't use pure black (`#000000`) anywhere — always warm near-black
-- Don't use cold grays (`#F0F0F0`, `#E0E0E0`) — use warm variants (`#F0ECE8`, `#F0E6E0`)
-- Don't use squared corners on interactive elements — always rounded
-- Don't make the Berry mascot large or dominant — it's a subtle brand touch
-- Don't use heavy/dark shadows — keep them soft and warm
-- Don't introduce new brand colors beyond the Berry Red system
-- Don't use light font weights (300, 400) for headings — 700 minimum
-- Don't use borders to separate sections — use whitespace and the red bar heading pattern
-- Don't use background colors for full sections — keep the white canvas clean (except nav bar and newsletter)
-- Don't clutter cards with too many badges — max 2–3 pills per card
+- Use pure white (`#FFFFFF`) as page background (use cream)
+- Use pure black (`#000000`) for text (use `#2D2D2D`)
+- Use sharp corners on anything interactive
+- Show long descriptions — tips and opinions only
+- Use the old Berry Red (`#E85A5A`) — replaced by coral `#F4A09C`
+- Use Inter or any generic font — Nunito only
+- Make Berry small (< 72px) — Berry is the personality
+- Create sections that feel like a listing/directory
 
-## 8. Responsive Behavior
+## 9. Responsive
 
-### Breakpoints (Tailwind)
-| Name | Width | Key Changes |
-|------|-------|-------------|
-| Base | <640px | Single column, `px-5`, compact hero |
-| sm | 640px+ | 2-column grids, `px-10`, expanded spacing |
-| md | 768px+ | Hero grid activates (large + 3 side tiles) |
-| lg | 1024px+ | 3-column card grids, sidebar layout |
+### Mobile
+- Berry avatar: 72px
+- Hero image: 200px height
+- Mood grid: 2 columns
+- Alt cards: 1 column
+- Hide weather chip and nav links
+- Speech text: 14px
 
-### Collapsing Strategy
-- **Hero grid**: `[3fr_1fr]` mosaic → stacked (main image + 3 below)
-- **Card grids**: 3 → 2 → 1 columns
-- **Event section**: Content + sidebar → full-width content only
-- **Category bar**: Horizontal scroll with hidden scrollbar at all sizes
-- **Film + Theater**: Side by side → stacked
-
-### Touch Targets
-- Buttons: generous padding (`px-6 py-2.5` minimum)
-- Cards: entire card is tap target (wrapped in Link/anchor)
-- Nav links: adequate spacing (`gap-6`) in scrollable bar
-
-## 9. Agent Prompt Guide
-
-### Quick Color Reference
-- Page background: `#FFFFFF`
-- Text: `#1A1A1A`
-- Brand accent: `#E85A5A`
-- Brand hover: `#D04A4A`
-- Warm surface: `#F0ECE8`
-- Warm border: `#F0E6E0`
-- Meta text: `#666`
-- Caption: `#6B6B6B`
-
-### Example Component Prompts
-- "Create an event card: no background/shadow. 3:2 aspect image with rounded-xl, object-cover, scale-[1.03] on hover. Below: Berry Red category label (12px semibold uppercase), then 18px bold title (hover → Berry Red), then 14px #444 date/location."
-- "Create a section heading: 26px extrabold #1A1A1A. Prefix with a span: h-[3px] w-10 bg-[#E85A5A] inline-block align-middle mr-3. Bottom margin mb-8."
-- "Create a CTA button: #E85A5A background, white text, rounded-full, px-6 py-2.5, 14px font-bold. Hover: #D04A4A."
-- "Create a newsletter block: #FAFAFA background, rounded-2xl, p-8. Centered content: 11px Berry Red uppercase label, 26px extrabold title, 14px #666 subtitle, email input (rounded-full, #F0E6E0 border) + Berry Red submit button."
-- "Create a hero tile: full-bleed image, gradient overlay (to top, rgba(0,0,0,0.72) → transparent). Absolute bottom text: 13px uppercase Berry Red category, then clamp(1.5rem,3.5vw,2.6rem) extrabold white title, then Berry Red rounded-full 'Lees meer' button."
-
-### Iteration Guide
-1. Start with white canvas — photos provide all visual richness
-2. Berry Red (`#E85A5A`) is the only accent — use it for CTAs, labels, nav, and section markers
-3. Warm near-black (`#1A1A1A`) for text — the warmth matters
-4. Warm neutrals for surfaces — `#F0ECE8` not `#F0F0F0`
-5. Generous radius everywhere: `rounded-full` buttons, `rounded-2xl` cards
-6. Nunito at 700–800 for headings — round type needs weight
-7. Photography is hero — 3:2 aspect ratio, object-cover, scale on hover
-8. Magazine rhythm — big whitespace between sections, editorial pacing
-9. Berry mascot is a wink, not a shout — 36–48px, gentle bounce
+### Desktop
+- Berry avatar: 100px
+- Hero image: 280px height
+- Mood grid: 3 columns
+- Alt cards: 2 columns
+- Show weather chip and nav links

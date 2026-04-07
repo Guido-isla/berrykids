@@ -7,14 +7,15 @@ import EventCard from "@/components/EventCard";
 import FilmVanDeWeek from "@/components/FilmVanDeWeek";
 import TheaterAgenda from "@/components/TheaterAgenda";
 import ActivityCard from "@/components/ActivityCard";
-import SituationHero from "@/components/SituationHero";
+import BerryZone from "@/components/BerryZone";
+import MoodTiles from "@/components/MoodTiles";
+import SaveButton from "@/components/SaveButton";
 import { getScrapedEvents, getDayPlanEvents } from "@/data/events-loader";
 import { resolveEventImages } from "@/lib/photos";
 import { getSiteContext } from "@/lib/context";
 import { activities } from "@/data/activities";
 import { resolveEventImages as resolveAct } from "@/lib/photos";
 import { generateBerryDayPlan } from "@/lib/berry-brain";
-import { formatShortDate } from "@/lib/dates";
 
 // Revalidate every 30 minutes — keeps weather, events and dagplan fresh
 export const revalidate = 1800;
@@ -24,277 +25,255 @@ export default async function Home() {
   const todayEvents = getDayPlanEvents();
   const ctx = await getSiteContext();
 
-  // Hero + Vandaag: only today/weekend events with images
   const todayWithImg = resolveEventImages(todayEvents).filter((e) => e.image !== "/berry-icon.png");
-  // Fallback section + lower page: all upcoming events
   const allWithImg = resolveEventImages(allEvents).filter((e) => e.image !== "/berry-icon.png");
 
   const outdoorEvents = todayWithImg.filter((e) => !e.indoor);
   const indoorEvents = todayWithImg.filter((e) => e.indoor);
 
-  // ===== DECISION ENGINE =====
-  // Berry picks based on situation, not taxonomy
   const preferIndoor = ctx.berryPick.preferIndoor;
   const primaryEvents = preferIndoor
     ? [...indoorEvents, ...outdoorEvents]
     : [...outdoorEvents, ...indoorEvents];
   const topPick = primaryEvents[0] || todayWithImg[0];
-  const alternatives = primaryEvents.slice(1, 4);
 
-  // Hero slides: top pick first, then alternatives — today only
-  const heroSlides = [topPick, ...alternatives].filter(Boolean).slice(0, 4).map((e) => ({
-    slug: e.slug,
-    title: e.title,
-    category: e.category,
-    image: e.resolvedImage || e.image,
-    location: e.location,
-    free: e.free,
-  }));
-
-  // Berry's day plan from berry-brain.ts
   const dayPlanEvents = getDayPlanEvents();
   const dayPlan = generateBerryDayPlan(ctx, dayPlanEvents, activities, ctx.season.suggestions);
 
-  // Situational heading — Berry decides, not the user
-  let situationHeading = `${ctx.weather.current.temp}°C ${ctx.weather.current.icon} — ${ctx.berryPick.reason.toLowerCase()}`;
-  if (ctx.calendar.holidayName) {
-    situationHeading = `${ctx.calendar.holidayName} · ${ctx.weather.current.temp}°C ${ctx.weather.current.icon}`;
-  } else if (ctx.calendar.isSchoolVacation) {
-    situationHeading = `${ctx.calendar.vacationName} · ${ctx.weather.current.temp}°C ${ctx.weather.current.icon}`;
-  }
-
-  // Tomorrow flip — use forecast to create urgency
   const tomorrow = ctx.weather.forecast[1];
   let tomorrowFlip: string | null = null;
   if (tomorrow) {
     const todayRainy = ctx.weather.isRainy;
     const tomorrowRainy = tomorrow.isRainy;
     if (!todayRainy && tomorrowRainy) {
-      tomorrowFlip = `${tomorrow.icon} Morgen regent het — pak vandaag mee`;
+      tomorrowFlip = `🌧️ Morgen regent het — pak vandaag mee`;
     } else if (todayRainy && !tomorrowRainy) {
-      tomorrowFlip = `${tomorrow.icon} Morgen ${tomorrow.tempMax}°C en droog — bewaar buiten voor morgen`;
+      tomorrowFlip = `☀️ Morgen ${tomorrow.tempMax}°C en droog — bewaar buiten voor morgen`;
     } else if (!todayRainy && !tomorrowRainy && tomorrow.tempMax >= 18 && ctx.weather.current.temp < 16) {
-      tomorrowFlip = `${tomorrow.icon} Morgen ${tomorrow.tempMax}°C — nog mooier dan vandaag`;
+      tomorrowFlip = `☀️ Morgen ${tomorrow.tempMax}°C — nog mooier dan vandaag`;
     }
   }
 
-  // Fallback: opposite weather direction from today's events, or upcoming if few today
   const allOutdoor = allWithImg.filter((e) => !e.indoor);
   const allIndoor = allWithImg.filter((e) => e.indoor);
-  const fallbackEvents = preferIndoor
-    ? allOutdoor.slice(0, 3)
-    : allIndoor.slice(0, 3);
-  const fallbackLabel = preferIndoor
-    ? "Als het toch opklaart"
-    : "Als het weer omslaat";
+  const fallbackEvents = preferIndoor ? allOutdoor.slice(0, 3) : allIndoor.slice(0, 3);
+  const fallbackLabel = preferIndoor ? "Als het toch opklaart" : "Als het weer omslaat";
 
-  // Activities for lower sections
-  const sportAct = resolveAct(activities.filter((a) => a.category === "sport").slice(0, 3));
-  const cultAct = resolveAct(activities.filter((a) => a.category === "cultuur" || a.category === "indoor").slice(0, 3));
+  const sportAct = resolveAct(activities.filter((a) => a.category === "sport" && a.verified).slice(0, 3));
+  const cultAct = resolveAct(activities.filter((a) => (a.category === "cultuur" || a.category === "indoor") && a.verified).slice(0, 3));
 
-  // "Ook goed vandaag" — 3 alternatives (mix of events + activities)
-  const alsoGood = primaryEvents.slice(1, 4);
-  // If fewer than 3 events, fill with weather-matched activities
+  const planLines = dayPlan.message.split("\n\n").filter(Boolean);
+
+  // Also good today — 2 alts
+  const alsoGood = primaryEvents.slice(1, 3);
   const verifiedActs = resolveAct(
     activities.filter((a) => a.verified && (!a.availableMonths || a.availableMonths.includes(new Date().getMonth() + 1)))
   );
   const matchedActs = preferIndoor
     ? verifiedActs.filter((a) => a.category === "indoor" || a.category === "cultuur")
     : verifiedActs.filter((a) => a.category === "natuur" || a.category === "dieren" || a.category === "sport");
-  while (alsoGood.length < 3 && matchedActs.length > 0) {
+  while (alsoGood.length < 2 && matchedActs.length > 0) {
     const act = matchedActs.shift()!;
     if (!alsoGood.some((e) => e.title === act.title)) {
       alsoGood.push({ ...act, date: "", time: "", indoor: act.category === "indoor" || act.category === "cultuur", slug: act.slug, image: act.resolvedImage || act.image } as typeof primaryEvents[0]);
     }
   }
 
-  // Parse day plan message into structured lines
-  const planLines = dayPlan.message.split("\n\n").filter(Boolean);
-
-  // Build unified item list for SituationHero (events + activities)
-  const heroItems = [
-    ...primaryEvents.map((e) => ({
-      slug: e.slug,
-      title: e.title,
-      category: e.category,
-      location: e.location,
-      free: e.free,
-      indoor: e.indoor,
-      image: e.resolvedImage || e.image,
-      subcategory: e.category,
-      isEvent: true,
-    })),
-    ...verifiedActs.map((a) => ({
-      slug: a.slug,
-      title: a.title,
-      category: a.category,
-      location: a.location,
-      free: a.free,
-      indoor: a.category === "indoor" || a.category === "cultuur",
-      image: a.resolvedImage || a.image,
-      subcategory: a.subcategory,
-      isEvent: false,
-    })),
-  ];
-  const defaultSituation = ctx.weather.isRainy ? "binnen" as const : ctx.weather.isGoodWeather ? "buiten" as const : "berry" as const;
+  const weatherMood = ctx.weather.isRainy ? "rainy" as const : ctx.weather.current.temp < 8 ? "cold" as const : "sunny" as const;
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
+    <div className="min-h-screen">
 
-      {/* ===== ATF — Berry's decision + situation pills + hero ===== */}
-      <section className="mx-auto max-w-[1200px] px-5 pt-5 sm:px-10">
-        {/* Berry message row */}
-        <div className="mb-4 flex items-center gap-3">
-          <div className="animate-berry-bounce shrink-0">
-            <Image src="/berry-wink.png" alt="" width={56} height={56} className="h-12 w-auto" />
-          </div>
-          <div className="flex-1">
-            <div className="flex items-center gap-2">
-              <p className="text-[12px] font-semibold lowercase tracking-wide text-[#E85A5A]">{dayPlan.vibe}</p>
-              <span className="inline-flex items-center gap-1 rounded-full bg-[#F0ECE8] px-2.5 py-0.5 text-[11px] font-bold text-[#888]">
-                {ctx.weather.current.icon} {ctx.weather.current.temp}°C
-              </span>
+      {/* ===== BERRY ZONE — pastel ATF ===== */}
+      <BerryZone mood={weatherMood}>
+        <Header />
+
+        <div className="mx-auto max-w-[880px] px-5 pb-4 sm:px-6">
+
+          {/* Berry row — avatar + vibe + headline + weather */}
+          <div className="mb-3 flex items-center gap-3">
+            <div className="animate-berry-bounce shrink-0" style={{ filter: "drop-shadow(0 6px 16px rgba(244,160,156,0.3))" }}>
+              <Image src="/berry-wink.png" alt="Berry" width={100} height={100} className="h-[72px] w-auto sm:h-[100px]" />
             </div>
-            <h1 className="text-[clamp(1.4rem,2.5vw,1.8rem)] font-extrabold tracking-tight text-[#1A1A1A]">
-              Doe dit vandaag
-            </h1>
+            <div className="flex-1">
+              <p className="text-[13px] font-bold text-[#F4A09C]">{dayPlan.vibe}</p>
+              <h1 className="text-[clamp(24px,4vw,34px)] font-black tracking-tight text-[#2D2D2D]" style={{ lineHeight: 1.05 }}>
+                Doe dit vandaag
+              </h1>
+            </div>
+            <div className="hidden items-center gap-1.5 rounded-full bg-white/50 px-3.5 py-1.5 text-[13px] font-bold text-[#2D2D2D] shadow-sm backdrop-blur-sm sm:flex">
+              {ctx.weather.current.icon} {ctx.weather.current.temp}°C
+            </div>
           </div>
-        </div>
 
-        {/* Berry dagplan — compact */}
-        <div className="mb-4 space-y-1 rounded-xl bg-[#F0ECE8] px-4 py-3">
-          {planLines.slice(0, 3).map((line, i) => {
-            const parts = line.split(/\[([^\]]+)\]\(([^)]+)\)/);
-            return (
-              <p key={i} className="text-[13px] leading-relaxed text-[#444]">
-                {parts.length === 1 ? (
-                  line
-                ) : (
-                  parts.map((part, j) => {
-                    if (j % 3 === 1) {
-                      const href = parts[j + 1];
-                      return (
-                        <Link key={j} href={href} className="font-bold text-[#E85A5A] hover:underline">
-                          {part}
-                        </Link>
-                      );
-                    }
-                    if (j % 3 === 2) return null;
-                    return <span key={j}>{part}</span>;
-                  })
-                )}
-              </p>
-            );
-          })}
-          {tomorrowFlip && (
-            <p className="text-[12px] font-semibold text-[#888]">{tomorrowFlip}</p>
+          {/* Speech bubble */}
+          <div className="relative mb-4 rounded-[24px] bg-white px-5 py-4 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
+            <div className="absolute -top-2 left-12 h-4 w-4 rotate-45 bg-white" />
+            <div className="relative space-y-1">
+              {planLines.slice(0, 3).map((line, i) => {
+                const parts = line.split(/\[([^\]]+)\]\(([^)]+)\)/);
+                return (
+                  <p key={i} className="text-[15px] font-semibold leading-relaxed text-[#3D3D3D]">
+                    {parts.length === 1 ? (
+                      line
+                    ) : (
+                      parts.map((part, j) => {
+                        if (j % 3 === 1) {
+                          const href = parts[j + 1];
+                          return (
+                            <Link key={j} href={href} className="font-extrabold text-[#F4A09C] hover:underline">
+                              {part}
+                            </Link>
+                          );
+                        }
+                        if (j % 3 === 2) return null;
+                        return <span key={j}>{part}</span>;
+                      })
+                    )}
+                  </p>
+                );
+              })}
+              {tomorrowFlip && (
+                <p className="text-[12px] font-semibold text-[#BBB]">{tomorrowFlip}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Hero card — Berry's #1 */}
+          {topPick && (
+            <Link href={`/event/${topPick.slug}`} className="group block">
+              <div className="overflow-hidden rounded-[24px] bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-transform duration-300 hover:-translate-y-1">
+                <div className="relative h-[200px] overflow-hidden sm:h-[280px]">
+                  <Image
+                    src={topPick.resolvedImage || topPick.image}
+                    alt={topPick.title}
+                    fill
+                    sizes="(max-width: 880px) 100vw, 880px"
+                    className="object-cover transition-transform duration-[5s] ease-out group-hover:scale-[1.04]"
+                    priority
+                  />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 45%)" }} />
+                  <div className="absolute left-3.5 top-3.5 rounded-full bg-[#F4A09C] px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white">
+                    Berry&apos;s #1
+                  </div>
+                  <SaveButton slug={topPick.slug} />
+                  <div className="absolute bottom-3.5 left-3.5 flex gap-1.5">
+                    {topPick.free && <span className="rounded-full bg-white/20 px-2.5 py-1 text-[11px] font-bold text-white backdrop-blur-sm">Gratis</span>}
+                    <span className="rounded-full bg-white/20 px-2.5 py-1 text-[11px] font-bold text-white backdrop-blur-sm">{topPick.ageLabel}</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between gap-3 px-5 py-4">
+                  <div>
+                    <h2 className="text-[18px] font-extrabold tracking-tight text-[#2D2D2D]">{topPick.title}</h2>
+                    <p className="mt-0.5 text-[12px] font-semibold text-[#BBB]">📍 {topPick.location}</p>
+                  </div>
+                  <span className="shrink-0 rounded-full bg-[#F4A09C] px-5 py-2.5 text-[13px] font-bold text-white transition-colors group-hover:bg-[#E88E8A]">
+                    Bekijk →
+                  </span>
+                </div>
+              </div>
+            </Link>
           )}
-        </div>
 
-        {/* Situation pills + hero card + alternatives */}
-        <SituationHero
-          allItems={heroItems}
-          defaultSituation={defaultSituation}
-          whyNow={dayPlan.whyNow}
-        />
-
-        <p className="mt-3 text-[11px] text-[#BBB]">Nieuw weekendplan vrijdag om 15:00</p>
-      </section>
-
-      {/* ===== VANDAAG — Berry's top picks, no explanation ===== */}
-      <section className="bg-[#FAF8F6] py-12 sm:py-20">
-        <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
-          <h2 className="mb-8 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
-            <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
-            Vandaag
-          </h2>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[5fr_2fr]">
-            <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-2 sm:gap-x-6">
-              {primaryEvents.slice(1, 7).map((e) => (
-                <EventCard key={e.slug} event={e} />
+          {/* Also good — compact row */}
+          {alsoGood.length > 0 && (
+            <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+              {alsoGood.slice(0, 2).map((e) => (
+                <Link key={e.slug} href={e.date ? `/event/${e.slug}` : `/activiteiten/${e.slug}`} className="group flex gap-3 rounded-[20px] bg-white p-3 shadow-[0_1px_8px_rgba(0,0,0,0.04)] transition-all hover:-translate-y-0.5 hover:shadow-md">
+                  <div className="relative h-[60px] w-[60px] shrink-0 overflow-hidden rounded-[12px] sm:h-[72px] sm:w-[72px]">
+                    <Image src={e.resolvedImage || e.image} alt={e.title} fill sizes="72px" className="object-cover" />
+                    {e.free && <span className="absolute bottom-1 left-1 rounded-full bg-[#7BC67F] px-1.5 py-0.5 text-[9px] font-bold text-white">Gratis</span>}
+                  </div>
+                  <div className="flex min-w-0 flex-col justify-center">
+                    <p className="text-[10px] font-bold uppercase tracking-wide text-[#F4A09C]">{e.category}</p>
+                    <h3 className="text-[14px] font-extrabold leading-snug tracking-tight text-[#2D2D2D] group-hover:text-[#F4A09C]">{e.title}</h3>
+                    <p className="truncate text-[11px] text-[#BBB]">{e.location}</p>
+                  </div>
+                </Link>
               ))}
             </div>
-            <div className="hidden lg:block">
-              <p className="mb-1.5 text-[10px] uppercase tracking-widest text-[#CCC]">Advertentie</p>
-              <div className="flex h-[600px] items-center justify-center rounded bg-[#F0ECE8] text-[13px] text-[#CCC]">
-                Advertentie
-              </div>
-            </div>
-          </div>
+          )}
+
+          <p className="mt-3 text-center text-[11px] font-semibold text-[#2D2D2D]/15">
+            Nieuw weekendplan vrijdag om 15:00
+          </p>
         </div>
+      </BerryZone>
+
+      {/* ===== MOOD TILES ===== */}
+      <section className="mx-auto max-w-[880px] px-5 py-8 sm:px-6 sm:py-10">
+        <p className="mb-3 text-[11px] font-bold uppercase tracking-[1.5px] text-[#D4C8BE]">Vandaag voelt als</p>
+        <MoodTiles />
       </section>
 
+      {/* ===== VANDAAG — more events ===== */}
+      {primaryEvents.length > 2 && (
+        <section className="mx-auto max-w-[880px] px-5 pb-10 sm:px-6">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[1.5px] text-[#D4C8BE]">Ook goed vandaag</p>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {primaryEvents.slice(2, 6).map((e) => (
+              <EventCard key={e.slug} event={e} />
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* ===== NEWSLETTER ===== */}
-      <section className="mx-auto max-w-[1200px] px-5 py-12 sm:py-20 sm:px-10">
-        <div className="rounded-2xl bg-[#FAFAFA] p-8 sm:p-12">
-          <div className="mx-auto max-w-lg text-center">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-[#E85A5A]">Elke vrijdag om 15:00</p>
-            <h2 className="mt-2 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">Weekend gepland in 2 minuten</h2>
-            <p className="mt-2 text-[14px] text-[#666]">De 5 leukste tips. Geen zoeken. Gewoon gaan.</p>
+      <section className="mx-auto max-w-[880px] px-5 py-10 sm:px-6">
+        <div className="rounded-[24px] bg-white p-8 shadow-[0_2px_16px_rgba(0,0,0,0.04)] sm:p-10">
+          <div className="mx-auto max-w-md text-center">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-[#F4A09C]">Elke vrijdag om 15:00</p>
+            <h2 className="mt-2 text-[24px] font-extrabold tracking-tight text-[#2D2D2D]">Weekend gepland in 2 minuten</h2>
+            <p className="mt-2 text-[14px] text-[#BBB]">De 5 leukste tips. Geen zoeken. Gewoon gaan.</p>
             <div className="mt-5"><NewsletterForm /></div>
-            <p className="mt-2 text-[12px] text-[#999]">2.340+ ouders · gratis</p>
+            <p className="mt-2 text-[12px] text-[#D4C8BE]">2.340+ ouders · gratis</p>
           </div>
         </div>
       </section>
 
       {/* ===== FALLBACK — if weather changes ===== */}
       {fallbackEvents.length > 0 && (
-        <section className="mx-auto max-w-[1200px] px-5 py-12 sm:py-20 sm:px-10">
-          <h2 className="mb-8 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
-            <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
-            {fallbackLabel}
-          </h2>
-          <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+        <section className="mx-auto max-w-[880px] px-5 pb-10 sm:px-6">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[1.5px] text-[#D4C8BE]">{fallbackLabel}</p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {fallbackEvents.map((e) => <EventCard key={e.slug + "-fb"} event={e} />)}
           </div>
         </section>
       )}
 
       {/* ===== FILM + THEATER ===== */}
-      <div className="mx-auto max-w-[1200px] px-5 py-12 sm:py-20 sm:px-10">
-        <div className="grid gap-8 lg:grid-cols-2">
+      <div className="mx-auto max-w-[880px] px-5 py-10 sm:px-6">
+        <div className="grid gap-6 lg:grid-cols-2">
           <FilmVanDeWeek />
           <TheaterAgenda />
         </div>
       </div>
 
-      {/* ===== AD ===== */}
-      <div className="mx-auto max-w-[1200px] px-5 py-10 sm:px-10">
-        <p className="mb-1.5 text-center text-[10px] uppercase tracking-widest text-[#CCC]">Advertentie</p>
-        <div className="flex h-[90px] items-center justify-center rounded bg-[#F5F5F5] text-[13px] text-[#CCC]">Advertentieruimte</div>
-      </div>
-
-      {/* ===== MEER ONTDEKKEN — activities, demoted ===== */}
-      <section className="bg-[#FAF8F6] py-12 sm:py-20">
-        <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
-          <h2 className="mb-8 text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">
-            <span className="mr-3 inline-block h-[3px] w-10 align-middle bg-[#E85A5A]" />
-            Meer ontdekken
-          </h2>
-          <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-            {[...sportAct, ...cultAct].slice(0, 6).map((a) => <ActivityCard key={a.slug} activity={a} />)}
-          </div>
+      {/* ===== MEER ONTDEKKEN ===== */}
+      <section className="mx-auto max-w-[880px] px-5 pb-10 sm:px-6">
+        <p className="mb-3 text-[11px] font-bold uppercase tracking-[1.5px] text-[#D4C8BE]">Meer ontdekken</p>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {[...sportAct, ...cultAct].slice(0, 6).map((a) => <ActivityCard key={a.slug} activity={a} />)}
         </div>
       </section>
 
       {/* ===== MEIVAKANTIE ===== */}
-      <section className="mx-auto max-w-[1200px] px-5 py-12 sm:py-20 sm:px-10">
-        <Link href="/vakanties" className="group block rounded-2xl bg-[#1A1A1A] p-8 text-white hover:bg-[#2A2A2A] sm:p-10">
-          <p className="text-[11px] font-bold uppercase tracking-widest text-[#E85A5A]">26 april – 9 mei</p>
-          <h2 className="mt-2 text-[26px] font-extrabold tracking-tight">Meivakantie — jouw weekplan</h2>
-          <p className="mt-2 max-w-md text-[14px] text-white/60">Dagplannen, surfcamps en meer.</p>
-          <span className="mt-4 inline-block text-[14px] font-bold text-[#E85A5A]">Bekijk dagplannen →</span>
+      <section className="mx-auto max-w-[880px] px-5 pb-10 sm:px-6">
+        <Link href="/vakanties" className="group block rounded-[24px] bg-[#2D2D2D] p-7 text-white transition-colors hover:bg-[#3D3D3D] sm:p-9">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-[#F4A09C]">26 april – 9 mei</p>
+          <h2 className="mt-2 text-[24px] font-extrabold tracking-tight">Meivakantie — jouw weekplan</h2>
+          <p className="mt-2 max-w-md text-[14px] text-white/40">Dagplannen, surfcamps en meer.</p>
+          <span className="mt-4 inline-block text-[14px] font-bold text-[#F4A09C]">Bekijk dagplannen →</span>
         </Link>
       </section>
 
       {/* ===== BOTTOM NEWSLETTER ===== */}
-      <section id="newsletter" className="border-t border-black/[0.06] bg-[#FAF8F6]">
-        <div className="mx-auto max-w-[1200px] px-5 py-16 sm:px-10">
+      <section id="newsletter" className="border-t border-[#F0ECE8]">
+        <div className="mx-auto max-w-[880px] px-5 py-14 sm:px-6">
           <div className="mx-auto max-w-md text-center">
-            <Image src="/berry-wink.png" alt="" width={36} height={36} className="mx-auto mb-3 h-9 w-auto" />
-            <h2 className="text-[26px] font-extrabold tracking-tight text-[#1A1A1A]">Weekend sorted</h2>
-            <p className="mt-1 text-[14px] text-[#666]">Elke vrijdag om 15:00. 5 tips. Klaar.</p>
+            <Image src="/berry-wink.png" alt="" width={48} height={48} className="mx-auto mb-3 h-12 w-auto" />
+            <h2 className="text-[24px] font-extrabold tracking-tight text-[#2D2D2D]">Weekend sorted</h2>
+            <p className="mt-1 text-[14px] text-[#BBB]">Elke vrijdag om 15:00. 5 tips. Klaar.</p>
             <div className="mt-5"><NewsletterForm /></div>
           </div>
         </div>

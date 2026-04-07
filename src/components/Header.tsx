@@ -9,46 +9,33 @@ export default function Header() {
   const [query, setQuery] = useState("");
 
   return (
-    <>
-      {/* Top nav */}
-      <header className="border-b border-black/[0.06]">
-        <div className="mx-auto flex max-w-[1200px] items-center justify-between px-5 py-2.5">
-          <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center gap-2">
-              <Image src="/berry-icon.png" alt="" width={48} height={48} className="h-12 w-auto" />
-              <div>
-                <Image src="/logo-text.png" alt="Berry Kids" width={100} height={28} className="h-[24px] w-auto" />
-                <p className="text-[10px] font-bold uppercase tracking-wider text-[#E85A5A]">Haarlem e.o.</p>
-              </div>
-            </Link>
-          </div>
-          <div className="flex items-center gap-5">
-            {searchOpen ? (
-              <form className="flex items-center gap-2" onSubmit={(e) => { e.preventDefault(); window.location.href = `/?q=${encodeURIComponent(query)}`; }}>
-                <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Zoeken..." autoFocus className="w-32 sm:w-48 border-b-2 border-[#1A1A1A] bg-transparent px-1 py-1 text-sm outline-none" />
-                <button type="button" onClick={() => { setSearchOpen(false); setQuery(""); }} className="text-[#666]">✕</button>
-              </form>
-            ) : (
-              <button onClick={() => setSearchOpen(true)} className="text-xs font-bold uppercase tracking-wider text-[#1A1A1A] hover:text-[#E85A5A]">
+    <header className="relative z-10">
+      <div className="mx-auto flex max-w-[880px] items-center justify-between px-5 py-3 sm:px-6">
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/berry-icon.png" alt="" width={36} height={36} className="h-8 w-auto" />
+          <span className="text-[16px] font-extrabold text-[#F4A09C]">Berry Kids</span>
+        </Link>
+        <div className="flex items-center gap-4">
+          {searchOpen ? (
+            <form className="flex items-center gap-2" onSubmit={(e) => { e.preventDefault(); window.location.href = `/?q=${encodeURIComponent(query)}`; }}>
+              <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Zoeken..." autoFocus className="w-32 sm:w-40 border-b-2 border-[#F4A09C] bg-transparent px-1 py-1 text-sm outline-none" />
+              <button type="button" onClick={() => { setSearchOpen(false); setQuery(""); }} className="text-[#BBB]">✕</button>
+            </form>
+          ) : (
+            <>
+              <Link href="/activiteiten" className="hidden text-[12px] font-bold text-[#2D2D2D]/25 hover:text-[#F4A09C] sm:inline">
+                Activiteiten
+              </Link>
+              <Link href="/vakanties" className="hidden text-[12px] font-bold text-[#2D2D2D]/25 hover:text-[#F4A09C] sm:inline">
+                Vakanties
+              </Link>
+              <button onClick={() => setSearchOpen(true)} className="text-[12px] font-bold text-[#2D2D2D]/25 hover:text-[#F4A09C]">
                 Zoeken
               </button>
-            )}
-            <a href="#newsletter" className={`text-xs font-bold uppercase tracking-wider text-[#1A1A1A] hover:text-[#E85A5A] ${searchOpen ? "hidden sm:inline" : ""}`}>
-              Nieuwsbrief
-            </a>
-          </div>
+            </>
+          )}
         </div>
-      </header>
-
-      {/* Category bar — red like Time Out */}
-      <nav className="bg-[#E85A5A]">
-        <div className="mx-auto flex max-w-[1200px] items-center gap-6 overflow-x-auto px-5 py-2 text-xs font-bold uppercase tracking-wider text-white scrollbar-none">
-          <Link href="/" className="shrink-0 hover:text-white/80">Dit weekend</Link>
-          <Link href="/activiteiten" className="shrink-0 hover:text-white/80">Activiteiten</Link>
-          <Link href="/vakanties" className="shrink-0 hover:text-white/80">Vakanties</Link>
-          <Link href="/insturen" className="shrink-0 hover:text-white/80">Event insturen</Link>
-        </div>
-      </nav>
-    </>
+      </div>
+    </header>
   );
 }

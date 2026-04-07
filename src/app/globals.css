@@ -10,8 +10,8 @@ html {
 }
 
 body {
-  background: #FFFFFF;
-  color: #1A1A1A;
+  background: #FFF9F0;
+  color: #2D2D2D;
   font-family: var(--font-sans);
   line-height: 1.6;
   overflow-x: hidden;
@@ -19,7 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Hide scrollbar on filter row */
+/* Hide scrollbar on horizontal scrolls */
 .scrollbar-none {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -33,7 +33,6 @@ body {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
 .animate-ticker {
   animation: ticker 30s linear infinite;
 }
@@ -41,13 +40,19 @@ body {
   animation-play-state: paused;
 }
 
-/* Berry mascot bounce */
-@keyframes berry-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+/* Berry mascot bob */
+@keyframes berry-bob {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
 }
 .animate-berry-bounce {
-  animation: berry-bounce 2.5s ease-in-out infinite;
+  animation: berry-bob 4s ease-in-out infinite;
+}
+
+/* Sparkle twinkle */
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 0.7; transform: scale(1.2); }
 }
 
 /* Ken Burns — subtle zoom on hero slides */
