@@ -12,8 +12,11 @@ export default function Header() {
     <header className="relative z-10">
       <div className="mx-auto flex max-w-[880px] items-center justify-between px-5 py-3 sm:px-6">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/berry-icon.png" alt="" width={36} height={36} className="h-8 w-auto" />
-          <span className="text-[16px] font-extrabold text-[#F4A09C]">Berry Kids</span>
+          <Image src="/berry-icon.png" alt="" width={40} height={40} className="h-9 w-auto" />
+          <div>
+            <span className="block text-[16px] font-extrabold leading-tight text-[#F4A09C]">Berry Kids</span>
+            <span className="block text-[8px] font-bold uppercase tracking-[1.5px] text-[#F4A09C]/50">Haarlem e.o.</span>
+          </div>
         </Link>
         <div className="flex items-center gap-4">
           {searchOpen ? (
