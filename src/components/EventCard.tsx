@@ -10,7 +10,7 @@ type EventWithImage = Event & {
   isNew?: boolean;
 };
 
-export default function EventCard({ event }: { event: EventWithImage }) {
+export default function EventCard({ event, berryTip }: { event: EventWithImage; berryTip?: string }) {
   const src = event.resolvedImage || event.image;
 
   return (
@@ -41,6 +41,11 @@ export default function EventCard({ event }: { event: EventWithImage }) {
           <p className="mt-1 text-sm text-[#444]">
             {formatShortDate(event.date)} · {event.location}
           </p>
+          {berryTip && (
+            <p className="mt-1.5 text-[12px] font-semibold text-[#F4A09C]">
+              🍓 {berryTip}
+            </p>
+          )}
         </div>
       </article>
     </Link>

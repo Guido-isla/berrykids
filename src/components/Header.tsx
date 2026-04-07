@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header className="relative z-10">
-      <div className="mx-auto flex max-w-[880px] items-center justify-between px-5 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-[1320px] items-center justify-between px-5 py-4 sm:px-8 sm:py-5">
         <Link href="/" className="flex items-center gap-2.5">
           <Image src="/berry-icon.png" alt="" width={40} height={40} className="h-9 w-auto" />
           <span className="text-[16px] font-extrabold text-[#F4A09C]">Berry Kids</span>
@@ -36,6 +36,10 @@ export default function Header() {
               <button onClick={() => setSearchOpen(true)} className="text-[12px] font-bold text-[#2D2D2D]/25 hover:text-[#F4A09C]">
                 Zoeken
               </button>
+              <span className="ml-2 flex items-center rounded-full border border-[#E8E0D8] text-[10px] font-bold text-[#6B6B6B]">
+                <span className="rounded-full bg-[#F4A09C] px-2 py-1 text-white">NL</span>
+                <span className="px-2 py-1 opacity-50">EN</span>
+              </span>
             </>
           )}
         </div>

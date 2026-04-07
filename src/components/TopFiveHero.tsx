@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SaveButton from "./SaveButton";
+import WeatherChip from "./WeatherChip";
 
 export type TopFivePick = {
   slug: string;
@@ -40,12 +41,21 @@ const NUM_COLORS = [
   "bg-[#F0ECE8] text-[#6B6B6B]",
 ];
 
+type ForecastDay = {
+  icon: string;
+  day: string;
+  tempMax: number;
+  isRainy: boolean;
+};
+
 export default function TopFiveHero({
   picksByMood,
   vibe,
   weatherIcon,
   weatherTemp,
   weatherLabel,
+  weatherReason,
+  weatherForecast,
   totalActivities,
 }: {
   picksByMood: Record<MoodKey, TopFivePick[]>;
@@ -53,6 +63,8 @@ export default function TopFiveHero({
   weatherIcon: string;
   weatherTemp: number;
   weatherLabel: string;
+  weatherReason: string;
+  weatherForecast: ForecastDay[];
   totalActivities: number;
 }) {
   const [mood, setMood] = useState<MoodKey>("berry");
@@ -116,12 +128,23 @@ export default function TopFiveHero({
         </div>
       </div>
 
-      {/* ===== HERO ===== */}
+      {/* ===== WEATHER + HERO ===== */}
       <div
         className="mx-auto max-w-[1320px] px-5 sm:px-8"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
+        {/* Weather chip — top right */}
+        <div className="mb-2 flex justify-end">
+          <WeatherChip
+            icon={weatherIcon}
+            temp={weatherTemp}
+            description={weatherLabel}
+            reason={weatherReason}
+            forecast={weatherForecast}
+          />
+        </div>
+
         <div className="relative">
           {/* Hero photo area */}
           <div className="relative h-[280px] overflow-hidden rounded-[24px] sm:h-[400px] lg:h-[500px]">
@@ -214,16 +237,13 @@ export default function TopFiveHero({
             {/* Header */}
             <div className="flex items-center gap-2.5 px-5 pt-5">
               <div className="shrink-0" style={{ animation: "berry-bob 4s ease-in-out infinite", filter: "drop-shadow(0 4px 10px rgba(244,160,156,0.2))" }}>
-                <Image src="/berry-wink.png" alt="Berry" width={48} height={48} className="h-12 w-auto" />
+                <Image src="/berry-wink.png" alt="Berry" width={64} height={64} className="h-14 w-auto sm:h-16" />
               </div>
               <div>
                 <p className="text-[11px] font-bold text-[#F4A09C]">{vibe}</p>
                 <h2 className="text-[20px] font-black leading-[1.1] tracking-[-0.4px] text-[#2D2D2D]">
                   {cardTitle}
                 </h2>
-                <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-[#FFF3E0] px-2 py-0.5 text-[10px] font-bold text-[#A67A40]">
-                  {weatherIcon} {weatherTemp}°C · {weatherLabel}
-                </span>
               </div>
             </div>
 

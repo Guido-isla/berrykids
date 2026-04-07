@@ -184,6 +184,13 @@ export default async function Home() {
         weatherIcon={ctx.weather.current.icon}
         weatherTemp={ctx.weather.current.temp}
         weatherLabel={ctx.weather.current.description}
+        weatherReason={ctx.berryPick.reason}
+        weatherForecast={ctx.weather.forecast.slice(1, 5).map((d) => ({
+          icon: d.icon,
+          day: ["zo","ma","di","wo","do","vr","za"][new Date(d.date + "T00:00:00").getDay()],
+          tempMax: d.tempMax,
+          isRainy: d.isRainy,
+        }))}
         totalActivities={activities.filter((a) => a.verified).length}
       />
 
@@ -198,12 +205,23 @@ export default async function Home() {
 
       {/* ===== VANDAAG — more events ===== */}
       {primaryEvents.length > 2 && (
-        <section className="mx-auto max-w-[880px] px-5 pb-10 sm:px-6">
-          <p className="mb-3 text-[11px] font-bold uppercase tracking-[1.5px] text-[#A09488]">Ook goed vandaag</p>
+        <section className="mx-auto max-w-[880px] px-5 pb-10 pt-6 sm:px-6">
+          <h2 className="mb-4 text-[22px] font-extrabold tracking-tight text-[#2D2D2D]">Ook goed vandaag</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {primaryEvents.slice(2, 6).map((e) => (
-              <EventCard key={e.slug} event={e} />
-            ))}
+            {primaryEvents.slice(2, 6).map((e) => {
+              const tip = e.free && !e.indoor
+                ? "Gratis en lekker buiten — ga nu"
+                : e.free && e.indoor
+                ? "Gratis en gezellig binnen"
+                : !e.indoor && ctx.weather.isGoodWeather
+                ? "Perfect weer hiervoor"
+                : e.indoor && ctx.weather.isRainy
+                ? "Ideaal voor een regendag"
+                : e.free
+                ? "Gratis — altijd goed"
+                : "Berry aanrader voor vandaag";
+              return <EventCard key={e.slug} event={e} berryTip={tip} />;
+            })}
           </div>
         </section>
       )}
