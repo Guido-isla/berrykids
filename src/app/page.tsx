@@ -7,9 +7,8 @@ import EventCard from "@/components/EventCard";
 import FilmVanDeWeek from "@/components/FilmVanDeWeek";
 import TheaterAgenda from "@/components/TheaterAgenda";
 import ActivityCard from "@/components/ActivityCard";
-import MoodTiles from "@/components/MoodTiles";
 import TopFiveHero from "@/components/TopFiveHero";
-import type { TopFivePick } from "@/components/TopFiveHero";
+import type { TopFivePick, MoodKey } from "@/components/TopFiveHero";
 import { getScrapedEvents, getDayPlanEvents } from "@/data/events-loader";
 import { resolveEventImages } from "@/lib/photos";
 import { getSiteContext } from "@/lib/context";
@@ -81,7 +80,7 @@ export default async function Home() {
 
   const weatherMood = ctx.weather.isRainy ? "rainy" as const : ctx.weather.current.temp < 8 ? "cold" as const : "sunny" as const;
 
-  // --- Build top 5 picks for the ATF hero ---
+  // --- Build top 5 picks per mood for the ATF hero ---
   const currentMonth = new Date().getMonth() + 1;
   const verifiedAvailable = activities.filter(
     (a) => a.verified && (!a.availableMonths || a.availableMonths.includes(currentMonth))
@@ -100,33 +99,77 @@ export default async function Home() {
     .filter((s) => s.item.image && s.item.image !== "/berry-icon.png")
     .sort((a, b) => b.score - a.score);
 
-  // Deduplicate by title and take top 5
-  const seen = new Set<string>();
-  const topFivePicks: TopFivePick[] = [];
-  for (const s of allScored) {
+  function toPickItem(s: (typeof allScored)[number]): TopFivePick {
     const item = s.item as Record<string, unknown>;
-    const title = item.title as string;
-    if (seen.has(title)) continue;
-    seen.add(title);
-    const img = (item.resolvedImage as string) || (item.image as string);
     const tags: string[] = [];
     if (item.free) tags.push("Gratis");
     tags.push(item.ageLabel as string);
-    topFivePicks.push({
+    return {
       slug: item.slug as string,
-      title,
-      image: img,
-      category: ((item.subcategory as string) || (item.category as string)),
+      title: item.title as string,
+      image: (item.resolvedImage as string) || (item.image as string),
+      category: (item.subcategory as string) || (item.category as string),
       location: item.location as string,
       free: item.free as boolean,
       ageLabel: item.ageLabel as string,
-      whyNow: ((item.tip as string) || (item.description as string)?.slice(0, 80) || ""),
+      whyNow: (item.tip as string) || (item.description as string)?.slice(0, 80) || "",
       tags,
       time: item.time as string | undefined,
       isEvent: s.isEvent,
-    });
-    if (topFivePicks.length >= 5) break;
+    };
   }
+
+  function pickTop5(items: typeof allScored): TopFivePick[] {
+    const seen = new Set<string>();
+    const result: TopFivePick[] = [];
+    for (const s of items) {
+      const title = (s.item as Record<string, unknown>).title as string;
+      if (seen.has(title)) continue;
+      seen.add(title);
+      result.push(toPickItem(s));
+      if (result.length >= 5) break;
+    }
+    return result;
+  }
+
+  const ENERGY_KEYWORDS = ["sport", "Speeltuin", "Trampolinepark", "Binnenspeeltuin", "Megaspeeltuin", "Klimhal", "Padel", "Surfen", "Boulderen"];
+  const RUSTIG_KEYWORDS = ["cultuur", "Museum", "Bibliotheek", "Landgoed", "Rondvaart", "Theater", "Bioscoop"];
+
+  const picksByMood: Record<MoodKey, TopFivePick[]> = {
+    berry: pickTop5(allScored),
+    buiten: pickTop5(allScored.filter((s) => {
+      const item = s.item as Record<string, unknown>;
+      const cat = item.category as string;
+      const indoor = "indoor" in item ? item.indoor : (cat === "indoor" || cat === "cultuur");
+      return !indoor;
+    })),
+    binnen: pickTop5(allScored.filter((s) => {
+      const item = s.item as Record<string, unknown>;
+      const cat = item.category as string;
+      const indoor = "indoor" in item ? item.indoor : (cat === "indoor" || cat === "cultuur");
+      return indoor;
+    })),
+    energie: pickTop5(allScored.filter((s) => {
+      const item = s.item as Record<string, unknown>;
+      const cat = item.category as string;
+      const sub = (item.subcategory as string) || "";
+      return ENERGY_KEYWORDS.some((k) => cat.includes(k) || sub.includes(k));
+    })),
+    rustig: pickTop5(allScored.filter((s) => {
+      const item = s.item as Record<string, unknown>;
+      const cat = item.category as string;
+      const sub = (item.subcategory as string) || "";
+      return RUSTIG_KEYWORDS.some((k) => cat.includes(k) || sub.includes(k));
+    })),
+    gratis: pickTop5(allScored.filter((s) => {
+      return (s.item as Record<string, unknown>).free as boolean;
+    })),
+    bijzonder: pickTop5(allScored.filter((s) => {
+      const item = s.item as Record<string, unknown>;
+      const sub = (item.subcategory as string) || "";
+      return ["Linnaeushof", "Rondvaart", "Speelbos", "Festival", "Theaterkamp", "Surfles"].some((k) => sub.includes(k)) || (item.featured as boolean);
+    })),
+  };
 
   return (
     <div className="min-h-screen">
@@ -136,7 +179,7 @@ export default async function Home() {
 
       {/* ===== TOP 5 HERO — ATF ===== */}
       <TopFiveHero
-        picks={topFivePicks}
+        picksByMood={picksByMood}
         vibe={dayPlan.vibe}
         weatherIcon={ctx.weather.current.icon}
         weatherTemp={ctx.weather.current.temp}
@@ -152,12 +195,6 @@ export default async function Home() {
           </div>
         </div>
       )}
-
-      {/* ===== MOOD TILES ===== */}
-      <section className="mx-auto max-w-[880px] px-5 py-8 sm:px-6 sm:py-10">
-        <p className="mb-3 text-[11px] font-bold uppercase tracking-[1.5px] text-[#A09488]">Vandaag voelt als</p>
-        <MoodTiles />
-      </section>
 
       {/* ===== VANDAAG — more events ===== */}
       {primaryEvents.length > 2 && (
