@@ -104,17 +104,24 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
   // === SUCCESS STATE ===
   if (step === "success") {
     return (
-      <div className="rounded-[20px] bg-[#FDF1EA] p-6 text-center">
-        <p className="text-lg font-bold text-[#2D2D2D]">Je bent erbij! 🍓</p>
-        <p className="mt-1 text-sm text-[#6B6B6B]">
-          {variant === "personalize"
-            ? "Berry kent je gezin nu. Tips worden persoonlijker."
-            : "Elke vrijdag de leukste tips in je inbox."}
-        </p>
+      <div className="overflow-hidden rounded-[20px] border border-[#B8E0D4] bg-[#E8F8ED]">
+        <div className="flex items-center gap-3 px-5 py-4">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#B8E0D4] text-[20px]">✓</span>
+          <div>
+            <p className="text-[16px] font-extrabold text-[#2D2D2D]">Je bent erbij! 🍓</p>
+            <p className="text-[13px] text-[#3D7A6A]">
+              {variant === "personalize"
+                ? "Berry kent je gezin nu. Elke vrijdag persoonlijke tips in je inbox."
+                : "Elke vrijdag de leukste tips in je inbox."}
+            </p>
+          </div>
+        </div>
         {variant === "default" && (
-          <Link href="/#newsletter" className="mt-2 inline-block text-[13px] font-bold text-[#F4A09C]">
-            Wil je tips op maat? Vertel Berry over je kids →
-          </Link>
+          <div className="border-t border-[#B8E0D4] bg-[#F0FBF5] px-5 py-3">
+            <Link href="/#newsletter" className="text-[13px] font-bold text-[#3D7A6A] hover:underline">
+              Wil je tips op maat? Vertel Berry over je kids →
+            </Link>
+          </div>
         )}
       </div>
     );
@@ -229,13 +236,22 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
 
         {error && <p className="text-[12px] font-semibold text-red-500">{error}</p>}
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded-full bg-[#F4A09C] py-3 text-[14px] font-bold text-white transition-colors hover:bg-[#E88E8A] disabled:opacity-50"
-        >
-          {loading ? "Even geduld..." : "Aanmelden →"}
-        </button>
+        {(() => {
+          const profileReady = consent && kids.some((k) => k.interests.length > 0);
+          return (
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full rounded-full py-3 text-[14px] font-bold text-white transition-all disabled:opacity-50 ${
+                profileReady
+                  ? "bg-[#4A8060] shadow-[0_4px_16px_rgba(74,128,96,0.3)] hover:bg-[#3D7A6A] scale-[1.02]"
+                  : "bg-[#F4A09C] hover:bg-[#E88E8A]"
+              }`}
+            >
+              {loading ? "Even geduld..." : profileReady ? "Klaar — aanmelden! ✓" : "Aanmelden →"}
+            </button>
+          );
+        })()}
       </form>
     );
   }
