@@ -203,12 +203,16 @@ export default async function Home() {
         </div>
       )}
 
-      {/* ===== VANDAAG — more events ===== */}
-      {primaryEvents.length > 2 && (
+      {/* ===== VANDAAG — more events (excluding top 5) ===== */}
+      {(() => {
+        const top5Slugs = new Set(picksByMood.berry.map((p) => p.slug));
+        const ookGoed = primaryEvents.filter((e) => !top5Slugs.has(e.slug)).slice(0, 4);
+        if (ookGoed.length === 0) return null;
+        return (
         <section className="mx-auto max-w-[880px] px-5 pb-10 pt-6 sm:px-6">
           <h2 className="mb-4 text-[22px] font-extrabold tracking-tight text-[#2D2D2D]">Ook goed vandaag</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {primaryEvents.slice(2, 6).map((e) => {
+            {ookGoed.map((e) => {
               const tip = e.free && !e.indoor
                 ? "Gratis en lekker buiten — ga nu"
                 : e.free && e.indoor
@@ -224,7 +228,8 @@ export default async function Home() {
             })}
           </div>
         </section>
-      )}
+        );
+      })()}
 
       {/* ===== NEWSLETTER ===== */}
       <section className="mx-auto max-w-[880px] px-5 py-10 sm:px-6">
