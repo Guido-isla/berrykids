@@ -216,7 +216,7 @@ export default function TopFiveHero({
                     {/* Desktop: click switches photo */}
                     <button
                       onClick={() => goTo(i)}
-                      className="hidden w-full items-center gap-3 px-5 py-2.5 text-left lg:flex"
+                      className={`hidden w-full items-center gap-3 px-5 py-2.5 text-left lg:flex ${i === 0 ? "pick-tap-hero" : "pick-tap"}`}
                     >
                       <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] text-[13px] font-black ${NUM_COLORS[i]}`}>
                         {i + 1}
@@ -236,7 +236,7 @@ export default function TopFiveHero({
                     {/* Mobile: link goes directly to page */}
                     <Link
                       href={itemHref}
-                      className="flex w-full items-center gap-2.5 px-4 py-2.5 lg:hidden"
+                      className={`flex w-full items-center gap-2.5 px-4 py-2.5 lg:hidden ${i === 0 ? "pick-tap-hero" : "pick-tap"}`}
                     >
                       <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-[7px] text-[12px] font-black ${NUM_COLORS[i]}`}>
                         {i + 1}
