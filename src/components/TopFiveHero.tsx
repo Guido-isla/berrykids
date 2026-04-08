@@ -85,82 +85,74 @@ export default function TopFiveHero({
 
       {/* ===== MOBILE: Berry digest + card carousel ===== */}
       <div className="lg:hidden">
-        {/* Berry daily digest */}
-        <div className="pick-header-reveal pb-4 pt-2 text-center">
-          <div className="mx-auto mb-3 w-fit" style={{ animation: "berry-bob 4s ease-in-out infinite", filter: "drop-shadow(0 6px 20px rgba(224,104,95,0.3))" }}>
-            <Image src="/berry-wink.png" alt="Berry" width={120} height={120} className="h-24 w-auto" />
+        {/* Berry daily digest — dominant */}
+        <div className="pick-header-reveal pb-8 pt-4 text-center">
+          {/* Berry with radial glow */}
+          <div className="relative mx-auto mb-4 h-28 w-28">
+            <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle, rgba(224,104,95,0.14) 0%, transparent 70%)", transform: "scale(2.2)" }} />
+            <div className="relative" style={{ animation: "berry-bob 4s ease-in-out infinite" }}>
+              <Image src="/berry-wink.png" alt="Berry" width={140} height={140} className="h-28 w-auto drop-shadow-[0_8px_24px_rgba(224,104,95,0.35)]" />
+            </div>
           </div>
-          <p className="text-[13px] font-bold text-[#E0685F]">{vibe}</p>
-          <h2 className="mt-1 text-[22px] font-black leading-[1.1] tracking-[-0.5px] text-[#2D2D2D]">
-            Berry&apos;s picks vandaag
+
+          <p className="text-[12px] font-bold uppercase tracking-[1.5px] text-[#E0685F]">{vibe}</p>
+
+          {/* Dominant headline — the punch */}
+          <h2 className="mt-2 text-[28px] font-black leading-[1.0] tracking-[-1px] text-[#1A1A1A]">
+            {dailyMessage.replace(/^[^\s]+\s/, "").replace(/°C.*/, "°C")}
           </h2>
-          <p className="mx-auto mt-2 max-w-[300px] text-[15px] font-semibold leading-snug text-[#6B6B6B]">
+          <p className="mt-1 text-[16px] font-medium text-[#6B6B6B]">
             {dailyMessage}
           </p>
-          <div className="mt-3 flex justify-center">
-            <WeatherChip
-              icon={weatherIcon}
-              temp={weatherTemp}
-              description={weatherLabel}
-              reason={weatherReason}
-              forecast={weatherForecast}
-            />
-          </div>
         </div>
 
-        {/* Swipeable card carousel */}
-        <div className="flex gap-3 overflow-x-auto pb-3 scrollbar-none">
+        {/* Card carousel — #1 dominant, #2-5 smaller */}
+        <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-none">
           {picks.map((p, i) => {
             const itemHref = p.isEvent ? `/event/${p.slug}` : `/activiteiten/${p.slug}`;
+            const isHero = i === 0;
             return (
               <Link
                 key={p.slug}
                 href={itemHref}
-                className={`pick-reveal pick-reveal-${i} pick-tap block w-[82vw] shrink-0 overflow-hidden rounded-[20px] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all active:scale-[1.02]`}
+                className={`pick-reveal pick-reveal-${i} block shrink-0 overflow-hidden rounded-[20px] bg-white transition-all active:scale-[1.03] ${
+                  isHero
+                    ? "w-[88vw] shadow-[0_6px_24px_rgba(0,0,0,0.10)] -translate-y-1"
+                    : "w-[72vw] shadow-[0_2px_10px_rgba(0,0,0,0.05)]"
+                }`}
               >
                 {/* Photo */}
-                <div className="relative h-[180px] overflow-hidden">
+                <div className={`relative overflow-hidden ${isHero ? "h-[220px]" : "h-[160px]"}`}>
                   <Image
                     src={p.image}
                     alt={p.title}
                     fill
-                    sizes="82vw"
+                    sizes={isHero ? "88vw" : "72vw"}
                     className="object-cover"
                     priority={i === 0}
                   />
                   {/* Number badge */}
-                  <span className={`absolute left-3 top-3 flex h-8 w-8 items-center justify-center rounded-[10px] text-[15px] font-black shadow-sm ${NUM_COLORS[i]}`}>
+                  <span className={`absolute left-3 top-3 flex items-center justify-center rounded-[10px] font-black shadow-sm ${NUM_COLORS[i]} ${isHero ? "h-9 w-9 text-[16px]" : "h-7 w-7 text-[13px]"}`}>
                     {i + 1}
                   </span>
-                  <div className="absolute right-3 top-3">
-                    <SaveButton slug={p.slug} />
-                  </div>
-                  {/* Berry tip on photo */}
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-3.5 pb-3 pt-8">
-                    <p className="flex items-center gap-1.5 text-[13px] font-bold text-white">
-                      <Image src="/berry-icon.png" alt="" width={16} height={16} className="h-4 w-4 shrink-0" />
-                      {p.whyNow.length > 60 ? p.whyNow.slice(0, 60) + "…" : p.whyNow}
-                    </p>
-                  </div>
+                  {/* Berry tip — #1 only */}
+                  {isHero && (
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-3.5 pb-3 pt-8">
+                      <p className="flex items-center gap-1.5 text-[14px] font-bold text-white">
+                        <Image src="/berry-icon.png" alt="" width={16} height={16} className="h-4 w-4 shrink-0" />
+                        {p.whyNow.length > 55 ? p.whyNow.slice(0, 55) + "…" : p.whyNow}
+                      </p>
+                    </div>
+                  )}
                 </div>
-                {/* Info */}
-                <div className="px-3.5 py-3">
-                  <h3 className="text-[17px] font-extrabold leading-snug tracking-tight text-[#2D2D2D]">
+                {/* Info — stripped to essentials */}
+                <div className={`${isHero ? "px-4 py-3.5" : "px-3 py-2.5"}`}>
+                  <h3 className={`font-extrabold leading-snug tracking-[-0.3px] text-[#1A1A1A] ${isHero ? "text-[18px]" : "text-[15px]"}`}>
                     {p.title}
                   </h3>
-                  <p className="mt-1 text-[13px] text-[#6B6B6B]">📍 {p.location}</p>
-                  <div className="mt-1.5 flex items-center justify-between">
-                    <span className="text-[13px] font-bold">
-                      {p.free ? (
-                        <span className="text-[#4A8060]">Gratis</span>
-                      ) : (
-                        <span className="text-[#2D2D2D]">{p.ageLabel}</span>
-                      )}
-                    </span>
-                    <span className="rounded-full bg-[#E0685F] px-3.5 py-1.5 text-[12px] font-bold text-white">
-                      Bekijk →
-                    </span>
-                  </div>
+                  <p className={`mt-0.5 font-normal text-[#888] ${isHero ? "text-[14px]" : "text-[13px]"}`}>
+                    {p.location}{p.free ? " · Gratis" : ""}
+                  </p>
                 </div>
               </Link>
             );
