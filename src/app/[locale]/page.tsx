@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NewsletterForm from "@/components/NewsletterForm";
@@ -152,28 +153,35 @@ export default async function Home() {
   // 4. MEER ONTDEKKEN — 3 from remaining
   const meerPicks = pickTopN(allScored, 3);
 
-  // === BERRY INTROS ===
+  // === BERRY INTROS (translated) ===
+  const tBerry = await getTranslations("berry");
+  const tHome = await getTranslations("home");
+  const tNewsletter = await getTranslations("newsletter");
+
+  const w = { icon: ctx.weather.current.icon, temp: String(ctx.weather.current.temp), description: ctx.weather.current.description.toLowerCase() };
   const dailyMessage = ctx.weather.isRainy
-    ? `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C en regen — lekker binnenblijven`
+    ? tBerry("dailyRain", w)
     : ctx.weather.isGoodWeather && ctx.weather.current.temp >= 18
-    ? `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C — heerlijk weer, ga naar buiten!`
+    ? tBerry("dailyHot", w)
     : ctx.weather.isGoodWeather
-    ? `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C en droog — prima dag om eropuit te gaan`
+    ? tBerry("dailyDry", w)
     : ctx.weather.current.temp < 8
-    ? `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C — koud, maar binnen is het warm`
-    : `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C — ${ctx.weather.current.description.toLowerCase()}`;
+    ? tBerry("dailyCold", w)
+    : tBerry("dailyDefault", w);
 
   const buitenIntro = ctx.weather.isGoodWeather
-    ? "Perfect weer om naar buiten te gaan"
+    ? tBerry("outdoorGood")
     : ctx.weather.isRainy
-    ? "Morgen beter weer? Bewaar deze:"
-    : "Even naar buiten — dit kan altijd:";
+    ? tBerry("outdoorRain")
+    : tBerry("outdoorDefault");
 
   const binnenIntro = ctx.weather.isRainy
-    ? "Ideaal voor vandaag:"
+    ? tBerry("indoorRain")
     : ctx.weather.isGoodWeather
-    ? "Voor als je toch binnen wilt blijven:"
-    : "Lekker warm binnen:";
+    ? tBerry("indoorGood")
+    : tBerry("indoorDefault");
+
+  const tomorrowFlipText = tomorrowFlip; // Keep dynamic for now — weather data is locale-independent
 
   return (
     <div className="min-h-screen">
@@ -209,7 +217,7 @@ export default async function Home() {
       {buitenPicks.length > 0 && (
         <section className="mx-auto max-w-[880px] px-4 pt-10 sm:px-6">
           <div className="mb-4">
-            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">🌳 Naar buiten</h2>
+            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">{tHome("outdoorTitle")}</h2>
             <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{buitenIntro}</p>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-3 sm:overflow-visible">
@@ -226,11 +234,11 @@ export default async function Home() {
       <section className="mx-auto max-w-[880px] px-4 py-10 sm:px-6">
         <div className="rounded-[24px] bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.04)] sm:p-10">
           <div className="mx-auto max-w-md text-center">
-            <p className="text-[12px] font-bold uppercase tracking-widest text-[#F4A09C]">Elke vrijdag om 15:00</p>
-            <h2 className="mt-2 text-[22px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[24px]">Weekend gepland in 2 minuten</h2>
-            <p className="mt-2 text-[14px] text-[#6B6B6B]">De 5 leukste tips. Geen zoeken. Gewoon gaan.</p>
+            <p className="text-[12px] font-bold uppercase tracking-widest text-[#F4A09C]">{tNewsletter("frequency")}</p>
+            <h2 className="mt-2 text-[22px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[24px]">{tNewsletter("headline")}</h2>
+            <p className="mt-2 text-[14px] text-[#6B6B6B]">{tNewsletter("subtitle")}</p>
             <div className="mt-5"><NewsletterForm variant="personalize" /></div>
-            <p className="mt-2 text-[12px] text-[#A09488]">2.340+ ouders · gratis</p>
+            <p className="mt-2 text-[12px] text-[#A09488]">{tNewsletter("subscriberCount")}</p>
           </div>
         </div>
       </section>
@@ -244,7 +252,7 @@ export default async function Home() {
       {binnenPicks.length > 0 && (
         <section className="mx-auto max-w-[880px] px-4 pb-10 sm:px-6">
           <div className="mb-4">
-            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">🏠 Lekker binnen</h2>
+            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">{tHome("indoorTitle")}</h2>
             <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{binnenIntro}</p>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-3 sm:overflow-visible">
@@ -266,8 +274,8 @@ export default async function Home() {
       {meerPicks.length > 0 && (
         <section className="mx-auto max-w-[880px] px-4 pb-10 sm:px-6">
           <div className="mb-4">
-            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">💡 Ken je deze al?</h2>
-            <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">Verborgen parels in de regio</p>
+            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">{tHome("discoverTitle")}</h2>
+            <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{tHome("discoverSub")}</p>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-3 sm:overflow-visible">
             {meerPicks.map((p) => (
@@ -282,10 +290,10 @@ export default async function Home() {
       {/* ===== 8. MEIVAKANTIE ===== */}
       <section className="mx-auto max-w-[880px] px-4 pb-10 sm:px-6">
         <Link href="/vakanties" className="group block rounded-[24px] bg-gradient-to-r from-[#F4A09C] to-[#FFD8B0] p-6 transition-shadow hover:shadow-lg sm:p-9">
-          <p className="text-[12px] font-bold uppercase tracking-widest text-white">26 april – 9 mei</p>
-          <h2 className="mt-2 text-[22px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[24px]">Meivakantie — jouw weekplan</h2>
-          <p className="mt-2 max-w-md text-[14px] text-[#2D2D2D]/70">Dagplannen, surfcamps en meer.</p>
-          <span className="mt-4 inline-block text-[14px] font-bold text-white">Bekijk dagplannen →</span>
+          <p className="text-[12px] font-bold uppercase tracking-widest text-white">{tHome("meivakantieDate")}</p>
+          <h2 className="mt-2 text-[22px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[24px]">{tHome("meivakantieTitle")}</h2>
+          <p className="mt-2 max-w-md text-[14px] text-[#2D2D2D]/70">{tHome("meivakantieSub")}</p>
+          <span className="mt-4 inline-block text-[14px] font-bold text-white">{tHome("meivakantieLink")}</span>
         </Link>
       </section>
 
@@ -294,8 +302,8 @@ export default async function Home() {
         <div className="mx-auto max-w-[880px] px-4 py-14 sm:px-6">
           <div className="mx-auto max-w-md text-center">
             <Image src="/berry-wink.png" alt="" width={48} height={48} className="mx-auto mb-3 h-12 w-auto" />
-            <h2 className="text-[22px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[24px]">Weekend sorted</h2>
-            <p className="mt-1 text-[14px] text-[#6B6B6B]">Elke vrijdag om 15:00. 5 tips. Klaar.</p>
+            <h2 className="text-[22px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[24px]">{tHome("weekendSorted")}</h2>
+            <p className="mt-1 text-[14px] text-[#6B6B6B]">{tHome("weekendSortedSub")}</p>
             <div className="mt-5"><NewsletterForm /></div>
           </div>
         </div>

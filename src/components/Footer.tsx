@@ -1,6 +1,10 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function Footer() {
+  const t = useTranslations("footer");
+  const tNav = useTranslations("nav");
+
   return (
     <footer className="border-t border-[#F0ECE8]">
       <div className="mx-auto max-w-[880px] px-5 py-10 sm:px-6">
@@ -8,26 +12,26 @@ export default function Footer() {
           <div>
             <p className="text-sm font-bold text-[#2D2D2D]">Berry Kids</p>
             <p className="mt-1 max-w-xs text-xs text-[#6B6B6B]">
-              De leukste uitjes voor gezinnen in Haarlem e.o.
+              {t("tagline")}
             </p>
           </div>
           <div className="flex gap-4 text-sm sm:gap-8">
             <div className="space-y-2">
-              <Link href="/" className="block text-[#666] hover:text-[#2D2D2D]">Dit weekend</Link>
-              <Link href="/activiteiten" className="block text-[#666] hover:text-[#2D2D2D]">Activiteiten</Link>
-              <Link href="/vakanties" className="block text-[#666] hover:text-[#2D2D2D]">Vakanties</Link>
+              <Link href="/" className="block text-[#666] hover:text-[#2D2D2D]">{t("thisWeekend")}</Link>
+              <Link href="/activiteiten" className="block text-[#666] hover:text-[#2D2D2D]">{tNav("activities")}</Link>
+              <Link href="/vakanties" className="block text-[#666] hover:text-[#2D2D2D]">{tNav("vacations")}</Link>
             </div>
             <div className="space-y-2">
-              <Link href="/insturen" className="block text-[#666] hover:text-[#2D2D2D]">Event insturen</Link>
-              <a href="mailto:info@berrykids.nl" className="block text-[#666] hover:text-[#2D2D2D]">Contact</a>
+              <Link href="/insturen" className="block text-[#666] hover:text-[#2D2D2D]">{t("submitEvent")}</Link>
+              <a href="mailto:info@berrykids.nl" className="block text-[#666] hover:text-[#2D2D2D]">{t("contact")}</a>
             </div>
             <div className="space-y-2">
-              <Link href="/privacy" className="block text-[#666] hover:text-[#2D2D2D]">Privacy</Link>
-              <Link href="/voorwaarden" className="block text-[#666] hover:text-[#2D2D2D]">Voorwaarden</Link>
+              <Link href="/privacy" className="block text-[#666] hover:text-[#2D2D2D]">{t("privacy")}</Link>
+              <Link href="/voorwaarden" className="block text-[#666] hover:text-[#2D2D2D]">{t("terms")}</Link>
             </div>
           </div>
         </div>
-        <p className="mt-8 text-xs text-[#6B6B6B]">&copy; 2026 Berry Kids</p>
+        <p className="mt-8 text-xs text-[#6B6B6B]">{t("copyright")}</p>
       </div>
     </footer>
   );

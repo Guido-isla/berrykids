@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berry Kids — Top 5 + Rotating Detail</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Nunito', sans-serif; background: #FFF9F0; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1320px; margin: 0 auto; padding: 12px 32px;
+  }
+  .nav-left { display: flex; align-items: center; gap: 8px; }
+  .nav-left img { height: 32px; }
+  .nav-left .name { font-size: 16px; font-weight: 800; color: #F4A09C; }
+  .nav-left .loc {
+    display: flex; align-items: center; gap: 3px;
+    font-size: 10px; font-weight: 700; color: #6B6B6B;
+    background: rgba(0,0,0,0.06); padding: 3px 8px; border-radius: 999px; margin-left: 4px;
+  }
+  .nav-right a {
+    font-size: 12px; font-weight: 700; color: #6B6B6B;
+    text-decoration: none; margin-left: 20px;
+  }
+  .nav-right a:hover { color: #F4A09C; }
+
+  /* ===== HERO ===== */
+  .hero {
+    max-width: 1320px; margin: 0 auto; padding: 8px 32px 0;
+    position: relative;
+  }
+
+  /* Photo area — cycles through items */
+  .hero-photo {
+    width: 100%; height: 500px;
+    border-radius: 24px; overflow: hidden;
+    position: relative;
+  }
+  .hero-slide {
+    position: absolute; inset: 0;
+    opacity: 0; transition: opacity 0.6s ease;
+  }
+  .hero-slide.active { opacity: 1; }
+  .hero-slide img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+
+  /* Left gradient — fades into card */
+  .hero-grad-left {
+    position: absolute; inset: 0; z-index: 2;
+    background: linear-gradient(to right, rgba(255,249,240,0.95) 0%, rgba(255,249,240,0.7) 32%, transparent 52%);
+    border-radius: 24px;
+    pointer-events: none;
+  }
+
+  /* Detail card — white floating card, right side */
+  .hero-detail {
+    position: absolute; bottom: 24px; right: 24px; z-index: 5;
+    width: 380px;
+  }
+  .detail-content {
+    display: none;
+    background: white;
+    border-radius: 20px;
+    padding: 20px 22px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+  .detail-content.active { display: block; animation: fadeUp 0.35s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .detail-cat {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.8px; color: #F4A09C;
+  }
+  .detail-title {
+    font-size: 22px; font-weight: 900;
+    color: #2D2D2D; letter-spacing: -0.4px; line-height: 1.1;
+    margin-top: 3px;
+  }
+  .detail-why {
+    font-size: 13px; font-weight: 600; color: #6B6B6B;
+    margin-top: 6px; line-height: 1.45;
+  }
+  .detail-tags {
+    display: flex; gap: 5px; margin-top: 10px;
+  }
+  .detail-tag {
+    background: #F0ECE8; padding: 3px 9px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; color: #6B6B6B;
+  }
+  .detail-tag.free { background: #E8F8ED; color: #4A8060; }
+  .detail-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 12px; padding-top: 12px; border-top: 1px solid #F5F0EB;
+  }
+  .detail-meta { font-size: 12px; font-weight: 600; color: #6B6B6B; }
+  .detail-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 9px 18px;
+    background: #F4A09C; color: white; border-radius: 999px;
+    font-size: 12px; font-weight: 700; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .detail-cta:hover { background: #E88E8A; transform: translateY(-1px); }
+
+  .hero-heart {
+    position: absolute; top: 20px; right: 20px; z-index: 5;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,0.85); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; cursor: pointer; border: none;
+    transition: transform 0.2s;
+  }
+  .hero-heart:hover { transform: scale(1.1); }
+
+  /* Progress bar */
+  .hero-progress {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 6;
+    height: 3px; border-radius: 0 0 24px 24px; overflow: hidden;
+  }
+  .hero-progress-bar {
+    height: 100%; background: #F4A09C;
+    width: 0%; transition: width 5s linear;
+  }
+  .hero-progress-bar.running { width: 100%; }
+
+  /* ===== TOP 5 CARD — overlapping left ===== */
+  .top-card {
+    position: absolute; top: 28px; left: 48px; z-index: 10;
+    width: 400px; background: white;
+    border-radius: 24px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  .tc-header {
+    padding: 20px 20px 0;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .tc-berry {
+    width: 48px; height: 48px; flex-shrink: 0;
+    animation: bob 4s ease-in-out infinite;
+    filter: drop-shadow(0 4px 10px rgba(244,160,156,0.2));
+  }
+  .tc-berry img { width: 100%; height: 100%; object-fit: contain; }
+  @keyframes bob { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-4px) rotate(1deg); } }
+  .tc-intro .vibe { font-size: 11px; font-weight: 700; color: #F4A09C; }
+  .tc-intro h2 { font-size: 20px; font-weight: 900; letter-spacing: -0.4px; color: #2D2D2D; line-height: 1.1; }
+  .tc-intro .weather {
+    display: inline-flex; align-items: center; gap: 3px;
+    margin-top: 3px; padding: 2px 8px; border-radius: 999px;
+    background: #FFF3E0; font-size: 10px; font-weight: 700; color: #A67A40;
+  }
+
+  .tc-list { padding: 8px 0 0; }
+  .tc-label {
+    padding: 0 20px; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px; color: #A09488;
+    margin-bottom: 4px;
+  }
+
+  .ti {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 20px; cursor: pointer;
+    transition: background 0.12s; text-decoration: none; color: inherit;
+    position: relative;
+  }
+  .ti:hover { background: #FFF9F0; }
+  .ti.active { background: #FFF3E0; }
+  .ti.active::after {
+    content: ''; position: absolute; right: 0; top: 50%;
+    transform: translateY(-50%);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid transparent;
+    /* Visual indicator that this item is shown on the right */
+  }
+  .ti + .ti { border-top: 1px solid #F5F0EB; }
+
+  .ti-num {
+    width: 24px; height: 24px; border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 900; flex-shrink: 0;
+  }
+  .ti-num.n1 { background: #F4A09C; color: white; }
+  .ti-num.n2 { background: #FFD8B0; color: #A67A40; }
+  .ti-num.n3 { background: #C5B8E8; color: #5B4FA0; }
+  .ti-num.n4 { background: #B8E0D4; color: #3D7A6A; }
+  .ti-num.n5 { background: #F0ECE8; color: #999; }
+
+  .ti-thumb {
+    width: 40px; height: 40px; border-radius: 10px;
+    overflow: hidden; flex-shrink: 0;
+  }
+  .ti-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  .ti-body { flex: 1; min-width: 0; }
+  .ti-title { font-size: 14px; font-weight: 800; color: #2D2D2D; letter-spacing: -0.1px; }
+  .ti-why { font-size: 12px; font-weight: 600; color: #6B6B6B; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .tc-footer {
+    padding: 10px 20px; background: #FDFAF5; text-align: center;
+    border-top: 1px solid #F5F0EB;
+  }
+  .tc-footer a { font-size: 11px; font-weight: 700; color: #F4A09C; text-decoration: none; }
+
+  /* Tomorrow */
+  .tmrw {
+    max-width: 1320px; margin: 12px auto 0; padding: 0 32px;
+  }
+  .tmrw-inner {
+    padding: 10px 20px; border-radius: 14px; background: #EDE7F6;
+    text-align: center; font-size: 12px; font-weight: 700; color: #7B6BA0;
+  }
+
+  /* Pill bar */
+  .pills {
+    max-width: 1320px; margin: 20px auto 0; padding: 0 32px;
+    display: flex; gap: 8px; overflow-x: auto;
+    -ms-overflow-style: none; scrollbar-width: none;
+  }
+  .pills::-webkit-scrollbar { display: none; }
+  .pb {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 8px 14px; border-radius: 14px; border: none;
+    font-family: 'Nunito'; font-size: 12px; font-weight: 700;
+    cursor: pointer; white-space: nowrap; transition: all 0.15s; flex-shrink: 0;
+  }
+  .pb .pi { font-size: 18px; }
+  .pb.on { background: #F4A09C; color: white; }
+  .pb:not(.on) { background: white; color: #6B6B6B; box-shadow: 0 0 0 1px #E8E0D8; }
+  .pb:not(.on):hover { color: #2D2D2D; }
+
+  /* Card grid */
+  .grid-section {
+    max-width: 1320px; margin: 24px auto 0; padding: 0 32px 48px;
+  }
+  .grid-label { font-size: 22px; font-weight: 900; color: #2D2D2D; letter-spacing: -0.5px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .card { cursor: pointer; text-decoration: none; color: inherit; transition: transform 0.2s; }
+  .card:hover { transform: translateY(-3px); }
+  .card-img { position: relative; aspect-ratio: 4/3; border-radius: 16px; overflow: hidden; }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; }
+  .card-img .badge { position: absolute; top: 10px; left: 10px; background: white; color: #2D2D2D; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 999px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .card-img .heart { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.8); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .card-body { padding: 10px 2px; }
+  .card-title { font-size: 15px; font-weight: 700; color: #2D2D2D; }
+  .card-loc { font-size: 12px; color: #6B6B6B; margin-top: 2px; }
+  .card-detail { font-size: 12px; color: #999; margin-top: 2px; }
+  .card-price { font-size: 13px; font-weight: 700; color: #2D2D2D; margin-top: 4px; }
+
+  .more-link { display: block; text-align: center; margin-top: 24px; font-size: 14px; font-weight: 700; color: #F4A09C; text-decoration: none; }
+
+  @media (max-width: 1024px) {
+    .hero-photo { height: 400px; }
+    .top-card { width: 360px; left: 32px; }
+    .card-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .hero { padding: 8px 16px 0; }
+    .hero-photo { height: 280px; }
+    .hero-grad-left { background: linear-gradient(to top, rgba(255,249,240,0.95) 0%, transparent 50%); }
+    .hero-detail { width: calc(100% - 32px); right: 16px; bottom: 16px; }
+    .detail-content { padding: 16px; }
+    .top-card { position: relative; top: 0; left: 0; width: 100%; margin-top: -40px; border-radius: 20px; }
+    .card-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pills, .grid-section, .tmrw { padding-left: 16px; padding-right: 16px; }
+    .nav { padding: 12px 16px; }
+    .nav-right { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <img src="/berry-icon.png" alt="">
+    <span class="name">Berry Kids</span>
+    <span class="loc">📍 Haarlem e.o.</span>
+  </div>
+  <div class="nav-right">
+    <a href="#">Activiteiten</a>
+    <a href="#">Vakanties</a>
+    <a href="#">Zoeken</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-photo">
+    <!-- 5 slides — one per tip -->
+    <div class="hero-slide active" data-i="0">
+      <img src="https://images.unsplash.com/photo-1540479859555-17af45c78602?w=1400&q=80" alt="">
+    </div>
+    <div class="hero-slide" data-i="1">
+      <img src="https://images.unsplash.com/photo-1472745433479-4556f22e32c2?w=1400&q=80" alt="">
+    </div>
+    <div class="hero-slide" data-i="2">
+      <img src="https://images.unsplash.com/photo-1500259571355-332da5cb07aa?w=1400&q=80" alt="">
+    </div>
+    <div class="hero-slide" data-i="3">
+      <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=1400&q=80" alt="">
+    </div>
+    <div class="hero-slide" data-i="4">
+      <img src="https://images.unsplash.com/photo-1472745433479-4556f22e32c2?w=1400&q=80" alt="">
+    </div>
+
+    <div class="hero-grad-left"></div>
+    <button class="hero-heart">🤍</button>
+
+    <!-- Detail card — white, floating on the photo -->
+    <div class="hero-detail">
+      <div class="detail-content active" data-i="0">
+        <div class="detail-cat">Festival · Gratis</div>
+        <div class="detail-title">Paasontbijt</div>
+        <div class="detail-why">Gratis, gezellig, en om 10:00 is het nog rustig. Wij zouden de pannenkoeken nemen.</div>
+        <div class="detail-tags"><span class="detail-tag free">Gratis</span><span class="detail-tag">Alle leeftijden</span><span class="detail-tag">~2 uur</span></div>
+        <div class="detail-bottom">
+          <div class="detail-meta">📍 Grote Markt · 🕐 10:00–17:00</div>
+          <a href="#" class="detail-cta">Bekijk →</a>
+        </div>
+      </div>
+      <div class="detail-content" data-i="1">
+        <div class="detail-cat">Natuur · Pannenkoeken</div>
+        <div class="detail-title">Kraantje Lek</div>
+        <div class="detail-why">Pannenkoeken in de duinen met een enorme speeltuin. Dé klassieker. Reserveer in het weekend.</div>
+        <div class="detail-tags"><span class="detail-tag">Overveen</span><span class="detail-tag">Alle leeftijden</span></div>
+        <div class="detail-bottom">
+          <div class="detail-meta">📍 Duinen, Overveen</div>
+          <a href="#" class="detail-cta">Bekijk →</a>
+        </div>
+      </div>
+      <div class="detail-content" data-i="2">
+        <div class="detail-cat">Duinen · Gratis</div>
+        <div class="detail-title">Kennemerduinen</div>
+        <div class="detail-why">Kabouterwandeling van 2 km met opdrachten onderweg. Damherten spotten!</div>
+        <div class="detail-tags"><span class="detail-tag free">Gratis</span><span class="detail-tag">Overveen</span></div>
+        <div class="detail-bottom">
+          <div class="detail-meta">📍 Overveen / Bloemendaal</div>
+          <a href="#" class="detail-cta">Bekijk →</a>
+        </div>
+      </div>
+      <div class="detail-content" data-i="3">
+        <div class="detail-cat">Kinderboerderij · Gratis</div>
+        <div class="detail-title">De Houthoeve</div>
+        <div class="detail-why">Geiten aaien, gratis, elke dag open. Ga doordeweeks — in het weekend is het druk.</div>
+        <div class="detail-tags"><span class="detail-tag free">Gratis</span><span class="detail-tag">Haarlem</span></div>
+        <div class="detail-bottom">
+          <div class="detail-meta">📍 Kleverparkweg 9</div>
+          <a href="#" class="detail-cta">Bekijk →</a>
+        </div>
+      </div>
+      <div class="detail-content" data-i="4">
+        <div class="detail-cat">Stadspark · Gratis</div>
+        <div class="detail-title">Haarlemmerhout</div>
+        <div class="detail-why">Speeltuin Groenendaal, hertenkamp, wandelpaden. Het oudste stadspark van Nederland.</div>
+        <div class="detail-tags"><span class="detail-tag free">Gratis</span><span class="detail-tag">Alle leeftijden</span></div>
+        <div class="detail-bottom">
+          <div class="detail-meta">📍 Haarlem centrum</div>
+          <a href="#" class="detail-cta">Bekijk →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="hero-progress">
+      <div class="hero-progress-bar" id="progressBar"></div>
+    </div>
+  </div>
+
+  <!-- Top 5 card -->
+  <div class="top-card">
+    <div class="tc-header">
+      <div class="tc-berry"><img src="/berry-wink.png" alt="Berry"></div>
+      <div class="tc-intro">
+        <div class="vibe">zonnige paasmaandag</div>
+        <h2>Berry's top 5 vandaag</h2>
+        <div class="weather">☀️ 18°C · Zonnig</div>
+      </div>
+    </div>
+
+    <div class="tc-list">
+      <div class="tc-label">Berry's keuzes</div>
+
+      <a class="ti active" href="#" data-i="0">
+        <div class="ti-num n1">1</div>
+        <div class="ti-thumb"><img src="https://images.unsplash.com/photo-1540479859555-17af45c78602?w=120&q=80" alt=""></div>
+        <div class="ti-body">
+          <div class="ti-title">Paasontbijt</div>
+          <div class="ti-why">Gratis, gezellig, om 10:00 nog rustig</div>
+        </div>
+      </a>
+      <a class="ti" href="#" data-i="1">
+        <div class="ti-num n2">2</div>
+        <div class="ti-thumb"><img src="https://images.unsplash.com/photo-1472745433479-4556f22e32c2?w=120&q=80" alt=""></div>
+        <div class="ti-body">
+          <div class="ti-title">Kraantje Lek</div>
+          <div class="ti-why">Pannenkoeken in de duinen</div>
+        </div>
+      </a>
+      <a class="ti" href="#" data-i="2">
+        <div class="ti-num n3">3</div>
+        <div class="ti-thumb"><img src="https://images.unsplash.com/photo-1500259571355-332da5cb07aa?w=120&q=80" alt=""></div>
+        <div class="ti-body">
+          <div class="ti-title">Kennemerduinen</div>
+          <div class="ti-why">Kabouterwandeling + damherten</div>
+        </div>
+      </a>
+      <a class="ti" href="#" data-i="3">
+        <div class="ti-num n4">4</div>
+        <div class="ti-thumb"><img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=120&q=80" alt=""></div>
+        <div class="ti-body">
+          <div class="ti-title">De Houthoeve</div>
+          <div class="ti-why">Geiten aaien, gratis, elke dag open</div>
+        </div>
+      </a>
+      <a class="ti" href="#" data-i="4">
+        <div class="ti-num n5">5</div>
+        <div class="ti-thumb"><img src="https://images.unsplash.com/photo-1472745433479-4556f22e32c2?w=120&q=80" alt=""></div>
+        <div class="ti-body">
+          <div class="ti-title">Haarlemmerhout</div>
+          <div class="ti-why">Speeltuin, hertenkamp. Altijd goed.</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="tc-footer">
+      <a href="#">Alle 76 activiteiten →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Tomorrow -->
+<div class="tmrw">
+  <div class="tmrw-inner">🌧️ Morgen regent het — pak vandaag mee</div>
+</div>
+
+<!-- Pills -->
+<div class="pills">
+  <button class="pb on"><span class="pi">🍓</span> Berry kiest</button>
+  <button class="pb"><span class="pi">☀️</span> Buiten</button>
+  <button class="pb"><span class="pi">🏠</span> Binnen</button>
+  <button class="pb"><span class="pi">⚡</span> Energie kwijt</button>
+  <button class="pb"><span class="pi">🎨</span> Rustig</button>
+  <button class="pb"><span class="pi">💚</span> Gratis</button>
+  <button class="pb"><span class="pi">✨</span> Bijzonder</button>
+  <button class="pb"><span class="pi">👶</span> Peuters</button>
+</div>
+
+<!-- Card grid -->
+<div class="grid-section">
+  <div class="grid-label">Meer in Haarlem</div>
+  <div class="card-grid">
+    <a class="card" href="#">
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=500&q=80" alt=""><div class="badge">Berry tip</div><div class="heart">🤍</div></div>
+      <div class="card-body"><div class="card-title">Teylers Museum</div><div class="card-loc">Spaarne 16, Haarlem</div><div class="card-detail">Kinderlab · 6–12 jaar</div><div class="card-price">€15</div></div>
+    </a>
+    <a class="card" href="#">
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=500&q=80" alt=""><div class="heart">🤍</div></div>
+      <div class="card-body"><div class="card-title">Aqua Mundo</div><div class="card-loc">Zandvoort</div><div class="card-detail">Subtropisch zwembad</div><div class="card-price">Vanaf €15</div></div>
+    </a>
+    <a class="card" href="#">
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=500&q=80" alt=""><div class="badge">Berry tip</div><div class="heart">🤍</div></div>
+      <div class="card-body"><div class="card-title">De Klimmuur</div><div class="card-loc">Haarlem</div><div class="card-detail">Boulderen · 4+ jaar</div><div class="card-price">€12</div></div>
+    </a>
+    <a class="card" href="#">
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500&q=80" alt=""><div class="heart">🤍</div></div>
+      <div class="card-body"><div class="card-title">FilmKoepel</div><div class="card-loc">Haarlem</div><div class="card-detail">Arthouse bioscoop</div><div class="card-price">€10 – €12</div></div>
+    </a>
+  </div>
+  <a href="#" class="more-link">Alle 76 activiteiten →</a>
+</div>
+
+<script>
+let current = 0;
+let paused = false;
+let timer;
+const INTERVAL = 5000;
+
+const slides = document.querySelectorAll('.hero-slide');
+const details = document.querySelectorAll('.detail-content');
+const items = document.querySelectorAll('.ti');
+const bar = document.getElementById('progressBar');
+
+function goTo(i) {
+  current = i;
+  slides.forEach(s => s.classList.toggle('active', +s.dataset.i === i));
+  details.forEach(d => d.classList.toggle('active', +d.dataset.i === i));
+  items.forEach(t => t.classList.toggle('active', +t.dataset.i === i));
+  // Reset progress
+  bar.classList.remove('running');
+  void bar.offsetWidth; // force reflow
+  bar.classList.add('running');
+}
+
+function next() {
+  if (!paused) goTo((current + 1) % 5);
+}
+
+function startTimer() {
+  clearInterval(timer);
+  timer = setInterval(next, INTERVAL);
+  bar.classList.add('running');
+}
+
+// Click list item → go to that slide
+items.forEach(t => {
+  t.addEventListener('click', (e) => {
+    e.preventDefault();
+    goTo(+t.dataset.i);
+    startTimer();
+  });
+});
+
+// Pause on hover
+const heroEl = document.querySelector('.hero');
+heroEl.addEventListener('mouseenter', () => { paused = true; });
+heroEl.addEventListener('mouseleave', () => { paused = false; });
+
+// Pill clicks
+document.querySelectorAll('.pb').forEach(p => {
+  p.addEventListener('click', () => {
+    document.querySelectorAll('.pb').forEach(x => x.classList.remove('on'));
+    p.classList.add('on');
+  });
+});
+
+// Start
+startTimer();
+</script>
+</body>
+</html>
