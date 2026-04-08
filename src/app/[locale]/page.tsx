@@ -7,6 +7,7 @@ import NewsletterForm from "@/components/NewsletterForm";
 import FilmVanDeWeek from "@/components/FilmVanDeWeek";
 import TheaterAgenda from "@/components/TheaterAgenda";
 import BerryCard from "@/components/BerryCard";
+import ScrollCTA from "@/components/ScrollCTA";
 import TopFiveHero from "@/components/TopFiveHero";
 import type { TopFivePick } from "@/components/TopFiveHero";
 import { getDayPlanEvents } from "@/data/events-loader";
@@ -101,11 +102,11 @@ export default async function Home() {
   }
 
   function pickTopN(items: typeof allScored, n: number): TopFivePick[] {
-    // Enforce variety: max 2 per subcategory
+    // Enforce variety: max 3 per subcategory
     const diverse = enforceVariety(
       items.filter((s) => !usedSlugs.has((s.item as Record<string, unknown>).slug as string)),
       (s) => ((s.item as Record<string, unknown>).subcategory as string) || ((s.item as Record<string, unknown>).category as string),
-      2,
+      3,
       n,
     );
     return diverse.map(toPickItem);
@@ -130,28 +131,28 @@ export default async function Home() {
   const berryPicks = pickTopN(allScored, 5);
   berryPicks.forEach((p) => usedSlugs.add(p.slug));
 
-  // 2. BUITEN — 3 outdoor, not in picks
+  // 2. BUITEN — 8 outdoor, not in picks
   const outdoorScored = allScored.filter((s) => {
     const item = s.item as Record<string, unknown>;
     const cat = item.category as string;
     const indoor = "indoor" in item ? item.indoor : (cat === "indoor" || cat === "cultuur");
     return !indoor;
   });
-  const buitenPicks = pickTopN(outdoorScored, 3);
+  const buitenPicks = pickTopN(outdoorScored, 8);
   buitenPicks.forEach((p) => usedSlugs.add(p.slug));
 
-  // 3. BINNEN — 3 indoor, not in picks or buiten
+  // 3. BINNEN — 6 indoor, not in picks or buiten
   const indoorScored = allScored.filter((s) => {
     const item = s.item as Record<string, unknown>;
     const cat = item.category as string;
     const indoor = "indoor" in item ? item.indoor : (cat === "indoor" || cat === "cultuur");
     return indoor;
   });
-  const binnenPicks = pickTopN(indoorScored, 3);
+  const binnenPicks = pickTopN(indoorScored, 6);
   binnenPicks.forEach((p) => usedSlugs.add(p.slug));
 
-  // 4. MEER ONTDEKKEN — 3 from remaining
-  const meerPicks = pickTopN(allScored, 3);
+  // 4. MEER ONTDEKKEN — 6 from remaining
+  const meerPicks = pickTopN(allScored, 6);
 
   // === BERRY INTROS (translated) ===
   const tBerry = await getTranslations("berry");
@@ -215,17 +216,20 @@ export default async function Home() {
 
       {/* ===== 2. BUITEN TIPS ===== */}
       {buitenPicks.length > 0 && (
-        <section className="mx-auto max-w-[880px] px-4 pt-10 sm:px-6">
+        <section className="mx-auto max-w-[1320px] px-4 pt-10 sm:px-8">
           <div className="mb-4">
             <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">{tHome("outdoorTitle")}</h2>
             <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{buitenIntro}</p>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-3 sm:overflow-visible">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-3 sm:overflow-visible lg:grid-cols-4 xl:grid-cols-5">
             {buitenPicks.map((p) => (
-              <div key={p.slug} className="w-[80vw] shrink-0 sm:w-auto">
+              <div key={p.slug} className="w-[70vw] shrink-0 sm:w-auto">
                 <BerryCard {...toBerryCardProps(p)} />
               </div>
             ))}
+            <div className="w-[60vw] shrink-0 sm:w-auto">
+              <ScrollCTA emoji="🌳" label="Meer buiten ontdekken" href="/activiteiten?mood=buiten" />
+            </div>
           </div>
         </section>
       )}
@@ -250,39 +254,45 @@ export default async function Home() {
 
       {/* ===== 5. BINNEN TIPS ===== */}
       {binnenPicks.length > 0 && (
-        <section className="mx-auto max-w-[880px] px-4 pb-10 sm:px-6">
+        <section className="mx-auto max-w-[1320px] px-4 pb-10 sm:px-8">
           <div className="mb-4">
             <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">{tHome("indoorTitle")}</h2>
             <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{binnenIntro}</p>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-3 sm:overflow-visible">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-3 sm:overflow-visible lg:grid-cols-4">
             {binnenPicks.map((p) => (
-              <div key={p.slug} className="w-[80vw] shrink-0 sm:w-auto">
+              <div key={p.slug} className="w-[70vw] shrink-0 sm:w-auto">
                 <BerryCard {...toBerryCardProps(p)} />
               </div>
             ))}
+            <div className="w-[60vw] shrink-0 sm:w-auto">
+              <ScrollCTA emoji="🏠" label="Meer binnen ontdekken" href="/activiteiten?mood=binnen" />
+            </div>
           </div>
         </section>
       )}
 
       {/* ===== 6. THEATER ===== */}
-      <section className="mx-auto max-w-[880px] px-4 pb-10 sm:px-6">
+      <section className="mx-auto max-w-[880px] px-4 pb-10 sm:px-8">
         <TheaterAgenda />
       </section>
 
       {/* ===== 7. MEER ONTDEKKEN ===== */}
       {meerPicks.length > 0 && (
-        <section className="mx-auto max-w-[880px] px-4 pb-10 sm:px-6">
+        <section className="mx-auto max-w-[1320px] px-4 pb-10 sm:px-8">
           <div className="mb-4">
             <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">{tHome("discoverTitle")}</h2>
             <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{tHome("discoverSub")}</p>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-3 sm:overflow-visible">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-3 sm:overflow-visible lg:grid-cols-4">
             {meerPicks.map((p) => (
-              <div key={p.slug} className="w-[80vw] shrink-0 sm:w-auto">
+              <div key={p.slug} className="w-[70vw] shrink-0 sm:w-auto">
                 <BerryCard {...toBerryCardProps(p)} />
               </div>
             ))}
+            <div className="w-[60vw] shrink-0 sm:w-auto">
+              <ScrollCTA emoji="🍓" label="Alle activiteiten" href="/activiteiten" />
+            </div>
           </div>
         </section>
       )}
