@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 const MOODS = [
   { emoji: "☀️", label: "Naar buiten", sub: "Park, strand, duinen", bg: "#FFF3E0", color: "#A67A40", href: "/activiteiten?mood=buiten" },

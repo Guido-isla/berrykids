@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { Metadata } from "next";
 import { getAllSuggestions, getSuggestionBySlug } from "@/data/dutch-calendar";
 import { activities } from "@/data/activities";

@@ -117,7 +117,7 @@ export function getAllKidsFilms() {
       times: ["Za 11:00", "Za 14:00", "Zo 11:00", "Wo 14:00"],
       ageLabel: "6+ jaar",
       description: "Mario en Luigi op avontuur door het heelal. Spectaculaire animatie voor het hele gezin.",
-      image: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDhRkZoIa0id37e.jpg",
+      image: "https://images.unsplash.com/photo-1626478885578-04c6e4d91a6c?w=400&q=80",
     },
     {
       title: "Mike & Molly vieren feest",
@@ -125,7 +125,7 @@ export function getAllKidsFilms() {
       times: ["Za 10:30", "Zo 10:30", "Wo 10:30"],
       ageLabel: "AL",
       description: "Feestelijke animatiefilm voor de allerkleinsten. Kort en vrolijk.",
-      image: "https://image.tmdb.org/t/p/w500/pLq3evLIbBv3YsJCSwkpMnEJfHf.jpg",
+      image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80",
     },
     {
       title: "Super Charlie",
@@ -133,7 +133,7 @@ export function getAllKidsFilms() {
       times: ["Za 13:30", "Zo 13:30"],
       ageLabel: "6+ jaar",
       description: "Fantasie-avontuur over een jongen met superkrachten. Scandinavische productie.",
-      image: "https://image.tmdb.org/t/p/w500/wQ8jPFMlr7JzqKBcZNjCHJm6Ohi.jpg",
+      image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&q=80",
     },
     {
       title: "Jumpers",
@@ -141,7 +141,7 @@ export function getAllKidsFilms() {
       times: ["Za 16:00", "Zo 14:00", "Wo 14:30"],
       ageLabel: "6+ jaar",
       description: "Snelle animatiefilm vol actie en humor. Nieuw in de bioscoop.",
-      image: "https://image.tmdb.org/t/p/w500/cLm1wgKwotHYxbIssVjKwtoS7PA.jpg",
+      image: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&q=80",
     },
     {
       title: "David",
@@ -149,7 +149,7 @@ export function getAllKidsFilms() {
       times: ["Za 11:30", "Zo 16:00"],
       ageLabel: "9+ jaar",
       description: "Animatiefilm over het beroemde bijbelverhaal. Mooi gemaakt, voor oudere kinderen.",
-      image: "https://image.tmdb.org/t/p/w500/b3BnJpMT0sOskL56VoKCpn7PMcj.jpg",
+      image: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&q=80",
     },
   ];
 
