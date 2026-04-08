@@ -18,20 +18,7 @@ export default function ActiviteitenPage() {
 
   return (
     <div className="min-h-screen">
-      <NewsTicker />
       <Header />
-
-      {/* Hero */}
-      <section className="bg-[#FDF1EA]">
-        <div className="mx-auto max-w-[880px] px-5 py-10 sm:px-8 sm:py-14">
-          <h1 className="text-3xl font-extrabold leading-tight text-[#2D2D2D] sm:text-4xl">
-            Activiteiten voor kinderen
-          </h1>
-          <p className="mt-2 max-w-lg text-base text-[#6B6B6B] sm:text-lg">
-            Sportclubs, musea, kinderboerderijen en meer. Altijd leuk, elk moment van het jaar.
-          </p>
-        </div>
-      </section>
 
       <main className="mx-auto max-w-[880px] px-5 py-8 sm:px-8">
         <FilterableActivities activities={activitiesWithImages} />

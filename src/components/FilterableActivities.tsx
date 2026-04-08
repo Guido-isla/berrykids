@@ -84,18 +84,15 @@ export default function FilterableActivities({ activities }: { activities: Activ
     <>
       {/* Category illustration — Berry's identity */}
       {illustration && (
-        <div className="mb-6 text-center">
+        <div className="mb-4 text-center">
           <Image
             src={illustration.src}
             alt={illustration.title}
-            width={320}
-            height={240}
-            className="mx-auto h-auto w-[240px] sm:w-[320px]"
+            width={500}
+            height={375}
+            className="mx-auto h-auto w-full max-w-[400px]"
             priority
           />
-          <h2 className="mt-2 text-[24px] font-black tracking-tight text-[#2D2D2D] sm:text-[28px]">
-            {illustration.title}
-          </h2>
         </div>
       )}
 
