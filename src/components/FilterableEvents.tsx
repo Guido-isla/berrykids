@@ -36,8 +36,8 @@ function Pill({
       onClick={onClick}
       className={`shrink-0 rounded-full px-4 py-2.5 text-sm font-semibold transition-all ${
         active
-          ? "bg-[#F4A09C] text-white"
-          : "bg-white text-[#6B6B6B] hover:bg-[#FFF0EE] hover:text-[#F4A09C]"
+          ? "bg-[#E0685F] text-white"
+          : "bg-white text-[#6B6B6B] hover:bg-[#FFF0EE] hover:text-[#E0685F]"
       }`}
     >
       {label}
@@ -85,7 +85,7 @@ export default function FilterableEvents({ events }: { events: EventWithImage[] 
               <span className="mx-1 text-[#E0D8D2]">|</span>
               <button
                 onClick={() => setFilters(DEFAULT_FILTERS)}
-                className="shrink-0 text-xs font-semibold text-[#F4A09C] hover:text-[#E88E8A]"
+                className="shrink-0 text-xs font-semibold text-[#E0685F] hover:text-[#D05A52]"
               >
                 Reset
               </button>
@@ -111,7 +111,7 @@ export default function FilterableEvents({ events }: { events: EventWithImage[] 
             </p>
             <button
               onClick={() => setFilters(DEFAULT_FILTERS)}
-              className="mt-4 rounded-full bg-[#F4A09C] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#E88E8A]"
+              className="mt-4 rounded-full bg-[#E0685F] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#D05A52]"
             >
               Toon alle activiteiten
             </button>

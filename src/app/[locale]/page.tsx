@@ -234,7 +234,7 @@ export default async function Home() {
       <section className="mx-auto max-w-[880px] px-4 py-10 sm:px-6">
         <div className="rounded-[24px] bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.04)] sm:p-10">
           <div className="mx-auto max-w-md text-center">
-            <p className="text-[12px] font-bold uppercase tracking-widest text-[#F4A09C]">{tNewsletter("frequency")}</p>
+            <p className="text-[12px] font-bold uppercase tracking-widest text-[#E0685F]">{tNewsletter("frequency")}</p>
             <h2 className="mt-2 text-[22px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[24px]">{tNewsletter("headline")}</h2>
             <p className="mt-2 text-[14px] text-[#6B6B6B]">{tNewsletter("subtitle")}</p>
             <div className="mt-5"><NewsletterForm variant="personalize" /></div>
@@ -289,7 +289,7 @@ export default async function Home() {
 
       {/* ===== 8. MEIVAKANTIE ===== */}
       <section className="mx-auto max-w-[880px] px-4 pb-10 sm:px-6">
-        <Link href="/vakanties" className="group block rounded-[24px] bg-gradient-to-r from-[#F4A09C] to-[#FFD8B0] p-6 transition-shadow hover:shadow-lg sm:p-9">
+        <Link href="/vakanties" className="group block rounded-[24px] bg-gradient-to-r from-[#E0685F] to-[#FFD8B0] p-6 transition-shadow hover:shadow-lg sm:p-9">
           <p className="text-[12px] font-bold uppercase tracking-widest text-white">{tHome("meivakantieDate")}</p>
           <h2 className="mt-2 text-[22px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[24px]">{tHome("meivakantieTitle")}</h2>
           <p className="mt-2 max-w-md text-[14px] text-[#2D2D2D]/70">{tHome("meivakantieSub")}</p>

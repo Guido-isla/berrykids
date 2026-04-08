@@ -27,7 +27,7 @@ export default function SaveButton({ slug }: { slug: string }) {
     >
       <svg
         viewBox="0 0 24 24"
-        className={`h-4.5 w-4.5 transition-colors ${saved ? "fill-[#F4A09C] stroke-[#F4A09C]" : "fill-none stroke-[#2D2D2D]/60"}`}
+        className={`h-4.5 w-4.5 transition-colors ${saved ? "fill-[#E0685F] stroke-[#E0685F]" : "fill-none stroke-[#2D2D2D]/60"}`}
         strokeWidth={2}
       >
         <path

@@ -127,7 +127,7 @@ export default function WeeklyTips({
   );
 }
 
-const NUMBER_COLORS = ["#F4A09C", "#FFD8B0", "#C5B8E8", "#B8E0D4", "#F0ECE8"];
+const NUMBER_COLORS = ["#E0685F", "#FFD8B0", "#C5B8E8", "#B8E0D4", "#F0ECE8"];
 const NUMBER_TEXT = ["#FFFFFF", "#A67A40", "#5B4FA0", "#3D7A6A", "#6B6B6B"];
 
 const body = {
@@ -151,7 +151,7 @@ const header = {
 const brandName = {
   fontSize: "18px",
   fontWeight: "800" as const,
-  color: "#F4A09C",
+  color: "#E0685F",
   margin: "8px 0 0",
 };
 
@@ -163,7 +163,7 @@ const vibeSection = {
 const vibeLabel = {
   fontSize: "13px",
   fontWeight: "700" as const,
-  color: "#F4A09C",
+  color: "#E0685F",
   margin: "0",
   textTransform: "lowercase" as const,
 };
@@ -216,7 +216,7 @@ const pickContent = {
 const pickCategory = {
   fontSize: "11px",
   fontWeight: "700" as const,
-  color: "#F4A09C",
+  color: "#E0685F",
   textTransform: "uppercase" as const,
   letterSpacing: "0.5px",
   margin: "0",
@@ -248,7 +248,7 @@ const pickMeta = {
 const pickCta = {
   fontSize: "12px",
   fontWeight: "700" as const,
-  color: "#F4A09C",
+  color: "#E0685F",
   textDecoration: "none",
   display: "inline-block" as const,
   marginTop: "6px",
@@ -261,7 +261,7 @@ const pickDivider = {
 
 const mainCta = {
   display: "inline-block" as const,
-  backgroundColor: "#F4A09C",
+  backgroundColor: "#E0685F",
   color: "#FFFFFF",
   fontSize: "14px",
   fontWeight: "700" as const,

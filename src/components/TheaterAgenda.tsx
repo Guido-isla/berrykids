@@ -34,7 +34,7 @@ export default function TheaterAgenda() {
                   className="object-cover"
                 />
                 <div className="absolute bottom-0 left-0 rounded-tr-lg bg-[#FDF1EA] px-1.5 py-0.5">
-                  <span className="text-[9px] font-bold uppercase text-[#F4A09C]">
+                  <span className="text-[9px] font-bold uppercase text-[#E0685F]">
                     {formatShortDate(show.date).split(" ")[0]}
                   </span>
                   <span className="ml-0.5 text-[11px] font-extrabold text-[#2D2D2D]">
@@ -44,7 +44,7 @@ export default function TheaterAgenda() {
               </div>
             ) : (
               <div className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-[12px] bg-[#FDF1EA]">
-                <span className="text-[10px] font-bold uppercase text-[#F4A09C]">
+                <span className="text-[10px] font-bold uppercase text-[#E0685F]">
                   {formatShortDate(show.date).split(" ")[0]}
                 </span>
                 <span className="text-[16px] font-extrabold leading-none text-[#2D2D2D]">
@@ -60,7 +60,7 @@ export default function TheaterAgenda() {
               <div className="mt-1 flex items-center gap-2">
                 <span className="text-[11px] font-semibold text-[#2D2D2D]">{show.price}</span>
                 {show.ticketUrl && (
-                  <span className="text-[11px] font-semibold text-[#F4A09C]">Tickets →</span>
+                  <span className="text-[11px] font-semibold text-[#E0685F]">Tickets →</span>
                 )}
               </div>
             </div>

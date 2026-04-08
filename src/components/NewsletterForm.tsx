@@ -147,7 +147,7 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
                 Kind {i + 1}
               </p>
               {kids.length > 1 && (
-                <button type="button" onClick={() => removeKid(i)} className="text-[12px] text-[#6B6B6B] hover:text-[#F4A09C]">
+                <button type="button" onClick={() => removeKid(i)} className="text-[12px] text-[#6B6B6B] hover:text-[#E0685F]">
                   verwijder
                 </button>
               )}
@@ -164,7 +164,7 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
                     onClick={() => updateKidAge(i, age)}
                     className={`h-8 w-8 rounded-full text-[12px] font-bold transition-all ${
                       kid.age === age
-                        ? "bg-[#F4A09C] text-white"
+                        ? "bg-[#E0685F] text-white"
                         : "bg-white text-[#6B6B6B] shadow-[0_0_0_1px_#E8E0D8] hover:text-[#2D2D2D]"
                     }`}
                   >
@@ -185,7 +185,7 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
                     onClick={() => toggleInterest(i, opt.id)}
                     className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-[12px] font-bold transition-all ${
                       kid.interests.includes(opt.id)
-                        ? "bg-[#F4A09C] text-white"
+                        ? "bg-[#E0685F] text-white"
                         : "bg-white text-[#6B6B6B] shadow-[0_0_0_1px_#E8E0D8] hover:text-[#2D2D2D]"
                     }`}
                   >
@@ -201,7 +201,7 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
           <button
             type="button"
             onClick={addKid}
-            className="text-[13px] font-bold text-[#F4A09C] hover:underline"
+            className="text-[13px] font-bold text-[#E0685F] hover:underline"
           >
             + nog een kind
           </button>
@@ -213,7 +213,7 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
           <select
             value={area}
             onChange={(e) => setArea(e.target.value)}
-            className="mt-1 w-full rounded-full border border-[#E8E0D8] bg-white px-4 py-2.5 text-[13px] font-semibold text-[#2D2D2D] outline-none focus:border-[#F4A09C]"
+            className="mt-1 w-full rounded-full border border-[#E8E0D8] bg-white px-4 py-2.5 text-[13px] font-semibold text-[#2D2D2D] outline-none focus:border-[#E0685F]"
           >
             {AREA_OPTIONS.map((a) => (
               <option key={a} value={a}>{a}</option>
@@ -227,7 +227,7 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
             type="checkbox"
             checked={consent}
             onChange={(e) => setConsent(e.target.checked)}
-            className="mt-0.5 h-4 w-4 rounded border-[#E8E0D8] accent-[#F4A09C]"
+            className="mt-0.5 h-4 w-4 rounded border-[#E8E0D8] accent-[#E0685F]"
           />
           <span className="text-[12px] leading-relaxed text-[#6B6B6B]">
             Ik wil elke vrijdag Berry&apos;s weekendtips ontvangen. Je kunt je altijd afmelden.
@@ -245,7 +245,7 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
               className={`w-full rounded-full py-3 text-[14px] font-bold text-white transition-all disabled:opacity-50 ${
                 profileReady
                   ? "bg-[#4A8060] shadow-[0_4px_16px_rgba(74,128,96,0.3)] hover:bg-[#3D7A6A] scale-[1.02]"
-                  : "bg-[#F4A09C] hover:bg-[#E88E8A]"
+                  : "bg-[#E0685F] hover:bg-[#D05A52]"
               }`}
             >
               {loading ? "Even geduld..." : profileReady ? "Klaar — aanmelden! ✓" : "Aanmelden →"}
@@ -265,12 +265,12 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="je@email.nl"
-        className="min-w-0 flex-1 rounded-full border border-[#F0E6E0] bg-white px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#999] focus:border-[#F4A09C]"
+        className="min-w-0 flex-1 rounded-full border border-[#F0E6E0] bg-white px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#999] focus:border-[#E0685F]"
       />
       <button
         type="submit"
         disabled={loading}
-        className="shrink-0 rounded-full bg-[#F4A09C] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#E88E8A] disabled:opacity-50"
+        className="shrink-0 rounded-full bg-[#E0685F] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#D05A52] disabled:opacity-50"
       >
         {loading ? "..." : variant === "personalize" ? "Volgende →" : "Inschrijven"}
       </button>

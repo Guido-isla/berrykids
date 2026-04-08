@@ -32,17 +32,17 @@ export default function EventCard({ event, berryTip }: { event: EventWithImage; 
           )}
         </div>
         <div className="mt-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#F4A09C]">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[#E0685F]">
             {event.category}
           </p>
-          <h3 className="mt-1 text-lg font-bold leading-snug tracking-tight text-[#2D2D2D] transition-colors group-hover:text-[#F4A09C]">
+          <h3 className="mt-1 text-lg font-bold leading-snug tracking-tight text-[#2D2D2D] transition-colors group-hover:text-[#E0685F]">
             {event.title}
           </h3>
           <p className="mt-1 text-sm text-[#444]">
             {formatShortDate(event.date)} · {event.location}
           </p>
           {berryTip && (
-            <p className="mt-1.5 text-[12px] font-semibold text-[#F4A09C]">
+            <p className="mt-1.5 text-[12px] font-semibold text-[#E0685F]">
               🍓 {berryTip}
             </p>
           )}

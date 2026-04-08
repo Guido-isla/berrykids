@@ -23,8 +23,8 @@ function Pill({ label, active, onClick }: { label: string; active: boolean; onCl
       onClick={onClick}
       className={`shrink-0 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all ${
         active
-          ? "border-[#F4A09C] bg-[#F4A09C] text-white shadow-sm"
-          : "border-[#E0D8D2] bg-white text-[#2D2D2D] hover:border-[#F4A09C]/40 hover:bg-[#FFF0EE]"
+          ? "border-[#E0685F] bg-[#E0685F] text-white shadow-sm"
+          : "border-[#E0D8D2] bg-white text-[#2D2D2D] hover:border-[#E0685F]/40 hover:bg-[#FFF0EE]"
       }`}
     >
       {label}
@@ -68,7 +68,7 @@ export default function FilterableActivities({ activities }: { activities: Activ
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Zoek op naam, locatie, categorie..."
-            className="w-full rounded-full border border-[#E8E0D8] bg-white px-4 py-2.5 text-[13px] outline-none transition-colors placeholder:text-[#A09488] focus:border-[#F4A09C]"
+            className="w-full rounded-full border border-[#E8E0D8] bg-white px-4 py-2.5 text-[13px] outline-none transition-colors placeholder:text-[#A09488] focus:border-[#E0685F]"
           />
         </div>
         {/* Category pills */}
@@ -97,7 +97,7 @@ export default function FilterableActivities({ activities }: { activities: Activ
             <p className="mt-1 text-[13px] text-[#6B6B6B]">Probeer een andere zoekterm of categorie.</p>
             <button
               onClick={() => { setSearchQuery(""); setCategory("all"); }}
-              className="mt-3 rounded-full bg-[#F4A09C] px-5 py-2 text-[13px] font-bold text-white hover:bg-[#E88E8A]"
+              className="mt-3 rounded-full bg-[#E0685F] px-5 py-2 text-[13px] font-bold text-white hover:bg-[#D05A52]"
             >
               Toon alles
             </button>

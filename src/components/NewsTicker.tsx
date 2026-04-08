@@ -21,7 +21,7 @@ export default function NewsTicker({ label = "DIT WEEKEND" }: { label?: string }
   return (
     <div className="overflow-hidden border-b border-[#F0ECE8] bg-[#FDF1EA]">
       <div className="relative flex items-center py-2">
-        <span className="shrink-0 rounded-sm bg-[#F4A09C] px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-white">
+        <span className="shrink-0 rounded-sm bg-[#E0685F] px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-white">
           {label}
         </span>
         <div className="ml-3 flex-1 overflow-hidden">

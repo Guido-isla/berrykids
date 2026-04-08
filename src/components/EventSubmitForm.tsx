@@ -47,7 +47,7 @@ export default function EventSubmitForm() {
         </p>
         <a
           href="/"
-          className="mt-6 inline-block rounded-full bg-[#F4A09C] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#E88E8A]"
+          className="mt-6 inline-block rounded-full bg-[#E0685F] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#D05A52]"
         >
           Terug naar Berry Kids
         </a>
@@ -74,7 +74,7 @@ export default function EventSubmitForm() {
               type="text"
               required
               placeholder="bv. Paasmarkt op de Grote Markt"
-              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#F4A09C]"
+              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E0685F]"
             />
           </div>
 
@@ -88,7 +88,7 @@ export default function EventSubmitForm() {
                 name="date"
                 type="date"
                 required
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E0685F]"
               />
             </div>
             <div>
@@ -99,7 +99,7 @@ export default function EventSubmitForm() {
                 id="endDate"
                 name="endDate"
                 type="date"
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E0685F]"
               />
             </div>
           </div>
@@ -114,7 +114,7 @@ export default function EventSubmitForm() {
                 name="timeStart"
                 type="time"
                 required
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E0685F]"
               />
             </div>
             <div>
@@ -125,7 +125,7 @@ export default function EventSubmitForm() {
                 id="timeEnd"
                 name="timeEnd"
                 type="time"
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E0685F]"
               />
             </div>
           </div>
@@ -140,7 +140,7 @@ export default function EventSubmitForm() {
               type="text"
               required
               placeholder="bv. Grote Markt, Haarlem"
-              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#F4A09C]"
+              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E0685F]"
             />
           </div>
 
@@ -154,7 +154,7 @@ export default function EventSubmitForm() {
               required
               rows={4}
               placeholder="Kort en wervend — wat maakt dit event leuk voor gezinnen?"
-              className="w-full resize-none rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#F4A09C]"
+              className="w-full resize-none rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E0685F]"
             />
           </div>
 
@@ -166,7 +166,7 @@ export default function EventSubmitForm() {
               <select
                 id="ageRange"
                 name="ageRange"
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E0685F]"
               >
                 <option value="all">Alle leeftijden</option>
                 <option value="0-3">0 – 3 jaar</option>
@@ -186,7 +186,7 @@ export default function EventSubmitForm() {
                 name="price"
                 type="text"
                 placeholder="Gratis / €7,50"
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#F4A09C]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E0685F]"
               />
             </div>
             <div>
@@ -196,7 +196,7 @@ export default function EventSubmitForm() {
               <select
                 id="setting"
                 name="setting"
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E0685F]"
               >
                 <option value="outdoor">Buiten</option>
                 <option value="indoor">Binnen</option>
@@ -214,7 +214,7 @@ export default function EventSubmitForm() {
               name="website"
               type="url"
               placeholder="https://"
-              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#F4A09C]"
+              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E0685F]"
             />
           </div>
 
@@ -228,7 +228,7 @@ export default function EventSubmitForm() {
             </p>
             <label
               htmlFor="photo"
-              className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E0D8D2] bg-[#FDFAF8] p-6 transition-colors hover:border-[#F4A09C]"
+              className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E0D8D2] bg-[#FDFAF8] p-6 transition-colors hover:border-[#E0685F]"
             >
               {imagePreview ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -276,7 +276,7 @@ export default function EventSubmitForm() {
                 name="contactName"
                 type="text"
                 required
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E0685F]"
               />
             </div>
             <div>
@@ -288,7 +288,7 @@ export default function EventSubmitForm() {
                 name="contactEmail"
                 type="email"
                 required
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#F4A09C]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors focus:border-[#E0685F]"
               />
             </div>
           </div>
@@ -301,7 +301,7 @@ export default function EventSubmitForm() {
               name="organization"
               type="text"
               placeholder="bv. Stichting Haarlemse Markten"
-              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#F4A09C]"
+              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E0685F]"
             />
           </div>
         </div>
@@ -311,7 +311,7 @@ export default function EventSubmitForm() {
         <button
           type="submit"
           disabled={state === "submitting"}
-          className="rounded-full bg-[#F4A09C] px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#E88E8A] disabled:opacity-50"
+          className="rounded-full bg-[#E0685F] px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#D05A52] disabled:opacity-50"
         >
           {state === "submitting" ? "Versturen..." : "Event insturen"}
         </button>

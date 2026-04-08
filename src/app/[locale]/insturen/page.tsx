@@ -36,7 +36,7 @@ export default function InsturenPage() {
           <p>
             <span className="font-bold text-[#2D2D2D]">Gratis plaatsing</span> voor alle kinderactiviteiten en evenementen.
             Wil je extra zichtbaarheid? Neem contact op via{" "}
-            <a href="mailto:info@berrykids.nl" className="font-semibold text-[#F4A09C]">info@berrykids.nl</a>.
+            <a href="mailto:info@berrykids.nl" className="font-semibold text-[#E0685F]">info@berrykids.nl</a>.
           </p>
         </div>
 

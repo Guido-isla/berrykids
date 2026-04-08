@@ -23,7 +23,7 @@ export default function BerrysPick({ event, reason }: { event: EventWithImage; r
         {/* Content overlay */}
         <div className="relative flex h-full min-h-[320px] flex-col justify-end p-6 sm:p-8">
           <div className="flex flex-wrap items-center gap-2 self-start">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F4A09C] px-3 py-1 text-xs font-bold text-white">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E0685F] px-3 py-1 text-xs font-bold text-white">
               <Image src="/berry-wink.png" alt="" width={16} height={16} className="h-4 w-auto" />
               Berry&apos;s Pick
             </span>

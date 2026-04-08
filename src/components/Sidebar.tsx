@@ -34,7 +34,7 @@ export default function Sidebar({
             key={i}
             href={match[2]}
             target={isExternal ? "_blank" : undefined}
-            className="font-bold text-[#F4A09C] underline decoration-[#F4A09C]/30 underline-offset-2 transition-colors hover:text-[#E88E8A]"
+            className="font-bold text-[#E0685F] underline decoration-[#E0685F]/30 underline-offset-2 transition-colors hover:text-[#D05A52]"
           >
             {match[1]}
           </Link>
@@ -58,7 +58,7 @@ export default function Sidebar({
               className="h-[52px] w-auto drop-shadow-sm"
             />
           </div>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#F4A09C]">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#E0685F]">
             Berry&apos;s dagplan
           </span>
         </div>
@@ -95,11 +95,11 @@ export default function Sidebar({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="je@email.nl"
-              className="min-w-0 flex-1 rounded-full border border-[#F0E6E0] bg-[#FFF8F4] px-3 py-2.5 text-xs outline-none focus:border-[#F4A09C]"
+              className="min-w-0 flex-1 rounded-full border border-[#F0E6E0] bg-[#FFF8F4] px-3 py-2.5 text-xs outline-none focus:border-[#E0685F]"
             />
             <button
               type="submit"
-              className="shrink-0 rounded-full bg-[#F4A09C] px-4 py-2.5 text-xs font-bold text-white hover:bg-[#E88E8A]"
+              className="shrink-0 rounded-full bg-[#E0685F] px-4 py-2.5 text-xs font-bold text-white hover:bg-[#D05A52]"
             >
               📬
             </button>

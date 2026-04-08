@@ -25,9 +25,9 @@ Berry the mascot is the heart of the experience. Not an icon in the corner — B
 ## 2. Color Palette
 
 ### Primary Brand
-- **Berry Coral** (`#F4A09C`): Primary CTA, links, badges, Berry's glow
-- **Berry Coral Hover** (`#E88E8A`): Pressed/hover state
-- **Berry Coral Soft** (`#FFE9EA`): Light backgrounds, tags
+- **Berry Coral** (`#E0685F`): Primary CTA, links, badges, Berry's glow
+- **Berry Coral Hover** (`#D05A52`): Pressed/hover state
+- **Berry Coral Soft** (`#FDDCDA`): Light backgrounds, tags
 
 ### Weather-Reactive Backgrounds (THE EDGE)
 ```
@@ -86,7 +86,7 @@ Cold:   linear-gradient(175deg, #E0F5F0 0%, #C8EAE0 40%, #B8E0D4 100%)
 ## 4. Component System
 
 ### A. Header
-- Berry icon (40px) + "Berry Kids" brand text (16px, extrabold, coral `#F4A09C`)
+- Berry icon (40px) + "Berry Kids" brand text (16px, extrabold, coral `#E0685F`)
 - Location pill: "Haarlem e.o." with pin SVG, `bg-[#2D2D2D]/[0.06]`, 10px bold
 - Nav links: "Activiteiten", "Vakanties", "Zoeken" (12px, bold, 25% opacity, coral on hover)
 - Inline search: coral bottom-border input, toggled by Zoeken button
@@ -193,7 +193,7 @@ Berry speaks in three modes, mixed per context:
 - Use pure black (`#000000`) for text (use `#2D2D2D`)
 - Use sharp corners on anything interactive
 - Show long descriptions — tips and opinions only
-- Use the old Berry Red (`#E85A5A`) — replaced by coral `#F4A09C`
+- Use the old Berry Red (`#E85A5A`) — replaced by coral `#E0685F`
 - Use Inter or any generic font — Nunito only
 - Make Berry small (< 72px) — Berry is the personality
 - Create sections that feel like a listing/directory

@@ -114,7 +114,7 @@ export default function VakantiesPage() {
 
         {/* Meivakantie — fully planned out */}
         <section>
-          <div className="mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-[#F4A09C] to-[#FFD8B0] p-6 sm:p-8">
+          <div className="mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-[#E0685F] to-[#FFD8B0] p-6 sm:p-8">
             <div className="flex items-start justify-between">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-white">
@@ -149,7 +149,7 @@ export default function VakantiesPage() {
                   {/* Day label */}
                   <div className="flex w-full shrink-0 flex-row items-center gap-2 bg-[#FFF8F4] p-3 sm:w-24 sm:flex-col sm:justify-center sm:gap-0">
                     <span className="text-2xl">{plan.emoji}</span>
-                    <span className="mt-1 text-center text-xs font-bold uppercase leading-tight text-[#F4A09C]">
+                    <span className="mt-1 text-center text-xs font-bold uppercase leading-tight text-[#E0685F]">
                       {plan.theme}
                     </span>
                   </div>

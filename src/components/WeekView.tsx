@@ -52,8 +52,8 @@ export default function WeekView({ events }: { events: Event[] }) {
               onClick={() => setSelectedIdx(i)}
               className={`flex shrink-0 flex-col items-center rounded-xl border px-2.5 py-2 transition-all sm:px-4 sm:py-3 ${
                 selectedIdx === i
-                  ? "border-[#F4A09C] bg-[#F4A09C] text-white shadow-sm"
-                  : "border-[#E0D8D2] bg-white text-[#2D2D2D] hover:border-[#F4A09C]/40"
+                  ? "border-[#E0685F] bg-[#E0685F] text-white shadow-sm"
+                  : "border-[#E0D8D2] bg-white text-[#2D2D2D] hover:border-[#E0685F]/40"
               }`}
             >
               <span className="text-xs font-bold uppercase">
@@ -62,7 +62,7 @@ export default function WeekView({ events }: { events: Event[] }) {
               <span className="text-lg font-extrabold leading-tight">{day.getDate()}</span>
               {eventCount > 0 && (
                 <span className={`mt-1 text-[10px] font-semibold ${
-                  selectedIdx === i ? "text-white/80" : "text-[#F4A09C]"
+                  selectedIdx === i ? "text-white/80" : "text-[#E0685F]"
                 }`}>
                   {eventCount} {eventCount === 1 ? "event" : "events"}
                 </span>
@@ -76,7 +76,7 @@ export default function WeekView({ events }: { events: Event[] }) {
       {dayEvents.length === 0 ? (
         <p className="text-sm text-[#6B6B6B]">
           Geen events op {formatShortDate(selectedDate)}. Bekijk onze{" "}
-          <a href="/activiteiten" className="font-semibold text-[#F4A09C]">
+          <a href="/activiteiten" className="font-semibold text-[#E0685F]">
             vaste activiteiten
           </a>.
         </p>

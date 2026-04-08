@@ -104,7 +104,7 @@ export default async function EventPage({ params }: Props) {
                   Gratis
                 </span>
               ) : (
-                <span className="rounded-full bg-[#FFE9EA] px-3 py-1 text-sm font-semibold text-[#F4A09C]">
+                <span className="rounded-full bg-[#FDDCDA] px-3 py-1 text-sm font-semibold text-[#E0685F]">
                   {event.price}
                 </span>
               )}
@@ -127,7 +127,7 @@ export default async function EventPage({ params }: Props) {
             {/* Date, time, location */}
             <div className="mt-4 space-y-2">
               <div className="flex items-center gap-3 text-sm">
-                <svg className="h-5 w-5 shrink-0 text-[#F4A09C]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <svg className="h-5 w-5 shrink-0 text-[#E0685F]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
                 </svg>
                 <div>
@@ -139,7 +139,7 @@ export default async function EventPage({ params }: Props) {
                 </div>
               </div>
               <div className="flex items-center gap-3 text-sm">
-                <svg className="h-5 w-5 shrink-0 text-[#F4A09C]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <svg className="h-5 w-5 shrink-0 text-[#E0685F]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z" />
                 </svg>
@@ -170,7 +170,7 @@ export default async function EventPage({ params }: Props) {
                   href={event.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-[#F4A09C] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#E88E8A]"
+                  className="rounded-full bg-[#E0685F] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#D05A52]"
                 >
                   Meer info & tickets →
                 </a>
@@ -179,7 +179,7 @@ export default async function EventPage({ params }: Props) {
                 href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border border-[#E0D8D2] px-4 py-2.5 text-sm font-semibold text-[#2D2D2D] transition-colors hover:border-[#F4A09C] hover:text-[#F4A09C]"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#E0D8D2] px-4 py-2.5 text-sm font-semibold text-[#2D2D2D] transition-colors hover:border-[#E0685F] hover:text-[#E0685F]"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />

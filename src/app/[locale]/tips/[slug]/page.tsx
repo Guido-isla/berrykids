@@ -83,7 +83,7 @@ export default async function TipPage({ params }: Props) {
                   Gratis
                 </span>
               ) : (
-                <span className="rounded-full bg-[#FFE9EA] px-3 py-1 text-sm font-semibold text-[#F4A09C]">
+                <span className="rounded-full bg-[#FDDCDA] px-3 py-1 text-sm font-semibold text-[#E0685F]">
                   Betaald
                 </span>
               )}
@@ -97,7 +97,7 @@ export default async function TipPage({ params }: Props) {
             </h1>
 
             <div className="mt-3 flex items-center gap-2 text-sm text-[#6B6B6B]">
-              <svg className="h-5 w-5 shrink-0 text-[#F4A09C]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <svg className="h-5 w-5 shrink-0 text-[#E0685F]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z" />
               </svg>
@@ -111,13 +111,13 @@ export default async function TipPage({ params }: Props) {
             {/* Tips */}
             {tip.tips.length > 0 && (
               <div className="mt-6 rounded-xl bg-[#FDF1EA] p-5">
-                <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#F4A09C]">
+                <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#E0685F]">
                   Tips
                 </h2>
                 <ul className="space-y-2">
                   {tip.tips.map((t, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm text-[#2D2D2D]">
-                      <span className="mt-0.5 text-[#F4A09C]">•</span>
+                      <span className="mt-0.5 text-[#E0685F]">•</span>
                       {t}
                     </li>
                   ))}
@@ -169,7 +169,7 @@ export default async function TipPage({ params }: Props) {
               href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-full items-center justify-center gap-2 rounded-full border border-[#E0D8D2] px-4 py-2.5 text-sm font-semibold text-[#2D2D2D] transition-colors hover:border-[#F4A09C] hover:text-[#F4A09C]"
+              className="flex w-full items-center justify-center gap-2 rounded-full border border-[#E0D8D2] px-4 py-2.5 text-sm font-semibold text-[#2D2D2D] transition-colors hover:border-[#E0685F] hover:text-[#E0685F]"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />

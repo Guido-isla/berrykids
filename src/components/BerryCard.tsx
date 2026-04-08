@@ -43,7 +43,7 @@ export default function BerryCard({
         </div>
         {/* Content */}
         <div className="px-3.5 py-3 sm:px-4">
-          <h3 className="text-[15px] font-extrabold leading-snug tracking-tight text-[#2D2D2D] group-hover:text-[#F4A09C] sm:text-[16px]">
+          <h3 className="text-[15px] font-extrabold leading-snug tracking-tight text-[#2D2D2D] group-hover:text-[#E0685F] sm:text-[16px]">
             {title}
           </h3>
           <p className="mt-0.5 text-[13px] text-[#6B6B6B]">

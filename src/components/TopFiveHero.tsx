@@ -22,7 +22,7 @@ export type TopFivePick = {
 
 const INTERVAL = 5000;
 const NUM_COLORS = [
-  "bg-[#F4A09C] text-white",
+  "bg-[#E0685F] text-white",
   "bg-[#FFD8B0] text-[#A67A40]",
   "bg-[#C5B8E8] text-[#5B4FA0]",
   "bg-[#B8E0D4] text-[#3D7A6A]",
@@ -136,7 +136,7 @@ export default function TopFiveHero({
             {/* Detail card — desktop only */}
             <div className="absolute bottom-6 right-6 z-[5] hidden w-[380px] lg:block">
               <div key={`detail-${current}`} className="animate-fade-up rounded-[20px] bg-white p-5 shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
-                <p className="text-[12px] font-bold uppercase tracking-[0.8px] text-[#F4A09C]">
+                <p className="text-[12px] font-bold uppercase tracking-[0.8px] text-[#E0685F]">
                   {pick.category}{pick.free ? " · Gratis" : ""}
                 </p>
                 <h3 className="mt-1 text-[22px] font-black leading-[1.1] tracking-[-0.4px] text-[#2D2D2D]">
@@ -165,7 +165,7 @@ export default function TopFiveHero({
                   </p>
                   <Link
                     href={href}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-[#F4A09C] px-4 py-2 text-[13px] font-bold text-white transition-all hover:bg-[#E88E8A] hover:-translate-y-px"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-[#E0685F] px-4 py-2 text-[13px] font-bold text-white transition-all hover:bg-[#D05A52] hover:-translate-y-px"
                   >
                     Bekijk →
                   </Link>
@@ -177,7 +177,7 @@ export default function TopFiveHero({
             <div className="absolute inset-x-0 bottom-0 z-[6] h-[3px] overflow-hidden rounded-b-[20px] sm:rounded-b-[24px]">
               <div
                 key={progressKey}
-                className="h-full bg-[#F4A09C]"
+                className="h-full bg-[#E0685F]"
                 style={{
                   width: "0%",
                   animation: paused ? "none" : `progressFill ${INTERVAL}ms linear forwards`,
@@ -193,7 +193,7 @@ export default function TopFiveHero({
               <div className="mx-auto mb-2 w-fit" style={{ animation: "berry-bob 4s ease-in-out infinite", filter: "drop-shadow(0 6px 16px rgba(244,160,156,0.3))" }}>
                 <Image src="/berry-wink.png" alt="Berry" width={100} height={100} className="h-16 w-auto sm:h-20" />
               </div>
-              <p className="text-[12px] font-bold text-[#F4A09C]">{vibe}</p>
+              <p className="text-[12px] font-bold text-[#E0685F]">{vibe}</p>
               <h2 className="text-[20px] font-black leading-[1.1] tracking-[-0.4px] text-[#2D2D2D] sm:text-[22px]">
                 Berry&apos;s picks vandaag
               </h2>
@@ -260,7 +260,7 @@ export default function TopFiveHero({
 
             {/* Footer */}
             <div className="border-t border-[#F5F0EB] px-4 py-2.5 text-center sm:px-5">
-              <Link href="/activiteiten" className="text-[12px] font-bold text-[#F4A09C]">
+              <Link href="/activiteiten" className="text-[12px] font-bold text-[#E0685F]">
                 Alle activiteiten →
               </Link>
             </div>

@@ -31,7 +31,7 @@ export default function ActivityCard({ activity }: { activity: ActivityWithImage
         </div>
         <div className="p-4">
           <div className="mb-2 flex flex-wrap items-center gap-1.5">
-            <span className="rounded-full bg-[#FFE9EA] px-2.5 py-0.5 text-xs font-semibold text-[#F4A09C]">
+            <span className="rounded-full bg-[#FDDCDA] px-2.5 py-0.5 text-xs font-semibold text-[#E0685F]">
               {activity.subcategory}
             </span>
             <span className="rounded-full bg-[#F0E6E0] px-2.5 py-0.5 text-xs text-[#6B6B6B]">
@@ -39,7 +39,7 @@ export default function ActivityCard({ activity }: { activity: ActivityWithImage
             </span>
           </div>
 
-          <h3 className="text-lg font-bold leading-snug tracking-tight text-[#2D2D2D] transition-colors group-hover:text-[#F4A09C]">
+          <h3 className="text-lg font-bold leading-snug tracking-tight text-[#2D2D2D] transition-colors group-hover:text-[#E0685F]">
             {activity.title}
           </h3>
 

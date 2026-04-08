@@ -35,7 +35,7 @@ export default function SituationPills({
           onClick={() => handleClick(pill.id)}
           className={`flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-bold transition-all ${
             active === pill.id
-              ? "bg-[#F4A09C] text-white shadow-sm"
+              ? "bg-[#E0685F] text-white shadow-sm"
               : "bg-[#F0ECE8] text-[#666] hover:bg-[#E8E0D8]"
           }`}
         >

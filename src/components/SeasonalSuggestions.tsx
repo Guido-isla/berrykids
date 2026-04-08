@@ -42,7 +42,7 @@ export default function SeasonalSuggestions({
               )}
             </div>
             <div className="p-4">
-              <h3 className="font-bold text-[#2D2D2D] transition-colors group-hover:text-[#F4A09C]">
+              <h3 className="font-bold text-[#2D2D2D] transition-colors group-hover:text-[#E0685F]">
                 {s.title}
               </h3>
               <p className="mt-1 text-sm text-[#6B6B6B]">{s.description}</p>
