@@ -451,7 +451,7 @@ export const activities: Activity[] = [
     price: "€5,50 / kinderen €4",
     free: false,
     website: "https://www.sro.nl/sportplaza-groenendaal/",
-    image: "https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=800&q=80",
+    image: "https://sportfondsen-website-prd-media.s3.eu-west-1.amazonaws.com/original_images/Header_nieuw_11.jpg",
     verified: true,
   },
 
@@ -469,7 +469,7 @@ export const activities: Activity[] = [
     ageMin: 4,
     price: "€9 / kinderen €7",
     free: false,
-    image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800&q=80",
+    image: "https://d1asnx830aw7pt.cloudfront.net/photos/4effc3ed-6be5-4104-ba66-5a2920adfb56/kvds-20240201-234038-x2d-100c_800x600xm.jpg",
     verified: true,
   },
 
@@ -488,7 +488,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     price: "Vanaf €9",
     free: false,
-    image: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=800&q=80",
+    image: "https://playgroundhaarlem.nl/wp-content/uploads/2023/02/banner-playground.jpeg",
     verified: true,
   },
   {
@@ -520,7 +520,7 @@ export const activities: Activity[] = [
     ageMin: 1,
     ageMax: 6,
     free: true,
-    image: "https://images.unsplash.com/photo-1596997000103-e597b3ca50df?w=800&q=80",
+    image: "https://speeltuinramplaan.wordpress.com/wp-content/uploads/2024/06/img_20240611_130934681.jpg",
     verified: true,
   },
   {
@@ -536,7 +536,7 @@ export const activities: Activity[] = [
     ageMin: 2,
     ageMax: 10,
     free: true,
-    image: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=800&q=80",
+    image: "https://b3884015.smushcdn.com/3884015/wp-content/uploads/2013/06/SpeeltuinFloragaarde_SpeeltuinFloragaarde_1.jpg?lossy=0&strip=1&webp=1",
     verified: true,
   },
 
@@ -553,7 +553,7 @@ export const activities: Activity[] = [
     area: "Bloemendaal",
     ageLabel: "Alle leeftijden",
     free: true,
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/North_Sea%2C_Bloemendaal_aan_Zee%2C_The_Netherlands%2C_Oct._2011%3B_Photo_by_Pejman_Akbarzadeh_%28Persian_Dutch_Network%29.jpg/960px-North_Sea%2C_Bloemendaal_aan_Zee%2C_The_Netherlands%2C_Oct._2011%3B_Photo_by_Pejman_Akbarzadeh_%28Persian_Dutch_Network%29.jpg",
     availableMonths: [4, 5, 6, 7, 8, 9, 10],
     verified: true,
   },
@@ -570,7 +570,7 @@ export const activities: Activity[] = [
     area: "Haarlem",
     ageLabel: "Alle leeftijden",
     free: true,
-    image: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800&q=80",
+    image: "https://d1asnx830aw7pt.cloudfront.net/sets/dfdf319c-4c4c-4212-addd-8cc9a79e1e2e/go-kids-het-molentje_800x600xm.jpg",
     verified: true,
   },
 
@@ -588,7 +588,7 @@ export const activities: Activity[] = [
     ageMin: 6,
     free: true,
     openingHours: "Wo-zo 13:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=800&q=80",
+    image: "https://www.archeologischmuseumhaarlem.nl/vleeshal.jpg",
     verified: true,
   },
   {
@@ -605,7 +605,7 @@ export const activities: Activity[] = [
     price: "€10 / kinderen gratis",
     free: false,
     openingHours: "Di-zo 11:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/6/69/Verwey_Museum_Haarlem.jpg",
     verified: true,
   },
   {
@@ -623,7 +623,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     price: "Vanaf €5",
     free: false,
-    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/3/34/Haarlem_Historisch_Museum_-_Groot_Heiligland_47.jpg",
     verified: true,
   },
 
@@ -643,7 +643,7 @@ export const activities: Activity[] = [
     price: "Vanaf €8",
     free: false,
     website: "https://www.ballorig.nl",
-    image: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?w=800&q=80",
+    image: "https://www.ballorig.nl/wp-content/uploads/2022/05/Binnenspeeltuin-Ballorig.jpg",
     verified: true,
   },
   {
@@ -660,7 +660,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     price: "Vanaf €9",
     free: false,
-    image: "https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=800&q=80",
+    image: "https://b3884015.smushcdn.com/3884015/wp-content/uploads/2021/10/center-parcs_baluba-indoor-speelparadijs_3-1.png?lossy=0&strip=1&webp=1",
     verified: true,
   },
 
@@ -678,7 +678,7 @@ export const activities: Activity[] = [
     price: "€5 / kinderen €3,50",
     free: false,
     website: "https://www.sro.nl",
-    image: "https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=800&q=80",
+    image: "https://b1307353.smushcdn.com/1307353/wp-content/uploads/2019/02/DSC_1248.jpg?lossy=1&strip=1&webp=1",
     verified: true,
   },
 
@@ -696,7 +696,7 @@ export const activities: Activity[] = [
     ageMin: 4,
     price: "Vanaf €6 per spel",
     free: false,
-    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Raakscomplex-haarlem.jpg",
     verified: true,
   },
 
@@ -715,7 +715,7 @@ export const activities: Activity[] = [
     free: false,
     price: "Lunch vanaf €12",
     website: "https://www.jfrfrpfm.nl",
-    image: "https://images.unsplash.com/photo-1559526324-593bc073d938?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/9/98/2015_0512_Jopenkerk.jpg",
     verified: true,
   },
 
@@ -741,7 +741,7 @@ export const activities: Activity[] = [
     free: false,
     website: "https://www.linnaeushof.nl",
     openingHours: "Apr-okt, dagelijks 10:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=800&q=80",
+    image: "https://www.linnaeushof.nl/wp-content/uploads/2026/02/Seayoulaterfotografie-132-scaled.jpg",
     availableMonths: [4, 5, 6, 7, 8, 9, 10],
     verified: true,
   },
@@ -760,7 +760,7 @@ export const activities: Activity[] = [
     price: "Kleine entree",
     free: false,
     website: "https://speeltuingroenendaal.nl",
-    image: "https://images.unsplash.com/photo-1472745433479-4556f22e32c2?w=800&q=80",
+    image: "https://d1asnx830aw7pt.cloudfront.net/sets/2dca0768-de6b-45a4-b00a-ea80244b38c7/go-kids-speeltuin-groenendaal_800x600xm.jpg",
     verified: true,
   },
   {
@@ -778,7 +778,7 @@ export const activities: Activity[] = [
     price: "€0,50 per persoon",
     free: false,
     website: "https://burchttercleeff.nl",
-    image: "https://images.unsplash.com/photo-1560807707-8cc77767d783?w=800&q=80",
+    image: "https://b3884015.smushcdn.com/3884015/wp-content/uploads/sites/9/2024/11/Barenshak.jpg?lossy=0&strip=1&webp=1",
     verified: true,
   },
   {
@@ -795,7 +795,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     free: true,
     website: "https://www.jeugdlandhaarlem.nl",
-    image: "https://images.unsplash.com/photo-1575783970733-1aaedde1db74?w=800&q=80",
+    image: "https://b3884015.smushcdn.com/3884015/wp-content/uploads/2017/03/SpeeltuinJeugdlandHaarlem_nldoetSpeeltuinJeugdland_2-1.png?lossy=0&strip=1&webp=1",
     verified: true,
   },
   {
@@ -812,7 +812,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     free: true,
     website: "https://speeltuindepapegaai.nl",
-    image: "https://images.unsplash.com/photo-1472745433479-4556f22e32c2?w=800&q=80",
+    image: "https://b3884015.smushcdn.com/3884015/wp-content/uploads/2013/08/SpeeltuinHaarlemOost_SpeeltuinHaarlemOost_2-1.png?lossy=0&strip=1&webp=1",
     verified: true,
   },
   {
@@ -829,7 +829,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     free: true,
     website: "https://speeltuindeeenhoorn.nl",
-    image: "https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=800&q=80",
+    image: "https://speeltuindeeenhoorn.nl/wp-content/uploads/2015/02/slider-speeltuin-2.jpg",
     verified: true,
   },
   {
@@ -846,7 +846,7 @@ export const activities: Activity[] = [
     ageMax: 12,
     free: true,
     website: "https://speeltuinelba.nl",
-    image: "https://images.unsplash.com/photo-1560807707-8cc77767d783?w=800&q=80",
+    image: "https://d1asnx830aw7pt.cloudfront.net/sets/bcd72827-9488-4e3c-8409-e29271aed601/speeltuin-elba-go-kids_800x600xm.jpg",
     verified: true,
   },
   {
@@ -882,7 +882,7 @@ export const activities: Activity[] = [
     free: true,
     openingHours: "Za-zo 13:00 – 17:00",
     website: "https://www.artisklas-haarlem.nl",
-    image: "https://images.unsplash.com/photo-1497752531616-c3afd9760a11?w=800&q=80",
+    image: "https://www.artisklas-haarlem.nl/wp-content/uploads/2017/01/website.jpg",
     verified: true,
   },
   {
@@ -897,7 +897,7 @@ export const activities: Activity[] = [
     ageLabel: "Alle leeftijden",
     free: true,
     website: "https://www.hertenkampbloemendaal.nl",
-    image: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800&q=80",
+    image: "https://www.hertenkampbloemendaal.nl/wp-content/uploads/2025/11/hertenkamp_foto_9x16.jpg",
     verified: true,
   },
   {
@@ -932,7 +932,7 @@ export const activities: Activity[] = [
     free: false,
     website: "https://www.hetdolhuys.nl",
     openingHours: "Di-zo 10:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=800&q=80",
+    image: "https://museumvandegeest.nl/wp-content/uploads/2023/11/MvdG-Nwsbrief-Header-1280x1000px.jpg",
     verified: true,
   },
   {
@@ -950,7 +950,7 @@ export const activities: Activity[] = [
     free: false,
     website: "https://www.molenadriaan.nl",
     openingHours: "Ma-za 10:00 – 17:00, zo 12:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1533669955142-6a73332af4db?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Molen_De_Adriaan_%28Haarlem%29.JPG",
     verified: true,
   },
   {
@@ -966,7 +966,7 @@ export const activities: Activity[] = [
     free: true,
     openingHours: "Zo 12:00 – 18:00",
     website: "https://www.draaiorgelmuseum.org",
-    image: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=800&q=80",
+    image: "https://draaiorgelmuseum.org/sites/default/files/styles/flexslider_full/public/Opening%20Werfstraa%205-10-69.jpg?itok=GNT45xAo",
     verified: true,
   },
   {
@@ -985,7 +985,7 @@ export const activities: Activity[] = [
     free: false,
     website: "https://www.haarlemmermeermuseum.nl",
     openingHours: "Di-zo 10:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/8/82/Gemaal_Cruquius_Haarlemmermeer_-_panoramio_-_Rokus_Cornelis_%282%29.jpg",
     verified: true,
   },
   {
@@ -1001,7 +1001,7 @@ export const activities: Activity[] = [
     free: true,
     openingHours: "Wo, za, zo 14:00 – 17:00",
     website: "https://www.juttersmuseum.nl",
-    image: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800&q=80",
+    image: "https://images.squarespace-cdn.com/content/v1/58871dfdc534a5e184145101/1485257331909-CMMWRXQX2AVY1N70D27H/juttersmuseum+home.jpg",
     verified: true,
   },
   {
@@ -1019,7 +1019,7 @@ export const activities: Activity[] = [
     price: "Kleine entree",
     free: false,
     website: "https://www.pietervermeulenmuseum.nl",
-    image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&q=80",
+    image: "https://www.pietervermeulenmuseum.nl/wp-content/uploads/2023/10/BruinvisSliderBewerkt.jpg",
     verified: true,
   },
   {
@@ -1035,7 +1035,7 @@ export const activities: Activity[] = [
     price: "€5 / kinderen gratis",
     free: false,
     website: "https://www.bavo.nl",
-    image: "https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/7/70/Gezicht_op_Grote_Kerk_of_Sint-Bavokerk_te_Haarlem%2C_RP-F-F19150.jpg",
     verified: true,
   },
 
@@ -1053,7 +1053,7 @@ export const activities: Activity[] = [
     price: "€10 – €13",
     free: false,
     website: "https://www.pathe.nl/bioscopen/pathe-haarlem",
-    image: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Raakscomplex-haarlem.jpg",
     verified: true,
   },
   {
@@ -1069,7 +1069,7 @@ export const activities: Activity[] = [
     price: "€10 – €12",
     free: false,
     website: "https://kinepolis.nl/bioscopen/kinepolis-haarlem/",
-    image: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Raakscomplex-haarlem.jpg",
     verified: true,
   },
   {
@@ -1085,7 +1085,7 @@ export const activities: Activity[] = [
     price: "€10 – €12",
     free: false,
     website: "https://filmkoepel.nl",
-    image: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/c/c4/Haarlem-Koepelgevangenis-08.jpg",
     verified: true,
   },
   {
@@ -1102,7 +1102,7 @@ export const activities: Activity[] = [
     price: "Vanaf €10",
     free: false,
     website: "https://stadsschouwburghaarlem.nl",
-    image: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Stadsschouwburg_Haarlem_front.jpg",
     verified: true,
   },
   {
@@ -1119,7 +1119,7 @@ export const activities: Activity[] = [
     price: "Vanaf €8",
     free: false,
     website: "https://philhaarlem.nl",
-    image: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Philharmonie_Haarlem_2019.jpg",
     verified: true,
   },
 
@@ -1138,7 +1138,7 @@ export const activities: Activity[] = [
     price: "€17,50 (intro, onder 18)",
     free: false,
     website: "https://www.boulderhaldefabriek.nl",
-    image: "https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=800&q=80",
+    image: "https://images.squarespace-cdn.com/content/v1/649aa459b26b3a5f887aa7ad/1dcf1327-cb8c-4786-b863-434f29c63780/Banner_1.jpg",
     verified: true,
   },
   {
@@ -1156,7 +1156,7 @@ export const activities: Activity[] = [
     price: "Vanaf €20 per persoon",
     free: false,
     website: "https://haarlem.letsescape.nl",
-    image: "https://images.unsplash.com/photo-1509515837298-2c67a3933321?w=800&q=80",
+    image: "https://haarlem.letsescape.nl/wp-content/uploads/2018/11/room-9-360x222.jpg",
     verified: true,
   },
   {
@@ -1173,7 +1173,7 @@ export const activities: Activity[] = [
     price: "Pannenkoeken vanaf €8",
     free: false,
     website: "https://www.pannenkoekenparadijs.nl",
-    image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80",
+    image: "https://www.pannenkoekenparadijs.nl/wp-content/uploads/2021/08/Pannenkoekenparadijs-Haarlem-header.jpg",
     verified: true,
   },
   {

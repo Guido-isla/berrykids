@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import type { Activity } from "@/data/activities";
 import ActivityCard from "./ActivityCard";
 
@@ -16,6 +17,21 @@ const CATEGORY_OPTIONS = [
 ] as const;
 
 type CategoryFilter = (typeof CATEGORY_OPTIONS)[number]["value"];
+
+/** Map categories to Berry illustrations */
+const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; title: string }> = {
+  sport: { src: "/illustrations/berry-sport.png", title: "Sport & Buiten" },
+  natuur: { src: "/illustrations/berry-natuur.png", title: "Natuur" },
+  dieren: { src: "/illustrations/berry-natuur.png", title: "Dieren" },
+  cultuur: { src: "/illustrations/berry-cultuur.png", title: "Cultuur" },
+  indoor: { src: "/illustrations/berry-zwemmen.png", title: "Indoor" },
+};
+
+/** Map mood query params to category filters */
+const MOOD_TO_CATEGORY: Record<string, CategoryFilter> = {
+  buiten: "natuur",
+  binnen: "indoor",
+};
 
 function Pill({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
@@ -36,11 +52,15 @@ export default function FilterableActivities({ activities }: { activities: Activ
   const [category, setCategory] = useState<CategoryFilter>("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Read ?q= from URL on mount
+  // Read ?q= and ?mood= from URL on mount
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const q = params.get("q");
     if (q) setSearchQuery(q);
+    const mood = params.get("mood");
+    if (mood && mood in MOOD_TO_CATEGORY) {
+      setCategory(MOOD_TO_CATEGORY[mood]);
+    }
   }, []);
 
   let filtered = category === "all"
@@ -58,8 +78,27 @@ export default function FilterableActivities({ activities }: { activities: Activ
     );
   }
 
+  const illustration = category !== "all" ? CATEGORY_ILLUSTRATIONS[category] : null;
+
   return (
     <>
+      {/* Category illustration — Berry's identity */}
+      {illustration && (
+        <div className="mb-6 text-center">
+          <Image
+            src={illustration.src}
+            alt={illustration.title}
+            width={320}
+            height={240}
+            className="mx-auto h-auto w-[240px] sm:w-[320px]"
+            priority
+          />
+          <h2 className="mt-2 text-[24px] font-black tracking-tight text-[#2D2D2D] sm:text-[28px]">
+            {illustration.title}
+          </h2>
+        </div>
+      )}
+
       <div className="sticky top-0 z-40 -mx-5 border-b border-[#F0E6E0] bg-white/95 px-5 py-3 shadow-sm backdrop-blur-sm sm:-mx-8 sm:px-8 sm:py-4">
         {/* Search bar */}
         <div className="mb-2">
