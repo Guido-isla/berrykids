@@ -14,7 +14,9 @@ import { resolveEventImages } from "@/lib/photos";
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return getAllSuggestions().map((s) => ({ slug: s.slug }));
+  return ["nl", "en"].flatMap((locale) =>
+    getAllSuggestions().map((s) => ({ locale, slug: s.slug }))
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

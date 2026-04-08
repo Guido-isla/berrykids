@@ -16,7 +16,9 @@ type Props = { params: Promise<{ slug: string }> };
 const MONTH_NAMES = ["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
 
 export async function generateStaticParams() {
-  return activities.map((a) => ({ slug: a.slug }));
+  return ["nl", "en"].flatMap((locale) =>
+    activities.map((a) => ({ locale, slug: a.slug }))
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

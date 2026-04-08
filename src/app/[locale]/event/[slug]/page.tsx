@@ -25,7 +25,9 @@ function getAllEvents() {
 }
 
 export async function generateStaticParams() {
-  return getAllEvents().map((e) => ({ slug: e.slug }));
+  return ["nl", "en"].flatMap((locale) =>
+    getAllEvents().map((e) => ({ locale, slug: e.slug }))
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
