@@ -254,12 +254,14 @@ export default async function Home() {
         </section>
       )}
 
-      {/* ===== FILM + THEATER ===== */}
-      <div className="mx-auto max-w-[880px] px-5 py-10 sm:px-6">
-        <div className="grid gap-6 lg:grid-cols-2">
-          <FilmVanDeWeek />
-          <TheaterAgenda />
-        </div>
+      {/* ===== FILMS ===== */}
+      <div className="mx-auto max-w-[880px] px-5 py-8 sm:px-6">
+        <FilmVanDeWeek />
+      </div>
+
+      {/* ===== THEATER ===== */}
+      <div className="mx-auto max-w-[880px] px-5 pb-10 sm:px-6">
+        <TheaterAgenda />
       </div>
 
       {/* ===== MEER ONTDEKKEN ===== */}

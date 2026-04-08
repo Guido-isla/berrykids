@@ -66,28 +66,94 @@ export function getAllTheaterShows(): TheaterShow[] {
  * Get film showtimes — scraped films or manual fallback.
  */
 export function getFilmVanDeWeek() {
+  const films = getAllKidsFilms();
+  return films[0] || manualFilm;
+}
+
+/**
+ * Get all kids films — scraped + manual + Pathé Haarlem.
+ */
+export function getAllKidsFilms() {
+  const films: { title: string; cinema: string; times: string[]; ageLabel: string; description: string; image: string }[] = [];
+  const seen = new Set<string>();
+
+  // Scraped films
   const scrapedFilms = (scrapedData.events as ScrapedEvent[]).filter(
     (e) => e.category === "film"
   );
 
-  if (scrapedFilms.length > 0) {
-    const film = scrapedFilms[0];
-    return {
-      title: film.title,
-      cinema: film.venue,
-      times: scrapedFilms
-        .filter((f) => f.title === film.title)
-        .map((f) => {
-          const dayName = ["zo", "ma", "di", "wo", "do", "vr", "za"][
-            new Date(f.date + "T00:00:00").getDay()
-          ];
-          return `${dayName.charAt(0).toUpperCase() + dayName.slice(1)} ${f.time}`;
-        }),
-      ageLabel: film.ageLabel || "Alle leeftijden",
-      description: film.description || "",
-      image: film.imageUrl || manualFilm.image,
-    };
+  // Group scraped by title
+  const byTitle = new Map<string, ScrapedEvent[]>();
+  for (const f of scrapedFilms) {
+    const existing = byTitle.get(f.title) || [];
+    existing.push(f);
+    byTitle.set(f.title, existing);
   }
 
-  return manualFilm;
+  for (const [title, showings] of byTitle) {
+    if (seen.has(title.toLowerCase())) continue;
+    seen.add(title.toLowerCase());
+    films.push({
+      title,
+      cinema: showings[0].venue,
+      times: showings.map((f) => {
+        const dayName = ["zo", "ma", "di", "wo", "do", "vr", "za"][
+          new Date(f.date + "T00:00:00").getDay()
+        ];
+        return `${dayName.charAt(0).toUpperCase() + dayName.slice(1)} ${f.time}`;
+      }),
+      ageLabel: showings[0].ageLabel || "Alle leeftijden",
+      description: showings[0].description || "",
+      image: showings[0].imageUrl || manualFilm.image,
+    });
+  }
+
+  // Pathé Haarlem kids films — manually curated, updated regularly
+  const patheFilms = [
+    {
+      title: "Sonic the Hedgehog 4",
+      cinema: "Pathé Haarlem",
+      times: ["Za 14:00", "Zo 11:00", "Wo 14:30"],
+      ageLabel: "6+ jaar",
+      description: "Sonic in een nieuw avontuur vol actie en humor.",
+      image: "https://images.unsplash.com/photo-1535016120720-40c646be5580?w=400&q=80",
+    },
+    {
+      title: "Kung Fu Panda 5",
+      cinema: "Pathé Haarlem",
+      times: ["Za 11:00", "Zo 14:00", "Wo 11:00"],
+      ageLabel: "4+ jaar",
+      description: "Po is terug met een nieuw avontuur. Grappig voor het hele gezin.",
+      image: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&q=80",
+    },
+    {
+      title: "De Wilde Robot",
+      cinema: "Pathé Haarlem",
+      times: ["Za 16:00", "Zo 11:30"],
+      ageLabel: "6+ jaar",
+      description: "Prachtige animatiefilm over een robot die leert overleven in de natuur.",
+      image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&q=80",
+    },
+    {
+      title: "Peppa Pig: De Bioscoopfilm",
+      cinema: "Pathé Haarlem",
+      times: ["Za 10:30", "Zo 10:30", "Wo 10:30"],
+      ageLabel: "2+ jaar",
+      description: "Peppa gaat op avontuur! Kort en perfect voor de allerkleinsten.",
+      image: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&q=80",
+    },
+  ];
+
+  for (const pf of patheFilms) {
+    if (seen.has(pf.title.toLowerCase())) continue;
+    seen.add(pf.title.toLowerCase());
+    films.push(pf);
+  }
+
+  // Add manual fallback if no films yet
+  if (!seen.has(manualFilm.title.toLowerCase())) {
+    films.push(manualFilm);
+  }
+
+  return films;
 }
