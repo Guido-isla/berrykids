@@ -189,7 +189,7 @@ export default function TopFiveHero({
           {/* Top-5 card */}
           <div className="relative z-10 -mt-6 mx-3 rounded-[20px] bg-white shadow-[0_8px_40px_rgba(0,0,0,0.08)] sm:-mt-8 sm:mx-4 sm:rounded-[24px] lg:absolute lg:left-12 lg:top-7 lg:mt-0 lg:mx-0 lg:w-[420px]">
             {/* Berry centered header */}
-            <div className="px-4 pt-5 text-center sm:px-5 sm:pt-6">
+            <div className="pick-header-reveal px-4 pt-5 text-center sm:px-5 sm:pt-6">
               <div className="mx-auto mb-2 w-fit" style={{ animation: "berry-bob 4s ease-in-out infinite", filter: "drop-shadow(0 6px 16px rgba(244,160,156,0.3))" }}>
                 <Image src="/berry-wink.png" alt="Berry" width={100} height={100} className="h-16 w-auto sm:h-20" />
               </div>
@@ -209,7 +209,7 @@ export default function TopFiveHero({
                 return (
                   <div
                     key={p.slug}
-                    className={`transition-colors ${
+                    className={`pick-reveal pick-reveal-${i} transition-colors ${
                       i === current ? "bg-[#FFF3E0]" : "hover:bg-[#FFF9F0]"
                     } ${i > 0 ? "border-t border-[#F5F0EB]" : ""}`}
                   >
@@ -264,6 +264,24 @@ export default function TopFiveHero({
                 Alle activiteiten →
               </Link>
             </div>
+          </div>
+
+          {/* Mobile #1 lock moment — brief detail that auto-fades */}
+          <div className="lock-moment mt-2 rounded-[16px] bg-[#FFF3E0] px-4 py-3 lg:hidden">
+            <Link href={href} className="block">
+              <p className="text-[11px] font-bold uppercase tracking-[0.8px] text-[#E0685F]">
+                Berry&apos;s #1 pick
+              </p>
+              <p className="mt-1 text-[15px] font-black leading-snug text-[#2D2D2D]">
+                {picks[0]?.title}
+              </p>
+              <p className="mt-0.5 text-[13px] font-semibold text-[#6B6B6B]">
+                {picks[0]?.whyNow}
+              </p>
+              <span className="mt-2 inline-block rounded-full bg-[#E0685F] px-4 py-1.5 text-[12px] font-bold text-white">
+                Bekijk →
+              </span>
+            </Link>
           </div>
         </div>
 
