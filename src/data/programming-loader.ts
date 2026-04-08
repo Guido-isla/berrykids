@@ -108,39 +108,48 @@ export function getAllKidsFilms() {
     });
   }
 
-  // Pathé Haarlem kids films — manually curated, updated regularly
+  // Pathé Haarlem kids films — manually curated from pathe.nl/bioscoop/haarlem
+  // Updated April 2026 — real current lineup
   const patheFilms = [
     {
-      title: "Sonic the Hedgehog 4",
+      title: "The Super Mario Galaxy Movie",
       cinema: "Pathé Haarlem",
-      times: ["Za 14:00", "Zo 11:00", "Wo 14:30"],
+      times: ["Za 11:00", "Za 14:00", "Zo 11:00", "Wo 14:00"],
       ageLabel: "6+ jaar",
-      description: "Sonic in een nieuw avontuur vol actie en humor.",
-      image: "https://images.unsplash.com/photo-1535016120720-40c646be5580?w=400&q=80",
+      description: "Mario en Luigi op avontuur door het heelal. Spectaculaire animatie voor het hele gezin.",
+      image: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDhRkZoIa0id37e.jpg",
     },
     {
-      title: "Kung Fu Panda 5",
-      cinema: "Pathé Haarlem",
-      times: ["Za 11:00", "Zo 14:00", "Wo 11:00"],
-      ageLabel: "4+ jaar",
-      description: "Po is terug met een nieuw avontuur. Grappig voor het hele gezin.",
-      image: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&q=80",
-    },
-    {
-      title: "De Wilde Robot",
-      cinema: "Pathé Haarlem",
-      times: ["Za 16:00", "Zo 11:30"],
-      ageLabel: "6+ jaar",
-      description: "Prachtige animatiefilm over een robot die leert overleven in de natuur.",
-      image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&q=80",
-    },
-    {
-      title: "Peppa Pig: De Bioscoopfilm",
+      title: "Mike & Molly vieren feest",
       cinema: "Pathé Haarlem",
       times: ["Za 10:30", "Zo 10:30", "Wo 10:30"],
-      ageLabel: "2+ jaar",
-      description: "Peppa gaat op avontuur! Kort en perfect voor de allerkleinsten.",
-      image: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&q=80",
+      ageLabel: "AL",
+      description: "Feestelijke animatiefilm voor de allerkleinsten. Kort en vrolijk.",
+      image: "https://image.tmdb.org/t/p/w500/pLq3evLIbBv3YsJCSwkpMnEJfHf.jpg",
+    },
+    {
+      title: "Super Charlie",
+      cinema: "Pathé Haarlem",
+      times: ["Za 13:30", "Zo 13:30"],
+      ageLabel: "6+ jaar",
+      description: "Fantasie-avontuur over een jongen met superkrachten. Scandinavische productie.",
+      image: "https://image.tmdb.org/t/p/w500/wQ8jPFMlr7JzqKBcZNjCHJm6Ohi.jpg",
+    },
+    {
+      title: "Jumpers",
+      cinema: "Pathé Haarlem",
+      times: ["Za 16:00", "Zo 14:00", "Wo 14:30"],
+      ageLabel: "6+ jaar",
+      description: "Snelle animatiefilm vol actie en humor. Nieuw in de bioscoop.",
+      image: "https://image.tmdb.org/t/p/w500/cLm1wgKwotHYxbIssVjKwtoS7PA.jpg",
+    },
+    {
+      title: "David",
+      cinema: "Pathé Haarlem",
+      times: ["Za 11:30", "Zo 16:00"],
+      ageLabel: "9+ jaar",
+      description: "Animatiefilm over het beroemde bijbelverhaal. Mooi gemaakt, voor oudere kinderen.",
+      image: "https://image.tmdb.org/t/p/w500/b3BnJpMT0sOskL56VoKCpn7PMcj.jpg",
     },
   ];
 

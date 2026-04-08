@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "us.images.westend61.de" },
       { protocol: "https", hostname: "www.spaarnwoudepark.nl" },
       { protocol: "https", hostname: "streetjump.nl" },
+      { protocol: "https", hostname: "image.tmdb.org" },
     ],
   },
 };
