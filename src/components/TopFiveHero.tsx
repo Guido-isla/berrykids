@@ -23,13 +23,10 @@ export type TopFivePick = {
 export type MoodKey = "berry" | "buiten" | "binnen" | "energie" | "rustig" | "gratis" | "bijzonder";
 
 const MOODS: { id: MoodKey; label: string; emoji: string }[] = [
-  { id: "berry", label: "Berry kiest", emoji: "🍓" },
+  { id: "berry", label: "Berry's picks", emoji: "🍓" },
   { id: "buiten", label: "Buiten", emoji: "☀️" },
   { id: "binnen", label: "Binnen", emoji: "🏠" },
-  { id: "energie", label: "Energie kwijt", emoji: "⚡" },
-  { id: "rustig", label: "Rustig", emoji: "🎨" },
   { id: "gratis", label: "Gratis", emoji: "💚" },
-  { id: "bijzonder", label: "Bijzonder", emoji: "✨" },
 ];
 
 const INTERVAL = 5000;
@@ -51,6 +48,7 @@ type ForecastDay = {
 export default function TopFiveHero({
   picksByMood,
   vibe,
+  dailyMessage,
   weatherIcon,
   weatherTemp,
   weatherLabel,
@@ -60,6 +58,7 @@ export default function TopFiveHero({
 }: {
   picksByMood: Record<MoodKey, TopFivePick[]>;
   vibe: string;
+  dailyMessage: string;
   weatherIcon: string;
   weatherTemp: number;
   weatherLabel: string;
@@ -103,8 +102,8 @@ export default function TopFiveHero({
   if (!pick) return null;
   const href = pick.isEvent ? `/event/${pick.slug}` : `/activiteiten/${pick.slug}`;
 
-  const cardTitle = mood === "berry" ? "Berry\u2019s top 5 vandaag" : `Top 5 ${MOODS.find((m) => m.id === mood)?.label.toLowerCase()}`;
-  const listLabel = mood === "berry" ? "Berry\u2019s keuzes" : MOODS.find((m) => m.id === mood)?.label || "";
+  const cardTitle = mood === "berry" ? "Berry\u2019s picks vandaag" : `Top 5 ${MOODS.find((m) => m.id === mood)?.label.toLowerCase()}`;
+  const listLabel = mood === "berry" ? "Berry\u2019s picks" : MOODS.find((m) => m.id === mood)?.label || "";
 
   return (
     <div ref={heroRef}>
@@ -234,22 +233,23 @@ export default function TopFiveHero({
 
           {/* Top-5 card */}
           <div className="relative z-10 -mt-6 mx-3 rounded-[20px] bg-white shadow-[0_8px_40px_rgba(0,0,0,0.08)] sm:-mt-8 sm:mx-4 sm:rounded-[24px] lg:absolute lg:left-12 lg:top-7 lg:mt-0 lg:mx-0 lg:w-[400px]">
-            {/* Header */}
-            <div className="flex items-center gap-2 px-4 pt-4 sm:gap-2.5 sm:px-5 sm:pt-5">
-              <div className="shrink-0" style={{ animation: "berry-bob 4s ease-in-out infinite", filter: "drop-shadow(0 4px 10px rgba(244,160,156,0.2))" }}>
-                <Image src="/berry-wink.png" alt="Berry" width={64} height={64} className="h-10 w-auto sm:h-14 lg:h-16" />
+            {/* Header — Berry centered with daily message */}
+            <div className="px-4 pt-4 text-center sm:px-5 sm:pt-5">
+              <div className="mx-auto mb-1 w-fit" style={{ animation: "berry-bob 4s ease-in-out infinite", filter: "drop-shadow(0 6px 16px rgba(244,160,156,0.3))" }}>
+                <Image src="/berry-wink.png" alt="Berry" width={100} height={100} className="h-16 w-auto sm:h-20" />
               </div>
-              <div>
-                <p className="text-[10px] font-bold text-[#F4A09C] sm:text-[11px]">{vibe}</p>
-                <h2 className="text-[17px] font-black leading-[1.1] tracking-[-0.4px] text-[#2D2D2D] sm:text-[20px]">
-                  {cardTitle}
-                </h2>
-              </div>
+              <p className="text-[11px] font-bold text-[#F4A09C] sm:text-[12px]">{vibe}</p>
+              <h2 className="text-[18px] font-black leading-[1.1] tracking-[-0.4px] text-[#2D2D2D] sm:text-[20px]">
+                {cardTitle}
+              </h2>
+              <p className="mt-1 text-[12px] font-semibold text-[#6B6B6B] sm:text-[13px]">
+                {dailyMessage}
+              </p>
             </div>
 
             {/* List */}
             <div className="mt-1 sm:mt-2">
-              <p className="px-4 text-[9px] font-bold uppercase tracking-[1.5px] text-[#A09488] sm:px-5 sm:text-[10px]">
+              <p className="px-4 text-[10px] font-bold uppercase tracking-[1.5px] text-[#A09488] sm:px-5 sm:text-[11px]">
                 {listLabel}
               </p>
 

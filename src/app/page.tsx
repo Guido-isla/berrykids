@@ -132,9 +132,6 @@ export default async function Home() {
     return result;
   }
 
-  const ENERGY_KEYWORDS = ["sport", "Speeltuin", "Trampolinepark", "Binnenspeeltuin", "Megaspeeltuin", "Klimhal", "Padel", "Surfen", "Boulderen"];
-  const RUSTIG_KEYWORDS = ["cultuur", "Museum", "Bibliotheek", "Landgoed", "Rondvaart", "Theater", "Bioscoop"];
-
   const picksByMood: Record<MoodKey, TopFivePick[]> = {
     berry: pickTop5(allScored),
     buiten: pickTop5(allScored.filter((s) => {
@@ -149,27 +146,25 @@ export default async function Home() {
       const indoor = "indoor" in item ? item.indoor : (cat === "indoor" || cat === "cultuur");
       return indoor;
     })),
-    energie: pickTop5(allScored.filter((s) => {
-      const item = s.item as Record<string, unknown>;
-      const cat = item.category as string;
-      const sub = (item.subcategory as string) || "";
-      return ENERGY_KEYWORDS.some((k) => cat.includes(k) || sub.includes(k));
-    })),
-    rustig: pickTop5(allScored.filter((s) => {
-      const item = s.item as Record<string, unknown>;
-      const cat = item.category as string;
-      const sub = (item.subcategory as string) || "";
-      return RUSTIG_KEYWORDS.some((k) => cat.includes(k) || sub.includes(k));
-    })),
     gratis: pickTop5(allScored.filter((s) => {
       return (s.item as Record<string, unknown>).free as boolean;
     })),
-    bijzonder: pickTop5(allScored.filter((s) => {
-      const item = s.item as Record<string, unknown>;
-      const sub = (item.subcategory as string) || "";
-      return ["Linnaeushof", "Rondvaart", "Speelbos", "Festival", "Theaterkamp", "Surfles"].some((k) => sub.includes(k)) || (item.featured as boolean);
-    })),
+    // Unused moods removed — keep type-safe stubs
+    energie: [],
+    rustig: [],
+    bijzonder: [],
   };
+
+  // Daily message from Berry — weather-driven advice
+  const dailyMessage = ctx.weather.isRainy
+    ? `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C en regen — lekker binnenblijven`
+    : ctx.weather.isGoodWeather && ctx.weather.current.temp >= 18
+    ? `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C — heerlijk weer, ga naar buiten!`
+    : ctx.weather.isGoodWeather
+    ? `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C en droog — prima dag om eropuit te gaan`
+    : ctx.weather.current.temp < 8
+    ? `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C — koud, maar binnen is het warm`
+    : `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C — ${ctx.weather.current.description.toLowerCase()}`;
 
   return (
     <div className="min-h-screen">
@@ -181,6 +176,7 @@ export default async function Home() {
       <TopFiveHero
         picksByMood={picksByMood}
         vibe={dayPlan.vibe}
+        dailyMessage={dailyMessage}
         weatherIcon={ctx.weather.current.icon}
         weatherTemp={ctx.weather.current.temp}
         weatherLabel={ctx.weather.current.description}
