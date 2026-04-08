@@ -215,5 +215,72 @@ Berry speaks in three modes, mixed per context:
 - Alt cards: 2 columns
 - Show weather chip, nav links, and floating emoji objects
 
-## 10. Brand Assets
+## 10. Mobile Text Minimums
+
+**Rule: nothing below 12px on mobile.** Badges/tags minimum 11px.
+
+| Element | Mobile | Desktop |
+|---------|--------|---------|
+| Berry daily message | 14px | 15px |
+| List item title | 15px | 15px |
+| List item subtitle | 13px | 13px |
+| Section heading | 20px | 22px |
+| Section Berry intro | 14px | 14px |
+| Card title (BerryCard) | 15px | 16px |
+| Card meta/location | 13px | 13px |
+| Berry tip on card | 12px | 13px |
+| Tomorrow flip | 13px | 13px |
+| Footer text | 12px | 12px |
+
+## 11. Homepage Structure
+
+Berry guides through a curated day — each section unique, no duplicates:
+
+```
+1. Header
+2. Berry's picks (top 5 ATF — no pills, no mood switching)
+3. 🌳 Buiten tips (3 BerryCards — outdoor, NOT in top 5)
+4. Newsletter signup
+5. 🎬 Kinderfilms (horizontal poster scroll)
+6. 🏠 Binnen tips (3 BerryCards — indoor, NOT in top 5 or buiten)
+7. 🎭 Theater & concerten (compact list)
+8. 💡 Meer ontdekken (3 BerryCards — hidden gems)
+9. 🌷 Meivakantie CTA
+10. Bottom newsletter
+11. Footer
+```
+
+**Each section has:**
+- Berry intro line (weather-aware, opinionated)
+- Zero duplicates (progressive exclusion by slug)
+- Berry tip on every card (contextual, subcategory-specific)
+
+**Content dedup:** `usedSlugs` Set grows as each section picks items.
+5 + 3 + 3 + 3 = 14 unique items minimum.
+
+**Scoring:** daily seed for variety (hash of date + slug), max 2 per subcategory.
+
+## 12. BerryCard Component
+
+Unified card for Buiten, Binnen, Meer ontdekken sections:
+
+```
+┌─────────────────────┐
+│  [image, 3:2 ratio] │
+│  🍓 Berry tip        │  ← white text on dark gradient overlay
+│  ♡ save             │  ← frosted circle, top right
+├─────────────────────┤
+│  Title              │  15px bold (mobile), 16px (desktop)
+│  📍 Location        │  13px #6B6B6B
+│  Gratis / €12       │  13px, green if free
+└─────────────────────┘
+```
+
+- `border-radius: 20px`, white bg
+- Shadow: `0 1px 8px rgba(0,0,0,0.04)`, hover: `0 4px 16px rgba(0,0,0,0.08)`
+- Hover: `-translate-y-1`, image `scale(1.03)`
+- Mobile: `w-[80vw] shrink-0` in horizontal scroll
+- Desktop: full-width in 3-column grid
+
+## 13. Brand Assets
 - **Favicon:** Berry mascot icon (`src/app/icon.png`), replaces default Next.js favicon

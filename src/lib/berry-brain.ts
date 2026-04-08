@@ -22,6 +22,17 @@ function getAvailableActivities(all: Activity[], month: number): Activity[] {
   return all.filter((a) => !a.availableMonths || a.availableMonths.includes(month));
 }
 
+/** Simple hash for daily seed — same picks all day, different tomorrow */
+function dailySeed(slug: string): number {
+  const dateStr = new Date().toISOString().split("T")[0];
+  const str = dateStr + slug;
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash + str.charCodeAt(i)) | 0;
+  }
+  return Math.abs(hash) % 5;
+}
+
 /** Score an event based on weather fit, cost, and data quality */
 export function scoreEvent(event: Event, ctx: SiteContext): number {
   let score = 0;
@@ -31,6 +42,7 @@ export function scoreEvent(event: Event, ctx: SiteContext): number {
   if (event.free) score += 3;
   if (event.image !== "/berry-icon.png") score += 2;
   if (event.time) score += 1;
+  score += dailySeed(event.slug); // 0–4 daily variety
   return score;
 }
 
@@ -43,7 +55,28 @@ export function scoreActivity(activity: Activity, ctx: SiteContext): number {
   if (ctx.weather.isGoodWeather && isOutdoorCat) score += 3;
   if (ctx.weather.current.temp < 10 && isIndoorCat) score += 2;
   if (activity.free) score += 2;
+  score += dailySeed(activity.slug); // 0–4 daily variety
   return score;
+}
+
+/** Enforce max N items per subcategory for diversity */
+export function enforceVariety<T>(
+  items: T[],
+  getSubcategory: (item: T) => string,
+  maxPerSubcategory: number,
+  limit: number,
+): T[] {
+  const counts = new Map<string, number>();
+  const result: T[] = [];
+  for (const item of items) {
+    const sub = getSubcategory(item);
+    const count = counts.get(sub) || 0;
+    if (count >= maxPerSubcategory) continue;
+    counts.set(sub, count + 1);
+    result.push(item);
+    if (result.length >= limit) break;
+  }
+  return result;
 }
 
 /** Boost a base score with family profile data (client-side) */

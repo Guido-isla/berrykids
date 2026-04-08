@@ -3,101 +3,81 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NewsletterForm from "@/components/NewsletterForm";
-import EventCard from "@/components/EventCard";
 import FilmVanDeWeek from "@/components/FilmVanDeWeek";
 import TheaterAgenda from "@/components/TheaterAgenda";
-import ActivityCard from "@/components/ActivityCard";
+import BerryCard from "@/components/BerryCard";
 import TopFiveHero from "@/components/TopFiveHero";
-import type { TopFivePick, MoodKey } from "@/components/TopFiveHero";
-import { getScrapedEvents, getDayPlanEvents } from "@/data/events-loader";
+import type { TopFivePick } from "@/components/TopFiveHero";
+import { getDayPlanEvents } from "@/data/events-loader";
 import { resolveEventImages } from "@/lib/photos";
 import { getSiteContext } from "@/lib/context";
 import { activities } from "@/data/activities";
 import { resolveEventImages as resolveAct } from "@/lib/photos";
-import { generateBerryDayPlan, scoreEvent, scoreActivity } from "@/lib/berry-brain";
+import { generateBerryDayPlan, scoreEvent, scoreActivity, enforceVariety } from "@/lib/berry-brain";
 
-// Revalidate every 30 minutes — keeps weather, events and dagplan fresh
 export const revalidate = 1800;
 
+/** Generate a Berry tip for a specific item — contextual, not generic */
+function generateBerryTip(item: Record<string, unknown>, ctx: { weather: { isGoodWeather: boolean; isRainy: boolean } }): string {
+  const tip = item.tip as string | undefined;
+  if (tip) return tip;
+
+  const sub = (item.subcategory as string) || "";
+  const free = item.free as boolean;
+  const indoor = item.indoor as boolean | undefined;
+
+  if (sub.includes("Speeltuin")) return "Ga vroeg, dan is het nog rustig";
+  if (sub.includes("Museum")) return "Museumkaart geldig — neem 'm mee";
+  if (sub.includes("Strand")) return "Check het getij voor je gaat";
+  if (sub.includes("Kinderboerderij")) return "Neem oud brood mee voor de dieren";
+  if (sub.includes("Zwemmen") || sub.includes("Subtropisch")) return "Zwemluier niet vergeten voor de kleintjes";
+  if (sub.includes("Klimmen") || sub.includes("Boulderen")) return "Sportschoenen mee — geen open schoenen";
+  if (sub.includes("Bioscoop")) return "Woensdag is kindermiddag";
+  if (sub.includes("Bibliotheek")) return "Gratis knutselen in de vakantie";
+  if (sub.includes("Landgoed")) return "Neem een picknickkleed mee";
+  if (sub.includes("Wandelen")) return "De kabouterwandeling is het leukst";
+  if (sub.includes("Surfen") || sub.includes("Suppen")) return "Boek vooruit — vol is vol";
+  if (sub.includes("Trampolinepark")) return "Antislip sokken verplicht";
+  if (sub.includes("Rondvaart")) return "Vanaf 4 jaar pas echt leuk";
+  if (sub.includes("Escape Room")) return "Vanaf 8 jaar, boek met vriendjes";
+  if (sub.includes("Bowling") || sub.includes("Midgetgolf")) return "Leuk voor een regenachtige middag";
+  if (free && !indoor && ctx.weather.isGoodWeather) return "Gratis en lekker buiten bij dit weer";
+  if (free && indoor) return "Gratis — altijd een goed plan";
+  if (free) return "Gratis — ga gewoon";
+  return `${item.location as string} — aanrader`;
+}
+
 export default async function Home() {
-  const allEvents = getScrapedEvents();
   const todayEvents = getDayPlanEvents();
   const ctx = await getSiteContext();
 
   const todayWithImg = resolveEventImages(todayEvents).filter((e) => e.image !== "/berry-icon.png");
-  const allWithImg = resolveEventImages(allEvents).filter((e) => e.image !== "/berry-icon.png");
 
-  const outdoorEvents = todayWithImg.filter((e) => !e.indoor);
-  const indoorEvents = todayWithImg.filter((e) => e.indoor);
-
-  const preferIndoor = ctx.berryPick.preferIndoor;
-  const primaryEvents = preferIndoor
-    ? [...indoorEvents, ...outdoorEvents]
-    : [...outdoorEvents, ...indoorEvents];
-  const topPick = primaryEvents[0] || todayWithImg[0];
-
-  const dayPlanEvents = getDayPlanEvents();
-  const dayPlan = generateBerryDayPlan(ctx, dayPlanEvents, activities, ctx.season.suggestions);
+  const dayPlan = generateBerryDayPlan(ctx, todayEvents, activities, ctx.season.suggestions);
 
   const tomorrow = ctx.weather.forecast[1];
   let tomorrowFlip: string | null = null;
   if (tomorrow) {
     const todayRainy = ctx.weather.isRainy;
     const tomorrowRainy = tomorrow.isRainy;
-    if (!todayRainy && tomorrowRainy) {
-      tomorrowFlip = `🌧️ Morgen regent het — pak vandaag mee`;
-    } else if (todayRainy && !tomorrowRainy) {
-      tomorrowFlip = `☀️ Morgen ${tomorrow.tempMax}°C en droog — bewaar buiten voor morgen`;
-    } else if (!todayRainy && !tomorrowRainy && tomorrow.tempMax >= 18 && ctx.weather.current.temp < 16) {
-      tomorrowFlip = `☀️ Morgen ${tomorrow.tempMax}°C — nog mooier dan vandaag`;
-    }
+    if (!todayRainy && tomorrowRainy) tomorrowFlip = `🌧️ Morgen regent het — pak vandaag mee`;
+    else if (todayRainy && !tomorrowRainy) tomorrowFlip = `☀️ Morgen ${tomorrow.tempMax}°C en droog — bewaar buiten voor morgen`;
+    else if (!todayRainy && !tomorrowRainy && tomorrow.tempMax >= 18 && ctx.weather.current.temp < 16) tomorrowFlip = `☀️ Morgen ${tomorrow.tempMax}°C — nog mooier dan vandaag`;
   }
 
-  const allOutdoor = allWithImg.filter((e) => !e.indoor);
-  const allIndoor = allWithImg.filter((e) => e.indoor);
-  const fallbackEvents = preferIndoor ? allOutdoor.slice(0, 3) : allIndoor.slice(0, 3);
-  const fallbackLabel = preferIndoor ? "Als het toch opklaart" : "Als het weer omslaat";
-
-  const sportAct = resolveAct(activities.filter((a) => a.category === "sport" && a.verified).slice(0, 3));
-  const cultAct = resolveAct(activities.filter((a) => (a.category === "cultuur" || a.category === "indoor") && a.verified).slice(0, 3));
-
-  const planLines = dayPlan.message.split("\n\n").filter(Boolean);
-
-  // Also good today — 2 alts
-  const alsoGood = primaryEvents.slice(1, 3);
-  const verifiedActs = resolveAct(
-    activities.filter((a) => a.verified && (!a.availableMonths || a.availableMonths.includes(new Date().getMonth() + 1)))
-  );
-  const matchedActs = preferIndoor
-    ? verifiedActs.filter((a) => a.category === "indoor" || a.category === "cultuur")
-    : verifiedActs.filter((a) => a.category === "natuur" || a.category === "dieren" || a.category === "sport");
-  while (alsoGood.length < 2 && matchedActs.length > 0) {
-    const act = matchedActs.shift()!;
-    if (!alsoGood.some((e) => e.title === act.title)) {
-      alsoGood.push({ ...act, date: "", time: "", indoor: act.category === "indoor" || act.category === "cultuur", slug: act.slug, image: act.resolvedImage || act.image } as typeof primaryEvents[0]);
-    }
-  }
-
-  const weatherMood = ctx.weather.isRainy ? "rainy" as const : ctx.weather.current.temp < 8 ? "cold" as const : "sunny" as const;
-
-  // --- Build top 5 picks per mood for the ATF hero ---
+  // === SCORE ALL ITEMS ===
   const currentMonth = new Date().getMonth() + 1;
   const verifiedAvailable = activities.filter(
     (a) => a.verified && (!a.availableMonths || a.availableMonths.includes(currentMonth))
   );
-  const scoredEvents = todayWithImg.map((e) => ({
-    item: e,
-    score: scoreEvent(e, ctx),
-    isEvent: true as const,
-  }));
-  const scoredActivities = resolveAct(verifiedAvailable).map((a) => ({
-    item: a,
-    score: scoreActivity(a, ctx),
-    isEvent: false as const,
-  }));
+  const scoredEvents = todayWithImg.map((e) => ({ item: e, score: scoreEvent(e, ctx), isEvent: true as const }));
+  const scoredActivities = resolveAct(verifiedAvailable).map((a) => ({ item: a, score: scoreActivity(a, ctx), isEvent: false as const }));
   const allScored = [...scoredEvents, ...scoredActivities]
     .filter((s) => s.item.image && s.item.image !== "/berry-icon.png")
     .sort((a, b) => b.score - a.score);
+
+  // === PROGRESSIVE DEDUP: build each section from remaining pool ===
+  const usedSlugs = new Set<string>();
 
   function toPickItem(s: (typeof allScored)[number]): TopFivePick {
     const item = s.item as Record<string, unknown>;
@@ -119,43 +99,60 @@ export default async function Home() {
     };
   }
 
-  function pickTop5(items: typeof allScored): TopFivePick[] {
-    const seen = new Set<string>();
-    const result: TopFivePick[] = [];
-    for (const s of items) {
-      const title = (s.item as Record<string, unknown>).title as string;
-      if (seen.has(title)) continue;
-      seen.add(title);
-      result.push(toPickItem(s));
-      if (result.length >= 5) break;
-    }
-    return result;
+  function pickTopN(items: typeof allScored, n: number): TopFivePick[] {
+    // Enforce variety: max 2 per subcategory
+    const diverse = enforceVariety(
+      items.filter((s) => !usedSlugs.has((s.item as Record<string, unknown>).slug as string)),
+      (s) => ((s.item as Record<string, unknown>).subcategory as string) || ((s.item as Record<string, unknown>).category as string),
+      2,
+      n,
+    );
+    return diverse.map(toPickItem);
   }
 
-  const picksByMood: Record<MoodKey, TopFivePick[]> = {
-    berry: pickTop5(allScored),
-    buiten: pickTop5(allScored.filter((s) => {
-      const item = s.item as Record<string, unknown>;
-      const cat = item.category as string;
-      const indoor = "indoor" in item ? item.indoor : (cat === "indoor" || cat === "cultuur");
-      return !indoor;
-    })),
-    binnen: pickTop5(allScored.filter((s) => {
-      const item = s.item as Record<string, unknown>;
-      const cat = item.category as string;
-      const indoor = "indoor" in item ? item.indoor : (cat === "indoor" || cat === "cultuur");
-      return indoor;
-    })),
-    gratis: pickTop5(allScored.filter((s) => {
-      return (s.item as Record<string, unknown>).free as boolean;
-    })),
-    // Unused moods removed — keep type-safe stubs
-    energie: [],
-    rustig: [],
-    bijzonder: [],
-  };
+  function toBerryCardProps(pick: TopFivePick) {
+    const item = allScored.find((s) => (s.item as Record<string, unknown>).slug === pick.slug);
+    const raw = item ? (item.item as Record<string, unknown>) : {};
+    return {
+      slug: pick.slug,
+      title: pick.title,
+      image: pick.image,
+      location: pick.location,
+      free: pick.free,
+      price: (raw.price as string) || undefined,
+      berryTip: generateBerryTip(raw, ctx),
+      href: pick.isEvent ? `/event/${pick.slug}` : `/activiteiten/${pick.slug}`,
+    };
+  }
 
-  // Daily message from Berry — weather-driven advice
+  // 1. BERRY'S PICKS — top 5
+  const berryPicks = pickTopN(allScored, 5);
+  berryPicks.forEach((p) => usedSlugs.add(p.slug));
+
+  // 2. BUITEN — 3 outdoor, not in picks
+  const outdoorScored = allScored.filter((s) => {
+    const item = s.item as Record<string, unknown>;
+    const cat = item.category as string;
+    const indoor = "indoor" in item ? item.indoor : (cat === "indoor" || cat === "cultuur");
+    return !indoor;
+  });
+  const buitenPicks = pickTopN(outdoorScored, 3);
+  buitenPicks.forEach((p) => usedSlugs.add(p.slug));
+
+  // 3. BINNEN — 3 indoor, not in picks or buiten
+  const indoorScored = allScored.filter((s) => {
+    const item = s.item as Record<string, unknown>;
+    const cat = item.category as string;
+    const indoor = "indoor" in item ? item.indoor : (cat === "indoor" || cat === "cultuur");
+    return indoor;
+  });
+  const binnenPicks = pickTopN(indoorScored, 3);
+  binnenPicks.forEach((p) => usedSlugs.add(p.slug));
+
+  // 4. MEER ONTDEKKEN — 3 from remaining
+  const meerPicks = pickTopN(allScored, 3);
+
+  // === BERRY INTROS ===
   const dailyMessage = ctx.weather.isRainy
     ? `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C en regen — lekker binnenblijven`
     : ctx.weather.isGoodWeather && ctx.weather.current.temp >= 18
@@ -166,15 +163,25 @@ export default async function Home() {
     ? `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C — koud, maar binnen is het warm`
     : `${ctx.weather.current.icon} ${ctx.weather.current.temp}°C — ${ctx.weather.current.description.toLowerCase()}`;
 
+  const buitenIntro = ctx.weather.isGoodWeather
+    ? "Perfect weer om naar buiten te gaan"
+    : ctx.weather.isRainy
+    ? "Morgen beter weer? Bewaar deze:"
+    : "Even naar buiten — dit kan altijd:";
+
+  const binnenIntro = ctx.weather.isRainy
+    ? "Ideaal voor vandaag:"
+    : ctx.weather.isGoodWeather
+    ? "Voor als je toch binnen wilt blijven:"
+    : "Lekker warm binnen:";
+
   return (
     <div className="min-h-screen">
-
-      {/* ===== HEADER ===== */}
       <Header />
 
-      {/* ===== TOP 5 HERO — ATF ===== */}
+      {/* ===== 1. BERRY'S PICKS — ATF ===== */}
       <TopFiveHero
-        picksByMood={picksByMood}
+        picks={berryPicks}
         vibe={dayPlan.vibe}
         dailyMessage={dailyMessage}
         weatherIcon={ctx.weather.current.icon}
@@ -187,52 +194,40 @@ export default async function Home() {
           tempMax: d.tempMax,
           isRainy: d.isRainy,
         }))}
-        totalActivities={activities.filter((a) => a.verified).length}
       />
 
       {/* Tomorrow flip */}
       {tomorrowFlip && (
-        <div className="mx-auto mt-3 max-w-[1320px] px-5 sm:px-8">
-          <div className="rounded-[14px] bg-[#EDE7F6] px-5 py-2.5 text-center text-[12px] font-bold text-[#7B6BA0]">
+        <div className="mx-auto mt-3 max-w-[1320px] px-4 sm:px-8">
+          <div className="rounded-[14px] bg-[#EDE7F6] px-4 py-2.5 text-center text-[13px] font-bold text-[#7B6BA0]">
             {tomorrowFlip}
           </div>
         </div>
       )}
 
-      {/* ===== VANDAAG — more events (excluding top 5) ===== */}
-      {(() => {
-        const top5Slugs = new Set(picksByMood.berry.map((p) => p.slug));
-        const ookGoed = primaryEvents.filter((e) => !top5Slugs.has(e.slug)).slice(0, 4);
-        if (ookGoed.length === 0) return null;
-        return (
-        <section className="mx-auto max-w-[880px] px-5 pb-10 pt-6 sm:px-6">
-          <h2 className="mb-4 text-[22px] font-extrabold tracking-tight text-[#2D2D2D]">Ook goed vandaag</h2>
-          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-2 sm:overflow-visible">
-            {ookGoed.map((e) => {
-              const tip = e.free && !e.indoor
-                ? "Gratis en lekker buiten — ga nu"
-                : e.free && e.indoor
-                ? "Gratis en gezellig binnen"
-                : !e.indoor && ctx.weather.isGoodWeather
-                ? "Perfect weer hiervoor"
-                : e.indoor && ctx.weather.isRainy
-                ? "Ideaal voor een regendag"
-                : e.free
-                ? "Gratis — altijd goed"
-                : "Berry aanrader voor vandaag";
-              return <div key={e.slug} className="w-[75vw] shrink-0 sm:w-auto"><EventCard event={e} berryTip={tip} /></div>;
-            })}
+      {/* ===== 2. BUITEN TIPS ===== */}
+      {buitenPicks.length > 0 && (
+        <section className="mx-auto max-w-[880px] px-4 pt-10 sm:px-6">
+          <div className="mb-4">
+            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">🌳 Naar buiten</h2>
+            <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{buitenIntro}</p>
+          </div>
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-3 sm:overflow-visible">
+            {buitenPicks.map((p) => (
+              <div key={p.slug} className="w-[80vw] shrink-0 sm:w-auto">
+                <BerryCard {...toBerryCardProps(p)} />
+              </div>
+            ))}
           </div>
         </section>
-        );
-      })()}
+      )}
 
-      {/* ===== NEWSLETTER ===== */}
-      <section className="mx-auto max-w-[880px] px-5 py-10 sm:px-6">
-        <div className="rounded-[24px] bg-white p-8 shadow-[0_2px_16px_rgba(0,0,0,0.04)] sm:p-10">
+      {/* ===== 3. NEWSLETTER ===== */}
+      <section className="mx-auto max-w-[880px] px-4 py-10 sm:px-6">
+        <div className="rounded-[24px] bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.04)] sm:p-10">
           <div className="mx-auto max-w-md text-center">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-[#F4A09C]">Elke vrijdag om 15:00</p>
-            <h2 className="mt-2 text-[24px] font-extrabold tracking-tight text-[#2D2D2D]">Weekend gepland in 2 minuten</h2>
+            <p className="text-[12px] font-bold uppercase tracking-widest text-[#F4A09C]">Elke vrijdag om 15:00</p>
+            <h2 className="mt-2 text-[22px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[24px]">Weekend gepland in 2 minuten</h2>
             <p className="mt-2 text-[14px] text-[#6B6B6B]">De 5 leukste tips. Geen zoeken. Gewoon gaan.</p>
             <div className="mt-5"><NewsletterForm variant="personalize" /></div>
             <p className="mt-2 text-[12px] text-[#A09488]">2.340+ ouders · gratis</p>
@@ -240,50 +235,66 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ===== FALLBACK — if weather changes ===== */}
-      {fallbackEvents.length > 0 && (
-        <section className="mx-auto max-w-[880px] px-5 pb-10 sm:px-6">
-          <p className="mb-3 text-[11px] font-bold uppercase tracking-[1.5px] text-[#A09488]">{fallbackLabel}</p>
-          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
-            {fallbackEvents.map((e) => <div key={e.slug + "-fb"} className="w-[75vw] shrink-0 sm:w-auto"><EventCard event={e} /></div>)}
+      {/* ===== 4. FILMS ===== */}
+      <section className="mx-auto max-w-[880px] px-4 pb-8 sm:px-6">
+        <FilmVanDeWeek />
+      </section>
+
+      {/* ===== 5. BINNEN TIPS ===== */}
+      {binnenPicks.length > 0 && (
+        <section className="mx-auto max-w-[880px] px-4 pb-10 sm:px-6">
+          <div className="mb-4">
+            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">🏠 Lekker binnen</h2>
+            <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{binnenIntro}</p>
+          </div>
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-3 sm:overflow-visible">
+            {binnenPicks.map((p) => (
+              <div key={p.slug} className="w-[80vw] shrink-0 sm:w-auto">
+                <BerryCard {...toBerryCardProps(p)} />
+              </div>
+            ))}
           </div>
         </section>
       )}
 
-      {/* ===== FILMS ===== */}
-      <div className="mx-auto max-w-[880px] px-5 py-8 sm:px-6">
-        <FilmVanDeWeek />
-      </div>
-
-      {/* ===== THEATER ===== */}
-      <div className="mx-auto max-w-[880px] px-5 pb-10 sm:px-6">
+      {/* ===== 6. THEATER ===== */}
+      <section className="mx-auto max-w-[880px] px-4 pb-10 sm:px-6">
         <TheaterAgenda />
-      </div>
-
-      {/* ===== MEER ONTDEKKEN ===== */}
-      <section className="mx-auto max-w-[880px] px-5 pb-10 sm:px-6">
-        <p className="mb-3 text-[11px] font-bold uppercase tracking-[1.5px] text-[#A09488]">Meer ontdekken</p>
-        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
-          {[...sportAct, ...cultAct].slice(0, 6).map((a) => <div key={a.slug} className="w-[70vw] shrink-0 sm:w-auto"><ActivityCard activity={a} /></div>)}
-        </div>
       </section>
 
-      {/* ===== MEIVAKANTIE ===== */}
-      <section className="mx-auto max-w-[880px] px-5 pb-10 sm:px-6">
-        <Link href="/vakanties" className="group block rounded-[24px] bg-gradient-to-r from-[#F4A09C] to-[#FFD8B0] p-7 transition-shadow hover:shadow-lg sm:p-9">
-          <p className="text-[11px] font-bold uppercase tracking-widest text-white">26 april – 9 mei</p>
-          <h2 className="mt-2 text-[24px] font-extrabold tracking-tight text-[#2D2D2D]">Meivakantie — jouw weekplan</h2>
+      {/* ===== 7. MEER ONTDEKKEN ===== */}
+      {meerPicks.length > 0 && (
+        <section className="mx-auto max-w-[880px] px-4 pb-10 sm:px-6">
+          <div className="mb-4">
+            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">💡 Ken je deze al?</h2>
+            <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">Verborgen parels in de regio</p>
+          </div>
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-3 sm:overflow-visible">
+            {meerPicks.map((p) => (
+              <div key={p.slug} className="w-[80vw] shrink-0 sm:w-auto">
+                <BerryCard {...toBerryCardProps(p)} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ===== 8. MEIVAKANTIE ===== */}
+      <section className="mx-auto max-w-[880px] px-4 pb-10 sm:px-6">
+        <Link href="/vakanties" className="group block rounded-[24px] bg-gradient-to-r from-[#F4A09C] to-[#FFD8B0] p-6 transition-shadow hover:shadow-lg sm:p-9">
+          <p className="text-[12px] font-bold uppercase tracking-widest text-white">26 april – 9 mei</p>
+          <h2 className="mt-2 text-[22px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[24px]">Meivakantie — jouw weekplan</h2>
           <p className="mt-2 max-w-md text-[14px] text-[#2D2D2D]/70">Dagplannen, surfcamps en meer.</p>
           <span className="mt-4 inline-block text-[14px] font-bold text-white">Bekijk dagplannen →</span>
         </Link>
       </section>
 
-      {/* ===== BOTTOM NEWSLETTER ===== */}
+      {/* ===== 9. BOTTOM NEWSLETTER ===== */}
       <section id="newsletter" className="border-t border-[#F0ECE8]">
-        <div className="mx-auto max-w-[880px] px-5 py-14 sm:px-6">
+        <div className="mx-auto max-w-[880px] px-4 py-14 sm:px-6">
           <div className="mx-auto max-w-md text-center">
             <Image src="/berry-wink.png" alt="" width={48} height={48} className="mx-auto mb-3 h-12 w-auto" />
-            <h2 className="text-[24px] font-extrabold tracking-tight text-[#2D2D2D]">Weekend sorted</h2>
+            <h2 className="text-[22px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[24px]">Weekend sorted</h2>
             <p className="mt-1 text-[14px] text-[#6B6B6B]">Elke vrijdag om 15:00. 5 tips. Klaar.</p>
             <div className="mt-5"><NewsletterForm /></div>
           </div>
