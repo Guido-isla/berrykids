@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { saveProfile, INTEREST_OPTIONS, AREA_OPTIONS, type KidProfile } from "@/lib/personalization";
 
@@ -108,7 +109,7 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
         <div className="flex items-center gap-3 px-5 py-4">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#B8E0D4] text-[20px]">✓</span>
           <div>
-            <p className="text-[16px] font-extrabold text-[#2D2D2D]">Je bent erbij! 🍓</p>
+            <p className="flex items-center gap-1.5 text-[16px] font-extrabold text-[#2D2D2D]">Je bent erbij! <Image src="/berry-icon.png" alt="" width={20} height={20} className="h-5 w-5" /></p>
             <p className="text-[13px] text-[#3D7A6A]">
               {variant === "personalize"
                 ? "Berry kent je gezin nu. Elke vrijdag persoonlijke tips in je inbox."
@@ -132,7 +133,7 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
     return (
       <form onSubmit={handleProfileSubmit} className="space-y-5">
         <div className="flex items-center gap-2">
-          <span className="text-[24px]">🍓</span>
+          <Image src="/berry-icon.png" alt="Berry" width={32} height={32} className="h-8 w-8" />
           <div>
             <p className="text-[16px] font-extrabold text-[#2D2D2D]">Berry leert je gezin kennen</p>
             <p className="text-[13px] text-[#6B6B6B]">Zo worden de tips persoonlijker</p>

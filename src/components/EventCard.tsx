@@ -42,8 +42,8 @@ export default function EventCard({ event, berryTip }: { event: EventWithImage; 
             {formatShortDate(event.date)} · {event.location}
           </p>
           {berryTip && (
-            <p className="mt-1.5 text-[12px] font-semibold text-[#E0685F]">
-              🍓 {berryTip}
+            <p className="mt-1.5 flex items-center gap-1 text-[12px] font-semibold text-[#E0685F]">
+              <Image src="/berry-icon.png" alt="" width={14} height={14} className="h-3.5 w-3.5 shrink-0" /> {berryTip}
             </p>
           )}
         </div>

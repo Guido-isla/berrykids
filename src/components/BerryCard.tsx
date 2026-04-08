@@ -36,8 +36,8 @@ export default function BerryCard({
           <SaveButton slug={slug} />
           {/* Berry tip overlay — bottom of image */}
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent px-3 pb-2.5 pt-6">
-            <p className="text-[12px] font-bold leading-snug text-white sm:text-[13px]">
-              🍓 {berryTip}
+            <p className="flex items-center gap-1 text-[12px] font-bold leading-snug text-white sm:text-[13px]">
+              <Image src="/berry-icon.png" alt="" width={16} height={16} className="h-4 w-4 shrink-0" /> {berryTip}
             </p>
           </div>
         </div>

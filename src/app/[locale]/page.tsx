@@ -291,7 +291,7 @@ export default async function Home() {
               </div>
             ))}
             <div className="w-[60vw] shrink-0 sm:w-auto">
-              <ScrollCTA emoji="🍓" label="Alle activiteiten" href="/activiteiten" />
+              <ScrollCTA emoji="" label="Alle activiteiten" href="/activiteiten" useLogo />
             </div>
           </div>
         </section>
