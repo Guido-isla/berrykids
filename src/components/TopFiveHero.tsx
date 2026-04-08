@@ -85,25 +85,22 @@ export default function TopFiveHero({
 
       {/* ===== MOBILE: Berry digest + card carousel ===== */}
       <div className="lg:hidden">
-        {/* Berry daily digest — dominant */}
-        <div className="pick-header-reveal pb-8 pt-4 text-center">
-          {/* Berry with radial glow */}
-          <div className="relative mx-auto mb-4 h-28 w-28">
-            <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle, rgba(224,104,95,0.14) 0%, transparent 70%)", transform: "scale(2.2)" }} />
+        {/* Berry daily digest — compact, dominant */}
+        <div className="pick-header-reveal flex items-center gap-4 pb-5 pt-3">
+          {/* Berry with glow */}
+          <div className="relative shrink-0">
+            <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle, rgba(224,104,95,0.12) 0%, transparent 70%)", transform: "scale(2)" }} />
             <div className="relative" style={{ animation: "berry-bob 4s ease-in-out infinite" }}>
-              <Image src="/berry-wink.png" alt="Berry" width={140} height={140} className="h-28 w-auto drop-shadow-[0_8px_24px_rgba(224,104,95,0.35)]" />
+              <Image src="/berry-wink.png" alt="Berry" width={100} height={100} className="h-20 w-auto drop-shadow-[0_6px_20px_rgba(224,104,95,0.3)]" />
             </div>
           </div>
-
-          <p className="text-[12px] font-bold uppercase tracking-[1.5px] text-[#E0685F]">{vibe}</p>
-
-          {/* Dominant headline — the punch */}
-          <h2 className="mt-2 text-[28px] font-black leading-[1.0] tracking-[-1px] text-[#1A1A1A]">
-            {dailyMessage.replace(/^[^\s]+\s/, "").replace(/°C.*/, "°C")}
-          </h2>
-          <p className="mt-1 text-[16px] font-medium text-[#6B6B6B]">
-            {dailyMessage}
-          </p>
+          {/* Message — Berry's opinion is the headline */}
+          <div className="min-w-0">
+            <p className="text-[11px] font-bold uppercase tracking-[1.5px] text-[#E0685F]">{vibe}</p>
+            <h2 className="mt-1 text-[22px] font-black leading-[1.05] tracking-[-0.5px] text-[#1A1A1A]">
+              {dailyMessage}
+            </h2>
+          </div>
         </div>
 
         {/* Card carousel — #1 dominant, #2-5 smaller */}
