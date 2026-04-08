@@ -10,7 +10,7 @@ export default function FilmVanDeWeek() {
         🎬 Film van de week
       </h2>
       <div className="overflow-hidden rounded-2xl bg-white shadow-sm sm:flex">
-        <div className="relative aspect-video sm:aspect-auto sm:w-64 sm:shrink-0">
+        <div className="relative h-[200px] sm:aspect-auto sm:h-auto sm:w-64 sm:shrink-0">
           <Image
             src={film.image}
             alt={film.title}

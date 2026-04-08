@@ -211,7 +211,7 @@ export default async function Home() {
         return (
         <section className="mx-auto max-w-[880px] px-5 pb-10 pt-6 sm:px-6">
           <h2 className="mb-4 text-[22px] font-extrabold tracking-tight text-[#2D2D2D]">Ook goed vandaag</h2>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-2 sm:overflow-visible">
             {ookGoed.map((e) => {
               const tip = e.free && !e.indoor
                 ? "Gratis en lekker buiten — ga nu"
@@ -224,7 +224,7 @@ export default async function Home() {
                 : e.free
                 ? "Gratis — altijd goed"
                 : "Berry aanrader voor vandaag";
-              return <EventCard key={e.slug} event={e} berryTip={tip} />;
+              return <div key={e.slug} className="w-[75vw] shrink-0 sm:w-auto"><EventCard event={e} berryTip={tip} /></div>;
             })}
           </div>
         </section>
@@ -248,8 +248,8 @@ export default async function Home() {
       {fallbackEvents.length > 0 && (
         <section className="mx-auto max-w-[880px] px-5 pb-10 sm:px-6">
           <p className="mb-3 text-[11px] font-bold uppercase tracking-[1.5px] text-[#A09488]">{fallbackLabel}</p>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {fallbackEvents.map((e) => <EventCard key={e.slug + "-fb"} event={e} />)}
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
+            {fallbackEvents.map((e) => <div key={e.slug + "-fb"} className="w-[75vw] shrink-0 sm:w-auto"><EventCard event={e} /></div>)}
           </div>
         </section>
       )}
@@ -265,8 +265,8 @@ export default async function Home() {
       {/* ===== MEER ONTDEKKEN ===== */}
       <section className="mx-auto max-w-[880px] px-5 pb-10 sm:px-6">
         <p className="mb-3 text-[11px] font-bold uppercase tracking-[1.5px] text-[#A09488]">Meer ontdekken</p>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {[...sportAct, ...cultAct].slice(0, 6).map((a) => <ActivityCard key={a.slug} activity={a} />)}
+        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
+          {[...sportAct, ...cultAct].slice(0, 6).map((a) => <div key={a.slug} className="w-[70vw] shrink-0 sm:w-auto"><ActivityCard activity={a} /></div>)}
         </div>
       </section>
 

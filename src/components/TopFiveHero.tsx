@@ -147,7 +147,7 @@ export default function TopFiveHero({
 
         <div className="relative">
           {/* Hero photo area */}
-          <div className="relative h-[280px] overflow-hidden rounded-[24px] sm:h-[400px] lg:h-[500px]">
+          <div className="relative h-[200px] overflow-hidden rounded-[20px] sm:h-[400px] sm:rounded-[24px] lg:h-[500px]">
             {picks.map((p, i) => (
               <div
                 key={p.slug}
@@ -233,81 +233,87 @@ export default function TopFiveHero({
           </div>
 
           {/* Top-5 card */}
-          <div className="relative z-10 -mt-8 mx-4 rounded-[24px] bg-white shadow-[0_8px_40px_rgba(0,0,0,0.08)] lg:absolute lg:left-12 lg:top-7 lg:mt-0 lg:mx-0 lg:w-[400px]">
+          <div className="relative z-10 -mt-6 mx-3 rounded-[20px] bg-white shadow-[0_8px_40px_rgba(0,0,0,0.08)] sm:-mt-8 sm:mx-4 sm:rounded-[24px] lg:absolute lg:left-12 lg:top-7 lg:mt-0 lg:mx-0 lg:w-[400px]">
             {/* Header */}
-            <div className="flex items-center gap-2.5 px-5 pt-5">
+            <div className="flex items-center gap-2 px-4 pt-4 sm:gap-2.5 sm:px-5 sm:pt-5">
               <div className="shrink-0" style={{ animation: "berry-bob 4s ease-in-out infinite", filter: "drop-shadow(0 4px 10px rgba(244,160,156,0.2))" }}>
-                <Image src="/berry-wink.png" alt="Berry" width={64} height={64} className="h-14 w-auto sm:h-16" />
+                <Image src="/berry-wink.png" alt="Berry" width={64} height={64} className="h-10 w-auto sm:h-14 lg:h-16" />
               </div>
               <div>
-                <p className="text-[11px] font-bold text-[#F4A09C]">{vibe}</p>
-                <h2 className="text-[20px] font-black leading-[1.1] tracking-[-0.4px] text-[#2D2D2D]">
+                <p className="text-[10px] font-bold text-[#F4A09C] sm:text-[11px]">{vibe}</p>
+                <h2 className="text-[17px] font-black leading-[1.1] tracking-[-0.4px] text-[#2D2D2D] sm:text-[20px]">
                   {cardTitle}
                 </h2>
               </div>
             </div>
 
             {/* List */}
-            <div className="mt-2">
-              <p className="px-5 text-[10px] font-bold uppercase tracking-[1.5px] text-[#A09488]">
+            <div className="mt-1 sm:mt-2">
+              <p className="px-4 text-[9px] font-bold uppercase tracking-[1.5px] text-[#A09488] sm:px-5 sm:text-[10px]">
                 {listLabel}
               </p>
 
-              {picks.map((p, i) => (
-                <button
-                  key={p.slug}
-                  onClick={() => goTo(i)}
-                  className={`flex w-full items-center gap-2 px-5 py-2 text-left transition-colors ${
-                    i === current ? "bg-[#FFF3E0]" : "hover:bg-[#FFF9F0]"
-                  } ${i > 0 ? "border-t border-[#F5F0EB]" : ""}`}
-                >
-                  <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-[7px] text-[12px] font-black ${NUM_COLORS[i]}`}>
-                    {i + 1}
-                  </span>
-                  <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-[10px]">
-                    <Image src={p.image} alt="" fill sizes="40px" className="object-cover" />
+              {picks.map((p, i) => {
+                const itemHref = p.isEvent ? `/event/${p.slug}` : `/activiteiten/${p.slug}`;
+                return (
+                  <div
+                    key={p.slug}
+                    className={`flex w-full items-center gap-2 text-left transition-colors ${
+                      i === current ? "bg-[#FFF3E0]" : "hover:bg-[#FFF9F0]"
+                    } ${i > 0 ? "border-t border-[#F5F0EB]" : ""}`}
+                  >
+                    {/* Desktop: click switches photo */}
+                    <button
+                      onClick={() => goTo(i)}
+                      className="hidden w-full items-center gap-2 px-5 py-2 text-left lg:flex"
+                    >
+                      <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-[7px] text-[12px] font-black ${NUM_COLORS[i]}`}>
+                        {i + 1}
+                      </span>
+                      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-[10px]">
+                        <Image src={p.image} alt="" fill sizes="40px" className="object-cover" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[14px] font-extrabold leading-snug tracking-[-0.1px] text-[#2D2D2D]">
+                          {p.title}
+                        </p>
+                        <p className="truncate text-[12px] font-semibold text-[#6B6B6B]">
+                          {p.whyNow}
+                        </p>
+                      </div>
+                    </button>
+                    {/* Mobile: link goes directly to page */}
+                    <Link
+                      href={itemHref}
+                      className="flex w-full items-center gap-2 px-4 py-1.5 sm:py-2 lg:hidden"
+                    >
+                      <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-[6px] text-[11px] font-black sm:h-6 sm:w-6 sm:rounded-[7px] sm:text-[12px] ${NUM_COLORS[i]}`}>
+                        {i + 1}
+                      </span>
+                      <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-[8px] sm:h-10 sm:w-10 sm:rounded-[10px]">
+                        <Image src={p.image} alt="" fill sizes="40px" className="object-cover" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[13px] font-extrabold leading-snug tracking-[-0.1px] text-[#2D2D2D] sm:text-[14px]">
+                          {p.title}
+                        </p>
+                        <p className="truncate text-[11px] font-semibold text-[#6B6B6B] sm:text-[12px]">
+                          {p.whyNow}
+                        </p>
+                      </div>
+                    </Link>
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-[14px] font-extrabold leading-snug tracking-[-0.1px] text-[#2D2D2D]">
-                      {p.title}
-                    </p>
-                    <p className="truncate text-[12px] font-semibold text-[#6B6B6B]">
-                      {p.whyNow}
-                    </p>
-                  </div>
-                </button>
-              ))}
+                );
+              })}
             </div>
 
             {/* Footer */}
-            <div className="border-t border-[#F5F0EB] px-5 py-2.5 text-center">
+            <div className="border-t border-[#F5F0EB] px-4 py-2 text-center sm:px-5 sm:py-2.5">
               <Link href="/activiteiten" className="text-[11px] font-bold text-[#F4A09C]">
                 Alle {totalActivities} activiteiten →
               </Link>
             </div>
           </div>
-        </div>
-
-        {/* Mobile detail */}
-        <div className="mt-3 lg:hidden">
-          <Link
-            href={href}
-            className="block rounded-[20px] bg-white p-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)]"
-          >
-            <p className="text-[11px] font-bold uppercase tracking-[0.8px] text-[#F4A09C]">
-              {pick.category}{pick.free ? " · Gratis" : ""}
-            </p>
-            <h3 className="mt-1 text-[18px] font-black leading-[1.1] text-[#2D2D2D]">
-              {pick.title}
-            </h3>
-            <p className="mt-1 text-[13px] font-semibold text-[#6B6B6B]">{pick.whyNow}</p>
-            <div className="mt-2 flex items-center justify-between">
-              <p className="text-[12px] text-[#6B6B6B]">📍 {pick.location}</p>
-              <span className="rounded-full bg-[#F4A09C] px-4 py-2 text-[12px] font-bold text-white">
-                Bekijk →
-              </span>
-            </div>
-          </Link>
         </div>
 
         <style jsx>{`

@@ -52,11 +52,11 @@ export default function TheaterAgenda() {
               </div>
             )}
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-[#2D2D2D]">{show.title}</h3>
-              <p className="mt-0.5 text-sm text-[#6B6B6B]">
+              <h3 className="font-bold text-[#2D2D2D] line-clamp-1">{show.title}</h3>
+              <p className="mt-0.5 truncate text-sm text-[#6B6B6B]">
                 {show.venue} · {show.time} · {show.ageLabel}
               </p>
-              <p className="mt-1 truncate text-sm text-[#6B6B6B]">{show.description}</p>
+              <p className="mt-1 line-clamp-1 text-sm text-[#6B6B6B]">{show.description}</p>
             </div>
             <div className="shrink-0 text-right">
               <span className="text-sm font-semibold text-[#2D2D2D]">{show.price}</span>
