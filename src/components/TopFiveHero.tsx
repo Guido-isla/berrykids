@@ -81,10 +81,96 @@ export default function TopFiveHero({
   const href = pick.isEvent ? `/event/${pick.slug}` : `/activiteiten/${pick.slug}`;
 
   return (
-    <div>
-      {/* ===== HERO ===== */}
+    <div className="mx-auto max-w-[1320px] px-4 sm:px-8">
+
+      {/* ===== MOBILE: Berry digest + card carousel ===== */}
+      <div className="lg:hidden">
+        {/* Berry daily digest */}
+        <div className="pick-header-reveal pb-4 pt-2 text-center">
+          <div className="mx-auto mb-3 w-fit" style={{ animation: "berry-bob 4s ease-in-out infinite", filter: "drop-shadow(0 6px 20px rgba(224,104,95,0.3))" }}>
+            <Image src="/berry-wink.png" alt="Berry" width={120} height={120} className="h-24 w-auto" />
+          </div>
+          <p className="text-[13px] font-bold text-[#E0685F]">{vibe}</p>
+          <h2 className="mt-1 text-[22px] font-black leading-[1.1] tracking-[-0.5px] text-[#2D2D2D]">
+            Berry&apos;s picks vandaag
+          </h2>
+          <p className="mx-auto mt-2 max-w-[300px] text-[15px] font-semibold leading-snug text-[#6B6B6B]">
+            {dailyMessage}
+          </p>
+          <div className="mt-3 flex justify-center">
+            <WeatherChip
+              icon={weatherIcon}
+              temp={weatherTemp}
+              description={weatherLabel}
+              reason={weatherReason}
+              forecast={weatherForecast}
+            />
+          </div>
+        </div>
+
+        {/* Swipeable card carousel */}
+        <div className="flex gap-3 overflow-x-auto pb-3 scrollbar-none">
+          {picks.map((p, i) => {
+            const itemHref = p.isEvent ? `/event/${p.slug}` : `/activiteiten/${p.slug}`;
+            return (
+              <Link
+                key={p.slug}
+                href={itemHref}
+                className={`pick-reveal pick-reveal-${i} pick-tap block w-[82vw] shrink-0 overflow-hidden rounded-[20px] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all active:scale-[1.02]`}
+              >
+                {/* Photo */}
+                <div className="relative h-[180px] overflow-hidden">
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    fill
+                    sizes="82vw"
+                    className="object-cover"
+                    priority={i === 0}
+                  />
+                  {/* Number badge */}
+                  <span className={`absolute left-3 top-3 flex h-8 w-8 items-center justify-center rounded-[10px] text-[15px] font-black shadow-sm ${NUM_COLORS[i]}`}>
+                    {i + 1}
+                  </span>
+                  <div className="absolute right-3 top-3">
+                    <SaveButton slug={p.slug} />
+                  </div>
+                  {/* Berry tip on photo */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-3.5 pb-3 pt-8">
+                    <p className="flex items-center gap-1.5 text-[13px] font-bold text-white">
+                      <Image src="/berry-icon.png" alt="" width={16} height={16} className="h-4 w-4 shrink-0" />
+                      {p.whyNow.length > 60 ? p.whyNow.slice(0, 60) + "…" : p.whyNow}
+                    </p>
+                  </div>
+                </div>
+                {/* Info */}
+                <div className="px-3.5 py-3">
+                  <h3 className="text-[17px] font-extrabold leading-snug tracking-tight text-[#2D2D2D]">
+                    {p.title}
+                  </h3>
+                  <p className="mt-1 text-[13px] text-[#6B6B6B]">📍 {p.location}</p>
+                  <div className="mt-1.5 flex items-center justify-between">
+                    <span className="text-[13px] font-bold">
+                      {p.free ? (
+                        <span className="text-[#4A8060]">Gratis</span>
+                      ) : (
+                        <span className="text-[#2D2D2D]">{p.ageLabel}</span>
+                      )}
+                    </span>
+                    <span className="rounded-full bg-[#E0685F] px-3.5 py-1.5 text-[12px] font-bold text-white">
+                      Bekijk →
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ===== DESKTOP: Hero photo + list + detail card (unchanged) ===== */}
       <div
-        className="mx-auto max-w-[1320px] px-4 sm:px-8"
+        className="hidden lg:block"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -101,7 +187,7 @@ export default function TopFiveHero({
 
         <div className="relative">
           {/* Hero photo area */}
-          <div className="relative h-[200px] overflow-hidden rounded-[20px] sm:h-[400px] sm:rounded-[24px] lg:h-[500px]">
+          <div className="relative h-[500px] overflow-hidden rounded-[24px]">
             {picks.map((p, i) => (
               <div
                 key={p.slug}
@@ -113,28 +199,28 @@ export default function TopFiveHero({
                   src={p.image}
                   alt={p.title}
                   fill
-                  sizes="(max-width: 1320px) 100vw, 1320px"
+                  sizes="1320px"
                   className="object-cover"
                   priority={i === 0}
                 />
               </div>
             ))}
 
-            {/* Left gradient — desktop */}
+            {/* Left gradient */}
             <div
-              className="pointer-events-none absolute inset-0 z-[2] hidden rounded-[24px] lg:block"
+              className="pointer-events-none absolute inset-0 z-[2] rounded-[24px]"
               style={{
                 background: "linear-gradient(to right, rgba(255,249,240,0.95) 0%, rgba(255,249,240,0.7) 32%, transparent 52%)",
               }}
             />
 
             {/* Save button */}
-            <div className="absolute right-4 top-4 z-[5]">
+            <div className="absolute right-5 top-5 z-[5]">
               <SaveButton slug={pick.slug} />
             </div>
 
-            {/* Detail card — desktop only */}
-            <div className="absolute bottom-6 right-6 z-[5] hidden w-[380px] lg:block">
+            {/* Detail card */}
+            <div className="absolute bottom-6 right-6 z-[5] w-[380px]">
               <div key={`detail-${current}`} className="animate-fade-up rounded-[20px] bg-white p-5 shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
                 <p className="text-[12px] font-bold uppercase tracking-[0.8px] text-[#E0685F]">
                   {pick.category}{pick.free ? " · Gratis" : ""}
@@ -174,7 +260,7 @@ export default function TopFiveHero({
             </div>
 
             {/* Progress bar */}
-            <div className="absolute inset-x-0 bottom-0 z-[6] h-[3px] overflow-hidden rounded-b-[20px] sm:rounded-b-[24px]">
+            <div className="absolute inset-x-0 bottom-0 z-[6] h-[3px] overflow-hidden rounded-b-[24px]">
               <div
                 key={progressKey}
                 className="h-full bg-[#E0685F]"
@@ -186,112 +272,66 @@ export default function TopFiveHero({
             </div>
           </div>
 
-          {/* Top-5 card */}
-          <div className="relative z-10 -mt-6 mx-3 rounded-[20px] bg-white shadow-[0_8px_40px_rgba(0,0,0,0.08)] sm:-mt-8 sm:mx-4 sm:rounded-[24px] lg:absolute lg:left-12 lg:top-7 lg:mt-0 lg:mx-0 lg:w-[420px]">
-            {/* Berry centered header */}
-            <div className="pick-header-reveal px-4 pt-5 text-center sm:px-5 sm:pt-6">
-              <div className="mx-auto mb-2 w-fit" style={{ animation: "berry-bob 4s ease-in-out infinite", filter: "drop-shadow(0 6px 16px rgba(244,160,156,0.3))" }}>
-                <Image src="/berry-wink.png" alt="Berry" width={100} height={100} className="h-16 w-auto sm:h-20" />
+          {/* Top-5 list card — overlapping left */}
+          <div className="absolute left-12 top-7 z-10 w-[420px] rounded-[24px] bg-white shadow-[0_8px_40px_rgba(0,0,0,0.08)]">
+            {/* Berry header */}
+            <div className="pick-header-reveal px-5 pt-6 text-center">
+              <div className="mx-auto mb-2 w-fit" style={{ animation: "berry-bob 4s ease-in-out infinite", filter: "drop-shadow(0 6px 16px rgba(224,104,95,0.3))" }}>
+                <Image src="/berry-wink.png" alt="Berry" width={100} height={100} className="h-20 w-auto" />
               </div>
               <p className="text-[12px] font-bold text-[#E0685F]">{vibe}</p>
-              <h2 className="text-[20px] font-black leading-[1.1] tracking-[-0.4px] text-[#2D2D2D] sm:text-[22px]">
+              <h2 className="text-[22px] font-black leading-[1.1] tracking-[-0.4px] text-[#2D2D2D]">
                 Berry&apos;s picks vandaag
               </h2>
-              <p className="mt-1.5 text-[14px] font-semibold text-[#6B6B6B] sm:text-[15px]">
+              <p className="mt-1.5 text-[15px] font-semibold text-[#6B6B6B]">
                 {dailyMessage}
               </p>
             </div>
 
             {/* List */}
             <div className="mt-3">
-              {picks.map((p, i) => {
-                const itemHref = p.isEvent ? `/event/${p.slug}` : `/activiteiten/${p.slug}`;
-                return (
-                  <div
-                    key={p.slug}
-                    className={`pick-reveal pick-reveal-${i} transition-colors ${
-                      i === current ? "bg-[#FFF3E0]" : "hover:bg-[#FFF9F0]"
-                    } ${i > 0 ? "border-t border-[#F5F0EB]" : ""}`}
-                  >
-                    {/* Desktop: click switches photo */}
-                    <button
-                      onClick={() => goTo(i)}
-                      className={`hidden w-full items-center gap-3 px-5 py-2.5 text-left lg:flex ${i === 0 ? "pick-tap-hero" : "pick-tap"}`}
-                    >
-                      <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] text-[13px] font-black ${NUM_COLORS[i]}`}>
-                        {i + 1}
-                      </span>
-                      <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[10px]">
-                        <Image src={p.image} alt="" fill sizes="44px" className="object-cover" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-[15px] font-extrabold leading-snug tracking-[-0.1px] text-[#2D2D2D]">
-                          {p.title}
-                        </p>
-                        <p className="truncate text-[13px] font-semibold text-[#6B6B6B]">
-                          {p.whyNow}
-                        </p>
-                      </div>
-                    </button>
-                    {/* Mobile: link goes directly to page */}
-                    <Link
-                      href={itemHref}
-                      className={`flex w-full items-center gap-2.5 px-4 py-2.5 lg:hidden ${i === 0 ? "pick-tap-hero" : "pick-tap"}`}
-                    >
-                      <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-[7px] text-[12px] font-black ${NUM_COLORS[i]}`}>
-                        {i + 1}
-                      </span>
-                      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-[10px]">
-                        <Image src={p.image} alt="" fill sizes="40px" className="object-cover" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-[15px] font-extrabold leading-snug tracking-[-0.1px] text-[#2D2D2D]">
-                          {p.title}
-                        </p>
-                        <p className="truncate text-[13px] font-semibold text-[#6B6B6B]">
-                          {p.whyNow}
-                        </p>
-                      </div>
-                    </Link>
+              {picks.map((p, i) => (
+                <button
+                  key={p.slug}
+                  onClick={() => goTo(i)}
+                  className={`pick-reveal pick-reveal-${i} flex w-full items-center gap-3 px-5 py-2.5 text-left transition-colors ${i === 0 ? "pick-tap-hero" : "pick-tap"} ${
+                    i === current ? "bg-[#FFF3E0]" : "hover:bg-[#FFF9F0]"
+                  } ${i > 0 ? "border-t border-[#F5F0EB]" : ""}`}
+                >
+                  <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] text-[13px] font-black ${NUM_COLORS[i]}`}>
+                    {i + 1}
+                  </span>
+                  <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[10px]">
+                    <Image src={p.image} alt="" fill sizes="44px" className="object-cover" />
                   </div>
-                );
-              })}
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[15px] font-extrabold leading-snug tracking-[-0.1px] text-[#2D2D2D]">
+                      {p.title}
+                    </p>
+                    <p className="truncate text-[13px] font-semibold text-[#6B6B6B]">
+                      {p.whyNow}
+                    </p>
+                  </div>
+                </button>
+              ))}
             </div>
 
             {/* Footer */}
-            <div className="border-t border-[#F5F0EB] px-4 py-2.5 text-center sm:px-5">
+            <div className="border-t border-[#F5F0EB] px-5 py-2.5 text-center">
               <Link href="/activiteiten" className="text-[12px] font-bold text-[#E0685F]">
                 Alle activiteiten →
               </Link>
             </div>
           </div>
-
-          {/* Mobile #1 lock moment — brief detail that auto-fades */}
-          <div className="lock-moment mt-2 rounded-[16px] bg-[#FFF3E0] px-4 py-3 lg:hidden">
-            <Link href={href} className="block">
-              <p className="text-[11px] font-bold uppercase tracking-[0.8px] text-[#E0685F]">
-                Berry&apos;s #1 pick
-              </p>
-              <p className="mt-1 text-[15px] font-black leading-snug text-[#2D2D2D]">
-                {picks[0]?.title}
-              </p>
-              <p className="mt-0.5 text-[13px] font-semibold text-[#6B6B6B]">
-                {picks[0]?.whyNow}
-              </p>
-              <span className="mt-2 inline-block rounded-full bg-[#E0685F] px-4 py-1.5 text-[12px] font-bold text-white">
-                Bekijk →
-              </span>
-            </Link>
-          </div>
         </div>
-
-        <style jsx>{`
-          @keyframes progressFill {
-            from { width: 0%; }
-            to { width: 100%; }
-          }
-        `}</style>
       </div>
+
+      <style jsx>{`
+        @keyframes progressFill {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+      `}</style>
     </div>
   );
 }
