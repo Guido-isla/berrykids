@@ -8,23 +8,23 @@ import ActivityCard from "./ActivityCard";
 type ActivityWithImage = Activity & { resolvedImage?: string; photoAttribution?: string };
 
 const CATEGORY_OPTIONS = [
-  { label: "Alles", value: "all" },
+  { label: "Cultuur", value: "cultuur" },
   { label: "Sport", value: "sport" },
   { label: "Natuur", value: "natuur" },
-  { label: "Cultuur", value: "cultuur" },
   { label: "Dieren", value: "dieren" },
   { label: "Indoor", value: "indoor" },
+  { label: "Alles", value: "all" },
 ] as const;
 
 type CategoryFilter = (typeof CATEGORY_OPTIONS)[number]["value"];
 
-/** Map categories to Berry illustrations */
-const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; title: string }> = {
-  sport: { src: "/illustrations/berry-sport.png", title: "Sport & Buiten" },
-  natuur: { src: "/illustrations/berry-natuur.png", title: "Natuur" },
-  dieren: { src: "/illustrations/berry-natuur.png", title: "Dieren" },
-  cultuur: { src: "/illustrations/berry-cultuur.png", title: "Cultuur" },
-  indoor: { src: "/illustrations/berry-zwemmen.png", title: "Indoor" },
+/** Map categories to Berry illustrations + gradient */
+const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; gradient: string }> = {
+  sport: { src: "/illustrations/berry-sport.png", gradient: "linear-gradient(180deg, #FFF3E0 0%, #FFF9F0 100%)" },
+  natuur: { src: "/illustrations/berry-natuur.png", gradient: "linear-gradient(180deg, #E8F5E9 0%, #FFF9F0 100%)" },
+  dieren: { src: "/illustrations/berry-natuur.png", gradient: "linear-gradient(180deg, #E8F5E9 0%, #FFF9F0 100%)" },
+  cultuur: { src: "/illustrations/berry-cultuur.png", gradient: "linear-gradient(180deg, #EDE7F6 0%, #FFF9F0 100%)" },
+  indoor: { src: "/illustrations/berry-zwemmen.png", gradient: "linear-gradient(180deg, #E0F4FF 0%, #FFF9F0 100%)" },
 };
 
 /** Map mood query params to category filters */
@@ -49,7 +49,7 @@ function Pill({ label, active, onClick }: { label: string; active: boolean; onCl
 }
 
 export default function FilterableActivities({ activities }: { activities: ActivityWithImage[] }) {
-  const [category, setCategory] = useState<CategoryFilter>("all");
+  const [category, setCategory] = useState<CategoryFilter>("cultuur");
   const [searchQuery, setSearchQuery] = useState("");
 
   // Read ?q= and ?mood= from URL on mount
@@ -82,17 +82,19 @@ export default function FilterableActivities({ activities }: { activities: Activ
 
   return (
     <>
-      {/* Category illustration — Berry's identity */}
+      {/* Category illustration with gradient — Berry's identity */}
       {illustration && (
-        <div className="mb-4 text-center">
-          <Image
-            src={illustration.src}
-            alt={illustration.title}
-            width={500}
-            height={375}
-            className="mx-auto h-auto w-full max-w-[400px]"
-            priority
-          />
+        <div className="-mx-5 -mt-8 mb-4 sm:-mx-8" style={{ background: illustration.gradient }}>
+          <div className="mx-auto max-w-[360px] px-4 pb-2 pt-6">
+            <Image
+              src={illustration.src}
+              alt=""
+              width={500}
+              height={375}
+              className="h-auto w-full"
+              priority
+            />
+          </div>
         </div>
       )}
 
