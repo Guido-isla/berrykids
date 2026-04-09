@@ -368,9 +368,15 @@ export default async function Home() {
                 </Link>
               );
             })}
-            <div className="w-[60vw] shrink-0 sm:w-auto">
-              <ScrollCTA emoji="📆" label="Alle evenementen" href="/evenementen" />
-            </div>
+            <Link href="/evenementen" className="flex h-[232px] w-[60vw] shrink-0 flex-col items-center justify-center rounded-[20px] bg-gradient-to-br from-[#E0685F] to-[#FFD8B0] p-6 text-center transition-all hover:-translate-y-1 hover:shadow-lg sm:w-auto">
+              <span className="text-[32px]">📆</span>
+              <p className="mt-2 text-[15px] font-extrabold leading-snug text-white sm:text-[16px]">
+                Alle evenementen
+              </p>
+              <span className="mt-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/30 text-[14px] text-white">
+                →
+              </span>
+            </Link>
           </div>
         </section>
       )}

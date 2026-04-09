@@ -588,7 +588,7 @@ export const activities: Activity[] = [
     ageMin: 6,
     free: true,
     openingHours: "Wo-zo 13:00 – 17:00",
-    image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=800&q=80",
+    image: "https://www.archeologischmuseumhaarlem.nl/wp-content/uploads/2024/04/AMH-Banner-homepage-April-1280x487px-scaled.jpg",
     verified: true,
   },
   {
