@@ -332,8 +332,8 @@ export default async function Home() {
             {binnenkortEvents.map((e) => {
               const berryTip = generateBerryTip(e as unknown as Record<string, unknown>, ctx, tBerry);
               return (
-                <Link key={e.slug} href={`/event/${e.slug}`} className="group block w-[75vw] shrink-0 overflow-hidden rounded-[20px] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all hover:-translate-y-1 sm:w-auto">
-                  <div className="relative h-[160px] overflow-hidden">
+                <Link key={e.slug} href={`/event/${e.slug}`} className="group flex h-full w-[75vw] shrink-0 flex-col overflow-hidden rounded-[20px] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all hover:-translate-y-1 sm:w-auto">
+                  <div className="relative h-[160px] shrink-0 overflow-hidden">
                     <Image
                       src={e.resolvedImage || e.image}
                       alt={e.title}
@@ -362,8 +362,8 @@ export default async function Home() {
                     </div>
                   </div>
                   <div className="px-3.5 py-3">
-                    <h3 className="text-[15px] font-extrabold leading-snug text-[#2D2D2D] group-hover:text-[#E0685F]">{e.title}</h3>
-                    <p className="mt-0.5 text-[13px] text-[#6B6B6B]">📍 {e.location}{e.time ? ` · ${e.time}` : ""}</p>
+                    <h3 className="line-clamp-1 text-[15px] font-extrabold leading-snug text-[#2D2D2D] group-hover:text-[#E0685F]">{e.title}</h3>
+                    <p className="mt-0.5 truncate text-[13px] text-[#6B6B6B]">📍 {e.location}{e.time ? ` · ${e.time}` : ""}</p>
                   </div>
                 </Link>
               );

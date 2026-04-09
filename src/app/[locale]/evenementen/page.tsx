@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { getScrapedEvents } from "@/data/events-loader";
 import { resolveEventImages } from "@/lib/photos";
-import { formatShortDate } from "@/lib/dates";
 import { getSchoolVacation } from "@/data/dutch-calendar";
 import Footer from "@/components/Footer";
 import EventCard from "@/components/EventCard";
@@ -14,14 +12,18 @@ export const metadata: Metadata = {
 };
 
 type WeekGroup = {
+  id: string;
   label: string;
   sublabel?: string;
   events: ReturnType<typeof resolveEventImages<ReturnType<typeof getScrapedEvents>[number]>>;
 };
 
-function getWeekLabel(date: string): string {
+function getWeekLabel(date: string, thisWeekKey: string, nextWeekKey: string): string {
+  const key = getWeekKey(date);
+  if (key === thisWeekKey) return "Deze week";
+  if (key === nextWeekKey) return "Volgende week";
+
   const d = new Date(date + "T00:00:00");
-  // Get Monday of this week
   const day = d.getDay();
   const mon = new Date(d);
   mon.setDate(d.getDate() - ((day + 6) % 7));
@@ -29,7 +31,7 @@ function getWeekLabel(date: string): string {
   sun.setDate(mon.getDate() + 6);
 
   const MONTHS = ["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
-  return `${mon.getDate()} ${MONTHS[mon.getMonth()]} – ${sun.getDate()} ${MONTHS[sun.getMonth()]}`;
+  return `${mon.getDate()} – ${sun.getDate()} ${MONTHS[sun.getMonth()]}`;
 }
 
 function getWeekKey(date: string): string {
@@ -54,6 +56,12 @@ export default function EvenementenPage() {
     return true;
   });
 
+  // Week keys for "Deze week" / "Volgende week"
+  const thisWeekKey = getWeekKey(today);
+  const nextWeekDate = new Date();
+  nextWeekDate.setDate(nextWeekDate.getDate() + 7);
+  const nextWeekKey = getWeekKey(nextWeekDate.toISOString().split("T")[0]);
+
   // Group by week
   const weekMap = new Map<string, typeof unique>();
   for (const e of unique) {
@@ -63,51 +71,50 @@ export default function EvenementenPage() {
   }
 
   const weeks: WeekGroup[] = [];
-  const now = new Date();
-  const thisWeekKey = getWeekKey(today);
-
   for (const [key, events] of weekMap) {
-    // Check for special context
     const vacation = getSchoolVacation(events[0].date);
-    let sublabel: string | undefined;
-    if (vacation) sublabel = `🎒 ${vacation.name}`;
+    const label = getWeekLabel(events[0].date, thisWeekKey, nextWeekKey);
 
-    // Friendly label
-    let label: string;
-    if (key === thisWeekKey) {
-      label = "Deze week";
-    } else {
-      label = getWeekLabel(events[0].date);
-    }
+    // Create stable ID for anchor links
+    const id = key === thisWeekKey ? "deze-week"
+      : key === nextWeekKey ? "volgende-week"
+      : `week-${key}`;
 
-    weeks.push({ label, sublabel, events });
+    weeks.push({
+      id,
+      label,
+      sublabel: vacation ? `🎒 ${vacation.name}` : undefined,
+      events,
+    });
   }
+
+  // Build filter pill data from actual weeks
+  const filterPills = weeks.map((w) => ({
+    id: w.id,
+    label: w.label,
+    count: w.events.length,
+  }));
 
   return (
     <div className="min-h-screen">
       <main className="mx-auto max-w-[1320px] px-4 py-8 sm:px-8">
-        {/* Hero */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3">
-            <Image src="/berry-icon.png" alt="" width={36} height={36} className="h-9 w-auto" />
-            <div>
-              <h1 className="text-[24px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[28px]">
-                Evenementen
-              </h1>
-              <p className="text-[14px] font-semibold text-[#6B6B6B]">
-                {unique.length} evenementen in Haarlem en omgeving
-              </p>
-            </div>
-          </div>
+        {/* Header */}
+        <div className="mb-6">
+          <h1 className="text-[24px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[28px]">
+            Evenementen
+          </h1>
+          <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">
+            {unique.length} evenementen in Haarlem en omgeving
+          </p>
         </div>
 
         {/* Filter bar */}
-        <EventFilterBar totalEvents={unique.length} />
+        <EventFilterBar pills={filterPills} />
 
         {/* Weekly groups */}
         <div className="mt-6 space-y-10">
           {weeks.map((week) => (
-            <section key={week.label}>
+            <section key={week.id} id={week.id} className="scroll-mt-20">
               <div className="mb-4 flex items-baseline gap-3">
                 <h2 className="text-[18px] font-extrabold text-[#2D2D2D] sm:text-[20px]">
                   {week.label}
