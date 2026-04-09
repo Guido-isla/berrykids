@@ -1,6 +1,6 @@
 {
-  "scrapedAt": "2026-04-09T10:17:15.852Z",
-  "eventCount": 8,
+  "scrapedAt": "2026-04-09T10:55:00.852Z",
+  "eventCount": 25,
   "rejectedCount": 0,
   "errors": [],
   "events": [
@@ -108,6 +108,156 @@
       ]
     },
     {
+      "source": "visithaarlemmermeer",
+      "title": "Kom klimmen bij Klimpark 21",
+      "date": "2026-04-24",
+      "time": "11:00",
+      "venue": "Haarlemmermeer",
+      "description": "Durf jij de uitdaging aan te gaan? Bij Klimpark21 kun je klimmen, klauteren en je avontuurlijke kant ontdekken. Voor jong en oud, beginnende of ervaren klimmers: iedereen kan meedoen! De professionele kliminstructeurs zorgen ervoor dat je veilig en met plezier de hoogte in gaat. Kom klimmen, ontdek ",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/Klimpark%2021.jpeg",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/kom-klimmen-bij-klimpark-21",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Boulderen bij Boulderhal de Fabriek Hoofddorp",
+      "date": "2026-04-24",
+      "time": "12:00",
+      "venue": "Haarlemmermeer",
+      "description": "Altijd al eens willen boulderen? Kom tijdens de meivakantie langs en ontdek deze leuke sport! Je krijgt eerst een korte uitleg over hoe boulderen werkt, wat je moet weten over veiligheid en een paar handige tips om je eerste boulders te halen. Na de uitleg ga je meteen zelf aan de slag! Je mag de re",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/Boulderen%20fabriek_0.jpg",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/voorjaar-boulderen",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Boerenvoetgolf Haarlemmermeer",
+      "date": "2026-04-24",
+      "time": "10:00",
+      "venue": "Haarlemmermeer",
+      "description": "Vier het voorjaar bij Boerenvoetgolf Haarlemmermeer! Geniet van de frisse lucht, gezelligheid en een leuke ronde Boerenvoetgolf met vrienden of familie. Tijdens de campagne van Visit Haarlemmermeer (vrijdag 24 april t/m zondag 3 mei 2026) krijg je 20% korting op de entree. Dit is dus een goed moment",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/Boerenvoetgolf%20Haarlemmermeer-8_0.jpg",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/voorjaar-boerenvoetgolf",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Spring dubbel zo lang bij JumpSkillz Hoofddorp!",
+      "date": "2026-04-24",
+      "time": "12:30",
+      "venue": "Haarlemmermeer",
+      "description": "Wil jij iets leuks doen met je vrienden of familie? Kom dan naar JumpSkillz Trampolinepark in Hoofddorp! Hier kun je springen, spelen en nieuwe tricks leren. Daag jezelf uit op de trampolines of doe mee met een spel in de dodgeball arena. Je kunt ook springen in de foampit of proberen te scoren in d",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/jumpskillz.jpeg",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/voorjaar-spring-dubbel-zo-lang-bij-jumpskillz-hoofddorp",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Geniet van de natuur met 20% korting op een kano!",
+      "date": "2026-04-24",
+      "time": "10:00",
+      "venue": "Haarlemmermeer",
+      "description": "Tijdens de Vier het Voorjaar-campagne van Visit Haarlemmermeer kun je 20% korting krijgen op de huur van een kano in recreatiegebied Spaarnwoude. Gebruik bij het afrekenen op de website de kortingscode “4HETVOORJAAR!” (in hoofdletters). Na het kanoën ben je welkom op het terras voor een hapje en dra",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/watergeus.jpg",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/voorjaar-geniet-van-de-natuur-met-20-korting-op-een-kano",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Varen in het voorjaar",
+      "date": "2026-04-24",
+      "time": "10:00",
+      "venue": "Haarlemmermeer",
+      "description": "Zin om lekker naar buiten te gaan? Kom deze lente naar Watersportcentrum Dynamique en geniet van het water met een mooie korting! Van 24 april tot en met 3 mei doen ze mee aan de campagne Vier het Voorjaar van Visit Haarlemmermeer. In deze periode profiteer je van leuke acties: - Huur 2 SUP boards e",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/Elektrisch%20varen%20Dynamique%20Haarlem%201.JPG",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/voorjaar-varen-het-voorjaar",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Escape Game",
+      "date": "2026-04-24",
+      "time": "13:00",
+      "venue": "Haarlemmermeer",
+      "description": "Maak je klaar voor een spannend avontuur! In deze Escape Game ga je op een interactieve reis door de geschiedenis van het beroemde Gemaal de Cruquius. Werk samen met je team om vier mysterieuze kluizen te openen en binnen een uur de sleutel van de machinekamer te vinden. Alleen dan kunnen jullie de ",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/Escape%20game%20cruquius.jpg",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/escape-game",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Huisjes maken voor oorwormen en lieveheersbeestjes",
+      "date": "2026-04-25",
+      "time": "10:00",
+      "venue": "Haarlemmermeer",
+      "description": "Je wilt je tuinplanten gezond houden. Dat kan door bepaalde insecten naar je tuin te lokken. Oorwormen en lieveheersbeestjes zijn echte “nuttige insecten”. Ze eten bladluizen, mijten en de eitjes van andere schadelijke insecten. Het is dus fijn als deze insecten in je tuin komen wonen. Deze ochtend ",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/lieveheersbeestjes.jpeg",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/huisjes-maken-voor-oorwormen-en-lieveheersbeestjes",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Familie Paintball",
+      "date": "2026-04-25",
+      "time": "11:00",
+      "venue": "Haarlemmermeer",
+      "description": "Op 25 en 26 april organiseert Paintball Spaarnwoude een speciale familiedag met veel actie en plezier. Gezinnen kunnen samen paintballen en kinderen kunnen op een makkelijke en veilige manier kennismaken met de sport. Er wordt gespeeld met speciale wapens voor kinderen van 8 tot en met 12 jaar. Oude",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/paintball%20spaarndam.jpg",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/voorjaar-familie-paintball",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Unieke combiticket museumbezoek en rondvaart Westeinderplassen",
+      "date": "2026-04-26",
+      "time": "13:00",
+      "venue": "Haarlemmermeer",
+      "description": "Op zondag 26 april is er een speciale combi-actie van het Crash Luchtoorlog- en Verzetsmuseum ’40-’45 en Westeinder Rondvaart. Met dit ticket bezoek je eerst het museum en maak je daarna een mooie rondvaart. Het programma begint om 13.00 uur bij het Crashmuseum. Parkeren is geen probleem. Je kunt he",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/Combiticket.png",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/unieke-combiticket-museumbezoek-en-rondvaart-westeinderplassen",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
       "source": "philharmonie",
       "title": "De gele duikmachine",
       "date": "2026-04-29",
@@ -121,6 +271,111 @@
       "tags": [
         "familie",
         "jeugd & familie"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Waterbeestjes excursie",
+      "date": "2026-04-29",
+      "time": "11:00",
+      "venue": "Haarlemmermeer",
+      "description": "Word een echte natuuronderzoeker! Ga mee op een spannende ontdekkingstocht door de Groene Weelde van Spaarnwoude Park! Samen met een educatief medewerker ontdek je waterbeestjes en leer je hoe padden en kikkers leven. Zo zie je hoe deze kleine dieren belangrijk zijn voor de natuur. Met een schepnet ",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/waterexcursie_0.jpg",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/waterbeestjes-excursie",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Lente op het fort",
+      "date": "2026-04-29",
+      "time": "11:00",
+      "venue": "Haarlemmermeer",
+      "description": "Kom op woensdag 29 april de lente vieren op Kunstfort Vijfhuizen. Doe mee aan een leuke ontdekkingstocht! De begeleiding is in handen van onze ervaren educator en rondleider Fred Rosenhart. Tijdens de ontdekkingstocht neemt Fred de kinderen mee in een prikkelende en zintuiglijke ervaring op en rond ",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/Lente%20op%20het%20fort.jpg",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/voorjaar-lente-op-het-fort",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "BOGOTÁ ART",
+      "date": "2026-04-30",
+      "time": "17:00",
+      "venue": "Haarlemmermeer",
+      "description": "Van donderdag 30 april t/m zondag 3 mei 2026 is de zesde editie van BOGOTÁ Art in Halfweg. Ruim 40 kunstenaars laten hun werk zien, zoals schilderijen, beeldhouwwerken, videokunst en installaties. Iedereen is welkom, of je nu van kunst houdt of een creatief uitje zoekt. Naast de tentoonstelling in d",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/bogota%20art.png",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/bogota-art",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Atelier Tours",
+      "date": "2026-05-01",
+      "time": "13:00",
+      "venue": "Haarlemmermeer",
+      "description": "Wil je weten wat er gebeurt achter de deuren van de ateliers in Broedplaats BOGOTÁ? Tijdens BOGOTÁ ART kun je mee op een inspirerende rondleiding langs verschillende makers. Onder begeleiding bezoek je meerdere ateliers en kijk je achter de schermen. Zie hoe kunstwerken ontstaan en praat met kunsten",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/atelier%20tour.png",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/atelier-tours",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Workshop: Bouw een kunstwerk van Lego",
+      "date": "2026-05-02",
+      "time": "12:00",
+      "venue": "Haarlemmermeer",
+      "description": "Bij BOGOTÁ ART draait alles om kunst en vooral om het maken ervan! Kom naar Bouwgabbers en ontdek hoe leuk het is om met LEGO je eigen kunstwerk te maken. Wil je een kleurrijk 2D-“schilderij” bouwen, of liever een indrukwekkend 3D-kunstwerk? Alles kan! Gebruik je fantasie en ervaar hoe eindeloos bou",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/kunstwerk%20lego.png",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/workshop-bouw-een-kunstwerk-van-lego",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Rondleiding Stoomgemaal met gratis kinderentree",
+      "date": "2026-05-02",
+      "time": "11:30",
+      "venue": "Haarlemmermeer",
+      "description": "Op zaterdag 2 en zondag 3 mei is Stoomgemaal Halfweg open voor publiek. Het oudste en grootste werkende schepradstoomgemaal ter wereld draait dan onder stoom. Dat is leuk en bijzonder om te zien voor jong en oud. Op zaterdag 2 mei geeft gids Han Maas twee technische rondleidingen. Hij vertelt meer o",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/technische%20rondleiding.jpg",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/voorjaar-stoomgemaal-halfweg",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "visithaarlemmermeer",
+      "title": "Heimanshof Eco-Meerfestival",
+      "date": "2026-05-03",
+      "time": "13:00",
+      "venue": "Haarlemmermeer",
+      "description": "Kom naar het Eco-Meerfestival in Heemtuin De Heimanshof en ontdek wat de natuur te bieden heeft. Wandel, kijk, proef en ervaar wat er allemaal leeft en groeit, vaak dichterbij dan je denkt. Luister naar het geluid van bloemblaadjes, volg het ritme van de bijendans en zie wat er gebeurt als je even s",
+      "imageUrl": "https://visithaarlemmermeer.nl/sites/default/files/visual_image_teaser/heemtuin%20de%20heimanshof.jpg",
+      "ticketUrl": "https://visithaarlemmermeer.nl/agenda/heimanshof-eco-meerfestival",
+      "category": "event",
+      "tags": [
+        "familie",
+        "haarlemmermeer"
       ]
     }
   ]

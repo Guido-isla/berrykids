@@ -13,6 +13,7 @@ import { scrapeSchuur } from "./scrapers/schuur";
 import { scrapePhilharmonie } from "./scrapers/philharmonie";
 import { scrapeKidsproof } from "./scrapers/kidsproof";
 import { scrapeHaarlemMarketing } from "./scrapers/haarlemmarketing";
+import { scrapeVisitHaarlemmermeer } from "./scrapers/visithaarlemmermeer";
 import { enrichDescriptions } from "./scrapers/enrich";
 import type { ScrapedEvent } from "./scrapers/types";
 
@@ -63,6 +64,7 @@ async function main() {
     { name: "Philharmonie", fn: scrapePhilharmonie },
     // Kidsproof removed — JS-rendered page, can't scrape without headless browser
     { name: "Haarlem Marketing", fn: scrapeHaarlemMarketing },
+    { name: "Visit Haarlemmermeer", fn: scrapeVisitHaarlemmermeer },
   ]) {
     console.log();
     try {
