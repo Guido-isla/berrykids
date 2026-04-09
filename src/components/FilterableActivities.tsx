@@ -106,7 +106,7 @@ export default function FilterableActivities({ activities }: { activities: Activ
   return (
     <>
       {/* Category banner — illustration is the hero */}
-      <div className="relative -mx-5 -mt-4 overflow-hidden pb-2 sm:-mx-8" style={{ background: illustration ? illustration.gradient : undefined }}>
+      <div className="relative -mx-5 -mt-4 overflow-hidden sm:-mx-8" style={{ background: illustration ? illustration.gradient : undefined }}>
         {illustration && (
           <>
             {/* Glow */}
@@ -118,7 +118,7 @@ export default function FilterableActivities({ activities }: { activities: Activ
                 alt=""
                 width={500}
                 height={375}
-                className="h-auto w-[80%] max-w-[340px] sm:w-[60%] sm:max-w-[400px]"
+                className="h-[80px] w-auto sm:h-[100px]"
                 priority
               />
             </div>
@@ -127,7 +127,7 @@ export default function FilterableActivities({ activities }: { activities: Activ
         {!illustration && <div className="pt-[72px] sm:pt-[80px]" />}
 
         {/* Pills — sit on the gradient */}
-        <div className="mt-3 flex gap-2 overflow-x-auto px-5 pb-1 scrollbar-none sm:px-8">
+        <div className="mt-2 flex gap-2 overflow-x-auto px-5 pb-2 scrollbar-none sm:px-8">
           {CATEGORY_OPTIONS.map((opt) => (
             <Pill
               key={opt.value}
