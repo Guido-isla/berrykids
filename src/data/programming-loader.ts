@@ -73,8 +73,22 @@ export function getFilmVanDeWeek() {
 /**
  * Get all kids films — scraped + manual + Pathé Haarlem.
  */
-export function getAllKidsFilms() {
-  const films: { title: string; cinema: string; times: string[]; ageLabel: string; description: string; image: string }[] = [];
+export type KidsFilm = {
+  slug: string;
+  title: string;
+  cinema: string;
+  times: string[];
+  ageLabel: string;
+  description: string;
+  image: string;
+};
+
+function slugify(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60);
+}
+
+export function getAllKidsFilms(): KidsFilm[] {
+  const films: KidsFilm[] = [];
   const seen = new Set<string>();
 
   // Scraped films
@@ -94,6 +108,7 @@ export function getAllKidsFilms() {
     if (seen.has(title.toLowerCase())) continue;
     seen.add(title.toLowerCase());
     films.push({
+      slug: slugify(title),
       title,
       cinema: showings[0].venue,
       times: showings.map((f) => {
@@ -112,6 +127,7 @@ export function getAllKidsFilms() {
   // Updated April 2026 — real current lineup
   const patheFilms = [
     {
+      slug: "the-super-mario-galaxy-movie",
       title: "The Super Mario Galaxy Movie",
       cinema: "Pathé Haarlem",
       times: ["Za 11:00", "Za 14:00", "Zo 11:00", "Wo 14:00"],
@@ -120,6 +136,7 @@ export function getAllKidsFilms() {
       image: "https://image.tmdb.org/t/p/w500/ekF2RiziyzLeXsTvEvhhRjEc7Eo.jpg",
     },
     {
+      slug: "mike-molly-vieren-feest",
       title: "Mike & Molly vieren feest",
       cinema: "Pathé Haarlem",
       times: ["Za 10:30", "Zo 10:30", "Wo 10:30"],
@@ -128,6 +145,7 @@ export function getAllKidsFilms() {
       image: "https://static.filmvandaag.nl/covers/original/149000/149419.jpg?v=1&width=400",
     },
     {
+      slug: "super-charlie",
       title: "Super Charlie",
       cinema: "Pathé Haarlem",
       times: ["Za 13:30", "Zo 13:30"],
@@ -136,6 +154,7 @@ export function getAllKidsFilms() {
       image: "https://image.tmdb.org/t/p/w500/mdmULykTC1owrECUXTp2haR1Boq.jpg",
     },
     {
+      slug: "jumpers",
       title: "Jumpers",
       cinema: "Pathé Haarlem",
       times: ["Za 16:00", "Zo 14:00", "Wo 14:30"],
@@ -144,6 +163,7 @@ export function getAllKidsFilms() {
       image: "https://image.tmdb.org/t/p/w500/lf1bwcuLOuBbsLw9wO2EMhNsNtU.jpg",
     },
     {
+      slug: "david",
       title: "David",
       cinema: "Pathé Haarlem",
       times: ["Za 11:30", "Zo 16:00"],
@@ -152,6 +172,7 @@ export function getAllKidsFilms() {
       image: "https://image.tmdb.org/t/p/w500/3f3bdkHG66HwPczYzbWoZK3lWtK.jpg",
     },
     {
+      slug: "goat",
       title: "GOAT",
       cinema: "Pathé Haarlem",
       times: ["Za 14:00", "Zo 11:30", "Wo 14:00"],
@@ -169,8 +190,12 @@ export function getAllKidsFilms() {
 
   // Add manual fallback if no films yet
   if (!seen.has(manualFilm.title.toLowerCase())) {
-    films.push(manualFilm);
+    films.push({ ...manualFilm, slug: slugify(manualFilm.title) });
   }
 
   return films;
+}
+
+export function getFilmBySlug(slug: string): KidsFilm | undefined {
+  return getAllKidsFilms().find((f) => f.slug === slug);
 }
