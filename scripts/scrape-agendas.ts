@@ -61,13 +61,15 @@ async function main() {
     { name: "Patronaat", fn: scrapePatronaat },
     { name: "Schuur", fn: scrapeSchuur },
     { name: "Philharmonie", fn: scrapePhilharmonie },
-    { name: "Kidsproof", fn: scrapeKidsproof },
+    // Kidsproof removed — JS-rendered page, can't scrape without headless browser
     { name: "Haarlem Marketing", fn: scrapeHaarlemMarketing },
   ]) {
     console.log();
     try {
       const events = await fn();
       allEvents.push(...events);
+      // Rate limit: 500ms between scrapers
+      await new Promise((r) => setTimeout(r, 500));
     } catch (err) {
       const msg = `${name} scraper failed: ${err}`;
       console.error(`  ❌ ${msg}`);
