@@ -4,78 +4,101 @@ import { Link } from "@/i18n/navigation";
 import Footer from "@/components/Footer";
 import NewsletterForm from "@/components/NewsletterForm";
 import { activities } from "@/data/activities";
+import { getScrapedEvents } from "@/data/events-loader";
 import { resolveEventImages } from "@/lib/photos";
-import ActivityCard from "@/components/ActivityCard";
+import EventCard from "@/components/EventCard";
 
 export const metadata: Metadata = {
-  title: "Vakantietips voor kinderen | Berry Kids",
+  title: "Meivakantie tips voor kinderen | Berry Kids",
   description:
-    "Surfcamps, theaterkampen, buitenactiviteiten en meer voor de schoolvakanties.",
+    "Berry's weekplan voor de meivakantie: elke dag een uitje met je kids in Haarlem en omgeving.",
 };
 
-const MEI_DAY_PLANS = [
+type DayPlan = {
+  day: string;
+  theme: string;
+  emoji: string;
+  picks: { slug: string; tip: string }[];
+  berryTip: string;
+};
+
+const MEI_DAY_PLANS: DayPlan[] = [
   {
-    day: "Week 1 · Ma 27 apr",
+    day: "Ma 27 apr",
     theme: "Strand & Surf",
     emoji: "🏄",
-    morning: "Surfles bij Pim Mulder in Zandvoort (6+ jaar, vanaf €35). Materiaal inbegrepen, groepsles van 10:00-12:00.",
-    afternoon: "Stranddag! Zandkastelen bouwen, vliegeren, en friet bij de strandtent. Trein vanuit Haarlem: 20 min.",
-    tip: "Boek de surfles minstens een week vooruit — de meivakantie is populair.",
-    links: ["/activiteiten"],
+    picks: [
+      { slug: "zandvoort-strand", tip: "Trein vanuit Haarlem: 20 min" },
+      { slug: "pepsports-zandvoort", tip: "Surfles vanaf 6 jaar, €35" },
+      { slug: "bloemendaal-strand", tip: "Rustiger dan Zandvoort" },
+    ],
+    berryTip: "Boek de surfles vooruit — meivakantie is populair!",
   },
   {
-    day: "Week 1 · Di 28 apr",
+    day: "Di 28 apr",
     theme: "Museum & Cultuur",
     emoji: "🎨",
-    morning: "Kinderlab bij Teylers Museum — fossielen onderzoeken en proefjes doen (6-12 jaar). Museumkaart geldig!",
-    afternoon: "Schetsboek mee naar het Frans Hals Museum. Kinderen krijgen opdrachten om schilderijen na te tekenen.",
-    tip: "Combineer beide musea — ze liggen op 10 minuten lopen van elkaar.",
-    links: ["/activiteiten"],
+    picks: [
+      { slug: "teylers-museum", tip: "Kinderlab: fossielen & proefjes" },
+      { slug: "frans-hals-museum", tip: "Schetsboek mee — tekenparcours" },
+      { slug: "archeologisch-museum-haarlem", tip: "Museumkaart geldig" },
+    ],
+    berryTip: "Combineer Teylers + Frans Hals — 10 min lopen van elkaar.",
   },
   {
-    day: "Week 1 · Wo 29 apr",
+    day: "Wo 29 apr",
     theme: "Natuur & Dieren",
     emoji: "🐑",
-    morning: "Lammetjes aaien bij Kinderboerderij De Olievaar (gratis!). Op woensdag is er ook een knutselmiddag.",
-    afternoon: "Duinwandeling in de Kennemerduinen — de Kabouterwandeling (2 km) is perfect voor kleintjes. Damherten spotten!",
-    tip: "Neem een verrekijker mee. En een picknickkleed voor de lunch in het gras.",
-    links: ["/tips/lammetjes-aaien", "/tips/duinwandeling-met-kids"],
+    picks: [
+      { slug: "kinderboerderij-t-molentje", tip: "Gratis! Lammetjes aaien" },
+      { slug: "kennemerduinen-wandelen", tip: "Kabouterwandeling (2 km)" },
+      { slug: "hertenkamp-bloemendaal", tip: "Damherten spotten" },
+    ],
+    berryTip: "Verrekijker en picknickkleed meenemen!",
   },
   {
-    day: "Week 1 · Do 30 apr",
+    day: "Do 30 apr",
     theme: "Sport & Actief",
     emoji: "🧗",
-    morning: "Boulderen bij Klimmuur Haarlem (4+ jaar, €12). Speciale kinderwanden, geen ervaring nodig.",
-    afternoon: "Peutergym of padel — Peakz Padel heeft speciale kidsuren. Rackets te leen.",
-    tip: "Bij Klimmuur kun je ook een kinderfeestje boeken als je dat wilt combineren.",
-    links: ["/activiteiten"],
+    picks: [
+      { slug: "klimhal-haarlem", tip: "4+ jaar, €12 per kind" },
+      { slug: "padel-haarlem", tip: "Speciale kidsuren, rackets te leen" },
+      { slug: "street-jump-haarlem", tip: "Trampolinepark — antislip sokken mee" },
+    ],
+    berryTip: "Geen ervaring nodig bij de Klimmuur — kinderwanden!",
   },
   {
-    day: "Week 1 · Vr 1 mei",
+    day: "Vr 1 mei",
     theme: "Creatief & Binnen",
     emoji: "🎭",
-    morning: "Knutselen in de Stadsbibliotheek (gratis met bibpas). Elke vakantiedag extra programma.",
-    afternoon: "Kinderfilm in De Schuur — elke dag een andere film tijdens de meivakantie. Gezellig en intiem.",
-    tip: "Check de Schuur website voor het actuele filmprogramma.",
-    links: ["/activiteiten"],
+    picks: [
+      { slug: "stadsbibliotheek-haarlem", tip: "Gratis knutselen in de vakantie" },
+      { slug: "filmschuur-haarlem", tip: "Kinderfilm elke dag in de vakantie" },
+      { slug: "ontdekplek", tip: "Tech-werkplaats: solderen, bouwen" },
+    ],
+    berryTip: "Regendag? De bieb heeft elke vakantiedag extra programma.",
   },
   {
-    day: "Week 2 · Ma 4 mei",
+    day: "Ma 4 mei",
     theme: "Fietsen & Bloemen",
     emoji: "🌷",
-    morning: "Fietstocht door de Bollenstreek! De tulpen en hyacinten staan nog in bloei. Route Haarlem → Lisse (25 km).",
-    afternoon: "Picknick onderweg bij een van de dorpjes. IJsje bij de boerderijwinkel.",
-    tip: "De route via Vogelenzang is het mooist. Neem de trein terug als de kleintjes moe zijn.",
-    links: ["/tips/fietstocht-bollenstreek"],
+    picks: [
+      { slug: "haarlemmerhout", tip: "Start je fietstocht hier" },
+      { slug: "buitenplaats-beeckestijn", tip: "Tussenstop met picknick" },
+      { slug: "elswout-overveen", tip: "Prachtige tuinen, gratis" },
+    ],
+    berryTip: "Route via Vogelenzang is het mooist. Neem trein terug!",
   },
   {
-    day: "Week 2 · Di 5 mei",
-    theme: "Bevrijdingsdag!",
+    day: "Di 5 mei",
+    theme: "Bevrijdingsdag",
     emoji: "🎉",
-    morning: "Bevrijdingsdag! Bevrijdingspop in Haarlem — gratis festival met muziek en kinderactiviteiten.",
-    afternoon: "Kindervrijmarkt en spelletjes op het Frederiksplein. De hele binnenstad is feest.",
-    tip: "Bevrijdingsdag is een nationale feestdag — veel winkels zijn dicht maar alle parken en festivals zijn open.",
-    links: ["/"],
+    picks: [
+      { slug: "haarlemmerhout", tip: "Bevrijdingspop — gratis festival" },
+      { slug: "linnaeushof", tip: "Grootste speeltuin van Europa" },
+      { slug: "spaarnwoude-recreatie", tip: "Fietsen, zwemmen, speelweides" },
+    ],
+    berryTip: "Hele binnenstad is feest — veel winkels dicht, alle parken open!",
   },
 ];
 
@@ -87,104 +110,146 @@ const SUMMER_PREVIEW = [
 ];
 
 export default function VakantiesPage() {
-  const sportActivities = resolveEventImages(
-    activities.filter((a) => a.category === "sport").slice(0, 3)
-  );
+  // Build activity lookup
+  const activityMap = new Map(activities.map((a) => [a.slug, a]));
+  const resolvedActivities = resolveEventImages(activities);
+  const resolvedMap = new Map(resolvedActivities.map((a) => [a.slug, a]));
+
+  // Get meivakantie events (Apr 25 – May 9)
+  const meiEvents = resolveEventImages(
+    getScrapedEvents().filter((e) => e.date >= "2026-04-25" && e.date <= "2026-05-09")
+  ).filter((e) => e.image !== "/berry-icon.png");
+
+  // Deduplicate events by title
+  const seenTitles = new Set<string>();
+  const uniqueMeiEvents = meiEvents.filter((e) => {
+    if (seenTitles.has(e.title)) return false;
+    seenTitles.add(e.title);
+    return true;
+  }).slice(0, 6);
 
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="bg-gradient-to-b from-[#FDF1EA] to-[#FFF8F4]">
-        <div className="mx-auto max-w-[880px] px-5 py-10 sm:px-8 sm:py-14">
-          <h1 className="text-3xl font-extrabold leading-tight text-[#2D2D2D] sm:text-4xl">
-            Schoolvakanties
-          </h1>
-          <p className="mt-2 max-w-lg text-base text-[#6B6B6B] sm:text-lg">
-            Dagplannen, camps en activiteiten voor elke vakantieperiode.
-          </p>
-        </div>
-      </section>
-
-      <main className="mx-auto max-w-[880px] px-5 py-8 sm:px-8">
-
-        {/* Meivakantie — fully planned out */}
-        <section>
-          <div className="mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-[#E0685F] to-[#FFD8B0] p-6 sm:p-8">
-            <div className="flex items-start justify-between">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-white">
-                  26 april – 9 mei 2026
-                </span>
-                <h2 className="mt-1 text-xl font-extrabold text-[#2D2D2D] sm:text-2xl md:text-3xl">
-                  🌷 Meivakantie — jouw weekplan
-                </h2>
-                <p className="mt-2 max-w-lg text-sm text-[#2D2D2D]/70">
-                  Twee weken geen school! Berry heeft voor elke dag een plan gemaakt.
-                  Mix en match — of gebruik het als inspiratie.
-                </p>
-              </div>
+      <section className="bg-gradient-to-b from-[#FDF1EA] to-[#FFF9F0]">
+        <div className="mx-auto max-w-[1100px] px-5 py-10 sm:px-8 sm:py-14">
+          <div className="flex items-start justify-between">
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-[2px] text-[#E0685F]">
+                26 april – 9 mei 2026
+              </span>
+              <h1 className="mt-2 text-[28px] font-extrabold leading-[1.1] tracking-tight text-[#2D2D2D] sm:text-[36px]">
+                🌷 Meivakantie met Berry
+              </h1>
+              <p className="mt-3 max-w-lg text-[15px] leading-relaxed text-[#6B6B6B]">
+                Twee weken geen school! Berry heeft voor elke dag een plan
+                gemaakt. Mix en match — of pak er gewoon eentje uit.
+              </p>
+            </div>
+            <div className="hidden sm:block" style={{ animation: "berry-bob 4s ease-in-out infinite" }}>
               <Image
                 src="/berry-wink.png"
                 alt=""
-                width={64}
-                height={64}
-                className="hidden h-auto shrink-0 sm:block"
+                width={80}
+                height={80}
+                className="h-20 w-auto drop-shadow-[0_6px_20px_rgba(224,104,95,0.3)]"
               />
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Day plans */}
-          <div className="space-y-4">
-            {MEI_DAY_PLANS.map((plan, i) => (
-              <div
-                key={i}
-                className="overflow-hidden rounded-2xl bg-white shadow-sm"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-stretch">
-                  {/* Day label */}
-                  <div className="flex w-full shrink-0 flex-row items-center gap-2 bg-[#FFF8F4] p-3 sm:w-24 sm:flex-col sm:justify-center sm:gap-0">
-                    <span className="text-2xl">{plan.emoji}</span>
-                    <span className="mt-1 text-center text-xs font-bold uppercase leading-tight text-[#E0685F]">
-                      {plan.theme}
-                    </span>
-                  </div>
+      <main className="mx-auto max-w-[1100px] px-5 py-8 sm:px-8">
 
-                  {/* Content */}
-                  <div className="flex-1 p-4 sm:p-5">
-                    <p className="text-xs font-bold text-[#6B6B6B]">{plan.day}</p>
-
-                    <div className="mt-2 space-y-2">
-                      <div className="rounded-lg bg-[#FFF8F4] px-3 py-2">
-                        <p className="text-[13px] text-[#2D2D2D]">
-                          <span className="font-bold">☀️ Ochtend:</span> {plan.morning}
-                        </p>
-                      </div>
-                      <div className="rounded-lg bg-[#FFF8F4] px-3 py-2">
-                        <p className="text-[13px] text-[#2D2D2D]">
-                          <span className="font-bold">🌤️ Middag:</span> {plan.afternoon}
-                        </p>
-                      </div>
-                    </div>
-
-                    <p className="mt-2 text-xs text-[#6B6B6B]">
-                      💡 {plan.tip}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA: sport activities for meivakantie */}
-          <div className="mt-10">
-            <h3 className="mb-4 text-lg font-extrabold text-[#2D2D2D]">
-              Sportcamps in de meivakantie
-            </h3>
-            <div className="grid gap-5 sm:grid-cols-3">
-              {sportActivities.map((a) => (
-                <ActivityCard key={a.slug} activity={a} />
+        {/* === Real events during meivakantie === */}
+        {uniqueMeiEvents.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">
+              📅 Evenementen in de meivakantie
+            </h2>
+            <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">
+              Echte evenementen die je kunt boeken
+            </p>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {uniqueMeiEvents.map((e) => (
+                <EventCard key={e.slug} event={e} />
               ))}
             </div>
+          </section>
+        )}
+
+        {/* === Day plans === */}
+        <section>
+          <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">
+            🗓️ Berry&apos;s weekplan
+          </h2>
+          <p className="mt-1 mb-6 text-[14px] font-semibold text-[#6B6B6B]">
+            Elke dag een thema — tap voor details
+          </p>
+
+          <div className="space-y-4">
+            {MEI_DAY_PLANS.map((plan, i) => {
+              // Resolve the activity picks
+              const pickActivities = plan.picks
+                .map((p) => {
+                  const resolved = resolvedMap.get(p.slug);
+                  return resolved ? { ...resolved, pickTip: p.tip } : null;
+                })
+                .filter(Boolean) as (typeof resolvedActivities[number] & { pickTip: string })[];
+
+              return (
+                <div key={i} className="overflow-hidden rounded-[20px] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+                  {/* Header */}
+                  <div className="flex items-center gap-3 border-b border-[#F5F0EB] bg-[#FFF8F4] px-5 py-3">
+                    <span className="text-[24px]">{plan.emoji}</span>
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-[1px] text-[#E0685F]">
+                        Week {i < 5 ? "1" : "2"} · {plan.day}
+                      </p>
+                      <p className="text-[16px] font-extrabold text-[#2D2D2D]">{plan.theme}</p>
+                    </div>
+                  </div>
+
+                  {/* Activity picks with images */}
+                  <div className="p-4">
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      {pickActivities.map((a) => (
+                        <Link
+                          key={a.slug}
+                          href={`/activiteiten/${a.slug}`}
+                          className="group flex gap-3 rounded-[14px] bg-[#FAF7F4] p-2.5 transition-all hover:bg-[#F5F0EB] sm:flex-col sm:gap-0 sm:p-0 sm:bg-transparent"
+                        >
+                          <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[12px] sm:aspect-[3/2] sm:h-auto sm:w-full sm:rounded-b-none">
+                            <Image
+                              src={(a as Record<string, unknown>).resolvedImage as string || a.image}
+                              alt={a.title}
+                              fill
+                              sizes="(max-width: 768px) 64px, 33vw"
+                              className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                            />
+                            {a.free && (
+                              <span className="absolute right-1.5 top-1.5 rounded-full bg-[#4A8060] px-1.5 py-0.5 text-[9px] font-bold text-white">Gratis</span>
+                            )}
+                          </div>
+                          <div className="min-w-0 sm:px-2.5 sm:py-2">
+                            <h4 className="text-[14px] font-bold leading-snug text-[#2D2D2D] group-hover:text-[#E0685F]">
+                              {a.title}
+                            </h4>
+                            <p className="mt-0.5 text-[12px] text-[#6B6B6B]">{a.pickTip}</p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* Berry tip */}
+                    <div className="mt-3 flex items-start gap-2 rounded-[12px] bg-[#FDF1EA] px-3 py-2.5">
+                      <Image src="/berry-icon.png" alt="" width={16} height={16} className="mt-0.5 h-4 w-4 shrink-0" />
+                      <p className="text-[13px] font-semibold text-[#6B6B6B]">{plan.berryTip}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
 
@@ -193,49 +258,49 @@ export default function VakantiesPage() {
 
         {/* Zomervakantie preview */}
         <section>
-          <h2 className="text-2xl font-extrabold text-[#2D2D2D]">
+          <h2 className="text-[22px] font-extrabold text-[#2D2D2D]">
             ☀️ Zomervakantie
           </h2>
-          <p className="mt-1 text-sm text-[#6B6B6B]">
+          <p className="mt-1 text-[14px] text-[#6B6B6B]">
             4 juli – 16 augustus 2026 · Dagplannen komen in juni
           </p>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {SUMMER_PREVIEW.map((item) => (
-              <div key={item.title} className="rounded-2xl bg-white p-5 shadow-sm">
-                <span className="text-2xl">{item.emoji}</span>
-                <h3 className="mt-2 font-bold text-[#2D2D2D]">{item.title}</h3>
-                <p className="mt-1 text-sm text-[#6B6B6B]">{item.text}</p>
+              <div key={item.title} className="rounded-[20px] bg-white p-5 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
+                <span className="text-[28px]">{item.emoji}</span>
+                <h3 className="mt-2 text-[15px] font-extrabold text-[#2D2D2D]">{item.title}</h3>
+                <p className="mt-1 text-[13px] text-[#6B6B6B]">{item.text}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Other vacations — compact */}
+        {/* Later dit jaar */}
         <div className="my-12 border-t border-[#F0E6E0]" />
 
         <section>
-          <h2 className="mb-4 text-lg font-extrabold text-[#2D2D2D]">
+          <h2 className="mb-4 text-[18px] font-extrabold text-[#2D2D2D]">
             Later dit jaar
           </h2>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl bg-white p-5 shadow-sm">
-              <p className="text-lg">🍂</p>
-              <h3 className="mt-1 font-bold text-[#2D2D2D]">Herfstvakantie</h3>
-              <p className="text-sm text-[#6B6B6B]">17 – 25 oktober 2026</p>
-              <p className="mt-1 text-sm text-[#6B6B6B]">Tips komen in september</p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="rounded-[20px] bg-white p-5 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
+              <span className="text-[24px]">🍂</span>
+              <h3 className="mt-2 font-extrabold text-[#2D2D2D]">Herfstvakantie</h3>
+              <p className="text-[13px] text-[#6B6B6B]">17 – 25 oktober 2026</p>
+              <p className="mt-1 text-[13px] text-[#999]">Tips komen in september</p>
             </div>
-            <div className="rounded-2xl bg-white p-5 shadow-sm">
-              <p className="text-lg">❄️</p>
-              <h3 className="mt-1 font-bold text-[#2D2D2D]">Kerstvakantie</h3>
-              <p className="text-sm text-[#6B6B6B]">19 dec – 3 januari 2027</p>
-              <p className="mt-1 text-sm text-[#6B6B6B]">Tips komen in november</p>
+            <div className="rounded-[20px] bg-white p-5 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
+              <span className="text-[24px]">❄️</span>
+              <h3 className="mt-2 font-extrabold text-[#2D2D2D]">Kerstvakantie</h3>
+              <p className="text-[13px] text-[#6B6B6B]">19 dec – 3 januari 2027</p>
+              <p className="mt-1 text-[13px] text-[#999]">Tips komen in november</p>
             </div>
           </div>
         </section>
 
         {/* Newsletter */}
-        <section className="mt-12 rounded-2xl bg-[#FDF1EA] p-8 text-center">
+        <section className="mt-12 rounded-[24px] bg-[#FDF1EA] p-6 text-center sm:p-8">
           <Image
             src="/berry-wink.png"
             alt=""
@@ -243,10 +308,10 @@ export default function VakantiesPage() {
             height={48}
             className="mx-auto mb-3 h-auto"
           />
-          <h2 className="text-xl font-extrabold text-[#2D2D2D]">
+          <h2 className="text-[20px] font-extrabold text-[#2D2D2D]">
             Vakantietips in je inbox
           </h2>
-          <p className="mt-1 text-sm text-[#6B6B6B]">
+          <p className="mt-1 text-[14px] text-[#6B6B6B]">
             Vlak voor elke vakantie sturen we een compleet weekplan.
           </p>
           <div className="mx-auto mt-4 max-w-sm">
