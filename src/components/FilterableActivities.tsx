@@ -27,13 +27,13 @@ const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; gradient: string; gl
     deep: "#A67A40",
   },
   natuur: {
-    src: "/illustrations/berry-natuur.png",
+    src: "/illustrations/berry-natuur-v2.png",
     gradient: "linear-gradient(135deg, #BCECC7 0%, #8BD8A8 48%, #54B76E 100%)",
     glow: "rgba(84,183,110,0.2)",
     deep: "#2F7D46",
   },
   dieren: {
-    src: "/illustrations/berry-natuur.png",
+    src: "/illustrations/berry-natuur-v2.png",
     gradient: "linear-gradient(135deg, #BCECC7 0%, #8BD8A8 48%, #54B76E 100%)",
     glow: "rgba(84,183,110,0.2)",
     deep: "#2F7D46",
