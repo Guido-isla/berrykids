@@ -58,15 +58,27 @@ const MOOD_TO_CATEGORY: Record<string, CategoryFilter> = {
   binnen: "indoor",
 };
 
-function Pill({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
+/** Colored pills — each category has its own color */
+const PILL_COLORS: Record<string, { bg: string; text: string }> = {
+  cultuur: { bg: "#7D5BCE", text: "#FFFFFF" },
+  sport: { bg: "#E0685F", text: "#FFFFFF" },
+  natuur: { bg: "#54B76E", text: "#FFFFFF" },
+  dieren: { bg: "#8BD8A8", text: "#2F7D46" },
+  indoor: { bg: "#4FAFBE", text: "#FFFFFF" },
+  all: { bg: "#6B6B6B", text: "#FFFFFF" },
+};
+
+function Pill({ label, value, active, onClick }: { label: string; value: string; active: boolean; onClick: () => void }) {
+  const color = PILL_COLORS[value] || PILL_COLORS.all;
   return (
     <button
       onClick={onClick}
-      className={`shrink-0 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all ${
+      className={`shrink-0 rounded-full px-4 py-2 text-[13px] font-bold transition-all ${
         active
-          ? "border-[#E0685F] bg-[#E0685F] text-white shadow-sm"
-          : "border-[#E0D8D2] bg-white text-[#2D2D2D] hover:border-[#E0685F]/40 hover:bg-[#FFF0EE]"
+          ? "shadow-sm"
+          : "bg-white text-[#2D2D2D] shadow-[0_0_0_1px_#E8E0D8] hover:shadow-[0_0_0_1px_#CCC]"
       }`}
+      style={active ? { background: color.bg, color: color.text } : undefined}
     >
       {label}
     </button>
@@ -75,33 +87,19 @@ function Pill({ label, active, onClick }: { label: string; active: boolean; onCl
 
 export default function FilterableActivities({ activities }: { activities: ActivityWithImage[] }) {
   const [category, setCategory] = useState<CategoryFilter>("cultuur");
-  const [searchQuery, setSearchQuery] = useState("");
 
-  // Read ?q= and ?mood= from URL on mount
+  // Read ?mood= from URL on mount
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const q = params.get("q");
-    if (q) setSearchQuery(q);
     const mood = params.get("mood");
     if (mood && mood in MOOD_TO_CATEGORY) {
       setCategory(MOOD_TO_CATEGORY[mood]);
     }
   }, []);
 
-  let filtered = category === "all"
+  const filtered = category === "all"
     ? activities
     : activities.filter((a) => a.category === category);
-
-  // Apply search filter
-  if (searchQuery.trim()) {
-    const q = searchQuery.toLowerCase();
-    filtered = filtered.filter((a) =>
-      a.title.toLowerCase().includes(q) ||
-      a.description.toLowerCase().includes(q) ||
-      a.subcategory.toLowerCase().includes(q) ||
-      a.location.toLowerCase().includes(q)
-    );
-  }
 
   const illustration = category !== "all" ? CATEGORY_ILLUSTRATIONS[category] : null;
 
@@ -109,38 +107,30 @@ export default function FilterableActivities({ activities }: { activities: Activ
     <>
       {/* Category banner — compact strip, illustration fills it */}
       {illustration && (
-        <div className="relative -mx-5 -mt-8 mb-3 h-[80px] overflow-hidden sm:-mx-8 sm:h-[110px]" style={{ background: illustration.gradient }}>
+        <div className="relative -mx-5 -mt-8 mb-3 h-[140px] overflow-hidden sm:-mx-8 sm:h-[180px]" style={{ background: illustration.gradient }}>
           {/* Glow */}
-          <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full blur-2xl" style={{ background: illustration.glow }} />
-          {/* Illustration — anchored bottom */}
+          <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full blur-3xl" style={{ background: illustration.glow }} />
+          {/* Bottom fade */}
+          <div className="absolute inset-x-0 bottom-0 h-10" style={{ background: `linear-gradient(to top, ${illustration.deep}15, transparent)` }} />
+          {/* Illustration — anchored bottom, big */}
           <Image
             src={illustration.src}
             alt=""
             width={500}
             height={375}
-            className="absolute bottom-0 left-1/2 h-[75px] w-auto -translate-x-1/2 object-contain sm:h-[105px]"
+            className="absolute bottom-0 left-1/2 h-[130px] w-auto -translate-x-1/2 object-contain sm:h-[170px]"
             priority
           />
         </div>
       )}
 
-      <div className="sticky top-0 z-40 -mx-5 border-b border-[#F0E6E0] bg-white/95 px-5 py-3 shadow-sm backdrop-blur-sm sm:-mx-8 sm:px-8 sm:py-4">
-        {/* Search bar */}
-        <div className="mb-2">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Zoek op naam, locatie, categorie..."
-            className="w-full rounded-full border border-[#E8E0D8] bg-white px-4 py-2.5 text-[13px] outline-none transition-colors placeholder:text-[#A09488] focus:border-[#E0685F]"
-          />
-        </div>
-        {/* Category pills */}
-        <div className="flex gap-1.5 overflow-x-auto scrollbar-none">
+      <div className="sticky top-0 z-40 -mx-5 bg-white/95 px-5 py-3 shadow-sm backdrop-blur-sm sm:-mx-8 sm:px-8">
+        <div className="flex gap-2 overflow-x-auto scrollbar-none">
           {CATEGORY_OPTIONS.map((opt) => (
             <Pill
               key={opt.value}
               label={opt.label}
+              value={opt.value}
               active={category === opt.value}
               onClick={() => setCategory(opt.value)}
             />
@@ -148,31 +138,12 @@ export default function FilterableActivities({ activities }: { activities: Activ
         </div>
       </div>
 
-      <div className="mt-6">
-        <p className="mb-4 text-sm text-[#6B6B6B]">
-          <span className="font-bold text-[#2D2D2D]">{filtered.length}</span>{" "}
-          {filtered.length === 1 ? "activiteit" : "activiteiten"}
-          {searchQuery && <span> voor &ldquo;{searchQuery}&rdquo;</span>}
-        </p>
-
-        {filtered.length === 0 ? (
-          <div className="rounded-[20px] bg-white p-8 text-center shadow-sm">
-            <p className="text-[16px] font-bold text-[#2D2D2D]">Niets gevonden</p>
-            <p className="mt-1 text-[13px] text-[#6B6B6B]">Probeer een andere zoekterm of categorie.</p>
-            <button
-              onClick={() => { setSearchQuery(""); setCategory("all"); }}
-              className="mt-3 rounded-full bg-[#E0685F] px-5 py-2 text-[13px] font-bold text-white hover:bg-[#D05A52]"
-            >
-              Toon alles
-            </button>
-          </div>
-        ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((activity) => (
-              <ActivityCard key={activity.slug} activity={activity} />
-            ))}
-          </div>
-        )}
+      <div className="mt-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((activity) => (
+            <ActivityCard key={activity.slug} activity={activity} />
+          ))}
+        </div>
       </div>
     </>
   );
