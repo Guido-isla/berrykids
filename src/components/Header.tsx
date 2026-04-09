@@ -18,7 +18,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2">
           <Image src="/berry-icon.png" alt="" width={40} height={40} className="h-8 w-auto sm:h-9" />
           <span className="text-[15px] font-extrabold text-[#E0685F] sm:text-[16px]">Berry Kids</span>
-          <span className="hidden items-center gap-1 rounded-full bg-[#2D2D2D]/[0.06] px-2 py-0.5 text-[10px] font-bold text-[#6B6B6B] sm:flex">
+          <span className="flex items-center gap-1 rounded-full bg-[#2D2D2D]/[0.06] px-2 py-0.5 text-[10px] font-bold text-[#6B6B6B]">
             <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z" /></svg>
             {t("haarlem")}
           </span>

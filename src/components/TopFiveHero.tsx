@@ -97,9 +97,10 @@ export default function TopFiveHero({
           {/* Message — Berry's opinion is the headline */}
           <div className="min-w-0">
             <p className="text-[11px] font-bold uppercase tracking-[1.5px] text-[#E0685F]">{vibe}</p>
-            <h2 className="mt-1 text-[22px] font-black leading-[1.05] tracking-[-0.5px] text-[#1A1A1A]">
+            <h2 className="mt-1 text-[20px] font-black leading-[1.05] tracking-[-0.5px] text-[#1A1A1A]">
               {dailyMessage}
             </h2>
+            <p className="mt-1 text-[12px] font-semibold text-[#888]">De leukste tips voor gezinnen in Haarlem</p>
           </div>
         </div>
 
@@ -132,15 +133,13 @@ export default function TopFiveHero({
                   <span className={`absolute left-3 top-3 flex items-center justify-center rounded-[10px] font-black shadow-sm ${NUM_COLORS[i]} ${isHero ? "h-9 w-9 text-[16px]" : "h-7 w-7 text-[13px]"}`}>
                     {i + 1}
                   </span>
-                  {/* Berry tip — #1 only */}
-                  {isHero && (
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-3.5 pb-3 pt-8">
-                      <p className="flex items-center gap-1.5 text-[14px] font-bold text-white">
-                        <Image src="/berry-icon.png" alt="" width={16} height={16} className="h-4 w-4 shrink-0" />
-                        {p.whyNow.length > 55 ? p.whyNow.slice(0, 55) + "…" : p.whyNow}
-                      </p>
-                    </div>
-                  )}
+                  {/* Berry tip — on every card */}
+                  <div className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-3 pb-2.5 ${isHero ? "pt-8" : "pt-6"}`}>
+                    <p className={`flex items-center gap-1 font-bold text-white ${isHero ? "text-[13px]" : "text-[11px]"}`}>
+                      <Image src="/berry-icon.png" alt="" width={14} height={14} className={`shrink-0 ${isHero ? "h-3.5 w-3.5" : "h-3 w-3"}`} />
+                      {p.whyNow.length > (isHero ? 55 : 40) ? p.whyNow.slice(0, isHero ? 55 : 40) + "…" : p.whyNow}
+                    </p>
+                  </div>
                 </div>
                 {/* Info — stripped to essentials */}
                 <div className={`${isHero ? "px-4 py-3.5" : "px-3 py-2.5"}`}>
