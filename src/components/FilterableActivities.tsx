@@ -105,27 +105,29 @@ export default function FilterableActivities({ activities }: { activities: Activ
 
   return (
     <>
-      {/* Category banner — compact strip, illustration fills it */}
-      {illustration && (
-        <div className="relative -mx-5 -mt-[88px] mb-3 h-[200px] overflow-hidden sm:-mx-8 sm:h-[240px]" style={{ background: illustration.gradient }}>
-          {/* Glow */}
-          <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full blur-3xl" style={{ background: illustration.glow }} />
-          {/* Bottom fade */}
-          <div className="absolute inset-x-0 bottom-0 h-10" style={{ background: `linear-gradient(to top, ${illustration.deep}15, transparent)` }} />
-          {/* Illustration — anchored bottom, big */}
-          <Image
-            src={illustration.src}
-            alt=""
-            width={500}
-            height={375}
-            className="absolute bottom-0 left-1/2 h-[120px] w-auto -translate-x-1/2 object-contain sm:h-[160px]"
-            priority
-          />
-        </div>
-      )}
+      {/* Category banner — illustration is the hero */}
+      <div className="relative -mx-5 -mt-[88px] overflow-hidden pb-3 sm:-mx-8" style={{ background: illustration ? illustration.gradient : undefined }}>
+        {illustration && (
+          <>
+            {/* Glow */}
+            <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full blur-3xl" style={{ background: illustration.glow }} />
+            {/* Illustration — big, centered */}
+            <div className="flex items-end justify-center pt-[72px] sm:pt-[80px]">
+              <Image
+                src={illustration.src}
+                alt=""
+                width={500}
+                height={375}
+                className="h-auto w-[65%] max-w-[300px] sm:w-[50%] sm:max-w-[360px]"
+                priority
+              />
+            </div>
+          </>
+        )}
+        {!illustration && <div className="pt-[72px] sm:pt-[80px]" />}
 
-      <div className="sticky top-0 z-40 -mx-5 bg-white/95 px-5 py-3 shadow-sm backdrop-blur-sm sm:-mx-8 sm:px-8">
-        <div className="flex gap-2 overflow-x-auto scrollbar-none">
+        {/* Pills — sit on the gradient */}
+        <div className="mt-3 flex gap-2 overflow-x-auto px-5 pb-1 scrollbar-none sm:px-8">
           {CATEGORY_OPTIONS.map((opt) => (
             <Pill
               key={opt.value}
