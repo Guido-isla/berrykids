@@ -107,7 +107,7 @@ export default function FilterableActivities({ activities }: { activities: Activ
     <>
       {/* Category banner — compact strip, illustration fills it */}
       {illustration && (
-        <div className="relative -mx-5 -mt-8 mb-3 h-[140px] overflow-hidden sm:-mx-8 sm:h-[180px]" style={{ background: illustration.gradient }}>
+        <div className="relative -mx-5 -mt-[88px] mb-3 h-[200px] overflow-hidden sm:-mx-8 sm:h-[240px]" style={{ background: illustration.gradient }}>
           {/* Glow */}
           <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full blur-3xl" style={{ background: illustration.glow }} />
           {/* Bottom fade */}
@@ -118,7 +118,7 @@ export default function FilterableActivities({ activities }: { activities: Activ
             alt=""
             width={500}
             height={375}
-            className="absolute bottom-0 left-1/2 h-[130px] w-auto -translate-x-1/2 object-contain sm:h-[170px]"
+            className="absolute bottom-0 left-1/2 h-[120px] w-auto -translate-x-1/2 object-contain sm:h-[160px]"
             priority
           />
         </div>
