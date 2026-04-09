@@ -118,7 +118,7 @@ export default function FilterableActivities({ activities }: { activities: Activ
                 alt=""
                 width={500}
                 height={375}
-                className="h-auto w-[80%] max-w-[340px] sm:w-[60%] sm:max-w-[400px]"
+                className="h-auto w-[100%] max-w-[420px] sm:w-[70%] sm:max-w-[500px]"
                 priority
               />
             </div>
