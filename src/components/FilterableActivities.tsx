@@ -106,13 +106,13 @@ export default function FilterableActivities({ activities }: { activities: Activ
   return (
     <>
       {/* Category banner — illustration is the hero */}
-      <div className="relative -mx-5 -mt-[88px] overflow-hidden pb-3 sm:-mx-8" style={{ background: illustration ? illustration.gradient : undefined }}>
+      <div className="relative -mx-5 -mt-4 overflow-hidden pb-2 sm:-mx-8" style={{ background: illustration ? illustration.gradient : undefined }}>
         {illustration && (
           <>
             {/* Glow */}
             <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full blur-3xl" style={{ background: illustration.glow }} />
             {/* Illustration — big, centered */}
-            <div className="flex items-end justify-center pt-[56px] sm:pt-[64px]">
+            <div className="flex items-end justify-center pt-2 sm:pt-3">
               <Image
                 src={illustration.src}
                 alt=""
