@@ -11,39 +11,21 @@ export const metadata: Metadata = {
   description: "Alle komende evenementen voor gezinnen in Haarlem en omgeving.",
 };
 
-type WeekGroup = {
+const MONTH_NAMES = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
+
+type EventGroup = {
   id: string;
   label: string;
   sublabel?: string;
   events: ReturnType<typeof resolveEventImages<ReturnType<typeof getScrapedEvents>[number]>>;
 };
 
-function getWeekLabel(date: string, thisWeekKey: string, nextWeekKey: string): string {
-  const key = getWeekKey(date);
-  if (key === thisWeekKey) return "Deze week";
-  if (key === nextWeekKey) return "Volgende week";
-
-  const d = new Date(date + "T00:00:00");
-  const day = d.getDay();
-  const mon = new Date(d);
-  mon.setDate(d.getDate() - ((day + 6) % 7));
-  const sun = new Date(mon);
-  sun.setDate(mon.getDate() + 6);
-
-  const MONTHS = ["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
-  return `${mon.getDate()} – ${sun.getDate()} ${MONTHS[sun.getMonth()]}`;
-}
-
-function getWeekKey(date: string): string {
-  const d = new Date(date + "T00:00:00");
-  const day = d.getDay();
-  const mon = new Date(d);
-  mon.setDate(d.getDate() - ((day + 6) % 7));
-  return mon.toISOString().split("T")[0];
-}
-
 export default function EvenementenPage() {
-  const today = new Date().toISOString().split("T")[0];
+  const now = new Date();
+  const today = now.toISOString().split("T")[0];
+  const currentMonth = now.getMonth();
+  const currentYear = now.getFullYear();
+
   const allEvents = resolveEventImages(
     getScrapedEvents().filter((e) => e.date >= today)
   );
@@ -56,43 +38,92 @@ export default function EvenementenPage() {
     return true;
   });
 
-  // Week keys for "Deze week" / "Volgende week"
-  const thisWeekKey = getWeekKey(today);
-  const nextWeekDate = new Date();
-  nextWeekDate.setDate(nextWeekDate.getDate() + 7);
-  const nextWeekKey = getWeekKey(nextWeekDate.toISOString().split("T")[0]);
+  // --- Compute date boundaries ---
+  // End of this week (Sunday)
+  const dayOfWeek = now.getDay();
+  const sundayOffset = dayOfWeek === 0 ? 0 : 7 - dayOfWeek;
+  const endOfWeek = new Date(now);
+  endOfWeek.setDate(now.getDate() + sundayOffset);
+  const endOfWeekStr = endOfWeek.toISOString().split("T")[0];
 
-  // Group by week
-  const weekMap = new Map<string, typeof unique>();
+  // Weekend: Saturday + Sunday
+  const satOffset = dayOfWeek === 6 ? 0 : dayOfWeek === 0 ? -1 : 6 - dayOfWeek;
+  const saturday = new Date(now);
+  saturday.setDate(now.getDate() + satOffset);
+  const satStr = saturday.toISOString().split("T")[0];
+  const sunday = new Date(saturday);
+  sunday.setDate(saturday.getDate() + 1);
+  const sunStr = sunday.toISOString().split("T")[0];
+
+  // End of current month
+  const endOfMonth = new Date(currentYear, currentMonth + 1, 0);
+  const endOfMonthStr = endOfMonth.toISOString().split("T")[0];
+
+  // --- Build groups ---
+  const groups: EventGroup[] = [];
+  const usedSlugs = new Set<string>();
+
+  function addGroup(id: string, label: string, events: typeof unique, sublabel?: string) {
+    const fresh = events.filter((e) => !usedSlugs.has(e.slug));
+    if (fresh.length === 0) return;
+    fresh.forEach((e) => usedSlugs.add(e.slug));
+    groups.push({ id, label, sublabel, events: fresh });
+  }
+
+  // 1. Deze week (excluding weekend if today is Mon-Fri)
+  if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+    const weekdayEvents = unique.filter((e) => e.date >= today && e.date < satStr);
+    addGroup("deze-week", "Deze week", weekdayEvents);
+  }
+
+  // 2. Dit weekend
+  const weekendEvents = unique.filter((e) => e.date >= satStr && e.date <= sunStr);
+  addGroup("dit-weekend", "Dit weekend", weekendEvents);
+
+  // 3. Rest of this month (after weekend, before month end)
+  const afterWeekend = new Date(sunday);
+  afterWeekend.setDate(sunday.getDate() + 1);
+  const afterWeekendStr = afterWeekend.toISOString().split("T")[0];
+  if (afterWeekendStr <= endOfMonthStr) {
+    const restOfMonth = unique.filter((e) => e.date >= afterWeekendStr && e.date <= endOfMonthStr);
+    const vacation = getSchoolVacation(afterWeekendStr);
+    addGroup(
+      "deze-maand",
+      `Rest van ${MONTH_NAMES[currentMonth].toLowerCase()}`,
+      restOfMonth,
+      vacation ? `🎒 ${vacation.name}` : undefined
+    );
+  }
+
+  // 4. Future months
+  const seenMonths = new Set<number>();
   for (const e of unique) {
-    const key = getWeekKey(e.date);
-    if (!weekMap.has(key)) weekMap.set(key, []);
-    weekMap.get(key)!.push(e);
+    const d = new Date(e.date + "T00:00:00");
+    const m = d.getMonth();
+    const y = d.getFullYear();
+    if (y === currentYear && m <= currentMonth) continue; // skip current month
+    if (y > currentYear + 1) continue;
+    const monthKey = y * 12 + m;
+    if (seenMonths.has(monthKey)) continue;
+    seenMonths.add(monthKey);
+
+    const monthStart = new Date(y, m, 1).toISOString().split("T")[0];
+    const monthEnd = new Date(y, m + 1, 0).toISOString().split("T")[0];
+    const monthEvents = unique.filter((ev) => ev.date >= monthStart && ev.date <= monthEnd);
+    const vacation = getSchoolVacation(monthStart);
+    addGroup(
+      `maand-${MONTH_NAMES[m].toLowerCase()}`,
+      MONTH_NAMES[m],
+      monthEvents,
+      vacation ? `🎒 ${vacation.name}` : undefined
+    );
   }
 
-  const weeks: WeekGroup[] = [];
-  for (const [key, events] of weekMap) {
-    const vacation = getSchoolVacation(events[0].date);
-    const label = getWeekLabel(events[0].date, thisWeekKey, nextWeekKey);
-
-    // Create stable ID for anchor links
-    const id = key === thisWeekKey ? "deze-week"
-      : key === nextWeekKey ? "volgende-week"
-      : `week-${key}`;
-
-    weeks.push({
-      id,
-      label,
-      sublabel: vacation ? `🎒 ${vacation.name}` : undefined,
-      events,
-    });
-  }
-
-  // Build filter pill data from actual weeks
-  const filterPills = weeks.map((w) => ({
-    id: w.id,
-    label: w.label,
-    count: w.events.length,
+  // Build pill data
+  const filterPills = groups.map((g) => ({
+    id: g.id,
+    label: g.label,
+    count: g.events.length,
   }));
 
   return (
@@ -111,23 +142,23 @@ export default function EvenementenPage() {
         {/* Filter bar */}
         <EventFilterBar pills={filterPills} />
 
-        {/* Weekly groups */}
+        {/* Groups */}
         <div className="mt-6 space-y-10">
-          {weeks.map((week) => (
-            <section key={week.id} id={week.id} className="scroll-mt-20">
+          {groups.map((group) => (
+            <section key={group.id} id={group.id} className="scroll-mt-20">
               <div className="mb-4 flex items-baseline gap-3">
                 <h2 className="text-[18px] font-extrabold text-[#2D2D2D] sm:text-[20px]">
-                  {week.label}
+                  {group.label}
                 </h2>
-                {week.sublabel && (
-                  <span className="text-[13px] font-bold text-[#E0685F]">{week.sublabel}</span>
+                {group.sublabel && (
+                  <span className="text-[13px] font-bold text-[#E0685F]">{group.sublabel}</span>
                 )}
                 <span className="text-[13px] font-semibold text-[#999]">
-                  {week.events.length} {week.events.length === 1 ? "event" : "events"}
+                  {group.events.length} {group.events.length === 1 ? "event" : "events"}
                 </span>
               </div>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {week.events.map((e) => (
+                {group.events.map((e) => (
                   <EventCard key={e.slug} event={e} />
                 ))}
               </div>
@@ -136,10 +167,10 @@ export default function EvenementenPage() {
         </div>
 
         {/* Empty state */}
-        {weeks.length === 0 && (
+        {groups.length === 0 && (
           <div className="py-20 text-center">
             <p className="text-[18px] font-bold text-[#2D2D2D]">Geen evenementen gevonden</p>
-            <p className="mt-1 text-[14px] text-[#6B6B6B]">Probeer een ander filter</p>
+            <p className="mt-1 text-[14px] text-[#6B6B6B]">Check later terug</p>
           </div>
         )}
       </main>
