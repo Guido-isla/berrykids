@@ -91,9 +91,14 @@ export function getAllKidsFilms(): KidsFilm[] {
   const films: KidsFilm[] = [];
   const seen = new Set<string>();
 
-  // Scraped films
+  // Scraped films — only future dates, skip mistagged events
+  const today = new Date().toISOString().split("T")[0];
+  const nonFilmWords = ["ontbijt", "brunch", "markt", "festival", "workshop"];
   const scrapedFilms = (scrapedData.events as ScrapedEvent[]).filter(
-    (e) => e.category === "film"
+    (e) =>
+      e.category === "film" &&
+      e.date >= today &&
+      !nonFilmWords.some((w) => e.title.toLowerCase().includes(w))
   );
 
   // Group scraped by title
