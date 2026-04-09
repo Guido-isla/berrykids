@@ -1,6 +1,6 @@
 {
-  "scrapedAt": "2026-04-09T11:11:16.145Z",
-  "eventCount": 30,
+  "scrapedAt": "2026-04-09T15:10:00.000Z",
+  "eventCount": 41,
   "rejectedCount": 1,
   "errors": [],
   "events": [
@@ -457,6 +457,193 @@
       "tags": [
         "familie",
         "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "caprera",
+      "title": "Van mij!",
+      "date": "2026-05-03",
+      "time": "11:00 & 14:00",
+      "venue": "Caprera, Bloemendaal",
+      "ageLabel": "2+ jaar",
+      "description": "Feest van delen en fantasie — humoristische familievoorstelling voor de allerkleinsten.",
+      "imageUrl": "https://caprera.nu/wp-content/uploads/2026/03/WEB-Garage-TDI-Malou-Van-Sluis-Van-mij-©-Moon-Saris-0383-zn-1-400x267.jpg",
+      "ticketUrl": "https://caprera.nu/programma/van-mij/",
+      "category": "theater",
+      "tags": [
+        "familie",
+        "jeugd",
+        "theater"
+      ]
+    },
+    {
+      "source": "caprera",
+      "title": "Peter Pan",
+      "date": "2026-05-10",
+      "time": "11:00 & 14:00",
+      "venue": "Caprera, Bloemendaal",
+      "ageLabel": "5+ jaar",
+      "description": "Het betoverende avontuur van Peter Pan — dynamische theatervoorstelling in het bos.",
+      "imageUrl": "https://caprera.nu/wp-content/uploads/2026/03/Peter-Pan-in-het-klein-liggend-400x324.jpg",
+      "ticketUrl": "https://caprera.nu/programma/peter-pan/",
+      "category": "theater",
+      "tags": [
+        "familie",
+        "jeugd",
+        "theater"
+      ]
+    },
+    {
+      "source": "caprera",
+      "title": "Zeg maar dag",
+      "date": "2026-05-17",
+      "time": "11:00 & 14:00",
+      "venue": "Caprera, Bloemendaal",
+      "ageLabel": "4+ jaar",
+      "description": "Poëtische voorstelling over afscheid nemen, met veel muziek en weinig woorden.",
+      "imageUrl": "https://caprera.nu/wp-content/uploads/2026/03/MID_Zeg-maar-dag_Maas-theater-en-dans_©AiRich-400x566.jpg",
+      "ticketUrl": "https://caprera.nu/programma/zeg-maar-dag/",
+      "category": "theater",
+      "tags": [
+        "familie",
+        "jeugd",
+        "theater"
+      ]
+    },
+    {
+      "source": "caprera",
+      "title": "Droplines",
+      "date": "2026-05-25",
+      "time": "11:00 & 14:00",
+      "venue": "Caprera, Bloemendaal",
+      "ageLabel": "6+ jaar",
+      "description": "Spectaculaire jongleershow — creatief spel met ballen, zwaartekracht en verwondering.",
+      "imageUrl": "https://caprera.nu/wp-content/uploads/2026/03/Droplines-400x300.jpg",
+      "ticketUrl": "https://caprera.nu/programma/droplines/",
+      "category": "event",
+      "tags": [
+        "familie",
+        "jeugd",
+        "circus"
+      ]
+    },
+    {
+      "source": "caprera",
+      "title": "Skeletje",
+      "date": "2026-05-31",
+      "time": "11:00 & 14:00",
+      "venue": "Caprera, Bloemendaal",
+      "ageLabel": "5+ jaar",
+      "description": "Ontroerende voorstelling over verlies die herinneringen viert met feest en fantasie.",
+      "imageUrl": "https://caprera.nu/wp-content/uploads/2026/03/Grote-Mensen-Maas-Theater-en-Dans-Skeletje-©-Kamerich-Budwilowitz-35-1-400x267.jpg",
+      "ticketUrl": "https://caprera.nu/programma/skeletje/",
+      "category": "theater",
+      "tags": [
+        "familie",
+        "jeugd",
+        "theater"
+      ]
+    },
+    {
+      "source": "caprera",
+      "title": "De waanzinnige boomhut",
+      "date": "2026-06-21",
+      "time": "15:00",
+      "venue": "Caprera, Bloemendaal",
+      "ageLabel": "5+ jaar",
+      "description": "Cartoonachtig actietheater vol visuele humor — gebaseerd op de populaire boekenserie.",
+      "imageUrl": "https://caprera.nu/wp-content/uploads/2026/01/Meneer-Monster-De-waanzinnige-boomhut-LIGGEND-Copyright-Matusiak-400x249.jpg",
+      "ticketUrl": "https://caprera.nu/programma/de-waanzinnige-boomhut/",
+      "category": "theater",
+      "tags": [
+        "familie",
+        "jeugd",
+        "theater"
+      ]
+    },
+    {
+      "source": "caprera",
+      "title": "Mátyás Bittenbinder",
+      "date": "2026-07-05",
+      "time": "11:00 & 13:00 & 15:00",
+      "venue": "Caprera, Bloemendaal",
+      "ageLabel": "6+ jaar",
+      "description": "Meeslepende verhalen over wilde dieren — boeiend verteld in het bos van Caprera.",
+      "imageUrl": "https://caprera.nu/wp-content/uploads/2026/01/vierkant-1-400x400.jpg",
+      "ticketUrl": "https://caprera.nu/programma/matyas-bittenbinder/",
+      "category": "theater",
+      "tags": [
+        "familie",
+        "jeugd",
+        "theater"
+      ]
+    },
+    {
+      "source": "caprera",
+      "title": "Over een kleine mol",
+      "date": "2026-07-12",
+      "time": "11:00 & 13:00 & 15:00",
+      "venue": "Caprera, Bloemendaal",
+      "ageLabel": "2+ jaar",
+      "description": "Hilarische slapstickvoorstelling gebaseerd op het beroemde kinderboek.",
+      "imageUrl": "https://caprera.nu/wp-content/uploads/2026/01/Meneer-Monster-Over-een-kleine-mol-©-Studio-Matusiak-breed-400x279.jpg",
+      "ticketUrl": "https://caprera.nu/programma/over-een-kleine-mol/",
+      "category": "theater",
+      "tags": [
+        "familie",
+        "jeugd",
+        "theater"
+      ]
+    },
+    {
+      "source": "caprera",
+      "title": "Crêpe de la bête",
+      "date": "2026-08-16",
+      "time": "12:00 & 14:30",
+      "venue": "Caprera, Bloemendaal",
+      "ageLabel": "4+ jaar",
+      "description": "Spectaculair circusavontuur met acrobatiek en luchtacts — midden in het bos.",
+      "imageUrl": "https://caprera.nu/wp-content/uploads/2026/03/Zomerpodium-50-400x267.jpg",
+      "ticketUrl": "https://caprera.nu/programma/crepe-de-la-bete/",
+      "category": "event",
+      "tags": [
+        "familie",
+        "jeugd",
+        "circus"
+      ]
+    },
+    {
+      "source": "caprera",
+      "title": "Heg",
+      "date": "2026-08-30",
+      "time": "11:00 & 14:00",
+      "venue": "Caprera, Bloemendaal",
+      "ageLabel": "6+ jaar",
+      "description": "Komische verkenning van grenzen tussen mensen en natuur — fysiek familietheater.",
+      "imageUrl": "https://caprera.nu/wp-content/uploads/2026/03/HEG-TIJDELIJK-staand-LR-1-400x500.jpg",
+      "ticketUrl": "https://caprera.nu/programma/heg/",
+      "category": "theater",
+      "tags": [
+        "familie",
+        "jeugd",
+        "theater"
+      ]
+    },
+    {
+      "source": "caprera",
+      "title": "Flexibeler als het ware",
+      "date": "2026-09-06",
+      "time": "11:00 & 14:00",
+      "venue": "Caprera, Bloemendaal",
+      "ageLabel": "4+ jaar",
+      "description": "Fysiek theater met humor en muziek — een energieke familievoorstelling.",
+      "imageUrl": "https://caprera.nu/wp-content/uploads/2026/03/Flexibeler-Als-Het-Ware-Vierkant-1080-x-1080-1024x1024-1-400x400.jpg",
+      "ticketUrl": "https://caprera.nu/programma/flexibeler-als-het-ware/",
+      "category": "theater",
+      "tags": [
+        "familie",
+        "jeugd",
+        "theater"
       ]
     }
   ]
