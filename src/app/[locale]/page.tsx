@@ -332,8 +332,8 @@ export default async function Home() {
             {binnenkortEvents.map((e) => {
               const berryTip = generateBerryTip(e as unknown as Record<string, unknown>, ctx, tBerry);
               return (
-                <Link key={e.slug} href={`/event/${e.slug}`} className="group flex h-full w-[75vw] shrink-0 flex-col overflow-hidden rounded-[20px] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all hover:-translate-y-1 sm:w-auto">
-                  <div className="relative h-[160px] shrink-0 overflow-hidden">
+                <Link key={e.slug} href={`/event/${e.slug}`} className="group block h-[232px] w-[75vw] shrink-0 overflow-hidden rounded-[20px] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all hover:-translate-y-1 sm:w-auto">
+                  <div className="relative h-[160px] overflow-hidden">
                     <Image
                       src={e.resolvedImage || e.image}
                       alt={e.title}
