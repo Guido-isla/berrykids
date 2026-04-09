@@ -10,8 +10,7 @@ type ActivityWithImage = Activity & { resolvedImage?: string; photoAttribution?:
 const CATEGORY_OPTIONS = [
   { label: "Cultuur", value: "cultuur" },
   { label: "Sport", value: "sport" },
-  { label: "Natuur", value: "natuur" },
-  { label: "Dieren", value: "dieren" },
+  { label: "Natuur & Dieren", value: "natuur" },
   { label: "Indoor", value: "indoor" },
   { label: "Alles", value: "all" },
 ] as const;
@@ -27,12 +26,6 @@ const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; gradient: string; gl
     deep: "#A67A40",
   },
   natuur: {
-    src: "/illustrations/berry-natuur-v2.png",
-    gradient: "linear-gradient(180deg, #FFF9F0 0%, #BCECC7 60%, #8BD8A8 100%)",
-    glow: "rgba(84,183,110,0.2)",
-    deep: "#2F7D46",
-  },
-  dieren: {
     src: "/illustrations/berry-natuur-v2.png",
     gradient: "linear-gradient(180deg, #FFF9F0 0%, #BCECC7 60%, #8BD8A8 100%)",
     glow: "rgba(84,183,110,0.2)",
@@ -99,6 +92,8 @@ export default function FilterableActivities({ activities }: { activities: Activ
 
   const filtered = category === "all"
     ? activities
+    : category === "natuur"
+    ? activities.filter((a) => a.category === "natuur" || a.category === "dieren")
     : activities.filter((a) => a.category === category);
 
   const illustration = category !== "all" ? CATEGORY_ILLUSTRATIONS[category] : null;
