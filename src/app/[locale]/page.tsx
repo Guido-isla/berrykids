@@ -187,8 +187,14 @@ export default async function Home() {
   // === UPCOMING EVENTS ===
   const today = new Date().toISOString().split("T")[0];
   const allUpcoming = resolveEventImages(getScrapedEvents().filter((e) => e.date >= today));
-  const weekendEventsRaw = resolveEventImages(getWeekendEvents()).filter((e) => e.image !== "/berry-icon.png");
-  // Deduplicate by title — keep first occurrence (earliest date), allow dupes only if < 4 unique
+  // Prioritize one-off events (festivals, markets, concerts) over recurring (films, theater)
+  const WEEKEND_PRIORITY: Record<string, number> = {
+    Festival: 0, Markt: 0, Event: 1, Concert: 2, Theater: 3, Film: 4,
+  };
+  const weekendEventsRaw = resolveEventImages(getWeekendEvents())
+    .filter((e) => e.image !== "/berry-icon.png")
+    .sort((a, b) => (WEEKEND_PRIORITY[a.category] ?? 1) - (WEEKEND_PRIORITY[b.category] ?? 1));
+  // Deduplicate by title — keep first occurrence, allow dupes only if < 4 unique
   const weekendSeenTitles = new Set<string>();
   const weekendUnique = weekendEventsRaw.filter((e) => {
     if (weekendSeenTitles.has(e.title)) return false;
