@@ -112,13 +112,13 @@ export default function FilterableActivities({ activities }: { activities: Activ
             {/* Glow */}
             <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full blur-3xl" style={{ background: illustration.glow }} />
             {/* Illustration — big, centered */}
-            <div className="flex items-end justify-center pt-2 sm:pt-3">
+            <div className="flex items-end justify-center -mb-2">
               <Image
                 src={illustration.src}
                 alt=""
                 width={500}
                 height={375}
-                className="h-[80px] w-auto sm:h-[100px]"
+                className="h-auto w-[80%] max-w-[340px] sm:w-[60%] sm:max-w-[400px]"
                 priority
               />
             </div>
@@ -127,7 +127,7 @@ export default function FilterableActivities({ activities }: { activities: Activ
         {!illustration && <div className="pt-[72px] sm:pt-[80px]" />}
 
         {/* Pills — sit on the gradient */}
-        <div className="mt-2 flex gap-2 overflow-x-auto px-5 pb-2 scrollbar-none sm:px-8">
+        <div className="mt-0 flex gap-2 overflow-x-auto px-5 pb-2 scrollbar-none sm:px-8">
           {CATEGORY_OPTIONS.map((opt) => (
             <Pill
               key={opt.value}
