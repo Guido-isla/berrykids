@@ -18,13 +18,38 @@ const CATEGORY_OPTIONS = [
 
 type CategoryFilter = (typeof CATEGORY_OPTIONS)[number]["value"];
 
-/** Map categories to Berry illustrations + gradient */
-const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; gradient: string }> = {
-  sport: { src: "/illustrations/berry-sport.png", gradient: "linear-gradient(180deg, #FFF3E0 0%, #FFF9F0 100%)" },
-  natuur: { src: "/illustrations/berry-natuur.png", gradient: "linear-gradient(180deg, #E8F5E9 0%, #FFF9F0 100%)" },
-  dieren: { src: "/illustrations/berry-natuur.png", gradient: "linear-gradient(180deg, #E8F5E9 0%, #FFF9F0 100%)" },
-  cultuur: { src: "/illustrations/berry-cultuur.png", gradient: "linear-gradient(180deg, #EDE7F6 0%, #FFF9F0 100%)" },
-  indoor: { src: "/illustrations/berry-zwemmen.png", gradient: "linear-gradient(180deg, #E0F4FF 0%, #FFF9F0 100%)" },
+/** Map categories to Berry illustrations + gradient + glow */
+const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; gradient: string; glow: string; deep: string }> = {
+  sport: {
+    src: "/illustrations/berry-sport.png",
+    gradient: "linear-gradient(135deg, #FFF3E0 0%, #FFE4C4 50%, #FFD8B0 100%)",
+    glow: "rgba(255,180,100,0.25)",
+    deep: "#A67A40",
+  },
+  natuur: {
+    src: "/illustrations/berry-natuur.png",
+    gradient: "linear-gradient(135deg, #BCECC7 0%, #8BD8A8 48%, #54B76E 100%)",
+    glow: "rgba(84,183,110,0.2)",
+    deep: "#2F7D46",
+  },
+  dieren: {
+    src: "/illustrations/berry-natuur.png",
+    gradient: "linear-gradient(135deg, #BCECC7 0%, #8BD8A8 48%, #54B76E 100%)",
+    glow: "rgba(84,183,110,0.2)",
+    deep: "#2F7D46",
+  },
+  cultuur: {
+    src: "/illustrations/berry-cultuur.png",
+    gradient: "linear-gradient(135deg, #DCC7FF 0%, #B590FF 46%, #7D5BCE 100%)",
+    glow: "rgba(125,91,206,0.2)",
+    deep: "#4D3B89",
+  },
+  indoor: {
+    src: "/illustrations/berry-zwemmen.png",
+    gradient: "linear-gradient(135deg, #BFE5F2 0%, #88D2DA 45%, #4FAFBE 100%)",
+    glow: "rgba(79,175,190,0.2)",
+    deep: "#2C7886",
+  },
 };
 
 /** Map mood query params to category filters */
@@ -82,16 +107,25 @@ export default function FilterableActivities({ activities }: { activities: Activ
 
   return (
     <>
-      {/* Category illustration with gradient — Berry's identity */}
+      {/* Category banner — rich gradient + illustration + overlays */}
       {illustration && (
-        <div className="-mx-5 -mt-8 mb-4 sm:-mx-8" style={{ background: illustration.gradient }}>
-          <div className="mx-auto max-w-[360px] px-4 pb-2 pt-6">
+        <div className="relative -mx-5 -mt-8 mb-4 overflow-hidden sm:-mx-8" style={{ background: illustration.gradient }}>
+          {/* Glow overlay */}
+          <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full blur-3xl" style={{ background: illustration.glow }} />
+          {/* Bottom fade into page */}
+          <div className="absolute inset-x-0 bottom-0 h-16" style={{ background: `linear-gradient(to top, ${illustration.deep}12, transparent)` }} />
+          {/* Sparkle dots */}
+          <div className="absolute left-[20%] top-6 h-3 w-3 rounded-full bg-white/30" />
+          <div className="absolute left-[35%] top-10 h-2 w-2 rounded-full bg-white/25" />
+          <div className="absolute left-[50%] top-7 h-2.5 w-2.5 rounded-full bg-white/20" />
+          {/* Illustration */}
+          <div className="relative mx-auto max-w-[380px] px-4 pb-2 pt-8">
             <Image
               src={illustration.src}
               alt=""
               width={500}
               height={375}
-              className="h-auto w-full"
+              className="h-auto w-full drop-shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
               priority
             />
           </div>
