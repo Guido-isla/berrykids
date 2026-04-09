@@ -17,9 +17,6 @@ import { getSiteContext } from "@/lib/context";
 import { activities } from "@/data/activities";
 import { resolveEventImages as resolveAct } from "@/lib/photos";
 import { generateBerryDayPlan, scoreEvent, scoreActivity, enforceVariety } from "@/lib/berry-brain";
-import CalendarStrip from "@/components/CalendarStrip";
-import type { CalendarDay } from "@/components/CalendarStrip";
-import { getHoliday, getSchoolVacation } from "@/data/dutch-calendar";
 
 export const revalidate = 1800;
 
@@ -212,36 +209,6 @@ export default async function Home() {
     .filter((e) => e.date >= twoDaysStr && !weekendSlugs.has(e.slug) && e.image !== "/berry-icon.png" && (e.resolvedImage || e.image) !== "/berry-icon.png")
     .slice(0, 6);
 
-  // === CALENDAR STRIP — next 14 days ===
-  const DAYS_SHORT = ["zo", "ma", "di", "wo", "do", "vr", "za"];
-  const MONTHS_SHORT = ["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
-  const calendarDays: CalendarDay[] = [];
-  for (let i = 0; i < 14; i++) {
-    const d = new Date();
-    d.setDate(d.getDate() + i);
-    const iso = d.toISOString().split("T")[0];
-    const dayOfWeek = d.getDay();
-    const forecast = ctx.weather.forecast.find((f) => f.date === iso);
-    const holiday = getHoliday(iso);
-    const vacation = getSchoolVacation(iso);
-    const eventsOnDay = allUpcoming.filter((e) => e.date === iso).length;
-
-    calendarDays.push({
-      date: iso,
-      dayName: DAYS_SHORT[dayOfWeek],
-      dayNum: d.getDate(),
-      monthName: MONTHS_SHORT[d.getMonth()],
-      weatherIcon: forecast?.icon,
-      tempMax: forecast?.tempMax,
-      isRainy: forecast?.isRainy,
-      eventCount: eventsOnDay,
-      isToday: i === 0,
-      isWeekend: dayOfWeek === 0 || dayOfWeek === 6,
-      isHoliday: !!holiday,
-      holidayName: holiday?.name || (vacation && i < 3 ? vacation.name : undefined),
-    });
-  }
-
   return (
     <div className="min-h-screen">
       <Header />
@@ -271,11 +238,6 @@ export default async function Home() {
           </div>
         </div>
       )}
-
-      {/* ===== CALENDAR STRIP ===== */}
-      <section className="mx-auto max-w-[1320px] px-4 pt-8 sm:px-8">
-        <CalendarStrip days={calendarDays} />
-      </section>
 
       {/* ===== 2. DIT WEEKEND ===== */}
       {weekendEvents.length > 0 && (
