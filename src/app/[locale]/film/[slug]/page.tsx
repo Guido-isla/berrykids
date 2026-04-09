@@ -3,7 +3,6 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GoTogetherButton from "@/components/GoTogetherButton";
 import { getAllKidsFilms, getFilmBySlug } from "@/data/programming-loader";
@@ -37,8 +36,6 @@ export default async function FilmPage({ params }: Props) {
 
   return (
     <div className="min-h-screen">
-      <Header />
-
       <main className="mx-auto max-w-[880px] px-4 py-6 sm:px-8">
         {/* Back */}
         <Link

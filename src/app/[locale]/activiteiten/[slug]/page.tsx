@@ -4,9 +4,7 @@ import { Link } from "@/i18n/navigation";
 import type { Metadata } from "next";
 import { activities } from "@/data/activities";
 import { getEventImage, resolveEventImages } from "@/lib/photos";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import NewsTicker from "@/components/NewsTicker";
 import ShareButton from "@/components/ShareButton";
 import NewsletterForm from "@/components/NewsletterForm";
 import ActivityCard from "@/components/ActivityCard";
@@ -59,9 +57,6 @@ export default async function ActivityPage({ params }: Props) {
 
   return (
     <div className="min-h-screen">
-      <NewsTicker />
-      <Header />
-
       <main className="mx-auto max-w-4xl px-5 py-8 sm:px-8">
         {/* Back link */}
         <Link

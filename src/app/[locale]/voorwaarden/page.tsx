@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -9,7 +8,6 @@ export const metadata: Metadata = {
 export default function VoorwaardenPage() {
   return (
     <div className="min-h-screen">
-      <Header />
       <main className="mx-auto max-w-3xl px-5 py-12 sm:px-8">
         <h1 className="text-3xl font-extrabold text-[#2D2D2D]">Algemene Voorwaarden</h1>
         <p className="mt-2 text-sm text-[#6B6B6B]">Laatst bijgewerkt: 3 april 2026</p>

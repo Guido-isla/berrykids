@@ -6,9 +6,7 @@ import { events as mockEvents } from "@/data/events";
 import { getScrapedEvents } from "@/data/events-loader";
 import { formatLongDate } from "@/lib/dates";
 import { getEventImage, resolveEventImages } from "@/lib/photos";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import NewsTicker from "@/components/NewsTicker";
 import ShareButton from "@/components/ShareButton";
 import NewsletterForm from "@/components/NewsletterForm";
 import EventCard from "@/components/EventCard";
@@ -74,9 +72,6 @@ export default async function EventPage({ params }: Props) {
 
   return (
     <div className="min-h-screen">
-      <NewsTicker />
-      <Header />
-
       <main className="mx-auto max-w-4xl px-5 py-8 sm:px-8">
         {/* Back link */}
         <Link

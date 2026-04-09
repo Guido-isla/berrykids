@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NewsletterForm from "@/components/NewsletterForm";
 import FilmVanDeWeek from "@/components/FilmVanDeWeek";
@@ -211,8 +210,6 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen">
-      <Header />
-
       {/* ===== 1. BERRY'S PICKS — ATF ===== */}
       <TopFiveHero
         picks={berryPicks}

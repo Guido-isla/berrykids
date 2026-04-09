@@ -4,9 +4,7 @@ import { Link } from "@/i18n/navigation";
 import type { Metadata } from "next";
 import { getAllSuggestions, getSuggestionBySlug } from "@/data/dutch-calendar";
 import { activities } from "@/data/activities";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import NewsTicker from "@/components/NewsTicker";
 import NewsletterForm from "@/components/NewsletterForm";
 import ActivityCard from "@/components/ActivityCard";
 import { resolveEventImages } from "@/lib/photos";
@@ -45,9 +43,6 @@ export default async function TipPage({ params }: Props) {
 
   return (
     <div className="min-h-screen">
-      <NewsTicker />
-      <Header />
-
       <main className="mx-auto max-w-4xl px-5 py-8 sm:px-8">
         {/* Back link */}
         <Link

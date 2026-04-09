@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import NewsTicker from "@/components/NewsTicker";
 import NewsletterForm from "@/components/NewsletterForm";
 import FilterableActivities from "@/components/FilterableActivities";
 import { activities } from "@/data/activities";
@@ -18,8 +16,6 @@ export default function ActiviteitenPage() {
 
   return (
     <div className="min-h-screen">
-      <Header />
-
       <main className="mx-auto max-w-[880px] px-5 py-8 sm:px-8">
         <FilterableActivities activities={activitiesWithImages} />
       </main>

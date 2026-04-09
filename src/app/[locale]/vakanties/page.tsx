@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import NewsTicker from "@/components/NewsTicker";
 import NewsletterForm from "@/components/NewsletterForm";
 import { activities } from "@/data/activities";
 import { resolveEventImages } from "@/lib/photos";
@@ -95,9 +93,6 @@ export default function VakantiesPage() {
 
   return (
     <div className="min-h-screen">
-      <NewsTicker />
-      <Header />
-
       {/* Hero */}
       <section className="bg-gradient-to-b from-[#FDF1EA] to-[#FFF8F4]">
         <div className="mx-auto max-w-[880px] px-5 py-10 sm:px-8 sm:py-14">
