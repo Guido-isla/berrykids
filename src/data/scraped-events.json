@@ -1,13 +1,41 @@
 {
-  "scrapedAt": "2026-04-03T10:17:15.743Z",
-  "eventCount": 28,
+  "scrapedAt": "2026-04-09T09:58:14.883Z",
+  "eventCount": 8,
   "rejectedCount": 0,
   "errors": [],
   "events": [
     {
       "source": "schuur",
       "title": "Mike & Molly vieren feest",
-      "date": "2026-04-04",
+      "date": "2026-04-10",
+      "time": "11:00",
+      "venue": "De Schuur, Haarlem",
+      "ageLabel": "3+ jaar",
+      "description": "Een lieve, muzikale en vrolijke film waar kinderen mogen mee zingen, lachen en bewegen",
+      "imageUrl": "https://schuur.b-cdn.net/stills/10044128/Mike-Molly-vieren-feest_st_1_jpg_sd-low_2026-02-13-095930_bnhz.jpg?width=800&height=733&quality=80&crop=819%2C750%2C256%2C0",
+      "ticketUrl": "https://www.schuur.nl/film/mike-molly-vieren-feest",
+      "category": "film",
+      "tags": [
+        "jeugd",
+        "familie"
+      ]
+    },
+    {
+      "source": "haarlemmarketing",
+      "title": "Chocolade workshop",
+      "date": "2026-04-10",
+      "time": "19:00",
+      "venue": "Haarlem",
+      "description": "Creëer, proef en beleef jouw chocolade avontuur Het chocolade hart van Haarlem vind je in de Kleine Houtstraat op nr 1. Hier dompel je je onder in chocolade, als het gaat om ambachtelijk gemaakte bonbons en chocolade figuren. In deze gezellige en inspirerende omgeving van het chocolade atelier, leer",
+      "imageUrl": "https://www.visithaarlem.com/wp-content/uploads/jet-form-builder/3b325606b0d8e11a09890bb8e85ea94c/2026/04/chocolade-workshop-bonbons-maken1-768x432.avif",
+      "ticketUrl": "https://www.visithaarlem.com/evenementen/chocolade-workshop/",
+      "category": "event",
+      "tags": []
+    },
+    {
+      "source": "schuur",
+      "title": "Mike & Molly vieren feest",
+      "date": "2026-04-11",
       "time": "11:00",
       "venue": "De Schuur, Haarlem",
       "ageLabel": "3+ jaar",
@@ -23,7 +51,7 @@
     {
       "source": "schuur",
       "title": "Taartrovers Cinemini",
-      "date": "2026-04-04",
+      "date": "2026-04-11",
       "time": "10:30",
       "venue": "De Schuur, Haarlem",
       "ageLabel": "2+ jaar",
@@ -34,362 +62,6 @@
       "tags": [
         "jeugd",
         "familie"
-      ]
-    },
-    {
-      "source": "haarlemmarketing",
-      "title": "Kweekmarkt",
-      "date": "2026-04-04",
-      "time": "10:00",
-      "venue": "Haarlem",
-      "description": "Elke 1e zaterdag van de maand tref je onze markt in de Haarlemmer Kweektuin",
-      "imageUrl": "https://www.visithaarlem.com/wp-content/uploads/import-afbeeldingen/Kweekmarkt_2026.jpeg",
-      "ticketUrl": "https://www.visithaarlem.com/evenementen/kweekmarkt/",
-      "category": "event",
-      "tags": []
-    },
-    {
-      "source": "haarlemmarketing",
-      "title": "OPLOS Festival",
-      "date": "2026-04-04",
-      "time": "16:00",
-      "venue": "Haarlem",
-      "description": "OPLOS Festival is het nieuwe hiphop festival van Haarlem bij Slachthuis op 4 april.",
-      "imageUrl": "https://www.visithaarlem.com/wp-content/uploads/import-afbeeldingen/260127_oplos_IG.jpg",
-      "ticketUrl": "https://www.visithaarlem.com/evenementen/oplos-festival/",
-      "category": "event",
-      "tags": []
-    },
-    {
-      "source": "schuur",
-      "title": "Taartrovers Cinemini",
-      "date": "2026-04-05",
-      "time": "10:30",
-      "venue": "De Schuur, Haarlem",
-      "ageLabel": "2+ jaar",
-      "description": "Film voor de allerkleinsten!",
-      "imageUrl": "https://schuur.b-cdn.net/stills/10040777/lowres15102022_TaartRovers-Fest-2022-Bijlmer_fotograaf-Almicheal-Fraay-3.JPG.jpg?width=800&height=733&quality=80&crop=874%2C800%2C163%2C0",
-      "ticketUrl": "https://www.schuur.nl/film/cinemini",
-      "category": "film",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Mike & Molly vieren feest",
-      "date": "2026-04-05",
-      "time": "13:00",
-      "venue": "De Schuur, Haarlem",
-      "ageLabel": "3+ jaar",
-      "description": "Een lieve, muzikale en vrolijke film waar kinderen mogen mee zingen, lachen en bewegen",
-      "imageUrl": "https://schuur.b-cdn.net/stills/10044128/Mike-Molly-vieren-feest_st_1_jpg_sd-low_2026-02-13-095930_bnhz.jpg?width=800&height=733&quality=80&crop=819%2C750%2C256%2C0",
-      "ticketUrl": "https://www.schuur.nl/film/mike-molly-vieren-feest",
-      "category": "film",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Paasontbijt",
-      "date": "2026-04-05",
-      "time": "08:45",
-      "venue": "De Schuur, Haarlem",
-      "description": "Begin 2turvenhoog festival goed met een lekker ontbijt",
-      "imageUrl": "https://schuur.b-cdn.net/stills/10043787/paasontbijt.jpg?width=800&height=733&quality=80&crop=1896%2C1737%2C365%2C0",
-      "ticketUrl": "https://www.schuur.nl/cafe/paasontbijt",
-      "category": "film",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Paasontbijt",
-      "date": "2026-04-06",
-      "time": "08:45",
-      "venue": "De Schuur, Haarlem",
-      "description": "Begin 2turvenhoog festival goed met een lekker ontbijt",
-      "imageUrl": "https://schuur.b-cdn.net/stills/10043787/paasontbijt.jpg?width=800&height=733&quality=80&crop=1896%2C1737%2C365%2C0",
-      "ticketUrl": "https://www.schuur.nl/cafe/paasontbijt",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Kunstspeeltuin",
-      "date": "2026-04-06",
-      "time": "09:00",
-      "venue": "De Schuur, Haarlem",
-      "description": "2turvenhoog festival is niet compleet zonder de gratis kunstinstallaties",
-      "imageUrl": "https://schuur.b-cdn.net/stills/90225607/WEB_2TurvenHoog_2025_zaterdag_©MoonSaris_3533.jpg?width=800&height=733&quality=80&crop=910%2C833%2C170%2C0",
-      "ticketUrl": "https://www.schuur.nl/theater/kunstspeeltuin",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Vilt",
-      "date": "2026-04-06",
-      "time": "09:30",
-      "venue": "De Schuur, Haarlem",
-      "ageLabel": "2+ jaar",
-      "description": "Een zachte, fysieke ervaring voor nieuwsgierigen: stil kijken of keihard rollen",
-      "imageUrl": "https://schuur.b-cdn.net/stills/10043573/Vilt-1.jpg?width=800&height=733&quality=80&crop=683%2C626%2C0%2C199",
-      "ticketUrl": "https://www.schuur.nl/theater/vilt",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Okapi",
-      "date": "2026-04-06",
-      "time": "09:30",
-      "venue": "Philharmonie Haarlem",
-      "ageLabel": "0,5+ jaar",
-      "description": "Kom luisteren, kijken en meebewegen in een muzikaal landschap van klank en klei",
-      "imageUrl": "https://schuur.b-cdn.net/stills/90221456/okapi.jpeg?width=800&height=733&quality=80&crop=1707%2C1565%2C0%2C497",
-      "ticketUrl": "https://www.schuur.nl/theater/okapi",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Stilte",
-      "date": "2026-04-06",
-      "time": "10:00",
-      "venue": "De Schuur, Haarlem",
-      "ageLabel": "1+ jaar",
-      "description": "Ga je mee op reis door deze betoverende wereld van klanken?",
-      "imageUrl": "https://schuur.b-cdn.net/stills/10043575/stilte-2.jpg?width=800&height=733&quality=80&crop=4480%2C4105%2C0%2C1307",
-      "ticketUrl": "https://www.schuur.nl/theater/stilte",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "DWALEN",
-      "date": "2026-04-06",
-      "time": "10:30",
-      "venue": "Philharmonie Haarlem",
-      "ageLabel": "2+ jaar",
-      "description": "Durf je te dwalen? Reis met ons mee op een muzikaal avontuur!",
-      "imageUrl": "https://schuur.b-cdn.net/stills/90221463/dwalen-1.jpg?width=800&height=733&quality=80&crop=3772%2C3456%2C706%2C0",
-      "ticketUrl": "https://www.schuur.nl/theater/dwalen",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Mike & Molly vieren feest",
-      "date": "2026-04-06",
-      "time": "10:30",
-      "venue": "De Schuur, Haarlem",
-      "ageLabel": "3+ jaar",
-      "description": "Een lieve, muzikale en vrolijke film waar kinderen mogen mee zingen, lachen en bewegen",
-      "imageUrl": "https://schuur.b-cdn.net/stills/10044128/Mike-Molly-vieren-feest_st_1_jpg_sd-low_2026-02-13-095930_bnhz.jpg?width=800&height=733&quality=80&crop=819%2C750%2C256%2C0",
-      "ticketUrl": "https://www.schuur.nl/film/mike-molly-vieren-feest",
-      "category": "film",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Mijn vlek\t(Ma tache)",
-      "date": "2026-04-06",
-      "time": "11:00",
-      "venue": "De Schuur, Haarlem",
-      "ageLabel": "4+ jaar",
-      "description": "Prijswinnende voorstelling over licht en schaduw",
-      "imageUrl": "https://schuur.b-cdn.net/stills/10043574/Mijn-vlek-1.jpeg?width=800&height=733&quality=80&crop=907%2C831%2C10%2C0",
-      "ticketUrl": "https://www.schuur.nl/theater/mijn-vlek",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Nekandinskie",
-      "date": "2026-04-06",
-      "time": "11:00",
-      "venue": "Philharmonie Haarlem",
-      "ageLabel": "1+ jaar",
-      "description": "Bouw jij ook mee aan een nieuwe wereld?",
-      "imageUrl": "https://schuur.b-cdn.net/stills/90221531/nekandinskie-1.jpg?width=800&height=733&quality=80&crop=1179%2C1080%2C220%2C0",
-      "ticketUrl": "https://www.schuur.nl/theater/nekandinskie",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Houtje",
-      "date": "2026-04-06",
-      "time": "11:30",
-      "venue": "De Schuur, Haarlem",
-      "ageLabel": "3+ jaar",
-      "description": "Een zingende werkplaats en een eigenwijs houtje dat nergens in past",
-      "imageUrl": "https://schuur.b-cdn.net/stills/10043578/WEB_2turvenhoog_29-3_Houtje_©MoonSaris_3316.jpg?width=800&height=733&quality=80&crop=910%2C833%2C170%2C0",
-      "ticketUrl": "https://www.schuur.nl/theater/houtje",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "philharmonie",
-      "title": "Mijn vlek - Ma tache",
-      "date": "2026-04-06",
-      "time": "11:00, 15:30",
-      "venue": "Philharmonie Haarlem",
-      "ageLabel": "4+",
-      "description": "Visuele en woordloze voorstelling over Rita's verjaardag met schaduwspel. Prijswinnend theater vol verbeelding, absurde humor en poëzie voor alle leeftijden.",
-      "imageUrl": "https://media.ssphaarlem.nl/019c0505-b7a4-76c5-8837-cce5d62a2908/vlek?crop=1350%2C900%2C0%2C225&scale=1350&optimizer=image",
-      "ticketUrl": "https://philhaarlem.nl/agenda/mijn-vlek-ma-tache-4",
-      "category": "concert",
-      "tags": [
-        "familie",
-        "jeugd & familie",
-        "2turvenhoog"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Kunstspeeltuin",
-      "date": "2026-04-07",
-      "time": "08:30",
-      "venue": "De Schuur, Haarlem",
-      "description": "2turvenhoog festival is niet compleet zonder de gratis kunstinstallaties",
-      "imageUrl": "https://schuur.b-cdn.net/stills/90225607/WEB_2TurvenHoog_2025_zaterdag_©MoonSaris_3533.jpg?width=800&height=733&quality=80&crop=910%2C833%2C170%2C0",
-      "ticketUrl": "https://www.schuur.nl/theater/kunstspeeltuin-2",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Vilt",
-      "date": "2026-04-07",
-      "time": "09:00",
-      "venue": "De Schuur, Haarlem",
-      "ageLabel": "2+ jaar",
-      "description": "Een zachte, fysieke ervaring voor nieuwsgierigen: stil kijken of keihard rollen",
-      "imageUrl": "https://schuur.b-cdn.net/stills/10043573/Vilt-1.jpg?width=800&height=733&quality=80&crop=683%2C626%2C0%2C199",
-      "ticketUrl": "https://www.schuur.nl/theater/vilt",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "DWALEN",
-      "date": "2026-04-07",
-      "time": "09:00",
-      "venue": "Philharmonie Haarlem",
-      "ageLabel": "2+ jaar",
-      "description": "Durf je te dwalen? Reis met ons mee op een muzikaal avontuur!",
-      "imageUrl": "https://schuur.b-cdn.net/stills/90221463/dwalen-1.jpg?width=800&height=733&quality=80&crop=3772%2C3456%2C706%2C0",
-      "ticketUrl": "https://www.schuur.nl/theater/dwalen",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Stilte",
-      "date": "2026-04-07",
-      "time": "09:15",
-      "venue": "De Schuur, Haarlem",
-      "ageLabel": "1+ jaar",
-      "description": "Ga je mee op reis door deze betoverende wereld van klanken?",
-      "imageUrl": "https://schuur.b-cdn.net/stills/10043575/stilte-2.jpg?width=800&height=733&quality=80&crop=4480%2C4105%2C0%2C1307",
-      "ticketUrl": "https://www.schuur.nl/theater/stilte",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Nekandinskie",
-      "date": "2026-04-07",
-      "time": "10:00",
-      "venue": "Philharmonie Haarlem",
-      "ageLabel": "1+ jaar",
-      "description": "Bouw jij ook mee aan een nieuwe wereld?",
-      "imageUrl": "https://schuur.b-cdn.net/stills/90221531/nekandinskie-1.jpg?width=800&height=733&quality=80&crop=1179%2C1080%2C220%2C0",
-      "ticketUrl": "https://www.schuur.nl/theater/nekandinskie",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "schuur",
-      "title": "Houtje",
-      "date": "2026-04-07",
-      "time": "10:30",
-      "venue": "De Schuur, Haarlem",
-      "ageLabel": "3+ jaar",
-      "description": "Een zingende werkplaats en een eigenwijs houtje dat nergens in past",
-      "imageUrl": "https://schuur.b-cdn.net/stills/10043578/WEB_2turvenhoog_29-3_Houtje_©MoonSaris_3316.jpg?width=800&height=733&quality=80&crop=910%2C833%2C170%2C0",
-      "ticketUrl": "https://www.schuur.nl/theater/houtje",
-      "category": "theater",
-      "tags": [
-        "jeugd",
-        "familie"
-      ]
-    },
-    {
-      "source": "philharmonie",
-      "title": "2Turvenhoog Festival 2026",
-      "date": "2026-04-07",
-      "time": "",
-      "venue": "Philharmonie Haarlem",
-      "description": "Fantasierijk festival voor de allerkleinsten",
-      "imageUrl": "https://media.ssphaarlem.nl/019c0513-65e9-7b82-803c-bdcdb0cdf456/2turf?crop=1349%2C899%2C0%2C72&scale=1349&optimizer=image",
-      "ticketUrl": "https://philhaarlem.nl/festival/2turvenhoog-festival",
-      "category": "concert",
-      "tags": [
-        "familie",
-        "2turvenhoog"
       ]
     },
     {
@@ -403,6 +75,22 @@
       "ticketUrl": "https://haarlem.nl/duurzaam/springer-festival-ontdek-de-natuur-de-stad",
       "category": "event",
       "tags": []
+    },
+    {
+      "source": "schuur",
+      "title": "Taartrovers Cinemini",
+      "date": "2026-04-12",
+      "time": "10:30",
+      "venue": "De Schuur, Haarlem",
+      "ageLabel": "2+ jaar",
+      "description": "Film voor de allerkleinsten!",
+      "imageUrl": "https://schuur.b-cdn.net/stills/10040777/lowres15102022_TaartRovers-Fest-2022-Bijlmer_fotograaf-Almicheal-Fraay-3.JPG.jpg?width=800&height=733&quality=80&crop=874%2C800%2C163%2C0",
+      "ticketUrl": "https://www.schuur.nl/film/cinemini",
+      "category": "film",
+      "tags": [
+        "jeugd",
+        "familie"
+      ]
     },
     {
       "source": "philharmonie",
