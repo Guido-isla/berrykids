@@ -10,7 +10,8 @@ import BerryCard from "@/components/BerryCard";
 import ScrollCTA from "@/components/ScrollCTA";
 import TopFiveHero from "@/components/TopFiveHero";
 import type { TopFivePick } from "@/components/TopFiveHero";
-import { getDayPlanEvents } from "@/data/events-loader";
+import { getDayPlanEvents, getWeekendEvents, getScrapedEvents } from "@/data/events-loader";
+import { formatShortDate } from "@/lib/dates";
 import { resolveEventImages } from "@/lib/photos";
 import { getSiteContext } from "@/lib/context";
 import { activities } from "@/data/activities";
@@ -184,7 +185,19 @@ export default async function Home() {
     ? tBerry("indoorGood")
     : tBerry("indoorDefault");
 
-  const tomorrowFlipText = tomorrowFlip; // Keep dynamic for now — weather data is locale-independent
+  // === UPCOMING EVENTS ===
+  const today = new Date().toISOString().split("T")[0];
+  const allUpcoming = resolveEventImages(getScrapedEvents().filter((e) => e.date >= today));
+  const weekendEvents = resolveEventImages(getWeekendEvents()).filter((e) => e.image !== "/berry-icon.png").slice(0, 4);
+
+  // "Binnenkort" — events 2+ days from now, excluding weekend events already shown
+  const twoDaysOut = new Date();
+  twoDaysOut.setDate(twoDaysOut.getDate() + 2);
+  const twoDaysStr = twoDaysOut.toISOString().split("T")[0];
+  const weekendSlugs = new Set(weekendEvents.map((e) => e.slug));
+  const binnenkortEvents = allUpcoming
+    .filter((e) => e.date >= twoDaysStr && !weekendSlugs.has(e.slug))
+    .slice(0, 6);
 
   return (
     <div className="min-h-screen">
@@ -216,7 +229,48 @@ export default async function Home() {
         </div>
       )}
 
-      {/* ===== 2. BUITEN TIPS ===== */}
+      {/* ===== 2. DIT WEEKEND ===== */}
+      {weekendEvents.length > 0 && (
+        <section className="mx-auto max-w-[1320px] px-4 pt-10 sm:px-8">
+          <div className="mb-4">
+            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">📅 Dit weekend</h2>
+            <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">Wat er dit weekend te doen is</p>
+          </div>
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-4">
+            {weekendEvents.map((e) => (
+              <Link key={e.slug} href={`/event/${e.slug}`} className="group w-[75vw] shrink-0 overflow-hidden rounded-[20px] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all hover:-translate-y-1 sm:w-auto">
+                <div className="relative h-[160px] overflow-hidden">
+                  <Image
+                    src={e.resolvedImage || e.image}
+                    alt={e.title}
+                    fill
+                    sizes="(max-width: 768px) 75vw, 25vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                  />
+                  {/* Date badge */}
+                  <div className="absolute left-3 top-3 flex flex-col items-center rounded-[12px] bg-white/90 px-2.5 py-1.5 text-center backdrop-blur-sm">
+                    <span className="text-[10px] font-bold uppercase text-[#E0685F]">
+                      {formatShortDate(e.date).split(" ")[0]}
+                    </span>
+                    <span className="text-[18px] font-black leading-none text-[#2D2D2D]">
+                      {new Date(e.date + "T00:00:00").getDate()}
+                    </span>
+                  </div>
+                  {e.free && (
+                    <span className="absolute right-3 top-3 rounded-full bg-[#4A8060] px-2 py-0.5 text-[10px] font-bold text-white">Gratis</span>
+                  )}
+                </div>
+                <div className="px-3.5 py-3">
+                  <h3 className="text-[15px] font-extrabold leading-snug text-[#2D2D2D] group-hover:text-[#E0685F]">{e.title}</h3>
+                  <p className="mt-0.5 text-[13px] text-[#6B6B6B]">📍 {e.location} · {e.time}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ===== 3. BUITEN TIPS ===== */}
       {buitenPicks.length > 0 && (
         <section className="mx-auto max-w-[1320px] px-4 pt-10 sm:px-8">
           <div className="mb-4">
@@ -254,7 +308,49 @@ export default async function Home() {
         <FilmVanDeWeek />
       </section>
 
-      {/* ===== 5. BINNEN TIPS ===== */}
+      {/* ===== 5. BINNENKORT — upcoming events ===== */}
+      {binnenkortEvents.length > 0 && (
+        <section className="mx-auto max-w-[1320px] px-4 pb-10 sm:px-8">
+          <div className="mb-4">
+            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">📆 Binnenkort</h2>
+            <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">De komende weken in de regio</p>
+          </div>
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
+            {binnenkortEvents.map((e) => (
+              <Link key={e.slug} href={`/event/${e.slug}`} className="group flex w-[85vw] shrink-0 gap-3 rounded-[20px] bg-white p-3 shadow-[0_2px_10px_rgba(0,0,0,0.05)] transition-all hover:-translate-y-0.5 sm:w-auto">
+                {/* Date badge */}
+                <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-[14px] bg-[#FDF1EA]">
+                  <span className="text-[10px] font-bold uppercase text-[#E0685F]">
+                    {formatShortDate(e.date).split(" ")[0]}
+                  </span>
+                  <span className="text-[20px] font-black leading-none text-[#2D2D2D]">
+                    {new Date(e.date + "T00:00:00").getDate()}
+                  </span>
+                </div>
+                {/* Image */}
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[12px]">
+                  <Image
+                    src={e.resolvedImage || e.image}
+                    alt={e.title}
+                    fill
+                    sizes="56px"
+                    className="object-cover"
+                  />
+                </div>
+                {/* Info */}
+                <div className="min-w-0 flex-1 py-0.5">
+                  <h3 className="text-[15px] font-extrabold leading-snug text-[#2D2D2D] group-hover:text-[#E0685F]">{e.title}</h3>
+                  <p className="mt-0.5 truncate text-[13px] text-[#6B6B6B]">
+                    📍 {e.location}{e.time ? ` · ${e.time}` : ""}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ===== 6. BINNEN TIPS ===== */}
       {binnenPicks.length > 0 && (
         <section className="mx-auto max-w-[1320px] px-4 pb-10 sm:px-8">
           <div className="mb-4">
