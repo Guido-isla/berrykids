@@ -368,6 +368,9 @@ export default async function Home() {
                 </Link>
               );
             })}
+            <div className="w-[60vw] shrink-0 sm:w-auto">
+              <ScrollCTA emoji="📆" label="Alle evenementen" href="/evenementen" />
+            </div>
           </div>
         </section>
       )}

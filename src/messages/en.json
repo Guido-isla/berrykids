@@ -1,6 +1,7 @@
 {
   "nav": {
     "activities": "Activities",
+    "events": "Events",
     "vacations": "School holidays",
     "search": "Search",
     "searchPlaceholder": "Search activities...",
