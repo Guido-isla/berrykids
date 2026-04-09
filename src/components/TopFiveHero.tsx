@@ -156,7 +156,7 @@ export default function TopFiveHero({
 
       {/* ===== DESKTOP: Hero photo + list + detail card (unchanged) ===== */}
       <div
-        className="hidden pb-16 lg:block"
+        className="hidden pb-28 lg:block"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >

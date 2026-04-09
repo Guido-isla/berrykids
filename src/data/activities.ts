@@ -345,7 +345,7 @@ export const activities: Activity[] = [
     area: "Zandvoort",
     ageLabel: "Alle leeftijden",
     free: true,
-    image: "https://us.images.westend61.de/0000798675pw/netherlands-zandvoort-happy-family-walking-on-the-beach-FMKF04314.jpg",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
     availableMonths: [4, 5, 6, 7, 8, 9, 10],
     verified: true,
   },
@@ -588,7 +588,7 @@ export const activities: Activity[] = [
     ageMin: 6,
     free: true,
     openingHours: "Wo-zo 13:00 – 17:00",
-    image: "https://www.archeologischmuseumhaarlem.nl/vleeshal.jpg",
+    image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=800&q=80",
     verified: true,
   },
   {
@@ -1102,7 +1102,7 @@ export const activities: Activity[] = [
     price: "Vanaf €10",
     free: false,
     website: "https://stadsschouwburghaarlem.nl",
-    image: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Stadsschouwburg_Haarlem_front.jpg",
+    image: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=800&q=80",
     verified: true,
   },
   {
@@ -1119,7 +1119,7 @@ export const activities: Activity[] = [
     price: "Vanaf €8",
     free: false,
     website: "https://philhaarlem.nl",
-    image: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Philharmonie_Haarlem_2019.jpg",
+    image: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80",
     verified: true,
   },
 
@@ -1173,7 +1173,7 @@ export const activities: Activity[] = [
     price: "Pannenkoeken vanaf €8",
     free: false,
     website: "https://www.pannenkoekenparadijs.nl",
-    image: "https://www.pannenkoekenparadijs.nl/wp-content/uploads/2021/08/Pannenkoekenparadijs-Haarlem-header.jpg",
+    image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80",
     verified: true,
   },
   {
