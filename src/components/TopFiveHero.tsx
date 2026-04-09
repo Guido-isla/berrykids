@@ -116,7 +116,7 @@ export default function TopFiveHero({
                 className={`pick-reveal pick-reveal-${i} block w-[78vw] shrink-0 overflow-hidden rounded-[20px] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all active:scale-[1.03]`}
               >
                 {/* Photo */}
-                <div className={`relative overflow-hidden ${isFirst ? "h-[200px]" : "h-[170px]"}`}>
+                <div className="relative h-[200px] overflow-hidden">
                   <Image
                     src={p.image}
                     alt={p.title}
