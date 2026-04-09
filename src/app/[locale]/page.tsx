@@ -196,7 +196,7 @@ export default async function Home() {
   const twoDaysStr = twoDaysOut.toISOString().split("T")[0];
   const weekendSlugs = new Set(weekendEvents.map((e) => e.slug));
   const binnenkortEvents = allUpcoming
-    .filter((e) => e.date >= twoDaysStr && !weekendSlugs.has(e.slug))
+    .filter((e) => e.date >= twoDaysStr && !weekendSlugs.has(e.slug) && e.image !== "/berry-icon.png" && (e.resolvedImage || e.image) !== "/berry-icon.png")
     .slice(0, 6);
 
   return (

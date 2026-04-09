@@ -50,12 +50,23 @@ export default async function EventPage({ params }: Props) {
   const { src, attribution } = getEventImage(event);
   const mapQuery = encodeURIComponent(event.location);
 
+  // Deduplicate by title so multi-day events don't repeat
+  const seenTitles = new Set<string>([event.title]);
   const relatedRaw = allEvents
-    .filter((e) => e.slug !== slug && e.area === event.area)
+    .filter((e) => {
+      if (e.slug === slug || seenTitles.has(e.title)) return false;
+      if (e.area !== event.area) return false;
+      seenTitles.add(e.title);
+      return true;
+    })
     .slice(0, 3);
   if (relatedRaw.length < 3) {
     const others = allEvents
-      .filter((e) => e.slug !== slug && !relatedRaw.includes(e))
+      .filter((e) => {
+        if (e.slug === slug || seenTitles.has(e.title)) return false;
+        seenTitles.add(e.title);
+        return true;
+      })
       .slice(0, 3 - relatedRaw.length);
     relatedRaw.push(...others);
   }
