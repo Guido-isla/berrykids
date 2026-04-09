@@ -21,7 +21,7 @@ type CategoryFilter = (typeof CATEGORY_OPTIONS)[number]["value"];
 /** Map categories to Berry illustrations + gradient + glow */
 const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; gradient: string; glow: string; deep: string }> = {
   sport: {
-    src: "/illustrations/berry-sport.png",
+    src: "/illustrations/berry-sport-v2.png",
     gradient: "linear-gradient(180deg, #FFF9F0 0%, #FFE4C4 60%, #FFD8B0 100%)",
     glow: "rgba(255,180,100,0.25)",
     deep: "#A67A40",
@@ -39,13 +39,13 @@ const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; gradient: string; gl
     deep: "#2F7D46",
   },
   cultuur: {
-    src: "/illustrations/berry-cultuur.png",
+    src: "/illustrations/berry-cultuur-v2.png",
     gradient: "linear-gradient(180deg, #FFF9F0 0%, #DCC7FF 60%, #B590FF 100%)",
     glow: "rgba(125,91,206,0.2)",
     deep: "#4D3B89",
   },
   indoor: {
-    src: "/illustrations/berry-zwemmen.png",
+    src: "/illustrations/berry-zwemmen-v2.png",
     gradient: "linear-gradient(180deg, #FFF9F0 0%, #BFE5F2 60%, #88D2DA 100%)",
     glow: "rgba(79,175,190,0.2)",
     deep: "#2C7886",
