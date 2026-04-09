@@ -107,28 +107,22 @@ export default function FilterableActivities({ activities }: { activities: Activ
 
   return (
     <>
-      {/* Category banner — rich gradient + illustration + overlays */}
+      {/* Category banner — compact strip, illustration fills it */}
       {illustration && (
-        <div className="relative -mx-5 -mt-8 mb-4 overflow-hidden sm:-mx-8" style={{ background: illustration.gradient }}>
-          {/* Glow overlay */}
-          <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full blur-3xl" style={{ background: illustration.glow }} />
-          {/* Bottom fade into page */}
-          <div className="absolute inset-x-0 bottom-0 h-16" style={{ background: `linear-gradient(to top, ${illustration.deep}12, transparent)` }} />
-          {/* Sparkle dots */}
-          <div className="absolute left-[20%] top-6 h-3 w-3 rounded-full bg-white/30" />
-          <div className="absolute left-[35%] top-10 h-2 w-2 rounded-full bg-white/25" />
-          <div className="absolute left-[50%] top-7 h-2.5 w-2.5 rounded-full bg-white/20" />
-          {/* Illustration */}
-          <div className="relative mx-auto max-w-[380px] px-4 pb-2 pt-8">
-            <Image
-              src={illustration.src}
-              alt=""
-              width={500}
-              height={375}
-              className="h-auto w-full drop-shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
-              priority
-            />
-          </div>
+        <div className="relative -mx-5 -mt-8 mb-4 h-[120px] overflow-hidden sm:-mx-8 sm:h-[160px]" style={{ background: illustration.gradient }}>
+          {/* Glow */}
+          <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full blur-2xl" style={{ background: illustration.glow }} />
+          {/* Bottom fade */}
+          <div className="absolute inset-x-0 bottom-0 h-8" style={{ background: `linear-gradient(to top, ${illustration.deep}12, transparent)` }} />
+          {/* Illustration — anchored bottom, fills width */}
+          <Image
+            src={illustration.src}
+            alt=""
+            width={500}
+            height={375}
+            className="absolute bottom-0 left-1/2 h-[110px] w-auto -translate-x-1/2 object-contain sm:h-[150px]"
+            priority
+          />
         </div>
       )}
 
