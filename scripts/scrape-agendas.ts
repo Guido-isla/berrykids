@@ -14,6 +14,8 @@ import { scrapePhilharmonie } from "./scrapers/philharmonie";
 import { scrapeKidsproof } from "./scrapers/kidsproof";
 import { scrapeHaarlemMarketing } from "./scrapers/haarlemmarketing";
 import { scrapeVisitHaarlemmermeer } from "./scrapers/visithaarlemmermeer";
+import { scrapeHaventheater } from "./scrapers/haventheater";
+import { scrapeTheaterElswout } from "./scrapers/theaterelswout";
 import { enrichDescriptions } from "./scrapers/enrich";
 import type { ScrapedEvent } from "./scrapers/types";
 
@@ -57,6 +59,48 @@ async function main() {
   const allEvents: ScrapedEvent[] = [];
   const errors: string[] = [];
 
+  // Manual events — major events not on any scraped site
+  const manualEvents: ScrapedEvent[] = [
+    {
+      source: "manual",
+      title: "Kermis Haarlem",
+      date: "2026-04-23",
+      time: "13:00",
+      venue: "Zaanenlaan / Grote Markt, Haarlem",
+      description: "De Haarlemse Kermis op de Zaanenlaan en Grote Markt. Attracties, botsauto's, suikerspinnen en meer. 23 april t/m 3 mei.",
+      imageUrl: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80",
+      ticketUrl: "https://kermis-haarlem.nl/",
+      category: "event",
+      tags: ["kermis", "familie", "gratis"],
+    },
+    {
+      source: "manual",
+      title: "Kermis Haarlem",
+      date: "2026-04-29",
+      time: "13:00",
+      venue: "Grote Markt, Haarlem",
+      description: "Kermis op de Grote Markt! Attracties, botsauto's en meer midden in het centrum.",
+      imageUrl: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80",
+      ticketUrl: "https://kermis-haarlem.nl/",
+      category: "event",
+      tags: ["kermis", "familie", "gratis"],
+    },
+    {
+      source: "manual",
+      title: "Bloemencorso Bollenstreek",
+      date: "2026-04-19",
+      time: "09:30",
+      venue: "Noordwijk → Haarlem",
+      description: "Het grootste lentefeest! Praalwagens vol bloemen rijden van Noordwijk naar Haarlem. Gratis te bekijken langs de route.",
+      imageUrl: "https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=800&q=80",
+      ticketUrl: "https://bloemencorso-bollenstreek.nl/programma/",
+      category: "event",
+      tags: ["bloemencorso", "familie", "gratis", "bloemen"],
+    },
+  ];
+  allEvents.push(...manualEvents);
+  console.log(`\n📋 Manual events: ${manualEvents.length}`);
+
   // Run all scrapers with error isolation
   for (const { name, fn } of [
     { name: "Patronaat", fn: scrapePatronaat },
@@ -65,6 +109,8 @@ async function main() {
     // Kidsproof removed — JS-rendered page, can't scrape without headless browser
     { name: "Haarlem Marketing", fn: scrapeHaarlemMarketing },
     { name: "Visit Haarlemmermeer", fn: scrapeVisitHaarlemmermeer },
+    { name: "Haventheater IJmuiden", fn: scrapeHaventheater },
+    { name: "Theater Elswout", fn: scrapeTheaterElswout },
   ]) {
     console.log();
     try {

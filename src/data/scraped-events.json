@@ -1,7 +1,7 @@
 {
-  "scrapedAt": "2026-04-09T10:55:00.852Z",
-  "eventCount": 25,
-  "rejectedCount": 0,
+  "scrapedAt": "2026-04-09T11:11:16.145Z",
+  "eventCount": 30,
+  "rejectedCount": 1,
   "errors": [],
   "events": [
     {
@@ -93,6 +93,39 @@
       ]
     },
     {
+      "source": "manual",
+      "title": "Bloemencorso Bollenstreek",
+      "date": "2026-04-19",
+      "time": "09:30",
+      "venue": "Noordwijk → Haarlem",
+      "description": "Het grootste lentefeest! Praalwagens vol bloemen rijden van Noordwijk naar Haarlem. Gratis te bekijken langs de route.",
+      "imageUrl": "https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=800&q=80",
+      "ticketUrl": "https://bloemencorso-bollenstreek.nl/programma/",
+      "category": "event",
+      "tags": [
+        "bloemencorso",
+        "familie",
+        "gratis",
+        "bloemen"
+      ]
+    },
+    {
+      "source": "haventheater",
+      "title": "Dirk Scheele & StoryZoo",
+      "date": "2026-04-19",
+      "time": "15:00",
+      "venue": "Haventheater IJmuiden",
+      "ageLabel": "Alle leeftijden",
+      "description": "Dirk Scheele & StoryZoo is op 19 april 2026 te zien in Haventheater IJmuiden.",
+      "imageUrl": "https://assets.stadsschouwburgvelsen.nl/images/dirk-scheele-en-story-zoo@2x.jpg",
+      "ticketUrl": "https://haventheaterijmuiden.nl/programma/dirk-scheele-storyzoo",
+      "category": "theater",
+      "tags": [
+        "familie",
+        "theater"
+      ]
+    },
+    {
       "source": "philharmonie",
       "title": "Koningsconcert",
       "date": "2026-04-22",
@@ -105,6 +138,22 @@
       "tags": [
         "familie",
         "orkest"
+      ]
+    },
+    {
+      "source": "manual",
+      "title": "Kermis Haarlem",
+      "date": "2026-04-23",
+      "time": "13:00",
+      "venue": "Zaanenlaan / Grote Markt, Haarlem",
+      "description": "De Haarlemse Kermis op de Zaanenlaan en Grote Markt. Attracties, botsauto's, suikerspinnen en meer. 23 april t/m 3 mei.",
+      "imageUrl": "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80",
+      "ticketUrl": "https://kermis-haarlem.nl/",
+      "category": "event",
+      "tags": [
+        "kermis",
+        "familie",
+        "gratis"
       ]
     },
     {
@@ -258,6 +307,22 @@
       ]
     },
     {
+      "source": "manual",
+      "title": "Kermis Haarlem",
+      "date": "2026-04-29",
+      "time": "13:00",
+      "venue": "Grote Markt, Haarlem",
+      "description": "Kermis op de Grote Markt! Attracties, botsauto's en meer midden in het centrum.",
+      "imageUrl": "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80",
+      "ticketUrl": "https://kermis-haarlem.nl/",
+      "category": "event",
+      "tags": [
+        "kermis",
+        "familie",
+        "gratis"
+      ]
+    },
+    {
       "source": "philharmonie",
       "title": "De gele duikmachine",
       "date": "2026-04-29",
@@ -316,6 +381,22 @@
       "tags": [
         "familie",
         "haarlemmermeer"
+      ]
+    },
+    {
+      "source": "haventheater",
+      "title": "Peppa Pig Live - Samen op stap!",
+      "date": "2026-04-30",
+      "time": "13:30",
+      "venue": "Haventheater IJmuiden",
+      "ageLabel": "Alle leeftijden",
+      "description": "Peppa Pig Live - Samen op stap! is op 30 april 2026 te zien in Haventheater IJmuiden.",
+      "imageUrl": "https://assets.stadsschouwburgvelsen.nl/images/peppa-pig-slide@2x.jpg",
+      "ticketUrl": "https://haventheaterijmuiden.nl/programma/peppa-pig-live-samen-op-stap",
+      "category": "theater",
+      "tags": [
+        "familie",
+        "theater"
       ]
     },
     {

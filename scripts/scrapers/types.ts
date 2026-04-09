@@ -1,7 +1,7 @@
 /** Shared types for all scrapers */
 
 export type ScrapedEvent = {
-  source: "patronaat" | "schuur" | "philharmonie" | "kidsproof" | "haarlemmarketing" | "visithaarlemmermeer";
+  source: "patronaat" | "schuur" | "philharmonie" | "kidsproof" | "haarlemmarketing" | "visithaarlemmermeer" | "haventheater" | "theaterelswout" | "manual";
   title: string;
   date: string; // ISO
   time: string;
