@@ -22,31 +22,31 @@ type CategoryFilter = (typeof CATEGORY_OPTIONS)[number]["value"];
 const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; gradient: string; glow: string; deep: string }> = {
   sport: {
     src: "/illustrations/berry-sport.png",
-    gradient: "linear-gradient(135deg, #FFF3E0 0%, #FFE4C4 50%, #FFD8B0 100%)",
+    gradient: "linear-gradient(180deg, #FFF9F0 0%, #FFE4C4 60%, #FFD8B0 100%)",
     glow: "rgba(255,180,100,0.25)",
     deep: "#A67A40",
   },
   natuur: {
     src: "/illustrations/berry-natuur-v2.png",
-    gradient: "linear-gradient(135deg, #BCECC7 0%, #8BD8A8 48%, #54B76E 100%)",
+    gradient: "linear-gradient(180deg, #FFF9F0 0%, #BCECC7 60%, #8BD8A8 100%)",
     glow: "rgba(84,183,110,0.2)",
     deep: "#2F7D46",
   },
   dieren: {
     src: "/illustrations/berry-natuur-v2.png",
-    gradient: "linear-gradient(135deg, #BCECC7 0%, #8BD8A8 48%, #54B76E 100%)",
+    gradient: "linear-gradient(180deg, #FFF9F0 0%, #BCECC7 60%, #8BD8A8 100%)",
     glow: "rgba(84,183,110,0.2)",
     deep: "#2F7D46",
   },
   cultuur: {
     src: "/illustrations/berry-cultuur.png",
-    gradient: "linear-gradient(135deg, #DCC7FF 0%, #B590FF 46%, #7D5BCE 100%)",
+    gradient: "linear-gradient(180deg, #FFF9F0 0%, #DCC7FF 60%, #B590FF 100%)",
     glow: "rgba(125,91,206,0.2)",
     deep: "#4D3B89",
   },
   indoor: {
     src: "/illustrations/berry-zwemmen.png",
-    gradient: "linear-gradient(135deg, #BFE5F2 0%, #88D2DA 45%, #4FAFBE 100%)",
+    gradient: "linear-gradient(180deg, #FFF9F0 0%, #BFE5F2 60%, #88D2DA 100%)",
     glow: "rgba(79,175,190,0.2)",
     deep: "#2C7886",
   },
@@ -112,13 +112,13 @@ export default function FilterableActivities({ activities }: { activities: Activ
             {/* Glow */}
             <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full blur-3xl" style={{ background: illustration.glow }} />
             {/* Illustration — big, centered */}
-            <div className="flex items-end justify-center pt-[72px] sm:pt-[80px]">
+            <div className="flex items-end justify-center pt-[56px] sm:pt-[64px]">
               <Image
                 src={illustration.src}
                 alt=""
                 width={500}
                 height={375}
-                className="h-auto w-[65%] max-w-[300px] sm:w-[50%] sm:max-w-[360px]"
+                className="h-auto w-[80%] max-w-[340px] sm:w-[60%] sm:max-w-[400px]"
                 priority
               />
             </div>
