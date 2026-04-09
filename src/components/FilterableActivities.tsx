@@ -109,18 +109,16 @@ export default function FilterableActivities({ activities }: { activities: Activ
     <>
       {/* Category banner — compact strip, illustration fills it */}
       {illustration && (
-        <div className="relative -mx-5 -mt-8 mb-4 h-[120px] overflow-hidden sm:-mx-8 sm:h-[160px]" style={{ background: illustration.gradient }}>
+        <div className="relative -mx-5 -mt-8 mb-3 h-[80px] overflow-hidden sm:-mx-8 sm:h-[110px]" style={{ background: illustration.gradient }}>
           {/* Glow */}
-          <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full blur-2xl" style={{ background: illustration.glow }} />
-          {/* Bottom fade */}
-          <div className="absolute inset-x-0 bottom-0 h-8" style={{ background: `linear-gradient(to top, ${illustration.deep}12, transparent)` }} />
-          {/* Illustration — anchored bottom, fills width */}
+          <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full blur-2xl" style={{ background: illustration.glow }} />
+          {/* Illustration — anchored bottom */}
           <Image
             src={illustration.src}
             alt=""
             width={500}
             height={375}
-            className="absolute bottom-0 left-1/2 h-[110px] w-auto -translate-x-1/2 object-contain sm:h-[150px]"
+            className="absolute bottom-0 left-1/2 h-[75px] w-auto -translate-x-1/2 object-contain sm:h-[105px]"
             priority
           />
         </div>
