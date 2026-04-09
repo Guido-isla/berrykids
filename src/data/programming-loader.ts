@@ -117,7 +117,7 @@ export function getAllKidsFilms() {
       times: ["Za 11:00", "Za 14:00", "Zo 11:00", "Wo 14:00"],
       ageLabel: "6+ jaar",
       description: "Mario en Luigi op avontuur door het heelal. Spectaculaire animatie voor het hele gezin.",
-      image: "https://images.unsplash.com/photo-1626478885578-04c6e4d91a6c?w=400&q=80",
+      image: "https://image.tmdb.org/t/p/w500/ekF2RiziyzLeXsTvEvhhRjEc7Eo.jpg",
     },
     {
       title: "Mike & Molly vieren feest",
@@ -125,7 +125,7 @@ export function getAllKidsFilms() {
       times: ["Za 10:30", "Zo 10:30", "Wo 10:30"],
       ageLabel: "AL",
       description: "Feestelijke animatiefilm voor de allerkleinsten. Kort en vrolijk.",
-      image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80",
+      image: "https://static.filmvandaag.nl/covers/original/149000/149419.jpg?v=1&width=400",
     },
     {
       title: "Super Charlie",
@@ -133,7 +133,7 @@ export function getAllKidsFilms() {
       times: ["Za 13:30", "Zo 13:30"],
       ageLabel: "6+ jaar",
       description: "Fantasie-avontuur over een jongen met superkrachten. Scandinavische productie.",
-      image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&q=80",
+      image: "https://image.tmdb.org/t/p/w500/mdmULykTC1owrECUXTp2haR1Boq.jpg",
     },
     {
       title: "Jumpers",
@@ -141,7 +141,7 @@ export function getAllKidsFilms() {
       times: ["Za 16:00", "Zo 14:00", "Wo 14:30"],
       ageLabel: "6+ jaar",
       description: "Snelle animatiefilm vol actie en humor. Nieuw in de bioscoop.",
-      image: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&q=80",
+      image: "https://image.tmdb.org/t/p/w500/lf1bwcuLOuBbsLw9wO2EMhNsNtU.jpg",
     },
     {
       title: "David",
@@ -149,7 +149,15 @@ export function getAllKidsFilms() {
       times: ["Za 11:30", "Zo 16:00"],
       ageLabel: "9+ jaar",
       description: "Animatiefilm over het beroemde bijbelverhaal. Mooi gemaakt, voor oudere kinderen.",
-      image: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&q=80",
+      image: "https://image.tmdb.org/t/p/w500/3f3bdkHG66HwPczYzbWoZK3lWtK.jpg",
+    },
+    {
+      title: "GOAT",
+      cinema: "Pathé Haarlem",
+      times: ["Za 14:00", "Zo 11:30", "Wo 14:00"],
+      ageLabel: "6+ jaar",
+      description: "Grappige animatiefilm over een geit met grote sportdromen.",
+      image: "https://image.tmdb.org/t/p/w500/ozUcWnTDu1j0tlj1UzCNSLWWKw8.jpg",
     },
   ];
 

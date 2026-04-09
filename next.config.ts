@@ -40,6 +40,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "www.pietervermeulenmuseum.nl" },
       { protocol: "https", hostname: "haarlem.letsescape.nl" },
       { protocol: "https", hostname: "www.pannenkoekenparadijs.nl" },
+      { protocol: "https", hostname: "static.filmvandaag.nl" },
     ],
   },
 };
