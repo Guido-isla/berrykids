@@ -104,49 +104,45 @@ export default function TopFiveHero({
           </div>
         </div>
 
-        {/* Card carousel — #1 dominant, #2-5 smaller */}
+        {/* Card carousel — uniform cards, #1 slightly bigger */}
         <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-none">
           {picks.map((p, i) => {
             const itemHref = p.isEvent ? `/event/${p.slug}` : `/activiteiten/${p.slug}`;
-            const isHero = i === 0;
+            const isFirst = i === 0;
             return (
               <Link
                 key={p.slug}
                 href={itemHref}
-                className={`pick-reveal pick-reveal-${i} block shrink-0 overflow-hidden rounded-[20px] bg-white transition-all active:scale-[1.03] ${
-                  isHero
-                    ? "w-[88vw] shadow-[0_6px_24px_rgba(0,0,0,0.10)] -translate-y-1"
-                    : "w-[72vw] shadow-[0_2px_10px_rgba(0,0,0,0.05)]"
-                }`}
+                className={`pick-reveal pick-reveal-${i} block w-[78vw] shrink-0 overflow-hidden rounded-[20px] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all active:scale-[1.03]`}
               >
                 {/* Photo */}
-                <div className={`relative overflow-hidden ${isHero ? "h-[220px]" : "h-[160px]"}`}>
+                <div className={`relative overflow-hidden ${isFirst ? "h-[200px]" : "h-[170px]"}`}>
                   <Image
                     src={p.image}
                     alt={p.title}
                     fill
-                    sizes={isHero ? "88vw" : "72vw"}
+                    sizes="78vw"
                     className="object-cover"
-                    priority={i === 0}
+                    priority={i < 2}
                   />
                   {/* Number badge */}
-                  <span className={`absolute left-3 top-3 flex items-center justify-center rounded-[10px] font-black shadow-sm ${NUM_COLORS[i]} ${isHero ? "h-9 w-9 text-[16px]" : "h-7 w-7 text-[13px]"}`}>
+                  <span className={`absolute left-3 top-3 flex h-8 w-8 items-center justify-center rounded-[10px] text-[15px] font-black shadow-sm ${NUM_COLORS[i]}`}>
                     {i + 1}
                   </span>
                   {/* Berry tip — on every card */}
-                  <div className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-3 pb-2.5 ${isHero ? "pt-8" : "pt-6"}`}>
-                    <p className={`flex items-center gap-1 font-bold text-white ${isHero ? "text-[13px]" : "text-[11px]"}`}>
-                      <Image src="/berry-icon.png" alt="" width={14} height={14} className={`shrink-0 ${isHero ? "h-3.5 w-3.5" : "h-3 w-3"}`} />
-                      {p.whyNow.length > (isHero ? 55 : 40) ? p.whyNow.slice(0, isHero ? 55 : 40) + "…" : p.whyNow}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-3 pb-2.5 pt-6">
+                    <p className="flex items-center gap-1 text-[12px] font-bold leading-snug text-white">
+                      <Image src="/berry-icon.png" alt="" width={14} height={14} className="h-3.5 w-3.5 shrink-0" />
+                      {p.whyNow}
                     </p>
                   </div>
                 </div>
-                {/* Info — stripped to essentials */}
-                <div className={`${isHero ? "px-4 py-3.5" : "px-3 py-2.5"}`}>
-                  <h3 className={`font-extrabold leading-snug tracking-[-0.3px] text-[#1A1A1A] ${isHero ? "text-[18px]" : "text-[15px]"}`}>
+                {/* Info — same for all cards */}
+                <div className="px-3.5 py-3">
+                  <h3 className="text-[16px] font-extrabold leading-snug tracking-[-0.3px] text-[#1A1A1A]">
                     {p.title}
                   </h3>
-                  <p className={`mt-0.5 font-normal text-[#888] ${isHero ? "text-[14px]" : "text-[13px]"}`}>
+                  <p className="mt-0.5 text-[13px] font-normal text-[#888]">
                     {p.location}{p.free ? " · Gratis" : ""}
                   </p>
                 </div>

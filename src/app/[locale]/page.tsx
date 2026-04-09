@@ -94,7 +94,7 @@ export default async function Home() {
       location: item.location as string,
       free: item.free as boolean,
       ageLabel: item.ageLabel as string,
-      whyNow: (item.tip as string) || (item.description as string)?.slice(0, 80) || "",
+      whyNow: generateBerryTip(item, ctx),
       tags,
       time: item.time as string | undefined,
       isEvent: s.isEvent,
