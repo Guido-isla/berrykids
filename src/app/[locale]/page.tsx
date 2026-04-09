@@ -19,34 +19,35 @@ import { generateBerryDayPlan, scoreEvent, scoreActivity, enforceVariety } from 
 
 export const revalidate = 1800;
 
-/** Generate a Berry tip for a specific item — contextual, not generic */
-function generateBerryTip(item: Record<string, unknown>, ctx: { weather: { isGoodWeather: boolean; isRainy: boolean } }): string {
-  const tip = item.tip as string | undefined;
-  if (tip) return tip;
-
+/** Generate a Berry tip — uses translation keys */
+function generateBerryTip(
+  item: Record<string, unknown>,
+  ctx: { weather: { isGoodWeather: boolean; isRainy: boolean } },
+  t: (key: string, params?: Record<string, string>) => string
+): string {
   const sub = (item.subcategory as string) || "";
   const free = item.free as boolean;
   const indoor = item.indoor as boolean | undefined;
 
-  if (sub.includes("Speeltuin")) return "Ga vroeg, dan is het nog rustig";
-  if (sub.includes("Museum")) return "Museumkaart geldig — neem 'm mee";
-  if (sub.includes("Strand")) return "Check het getij voor je gaat";
-  if (sub.includes("Kinderboerderij")) return "Neem oud brood mee voor de dieren";
-  if (sub.includes("Zwemmen") || sub.includes("Subtropisch")) return "Zwemluier niet vergeten voor de kleintjes";
-  if (sub.includes("Klimmen") || sub.includes("Boulderen")) return "Sportschoenen mee — geen open schoenen";
-  if (sub.includes("Bioscoop")) return "Woensdag is kindermiddag";
-  if (sub.includes("Bibliotheek")) return "Gratis knutselen in de vakantie";
-  if (sub.includes("Landgoed")) return "Neem een picknickkleed mee";
-  if (sub.includes("Wandelen")) return "De kabouterwandeling is het leukst";
-  if (sub.includes("Surfen") || sub.includes("Suppen")) return "Boek vooruit — vol is vol";
-  if (sub.includes("Trampolinepark")) return "Antislip sokken verplicht";
-  if (sub.includes("Rondvaart")) return "Vanaf 4 jaar pas echt leuk";
-  if (sub.includes("Escape Room")) return "Vanaf 8 jaar, boek met vriendjes";
-  if (sub.includes("Bowling") || sub.includes("Midgetgolf")) return "Leuk voor een regenachtige middag";
-  if (free && !indoor && ctx.weather.isGoodWeather) return "Gratis en lekker buiten bij dit weer";
-  if (free && indoor) return "Gratis — altijd een goed plan";
-  if (free) return "Gratis — ga gewoon";
-  return `${item.location as string} — aanrader`;
+  if (sub.includes("Speeltuin")) return t("tipPlayground");
+  if (sub.includes("Museum")) return t("tipMuseum");
+  if (sub.includes("Strand")) return t("tipBeach");
+  if (sub.includes("Kinderboerderij")) return t("tipFarm");
+  if (sub.includes("Zwemmen") || sub.includes("Subtropisch")) return t("tipSwim");
+  if (sub.includes("Klimmen") || sub.includes("Boulderen")) return t("tipClimb");
+  if (sub.includes("Bioscoop")) return t("tipCinema");
+  if (sub.includes("Bibliotheek")) return t("tipLibrary");
+  if (sub.includes("Landgoed")) return t("tipEstate");
+  if (sub.includes("Wandelen")) return t("tipHike");
+  if (sub.includes("Surfen") || sub.includes("Suppen")) return t("tipSurf");
+  if (sub.includes("Trampolinepark")) return t("tipTrampoline");
+  if (sub.includes("Rondvaart")) return t("tipBoat");
+  if (sub.includes("Escape Room")) return t("tipEscape");
+  if (sub.includes("Bowling") || sub.includes("Midgetgolf")) return t("tipRainyDay");
+  if (free && !indoor && ctx.weather.isGoodWeather) return t("tipFreeOutdoor");
+  if (free && indoor) return t("tipFreeIndoor");
+  if (free) return t("tipFree");
+  return t("tipDefault", { location: item.location as string });
 }
 
 export default async function Home() {
@@ -78,6 +79,11 @@ export default async function Home() {
     .filter((s) => s.item.image && s.item.image !== "/berry-icon.png")
     .sort((a, b) => b.score - a.score);
 
+  // === TRANSLATIONS ===
+  const tBerry = await getTranslations("berry");
+  const tHome = await getTranslations("home");
+  const tNewsletter = await getTranslations("newsletter");
+
   // === PROGRESSIVE DEDUP: build each section from remaining pool ===
   const usedSlugs = new Set<string>();
 
@@ -94,7 +100,7 @@ export default async function Home() {
       location: item.location as string,
       free: item.free as boolean,
       ageLabel: item.ageLabel as string,
-      whyNow: generateBerryTip(item, ctx),
+      whyNow: generateBerryTip(item, ctx, tBerry),
       tags,
       time: item.time as string | undefined,
       isEvent: s.isEvent,
@@ -122,7 +128,7 @@ export default async function Home() {
       location: pick.location,
       free: pick.free,
       price: (raw.price as string) || undefined,
-      berryTip: generateBerryTip(raw, ctx),
+      berryTip: generateBerryTip(raw, ctx, tBerry),
       href: pick.isEvent ? `/event/${pick.slug}` : `/activiteiten/${pick.slug}`,
     };
   }
@@ -154,11 +160,7 @@ export default async function Home() {
   // 4. MEER ONTDEKKEN — 6 from remaining
   const meerPicks = pickTopN(allScored, 6);
 
-  // === BERRY INTROS (translated) ===
-  const tBerry = await getTranslations("berry");
-  const tHome = await getTranslations("home");
-  const tNewsletter = await getTranslations("newsletter");
-
+  // === BERRY INTROS ===
   const w = { icon: ctx.weather.current.icon, temp: String(ctx.weather.current.temp), description: ctx.weather.current.description.toLowerCase() };
   const dailyMessage = ctx.weather.isRainy
     ? tBerry("dailyRain", w)

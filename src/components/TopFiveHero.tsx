@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import SaveButton from "./SaveButton";
 import WeatherChip from "./WeatherChip";
@@ -76,6 +77,7 @@ export default function TopFiveHero({
     return () => clearInterval(id);
   }, [paused, picks.length]);
 
+  const t = useTranslations("home");
   const pick = picks[current];
   if (!pick) return null;
   const href = pick.isEvent ? `/event/${pick.slug}` : `/activiteiten/${pick.slug}`;
@@ -100,7 +102,7 @@ export default function TopFiveHero({
             <h2 className="mt-1 text-[20px] font-black leading-[1.05] tracking-[-0.5px] text-[#1A1A1A]">
               {dailyMessage}
             </h2>
-            <p className="mt-1 text-[12px] font-semibold text-[#888]">De leukste tips voor gezinnen in Haarlem</p>
+            <p className="mt-1 text-[12px] font-semibold text-[#888]">{t("tagline")}</p>
           </div>
         </div>
 
@@ -143,7 +145,7 @@ export default function TopFiveHero({
                     {p.title}
                   </h3>
                   <p className="mt-0.5 text-[13px] font-normal text-[#888]">
-                    {p.location}{p.free ? " · Gratis" : ""}
+                    {p.location}{p.free ? ` · ${t("free")}` : ""}
                   </p>
                 </div>
               </Link>
@@ -207,7 +209,7 @@ export default function TopFiveHero({
             <div className="absolute bottom-6 right-6 z-[5] w-[380px]">
               <div key={`detail-${current}`} className="animate-fade-up rounded-[20px] bg-white p-5 shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
                 <p className="text-[12px] font-bold uppercase tracking-[0.8px] text-[#E0685F]">
-                  {pick.category}{pick.free ? " · Gratis" : ""}
+                  {pick.category}{pick.free ? ` · ${t("free")}` : ""}
                 </p>
                 <h3 className="mt-1 text-[22px] font-black leading-[1.1] tracking-[-0.4px] text-[#2D2D2D]">
                   {pick.title}
@@ -237,7 +239,7 @@ export default function TopFiveHero({
                     href={href}
                     className="inline-flex items-center gap-1.5 rounded-full bg-[#E0685F] px-4 py-2 text-[13px] font-bold text-white transition-all hover:bg-[#D05A52] hover:-translate-y-px"
                   >
-                    Bekijk →
+                    {t("viewButton")}
                   </Link>
                 </div>
               </div>
