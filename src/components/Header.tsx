@@ -31,13 +31,13 @@ export default function Header() {
             </form>
           ) : (
             <>
-              <Link href="/activiteiten" className={`hidden text-[13px] font-bold sm:inline ${pathname.startsWith("/activiteiten") ? "text-[#E0685F]" : "text-[#6B6B6B] hover:text-[#E0685F]"}`}>
+              <Link href="/activiteiten" className="hidden text-[13px] font-bold text-[#6B6B6B] hover:text-[#E0685F] sm:inline">
                 {t("activities")}
               </Link>
-              <Link href="/evenementen" className={`hidden text-[13px] font-bold sm:inline ${pathname.startsWith("/evenementen") || pathname.startsWith("/event") ? "text-[#E0685F]" : "text-[#6B6B6B] hover:text-[#E0685F]"}`}>
+              <Link href="/evenementen" className="hidden text-[13px] font-bold text-[#6B6B6B] hover:text-[#E0685F] sm:inline">
                 {t("events")}
               </Link>
-              <Link href="/vakanties" className={`hidden text-[13px] font-bold sm:inline ${pathname.startsWith("/vakanties") ? "text-[#E0685F]" : "text-[#6B6B6B] hover:text-[#E0685F]"}`}>
+              <Link href="/vakanties" className="hidden text-[13px] font-bold text-[#6B6B6B] hover:text-[#E0685F] sm:inline">
                 {t("vacations")}
               </Link>
               <button onClick={() => setSearchOpen(true)} className="text-[13px] font-bold text-[#6B6B6B] hover:text-[#E0685F]">
