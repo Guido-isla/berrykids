@@ -44,16 +44,23 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-bold">4. Cookies</h2>
+            <h2 className="text-lg font-bold">4. Cookies en lokale opslag</h2>
             <p className="mt-2 text-[#6B6B6B]">
-              Berry Kids gebruikt functionele cookies die nodig zijn voor het goed functioneren van de website. Daarnaast gebruiken wij analytische cookies om inzicht te krijgen in het gebruik van onze website. Deze cookies verzamelen geen persoonsgegevens.
+              Berry Kids gebruikt geen tracking-, analyse- of advertentiecookies. We slaan alleen functionele gegevens op (zoals je opgeslagen activiteiten in localStorage). Externe inhoud zoals Google Maps wordt pas geladen nadat je daarop klikt — pas dán plaatst Google cookies. Lees ons volledige <a href="/cookies" className="text-[#E0685F] underline">cookiebeleid</a> voor details.
             </p>
           </section>
 
           <section>
-            <h2 className="text-lg font-bold">5. Delen met derden</h2>
+            <h2 className="text-lg font-bold">5. Externe diensten</h2>
             <p className="mt-2 text-[#6B6B6B]">
-              Wij delen je gegevens niet met derden, behalve wanneer dit noodzakelijk is voor het verzenden van de nieuwsbrief (via onze e-maildienstverlener). Wij verkopen nooit je gegevens.
+              We gebruiken de volgende externe diensten:
+            </p>
+            <ul className="mt-2 list-inside list-disc space-y-1 text-[#6B6B6B]">
+              <li><strong>Google Maps</strong> (Google LLC, VS) — alleen als je actief op een kaart klikt om hem te laden. Google plaatst dan eigen cookies. De gegevensoverdracht naar de VS is gebaseerd op de Standard Contractual Clauses van de Europese Commissie.</li>
+              <li><strong>Onze e-maildienstverlener</strong> — voor het versturen van de nieuwsbrief (alleen na expliciete toestemming).</li>
+            </ul>
+            <p className="mt-2 text-[#6B6B6B]">
+              Wij verkopen je gegevens nooit aan derden.
             </p>
           </section>
 

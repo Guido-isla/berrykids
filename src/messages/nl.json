@@ -133,6 +133,7 @@
     "submitEvent": "Event insturen",
     "contact": "Contact",
     "privacy": "Privacy",
+    "cookies": "Cookies",
     "terms": "Voorwaarden",
     "copyright": "© 2026 Berry Kids"
   },
@@ -164,6 +165,35 @@
   },
   "common": {
     "goTogether": "Ga samen"
+  },
+  "mapEmbed": {
+    "loadMap": "Kaart van Google Maps",
+    "privacyNote": "We laden de kaart pas als je ermee instemt. Google plaatst dan cookies.",
+    "loadButton": "Kaart laden →"
+  },
+  "cookieNotice": {
+    "text": "Berry Kids gebruikt geen tracking cookies. Externe inhoud zoals Google Maps wordt pas geladen als je erop klikt.",
+    "link": "Lees ons cookiebeleid",
+    "dismiss": "Sluiten"
+  },
+  "cookies": {
+    "title": "Cookiebeleid",
+    "lastUpdated": "Laatst bijgewerkt: 10 april 2026",
+    "intro": "Berry Kids hecht waarde aan jouw privacy. We gebruiken zo min mogelijk cookies en laden geen externe trackers tot je daar zelf voor kiest. Hieronder zie je wat we precies opslaan.",
+    "section1Title": "1. Wat zijn cookies",
+    "section1Text": "Cookies zijn kleine tekstbestandjes die websites op je apparaat plaatsen. Sommige zijn nodig om de site te laten werken, andere worden gebruikt voor analyse of advertenties. Berry Kids gebruikt alleen functionele opslag — geen tracking of advertentiecookies.",
+    "section2Title": "2. Wat wij opslaan",
+    "section2Text": "We slaan op:",
+    "section2List1": "Opgeslagen activiteiten — wanneer je op het hartje tikt, bewaren we de slug lokaal in je browser (localStorage). Deze gegevens verlaten je apparaat niet.",
+    "section2List2": "Cookiekennisgeving — een vinkje dat je onze cookiekennisgeving hebt gezien.",
+    "section3Title": "3. Externe inhoud (alleen na actie)",
+    "section3Text": "Sommige pagina's bieden externe inhoud aan die je handmatig moet laden:",
+    "section3List1": "Google Maps — op de detailpagina van een evenement of activiteit zie je een knop \"Kaart laden\". Pas als je daarop klikt, laden we de Google Maps iframe en plaatst Google cookies (NID, CONSENT). Tot dat moment vindt er geen communicatie met Google plaats.",
+    "section3GoogleNote": "Google LLC is gevestigd in de VS. Door op \"Kaart laden\" te klikken, ga je akkoord met de overdracht van gegevens naar Google. Lees Google's privacybeleid op",
+    "section4Title": "4. Geen analyse- of advertentiecookies",
+    "section4Text": "Berry Kids gebruikt op dit moment geen Google Analytics, Google Ads, Facebook Pixel of vergelijkbare diensten. Als dit verandert, vragen we eerst om je toestemming via een cookiebanner.",
+    "section5Title": "5. Je rechten",
+    "section5Text": "Je kunt op elk moment je localStorage wissen via je browserinstellingen. Voor vragen over privacy: privacy@berrykids.nl."
   },
   "subcategory": {
     "Bibliotheek": "Bibliotheek",

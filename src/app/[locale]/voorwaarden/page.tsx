@@ -77,7 +77,23 @@ export default function VoorwaardenPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-bold">10. Contact</h2>
+            <h2 className="text-lg font-bold">10. Online geschillenbeslechting</h2>
+            <p className="mt-2 text-[#6B6B6B]">
+              Consumenten in de Europese Unie kunnen voor de buitengerechtelijke beslechting van geschillen gebruikmaken van het Online Dispute Resolution (ODR) platform van de Europese Commissie. Het platform is bereikbaar via{" "}
+              <a
+                href="https://ec.europa.eu/consumers/odr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#E0685F] underline"
+              >
+                ec.europa.eu/consumers/odr
+              </a>
+              . Berry Kids is niet verplicht en niet bereid deel te nemen aan een geschillenbeslechtingsprocedure voor een consumentengeschillencommissie.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-bold">11. Contact</h2>
             <p className="mt-2 text-[#6B6B6B]">
               Voor vragen over deze voorwaarden kun je contact opnemen via info@berrykids.nl.
             </p>

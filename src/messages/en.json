@@ -133,6 +133,7 @@
     "submitEvent": "Submit an event",
     "contact": "Contact",
     "privacy": "Privacy",
+    "cookies": "Cookies",
     "terms": "Terms",
     "copyright": "© 2026 Berry Kids"
   },
@@ -164,6 +165,35 @@
   },
   "common": {
     "goTogether": "Go together"
+  },
+  "mapEmbed": {
+    "loadMap": "Map by Google Maps",
+    "privacyNote": "We only load the map when you agree. Google will then set cookies.",
+    "loadButton": "Load map →"
+  },
+  "cookieNotice": {
+    "text": "Berry Kids does not use tracking cookies. External content like Google Maps only loads when you tap to load it.",
+    "link": "Read our cookie policy",
+    "dismiss": "Dismiss"
+  },
+  "cookies": {
+    "title": "Cookie policy",
+    "lastUpdated": "Last updated: 10 April 2026",
+    "intro": "Berry Kids respects your privacy. We use as few cookies as possible and don't load any third-party trackers until you choose to. Here's what we store.",
+    "section1Title": "1. What are cookies",
+    "section1Text": "Cookies are small text files that websites place on your device. Some are necessary to make the site work, others are used for analytics or advertising. Berry Kids uses only functional storage — no tracking or advertising cookies.",
+    "section2Title": "2. What we store",
+    "section2Text": "We store:",
+    "section2List1": "Saved activities — when you tap the heart, we store the slug locally in your browser (localStorage). This data never leaves your device.",
+    "section2List2": "Cookie notice — a flag confirming you've seen our cookie notice.",
+    "section3Title": "3. Third-party content (only on action)",
+    "section3Text": "Some pages offer third-party content that requires manual loading:",
+    "section3List1": "Google Maps — on event and activity detail pages you'll see a \"Load map\" button. Only when you click it do we load the Google Maps iframe, at which point Google sets cookies (NID, CONSENT). No communication with Google happens before that point.",
+    "section3GoogleNote": "Google LLC is based in the US. By clicking \"Load map\" you consent to data being transferred to Google. Read Google's privacy policy at",
+    "section4Title": "4. No analytics or advertising cookies",
+    "section4Text": "Berry Kids does not currently use Google Analytics, Google Ads, Facebook Pixel or similar services. If that changes, we'll ask for your consent first via a cookie banner.",
+    "section5Title": "5. Your rights",
+    "section5Text": "You can clear your localStorage at any time via your browser settings. For privacy questions: privacy@berrykids.nl."
   },
   "subcategory": {
     "Bibliotheek": "Library",

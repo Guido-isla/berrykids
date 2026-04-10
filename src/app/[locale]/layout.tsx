@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import NewsTicker from "@/components/NewsTicker";
 import Header from "@/components/Header";
+import CookieNotice from "@/components/CookieNotice";
 
 export default async function LocaleLayout({
   children,
@@ -25,6 +26,7 @@ export default async function LocaleLayout({
       <NewsTicker />
       <Header />
       {children}
+      <CookieNotice />
     </NextIntlClientProvider>
   );
 }

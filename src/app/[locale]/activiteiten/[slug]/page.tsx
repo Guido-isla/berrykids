@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import ShareButton from "@/components/ShareButton";
 import NewsletterForm from "@/components/NewsletterForm";
 import ActivityCard from "@/components/ActivityCard";
+import MapEmbed from "@/components/MapEmbed";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -197,19 +198,8 @@ export default async function ActivityPage({ params }: Props) {
 
           {/* Sidebar */}
           <div className="space-y-4">
-            {/* Map */}
-            <div className="overflow-hidden rounded-2xl border border-[#F0E6E0]">
-              <iframe
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBN-CNaX3zejJ6YsxStrVgLt2tBwfxod5k&q=${mapQuery}`}
-                width="100%"
-                height="220"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={`Kaart: ${activity.location}`}
-              />
-            </div>
+            {/* Privacy-friendly click-to-load map */}
+            <MapEmbed location={activity.location} />
 
             {/* Details card */}
             <div className="rounded-2xl bg-white p-5 shadow-sm">

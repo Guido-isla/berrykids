@@ -27,6 +27,7 @@ export default function Footer() {
             </div>
             <div className="space-y-2">
               <Link href="/privacy" className="block text-[#666] hover:text-[#2D2D2D]">{t("privacy")}</Link>
+              <Link href="/cookies" className="block text-[#666] hover:text-[#2D2D2D]">{t("cookies")}</Link>
               <Link href="/voorwaarden" className="block text-[#666] hover:text-[#2D2D2D]">{t("terms")}</Link>
             </div>
           </div>
