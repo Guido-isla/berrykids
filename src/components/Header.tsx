@@ -36,6 +36,7 @@ export default function Header() {
     { href: "/activiteiten", label: t("activities"), match: (p: string) => p.startsWith("/activiteiten") },
     { href: "/evenementen", label: t("events"), match: (p: string) => p.startsWith("/evenementen") || p.startsWith("/event") },
     { href: "/vakanties", label: t("vacations"), match: (p: string) => p.startsWith("/vakanties") },
+    { href: "/opgeslagen", label: t("saved"), match: (p: string) => p.startsWith("/opgeslagen") },
   ];
 
   return (
@@ -138,7 +139,7 @@ export default function Header() {
               <nav className="flex-1 overflow-y-auto px-3 py-4">
                 {[
                   { href: "/", label: "Home", emoji: "🏠", isHome: true },
-                  ...navLinks.map((link, i) => ({ ...link, emoji: ["🎯", "📅", "🌷"][i], isHome: false })),
+                  ...navLinks.map((link, i) => ({ ...link, emoji: ["🎯", "📅", "🌷", "❤️"][i], isHome: false })),
                 ].map((item) => {
                   const isActive = item.isHome ? pathname === "/" : (item as typeof navLinks[number]).match(pathname);
                   const isTapped = tappedHref === item.href;

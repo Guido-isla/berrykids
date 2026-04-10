@@ -3,6 +3,7 @@
     "activities": "Activities",
     "events": "Events",
     "vacations": "School holidays",
+    "saved": "Saved",
     "search": "Search",
     "searchPlaceholder": "Search activities...",
     "haarlem": "Haarlem area"
@@ -172,6 +173,39 @@
   },
   "common": {
     "goTogether": "Go together"
+  },
+  "saved": {
+    "badge": "Your list",
+    "title": "Saved",
+    "subtitle": "Everything you've bookmarked for later — handy for the next weekend.",
+    "count": "{count, plural, one {1 saved item} other {# saved items}}",
+    "emptyTitle": "Nothing saved yet",
+    "emptySubtitle": "Tap the heart on any activity or event to save it here.",
+    "emptyCta": "Discover activities →"
+  },
+  "ticker": {
+    "label": "Coming up"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "subtitle": "Berry can't find this page — maybe it moved, or never existed.",
+    "homeCta": "Back to home",
+    "activitiesCta": "Browse activities →"
+  },
+  "about": {
+    "badge": "About Berry Kids",
+    "title": "Berry helps you plan the weekend",
+    "subtitle": "Being a parent in Haarlem is great — but figuring out what to do takes time. That's where Berry steps in.",
+    "missionTitle": "What we do",
+    "missionText": "Berry Kids picks the best family activities and events in the Haarlem area each week. No endless lists — we choose for you, based on the weather, your kids' ages, and what's actually happening in town.",
+    "voiceTitle": "Berry's voice",
+    "voiceText": "We believe great recommendations feel like a friend telling you something: short, honest, with an opinion. Berry doesn't tell you everything — Berry tells you the right things.",
+    "trustTitle": "How we choose",
+    "trustText": "No sponsorship, no paid placements. Berry picks based on weather, kid ages, and whether something is actually worth doing. If we don't love it, you won't see it.",
+    "contactTitle": "Contact",
+    "contactText": "Questions, tips, or want to submit an event? We'd love to hear from you.",
+    "contactEmail": "hallo@berrykids.nl",
+    "submitLink": "Submit an event →"
   },
   "mapEmbed": {
     "loadMap": "Map by Google Maps",

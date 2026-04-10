@@ -3,6 +3,7 @@
     "activities": "Activiteiten",
     "events": "Evenementen",
     "vacations": "Vakanties",
+    "saved": "Opgeslagen",
     "search": "Zoeken",
     "searchPlaceholder": "Zoek activiteit...",
     "haarlem": "Haarlem e.o."
@@ -172,6 +173,39 @@
   },
   "common": {
     "goTogether": "Ga samen"
+  },
+  "saved": {
+    "badge": "Jouw lijst",
+    "title": "Opgeslagen",
+    "subtitle": "Alles wat je hebt bewaard om later te bekijken — handig voor het volgende weekend.",
+    "count": "{count, plural, one {1 opgeslagen item} other {# opgeslagen items}}",
+    "emptyTitle": "Nog niks opgeslagen",
+    "emptySubtitle": "Tik op het hartje bij een activiteit of evenement om hem hier te bewaren.",
+    "emptyCta": "Activiteiten ontdekken →"
+  },
+  "ticker": {
+    "label": "Binnenkort"
+  },
+  "notFound": {
+    "title": "Pagina niet gevonden",
+    "subtitle": "Berry kan deze pagina niet vinden — misschien is hij verhuisd of nooit bestaan.",
+    "homeCta": "Naar de homepagina",
+    "activitiesCta": "Bekijk activiteiten →"
+  },
+  "about": {
+    "badge": "Over Berry Kids",
+    "title": "Berry helpt je het weekend te plannen",
+    "subtitle": "Ouder worden in Haarlem is heerlijk, maar uitjes uitzoeken kost tijd. Daar helpt Berry mee.",
+    "missionTitle": "Wat we doen",
+    "missionText": "Berry Kids verzamelt elke week de leukste activiteiten en evenementen voor gezinnen in Haarlem en omgeving. Geen eindeloze lijsten — wij kiezen voor je. Met het weer, de leeftijd van je kids en wat er échte gebeurt in de stad als basis.",
+    "voiceTitle": "Berry's stem",
+    "voiceText": "We geloven dat goede aanbevelingen voelen als die van een goede vriend: kort, eerlijk, met een mening. Berry vertelt je niet alles — Berry vertelt je de juiste dingen.",
+    "trustTitle": "Hoe we kiezen",
+    "trustText": "Geen sponsoring, geen betaalde plekken. Berry kiest op basis van het weer, de leeftijd van je kids, en of een uitje echt de moeite waard is. Vinden we iets niks? Dan staat het er niet op.",
+    "contactTitle": "Contact",
+    "contactText": "Vragen, tips of een evenement insturen? We horen het graag.",
+    "contactEmail": "hallo@berrykids.nl",
+    "submitLink": "Event insturen →"
   },
   "mapEmbed": {
     "loadMap": "Kaart van Google Maps",
