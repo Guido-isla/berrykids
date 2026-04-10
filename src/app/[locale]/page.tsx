@@ -276,7 +276,14 @@ export default async function Home() {
                       {new Date(e.date + "T00:00:00").getDate()}
                     </span>
                   </div>
-                  {e.free && (
+                  {e.featured ? (
+                    <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#E0685F] to-[#FFB347] px-2 py-0.5 text-[10px] font-extrabold text-white shadow-md">
+                      <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l2.39 7.36h7.74l-6.26 4.55 2.39 7.36L12 16.71l-6.26 4.56 2.39-7.36L1.87 9.36h7.74L12 2z" />
+                      </svg>
+                      Onze tip
+                    </span>
+                  ) : e.free && (
                     <span className="absolute right-3 top-3 rounded-full bg-[#4A8060] px-2 py-0.5 text-[10px] font-bold text-white">Gratis</span>
                   )}
                 </div>
@@ -337,7 +344,7 @@ export default async function Home() {
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
             {binnenkortEvents.map((e) => {
-              const berryTip = generateBerryTip(e as unknown as Record<string, unknown>, ctx, tBerry);
+              const berryTip = e.featuredNote || generateBerryTip(e as unknown as Record<string, unknown>, ctx, tBerry);
               return (
                 <Link key={e.slug} href={`/event/${e.slug}`} className="group block h-[232px] w-[75vw] shrink-0 overflow-hidden rounded-[20px] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all hover:-translate-y-1 sm:w-auto">
                   <div className="relative h-[160px] overflow-hidden">
@@ -357,7 +364,14 @@ export default async function Home() {
                         {new Date(e.date + "T00:00:00").getDate()}
                       </span>
                     </div>
-                    {e.free && (
+                    {e.featured ? (
+                      <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#E0685F] to-[#FFB347] px-2 py-0.5 text-[10px] font-extrabold text-white shadow-md">
+                        <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 2l2.39 7.36h7.74l-6.26 4.55 2.39 7.36L12 16.71l-6.26 4.56 2.39-7.36L1.87 9.36h7.74L12 2z" />
+                        </svg>
+                        Onze tip
+                      </span>
+                    ) : e.free && (
                       <span className="absolute right-3 top-3 rounded-full bg-[#4A8060] px-2 py-0.5 text-[10px] font-bold text-white">Gratis</span>
                     )}
                     {/* Berry tip overlay */}

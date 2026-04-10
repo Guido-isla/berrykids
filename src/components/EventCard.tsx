@@ -25,7 +25,15 @@ export default function EventCard({ event, berryTip }: { event: EventWithImage; 
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
           <SaveButton slug={event.slug} />
-          {event.free && (
+          {event.featured && (
+            <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#E0685F] to-[#FFB347] px-2.5 py-1 text-[10px] font-extrabold text-white shadow-md">
+              <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l2.39 7.36h7.74l-6.26 4.55 2.39 7.36L12 16.71l-6.26 4.56 2.39-7.36L1.87 9.36h7.74L12 2z" />
+              </svg>
+              Onze tip
+            </span>
+          )}
+          {!event.featured && event.free && (
             <span className="absolute left-3 top-3 rounded-full bg-[#8BC34A]/90 px-2.5 py-1 text-[10px] font-bold text-white shadow-sm">
               Gratis
             </span>

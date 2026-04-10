@@ -46,6 +46,7 @@ const CATEGORY_BONUS: Record<string, number> = {
 /** Score an event based on weather fit, cost, data quality, and event type */
 export function scoreEvent(event: Event, ctx: SiteContext): number {
   let score = 0;
+  if (event.featured) score += 15; // editorial pick — always top
   if (ctx.weather.isRainy && event.indoor) score += 4;
   if (ctx.weather.isGoodWeather && !event.indoor) score += 4;
   if (ctx.weather.current.temp < 10 && event.indoor) score += 3;

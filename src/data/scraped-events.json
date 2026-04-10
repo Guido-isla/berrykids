@@ -74,7 +74,9 @@
       "imageUrl": "/sites/default/files/styles/content_large/public/2025-09/online-koen-van-der-lee-fotografie_gemeentehlm_springerfestival_047_16x9.jpg?h=97c79c76",
       "ticketUrl": "https://haarlem.nl/duurzaam/springer-festival-ontdek-de-natuur-de-stad",
       "category": "event",
-      "tags": []
+      "tags": [],
+      "featured": true,
+      "featuredNote": "Hét natuurfestival van het weekend — de Kweektuin opent plekken die normaal dicht zijn"
     },
     {
       "source": "schuur",

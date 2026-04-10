@@ -18,6 +18,8 @@ export type Event = {
   googlePlaceId?: string;
   category: string;
   url?: string;
+  featured?: boolean;       // Berry's editorial pick
+  featuredNote?: string;    // Berry's reason in her voice
 };
 
 export const events: Event[] = [

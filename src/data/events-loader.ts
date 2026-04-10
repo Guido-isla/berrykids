@@ -22,6 +22,8 @@ type ScrapedEvent = {
   ticketUrl?: string;
   category?: string;
   tags?: string[];
+  featured?: boolean;
+  featuredNote?: string;
 };
 
 function resolveImageUrl(url: string | undefined, ticketUrl: string | undefined): string {
@@ -71,6 +73,8 @@ function scrapedToEvent(s: ScrapedEvent): Event {
     image: resolveImageUrl(s.imageUrl, s.ticketUrl),
     category: mapCategory(s.category, s.title),
     url: s.ticketUrl,
+    featured: s.featured,
+    featuredNote: s.featuredNote,
   };
 }
 
