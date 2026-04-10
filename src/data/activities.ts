@@ -21,6 +21,8 @@ export type Activity = {
   featured?: boolean;
   availableMonths?: number[]; // 1-12; absent = year-round
   verified?: boolean; // true = data manually checked, Berry can recommend
+  isProgram?: boolean; // true = recurring weekly program (e.g. KinderAtelier)
+  programDay?: number; // 0=zo, 1=ma, 2=di, 3=wo, 4=do, 5=vr, 6=za
 };
 
 export const activities: Activity[] = [
@@ -1372,5 +1374,89 @@ export const activities: Activity[] = [
     website: "https://haarlemcanaltours.com",
     image: "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=80",
     verified: true,
+  },
+
+  // ===== DOORLOPENDE PROGRAMMA'S — recurring weekly programs =====
+  {
+    slug: "kinderatelier-delftwijk",
+    title: "KinderAtelier Delftwijk",
+    description:
+      "Wekelijks knutselen en creatief klussen voor kinderen vanaf groep 4. Iedere maandag iets nieuws — er is altijd iemand die helpt.",
+    tip: "Bel Elvira (06 24 76 73 43) om aan te melden.",
+    category: "cultuur",
+    subcategory: "Knutselen & Creatief",
+    location: "Jan Gijzenkade 305 A, Haarlem",
+    area: "Haarlem",
+    ageLabel: "8+ jaar",
+    ageMin: 8,
+    ageMax: 12,
+    free: true,
+    openingHours: "Elke maandag 15:30 – 17:00 (deur open 15:15)",
+    website: "https://www.hart-haarlem.nl/agenda/kinderatelier-delftwijk",
+    image: "https://www.hart-haarlem.nl/clientdata/media/images/full/delftwijk-agenda.jpg",
+    verified: true,
+    isProgram: true,
+    programDay: 1,
+  },
+  {
+    slug: "kinderatelier-parkwijk",
+    title: "KinderAtelier Parkwijk",
+    description:
+      "Gratis knutselworkshops elke dinsdagmiddag in Huis van de Wijk Alleman. Soms speciale workshops in dans, techniek en textiel.",
+    category: "cultuur",
+    subcategory: "Knutselen & Creatief",
+    location: "Jan Sluyterslaan 11, Haarlem",
+    area: "Haarlem",
+    ageLabel: "4-12 jaar",
+    ageMin: 4,
+    ageMax: 12,
+    free: true,
+    openingHours: "Elke dinsdag 15:30 – 17:00 (deur open 15:15)",
+    website: "https://www.hart-haarlem.nl/agenda/kinderatelier-parkwijk-16",
+    image: "https://www.hart-haarlem.nl/clientdata/media/images/full/alleman-agenda-2.jpg",
+    verified: true,
+    isProgram: true,
+    programDay: 2,
+  },
+  {
+    slug: "kinderatelier-meerwijk",
+    title: "KinderAtelier Meerwijk",
+    description:
+      "Gratis knutselworkshops elke woensdagmiddag in Huis van de Wijk Da Vinci. Stof, breien, schilderen, kleien — telkens iets anders.",
+    tip: "Geen aanmelding nodig — kom gewoon langs.",
+    category: "cultuur",
+    subcategory: "Knutselen & Creatief",
+    location: "Leonardo Da Vinciplein 73, Haarlem",
+    area: "Haarlem",
+    ageLabel: "6-12 jaar",
+    ageMin: 6,
+    ageMax: 12,
+    free: true,
+    openingHours: "Elke woensdag 14:30 – 16:30",
+    website: "https://www.hart-haarlem.nl/agenda/kinderatelier-meerwijk-26",
+    image: "https://www.hart-haarlem.nl/clientdata/media/images/full/meerwijk.jpg",
+    verified: true,
+    isProgram: true,
+    programDay: 3,
+  },
+  {
+    slug: "kinderatelier-europawijk",
+    title: "KinderAtelier Europawijk",
+    description:
+      "Wekelijkse knutselworkshops in Huis van de Wijk De Wereld. Stof, breien, schilderen, kleien. Jongere broertjes/zusjes (0-5) welkom met ouder.",
+    category: "cultuur",
+    subcategory: "Knutselen & Creatief",
+    location: "Laan van Berlijn 1, Haarlem",
+    area: "Haarlem",
+    ageLabel: "6-12 jaar",
+    ageMin: 6,
+    ageMax: 12,
+    free: true,
+    openingHours: "Elke dinsdag 15:30 – 17:00",
+    website: "https://www.hart-haarlem.nl/agenda/kinderatelier-europawijk",
+    image: "https://www.hart-haarlem.nl/clientdata/media/images/full/banner-website.jpg",
+    verified: true,
+    isProgram: true,
+    programDay: 2,
   },
 ];
