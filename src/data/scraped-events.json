@@ -1,6 +1,6 @@
 {
-  "scrapedAt": "2026-04-09T15:10:00.000Z",
-  "eventCount": 41,
+  "scrapedAt": "2026-04-10T08:50:00.000Z",
+  "eventCount": 44,
   "rejectedCount": 1,
   "errors": [],
   "events": [
@@ -644,6 +644,61 @@
         "familie",
         "jeugd",
         "theater"
+      ]
+    },
+    {
+      "source": "hart-haarlem",
+      "title": "VakantieKaravaan Oost",
+      "date": "2026-04-30",
+      "time": "10:45 - 14:00",
+      "venue": "DSK & De Papegaai, Haarlem",
+      "ageLabel": "7-12 jaar",
+      "price": "€2,50",
+      "description": "Leuke dag met sport, creativiteit en cultuur — MooiZooi, Dayna Dance en djembé lessen.",
+      "imageUrl": "https://www.hart-haarlem.nl/clientdata/media/images/full/vakantiekaravaanoost.jpg",
+      "ticketUrl": "https://www.hart-haarlem.nl/agenda/vakantiekaravaan-oost-2",
+      "category": "event",
+      "tags": [
+        "familie",
+        "jeugd",
+        "sport",
+        "creatief"
+      ]
+    },
+    {
+      "source": "hart-haarlem",
+      "title": "Open Dag Hart Haarlem 2026",
+      "date": "2026-06-06",
+      "time": "12:00 - 16:00",
+      "venue": "Hart Haarlem, Kleine Houtweg 18",
+      "ageLabel": "Alle leeftijden",
+      "description": "Open huis met proeflessen, workshops en live performances — muziek, dans, theater en beeldende kunst.",
+      "imageUrl": "https://www.hart-haarlem.nl/clientdata/media/images/full/open-dag-agenda0.jpg",
+      "ticketUrl": "https://www.hart-haarlem.nl/agenda/open-dag-2026",
+      "category": "event",
+      "tags": [
+        "familie",
+        "gratis",
+        "cultuur",
+        "festival"
+      ]
+    },
+    {
+      "source": "hart-haarlem",
+      "title": "Zomer in de Zaanen Festival",
+      "date": "2026-06-27",
+      "time": "14:00 - 23:00",
+      "venue": "Zaanenpark, Haarlem Noord",
+      "ageLabel": "Alle leeftijden",
+      "description": "Buurtfestival met muziek, cultuur, eten en drinken. Wijkorkest Haarlem Noord opent het festival.",
+      "imageUrl": "https://www.hart-haarlem.nl/clientdata/media/images/full/zomer-in-de-zaanen.jpeg",
+      "ticketUrl": "https://www.hart-haarlem.nl/agenda/zomer-in-de-zaanen-festival",
+      "category": "festival",
+      "tags": [
+        "familie",
+        "gratis",
+        "festival",
+        "muziek"
       ]
     }
   ]
