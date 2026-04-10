@@ -33,9 +33,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ActivityPage({ params }: Props) {
   const { slug } = await params;
   const t = await getTranslations("activityDetail");
+  const tSubcategory = await getTranslations("subcategory");
+  const tAge = await getTranslations("ageLabel");
   const activity = activities.find((a) => a.slug === slug);
 
   if (!activity) notFound();
+
+  // Safe lookup: try translation, fall back to original Dutch string
+  const safeTranslate = (
+    translator: (key: string) => string,
+    value: string
+  ): string => {
+    try {
+      return translator(value);
+    } catch {
+      return value;
+    }
+  };
+  const localizedSubcategory = safeTranslate(tSubcategory, activity.subcategory);
+  const localizedAgeLabel = safeTranslate(tAge, activity.ageLabel);
 
   const { src, attribution } = getEventImage(activity);
   const mapQuery = encodeURIComponent(activity.location);
@@ -95,7 +111,7 @@ export default async function ActivityPage({ params }: Props) {
             {/* Badges */}
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-[#FDDCDA] px-3 py-1 text-sm font-semibold text-[#E0685F]">
-                {activity.subcategory}
+                {localizedSubcategory}
               </span>
               {activity.free ? (
                 <span className="rounded-full bg-[#8BC34A]/15 px-3 py-1 text-sm font-semibold text-[#6FAF3A]">
@@ -107,7 +123,7 @@ export default async function ActivityPage({ params }: Props) {
                 </span>
               )}
               <span className="rounded-full bg-[#F0E6E0] px-3 py-1 text-sm text-[#6B6B6B]">
-                {activity.ageLabel}
+                {localizedAgeLabel}
               </span>
             </div>
 
@@ -211,7 +227,7 @@ export default async function ActivityPage({ params }: Props) {
                 </div>
                 <div>
                   <dt className="font-semibold text-[#2D2D2D]">{t("age")}</dt>
-                  <dd className="text-[#6B6B6B]">{activity.ageLabel}</dd>
+                  <dd className="text-[#6B6B6B]">{localizedAgeLabel}</dd>
                 </div>
                 {activity.openingHours && (
                   <div>
@@ -231,7 +247,7 @@ export default async function ActivityPage({ params }: Props) {
         {/* Related activities */}
         <section className="mt-14 border-t border-[#F0E6E0] pt-8">
           <h2 className="mb-5 text-lg font-bold text-[#2D2D2D]">
-            {t("moreOf", { subcategory: activity.subcategory.toLowerCase() })}
+            {t("moreOf", { subcategory: localizedSubcategory.toLowerCase() })}
           </h2>
           <div className="grid gap-3 sm:gap-5 sm:grid-cols-3">
             {related.map((a) => (
