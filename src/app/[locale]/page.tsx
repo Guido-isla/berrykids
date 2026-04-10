@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import Footer from "@/components/Footer";
 import NewsletterForm from "@/components/NewsletterForm";
 import MediaCard from "@/components/MediaCard";
+import FocalCarousel from "@/components/FocalCarousel";
 import TopFiveHero from "@/components/TopFiveHero";
 import type { TopFivePick } from "@/components/TopFiveHero";
 import { getDayPlanEvents, getWeekendEvents, getScrapedEvents } from "@/data/events-loader";
@@ -222,12 +223,12 @@ export default async function Home() {
 
       {/* ===== 2. DIT WEEKEND ===== */}
       {weekendEvents.length > 0 && (
-        <section className="mx-auto max-w-[1200px] px-4 pt-10 sm:px-8">
-          <div className="mb-4">
+        <section className="mx-auto max-w-[1200px] pt-10 sm:px-8">
+          <div className="mb-4 px-4 sm:px-0">
             <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">{tHome("weekendTitle")}</h2>
             <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{tHome("weekendSub")}</p>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <FocalCarousel desktopGrid="lg:grid lg:grid-cols-4 lg:gap-4">
             {weekendEvents.map((e) => (
               <MediaCard
                 key={e.slug}
@@ -243,18 +244,18 @@ export default async function Home() {
                 meta={`📍 ${e.location}${e.time ? ` · ${e.time}` : ""}`}
               />
             ))}
-          </div>
+          </FocalCarousel>
         </section>
       )}
 
       {/* ===== 3. BINNENKORT — upcoming events ===== */}
       {binnenkortEvents.length > 0 && (
-        <section className="mx-auto max-w-[1200px] px-4 pt-10 sm:px-8">
-          <div className="mb-4">
+        <section className="mx-auto max-w-[1200px] pt-10 sm:px-8">
+          <div className="mb-4 px-4 sm:px-0">
             <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">{tHome("binnenkortTitle")}</h2>
             <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{tHome("binnenkortSub")}</p>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <FocalCarousel desktopGrid="lg:grid lg:grid-cols-3 lg:gap-4">
             {binnenkortEvents.map((e) => (
               <MediaCard
                 key={e.slug}
@@ -274,7 +275,7 @@ export default async function Home() {
             ))}
             <Link
               href="/evenementen"
-              className="flex h-full min-h-[280px] flex-col items-center justify-center rounded-[20px] bg-gradient-to-br from-[#E0685F] to-[#FFD8B0] p-6 text-center transition-all hover:-translate-y-1 hover:shadow-lg"
+              className="flex flex-col items-center justify-center rounded-[20px] bg-gradient-to-br from-[#E0685F] to-[#FFD8B0] p-6 text-center transition-all hover:-translate-y-1 hover:shadow-lg"
             >
               <span className="text-[32px]">📆</span>
               <p className="mt-2 text-[15px] font-extrabold leading-snug text-white sm:text-[16px]">
@@ -284,7 +285,7 @@ export default async function Home() {
                 →
               </span>
             </Link>
-          </div>
+          </FocalCarousel>
         </section>
       )}
 
