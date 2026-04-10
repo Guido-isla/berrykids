@@ -13,7 +13,9 @@ import type { SeasonSuggestion } from "@/data/dutch-calendar";
 export type BerryTip = {
   message: string;
   mood: "sunny" | "rainy" | "festive" | "chill" | "excited";
-  vibe: string; // lowercase mood label, e.g. "zonnige paasmaandag"
+  vibe: string; // legacy Dutch fallback
+  vibeKey: string; // translation key, used with t(vibeKey, { day: vibeDayKey })
+  vibeDayKey: string; // day-of-week translation key (e.g. "vrijdag")
   whyNow: string; // one-line reason for the #1 pick
 };
 
@@ -213,23 +215,33 @@ export function generateBerryDayPlan(
   // --- Vibe label (lowercase, Spotify-style) ---
   const dayNames = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
   const dayName = dayNames[new Date().getDay()];
+  const vibeDayKey = dayName; // translation key matches the Dutch day name
   let vibe = "";
+  let vibeKey = "vibeQuiet";
   if (calendar.holidayName?.includes("Paas")) {
     vibe = weather.isGoodWeather ? `zonnige paas${dayName}` : `gezellige paas${dayName}`;
+    vibeKey = weather.isGoodWeather ? "vibeEasterSunny" : "vibeEasterCozy";
   } else if (calendar.holidayName === "Koningsdag") {
     vibe = "oranje koningsdag";
+    vibeKey = "vibeKingsDay";
   } else if (calendar.isSchoolVacation) {
     vibe = weather.isGoodWeather ? `buitendag ${calendar.vacationName?.toLowerCase()}` : `binnendag ${calendar.vacationName?.toLowerCase()}`;
+    vibeKey = weather.isGoodWeather ? "vibeVacationOutdoor" : "vibeVacationIndoor";
   } else if (weather.isRainy) {
     vibe = `binnenblijf-${dayName}`;
+    vibeKey = "vibeRainy";
   } else if (weather.isGoodWeather && weather.current.temp >= 18) {
     vibe = `warme ${dayName} buitendag`;
+    vibeKey = "vibeWarm";
   } else if (weather.isGoodWeather) {
     vibe = `eerste-zonnedag-${dayName}`;
+    vibeKey = "vibeFirstSun";
   } else if (weather.current.temp < 8) {
     vibe = `koude ${dayName} — warm binnen`;
+    vibeKey = "vibeCold";
   } else {
     vibe = `rustige ${dayName}`;
+    vibeKey = "vibeQuiet";
   }
 
   // --- "Waarom nu" for the #1 pick ---
@@ -262,6 +274,8 @@ export function generateBerryDayPlan(
       message: `${opener} Vandaag geen evenementen, maar scroll naar beneden — er is genoeg te doen.`,
       mood: weather.isRainy ? "rainy" : "chill",
       vibe,
+      vibeKey,
+      vibeDayKey,
       whyNow: weather.isGoodWeather ? "Lekker weer, ga naar buiten" : "Genoeg te doen binnen",
     };
   }
@@ -301,6 +315,8 @@ export function generateBerryDayPlan(
       message: msgLines.join("\n\n"),
       mood: weather.isGoodWeather ? "sunny" : weather.isRainy ? "rainy" : "chill",
       vibe,
+      vibeKey,
+      vibeDayKey,
       whyNow: topFree ? `${topFree.title} — altijd goed` : "Genoeg te doen in de buurt",
     };
   }
@@ -315,6 +331,8 @@ export function generateBerryDayPlan(
           ? "sunny"
           : "chill",
     vibe,
+    vibeKey,
+    vibeDayKey,
     whyNow,
   };
 }

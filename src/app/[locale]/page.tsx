@@ -221,12 +221,16 @@ export default async function Home() {
     .filter((e) => e.date >= twoDaysStr && !weekendSlugs.has(e.slug) && e.image !== "/berry-icon.png" && (e.resolvedImage || e.image) !== "/berry-icon.png")
     .slice(0, 5);
 
+  // Resolve the vibe label via translation keys
+  const localizedDay = tBerry(dayPlan.vibeDayKey);
+  const localizedVibe = tBerry(dayPlan.vibeKey, { day: localizedDay });
+
   return (
     <div className="min-h-screen">
       {/* ===== 1. BERRY'S PICKS — ATF ===== */}
       <TopFiveHero
         picks={berryPicks}
-        vibe={dayPlan.vibe}
+        vibe={localizedVibe}
         dailyMessage={dailyMessage}
         weatherIcon={ctx.weather.current.icon}
         weatherTemp={ctx.weather.current.temp}

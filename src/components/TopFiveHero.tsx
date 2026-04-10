@@ -267,7 +267,7 @@ export default function TopFiveHero({
               </div>
               <p className="text-[12px] font-bold text-[#E0685F]">{vibe}</p>
               <h2 className="text-[22px] font-black leading-[1.1] tracking-[-0.4px] text-[#2D2D2D]">
-                Berry&apos;s picks vandaag
+                {t("berryPicksTitle")}
               </h2>
               <p className="mt-1.5 text-[15px] font-semibold text-[#6B6B6B]">
                 {dailyMessage}
@@ -305,7 +305,7 @@ export default function TopFiveHero({
             {/* Footer */}
             <div className="border-t border-[#F5F0EB] px-5 py-2.5 text-center">
               <Link href="/activiteiten" className="text-[12px] font-bold text-[#E0685F]">
-                Alle activiteiten →
+                {t("allActivities")}
               </Link>
             </div>
           </div>
