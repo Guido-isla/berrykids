@@ -1,28 +1,66 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 
 export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState("");
   const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
 
+  // Lock scroll when menu open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  // Close menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  const navLinks = [
+    { href: "/activiteiten", label: t("activities"), match: (p: string) => p.startsWith("/activiteiten") },
+    { href: "/evenementen", label: t("events"), match: (p: string) => p.startsWith("/evenementen") || p.startsWith("/event") },
+    { href: "/vakanties", label: t("vacations"), match: (p: string) => p.startsWith("/vakanties") },
+  ];
+
   return (
-    <header className="relative z-10">
+    <header className="relative z-30">
       <div className="mx-auto flex max-w-[1320px] items-center justify-between px-4 py-3 sm:px-8 sm:py-5">
-        <Link href="/" className="flex items-center gap-2">
-          <Image src="/berry-icon.png" alt="" width={40} height={40} className="h-8 w-auto sm:h-9" />
-          <span className="text-[15px] font-extrabold text-[#E0685F] sm:text-[16px]">Berry Kids</span>
-          <span className="flex items-center gap-1 rounded-full bg-[#2D2D2D]/[0.06] px-2 py-0.5 text-[10px] font-bold text-[#6B6B6B]">
-            <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z" /></svg>
-            {t("haarlem")}
-          </span>
-        </Link>
+        {/* Left: hamburger (mobile) + logo */}
+        <div className="flex items-center gap-3">
+          {/* Hamburger — mobile only */}
+          <button
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open menu"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[#2D2D2D] shadow-[0_1px_4px_rgba(0,0,0,0.06)] transition-colors hover:bg-[#FFF3E0] sm:hidden"
+          >
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+
+          <Link href="/" className="flex items-center gap-2">
+            <Image src="/berry-icon.png" alt="" width={40} height={40} className="h-8 w-auto sm:h-9" />
+            <span className="text-[15px] font-extrabold text-[#E0685F] sm:text-[16px]">Berry Kids</span>
+            <span className="hidden items-center gap-1 rounded-full bg-[#2D2D2D]/[0.06] px-2 py-0.5 text-[10px] font-bold text-[#6B6B6B] sm:flex">
+              <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z" /></svg>
+              {t("haarlem")}
+            </span>
+          </Link>
+        </div>
         <div className="flex items-center gap-3 sm:gap-4">
           {searchOpen ? (
             <form className="flex items-center gap-2" onSubmit={(e) => { e.preventDefault(); if (query.trim()) window.location.href = `/${locale === "nl" ? "" : locale + "/"}activiteiten?q=${encodeURIComponent(query.trim())}`; }}>
@@ -31,15 +69,15 @@ export default function Header() {
             </form>
           ) : (
             <>
-              <Link href="/activiteiten" className="hidden text-[13px] font-bold text-[#6B6B6B] hover:text-[#E0685F] sm:inline">
-                {t("activities")}
-              </Link>
-              <Link href="/evenementen" className="hidden text-[13px] font-bold text-[#6B6B6B] hover:text-[#E0685F] sm:inline">
-                {t("events")}
-              </Link>
-              <Link href="/vakanties" className="hidden text-[13px] font-bold text-[#6B6B6B] hover:text-[#E0685F] sm:inline">
-                {t("vacations")}
-              </Link>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`hidden text-[13px] font-bold sm:inline ${link.match(pathname) ? "text-[#E0685F]" : "text-[#6B6B6B] hover:text-[#E0685F]"}`}
+                >
+                  {link.label}
+                </Link>
+              ))}
               <button onClick={() => setSearchOpen(true)} className="text-[13px] font-bold text-[#6B6B6B] hover:text-[#E0685F]">
                 <svg className="h-5 w-5 sm:hidden" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
                 <span className="hidden sm:inline">{t("search")}</span>
@@ -65,6 +103,87 @@ export default function Header() {
           )}
         </div>
       </div>
+
+      {/* Mobile menu overlay */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-50 sm:hidden">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-[#2D2D2D]/40 backdrop-blur-sm"
+            onClick={() => setMenuOpen(false)}
+          />
+          {/* Panel — slides in from left */}
+          <div className="absolute inset-y-0 left-0 w-[82%] max-w-[340px] bg-[#FFF9F0] shadow-[8px_0_40px_rgba(0,0,0,0.2)]">
+            <div className="flex h-full flex-col">
+              {/* Header */}
+              <div className="flex items-center justify-between border-b border-[#F0ECE8] px-5 py-4">
+                <div className="flex items-center gap-2">
+                  <Image src="/berry-icon.png" alt="" width={36} height={36} className="h-9 w-auto" />
+                  <span className="text-[16px] font-extrabold text-[#E0685F]">Berry Kids</span>
+                </div>
+                <button
+                  onClick={() => setMenuOpen(false)}
+                  aria-label="Close menu"
+                  className="flex h-9 w-9 items-center justify-center rounded-full text-[#6B6B6B] hover:bg-[#FFF3E0]"
+                >
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Nav links */}
+              <nav className="flex-1 overflow-y-auto px-3 py-4">
+                <Link
+                  href="/"
+                  className={`flex items-center gap-3 rounded-[14px] px-4 py-3 text-[16px] font-bold transition-colors ${
+                    pathname === "/" ? "bg-[#FFF3E0] text-[#E0685F]" : "text-[#2D2D2D] hover:bg-[#FFF3E0]"
+                  }`}
+                >
+                  <span className="text-[20px]">🏠</span>
+                  Home
+                </Link>
+                {navLinks.map((link, i) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`flex items-center gap-3 rounded-[14px] px-4 py-3 text-[16px] font-bold transition-colors ${
+                      link.match(pathname) ? "bg-[#FFF3E0] text-[#E0685F]" : "text-[#2D2D2D] hover:bg-[#FFF3E0]"
+                    }`}
+                  >
+                    <span className="text-[20px]">{["🎯", "📅", "🌷"][i]}</span>
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+
+              {/* Footer: locale + location */}
+              <div className="border-t border-[#F0ECE8] px-5 py-4">
+                <div className="mb-3 flex items-center gap-1 text-[12px] font-semibold text-[#6B6B6B]">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z" /></svg>
+                  {t("haarlem")}
+                </div>
+                <span className="flex w-fit items-center rounded-full border border-[#E8E0D8] bg-white text-[12px] font-bold">
+                  <Link
+                    href={pathname}
+                    locale="nl"
+                    className={`rounded-full px-3 py-1 transition-colors ${locale === "nl" ? "bg-[#E0685F] text-white" : "text-[#6B6B6B]"}`}
+                  >
+                    NL
+                  </Link>
+                  <Link
+                    href={pathname}
+                    locale="en"
+                    className={`rounded-full px-3 py-1 transition-colors ${locale === "en" ? "bg-[#E0685F] text-white" : "text-[#6B6B6B]"}`}
+                  >
+                    EN
+                  </Link>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
