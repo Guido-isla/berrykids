@@ -58,15 +58,7 @@ export default async function Home() {
 
   const dayPlan = generateBerryDayPlan(ctx, todayEvents, activities, ctx.season.suggestions);
 
-  const tomorrow = ctx.weather.forecast[1];
-  let tomorrowFlip: string | null = null;
-  if (tomorrow) {
-    const todayRainy = ctx.weather.isRainy;
-    const tomorrowRainy = tomorrow.isRainy;
-    if (!todayRainy && tomorrowRainy) tomorrowFlip = `🌧️ Morgen regent het — pak vandaag mee`;
-    else if (todayRainy && !tomorrowRainy) tomorrowFlip = `☀️ Morgen ${tomorrow.tempMax}°C en droog — bewaar buiten voor morgen`;
-    else if (!todayRainy && !tomorrowRainy && tomorrow.tempMax >= 18 && ctx.weather.current.temp < 16) tomorrowFlip = `☀️ Morgen ${tomorrow.tempMax}°C — nog mooier dan vandaag`;
-  }
+  // Tomorrow flip — uses berry.tomorrow* translation keys, computed below after tBerry init
 
   // === SCORE ALL ITEMS ===
   const currentMonth = new Date().getMonth() + 1;
@@ -90,6 +82,17 @@ export default async function Home() {
   const tBerry = await getTranslations("berry");
   const tHome = await getTranslations("home");
   const tNewsletter = await getTranslations("newsletter");
+
+  // Tomorrow flip — localized via tBerry
+  const tomorrow = ctx.weather.forecast[1];
+  let tomorrowFlip: string | null = null;
+  if (tomorrow) {
+    const todayRainy = ctx.weather.isRainy;
+    const tomorrowRainy = tomorrow.isRainy;
+    if (!todayRainy && tomorrowRainy) tomorrowFlip = tBerry("tomorrowRain");
+    else if (todayRainy && !tomorrowRainy) tomorrowFlip = tBerry("tomorrowDry", { temp: String(tomorrow.tempMax) });
+    else if (!todayRainy && !tomorrowRainy && tomorrow.tempMax >= 18 && ctx.weather.current.temp < 16) tomorrowFlip = tBerry("tomorrowWarmer", { temp: String(tomorrow.tempMax) });
+  }
 
   // === PROGRESSIVE DEDUP: build each section from remaining pool ===
   const usedSlugs = new Set<string>();
@@ -257,8 +260,8 @@ export default async function Home() {
       {weekendEvents.length > 0 && (
         <section className="mx-auto max-w-[1320px] px-4 pt-10 sm:px-8">
           <div className="mb-4">
-            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">📅 Dit weekend</h2>
-            <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">Wat er dit weekend te doen is</p>
+            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">{tHome("weekendTitle")}</h2>
+            <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{tHome("weekendSub")}</p>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-4">
             {weekendEvents.map((e) => (
@@ -285,10 +288,10 @@ export default async function Home() {
                       <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2l2.39 7.36h7.74l-6.26 4.55 2.39 7.36L12 16.71l-6.26 4.56 2.39-7.36L1.87 9.36h7.74L12 2z" />
                       </svg>
-                      Onze tip
+                      {tHome("ourTip")}
                     </span>
                   ) : e.free && (
-                    <span className="absolute right-3 top-3 rounded-full bg-[#4A8060] px-2 py-0.5 text-[10px] font-bold text-white">Gratis</span>
+                    <span className="absolute right-3 top-3 rounded-full bg-[#4A8060] px-2 py-0.5 text-[10px] font-bold text-white">{tHome("gratis")}</span>
                   )}
                 </div>
                 <div className="px-3.5 py-3">
@@ -343,8 +346,8 @@ export default async function Home() {
       {binnenkortEvents.length > 0 && (
         <section className="mx-auto max-w-[1320px] px-4 pb-10 sm:px-8">
           <div className="mb-4">
-            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">📆 Binnenkort</h2>
-            <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">De komende weken in de regio</p>
+            <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">{tHome("binnenkortTitle")}</h2>
+            <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{tHome("binnenkortSub")}</p>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
             {binnenkortEvents.map((e) => {
@@ -373,10 +376,10 @@ export default async function Home() {
                         <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M12 2l2.39 7.36h7.74l-6.26 4.55 2.39 7.36L12 16.71l-6.26 4.56 2.39-7.36L1.87 9.36h7.74L12 2z" />
                         </svg>
-                        Onze tip
+                        {tHome("ourTip")}
                       </span>
                     ) : e.free && (
-                      <span className="absolute right-3 top-3 rounded-full bg-[#4A8060] px-2 py-0.5 text-[10px] font-bold text-white">Gratis</span>
+                      <span className="absolute right-3 top-3 rounded-full bg-[#4A8060] px-2 py-0.5 text-[10px] font-bold text-white">{tHome("gratis")}</span>
                     )}
                     {/* Berry tip overlay */}
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent px-3 pb-2.5 pt-6">
@@ -396,7 +399,7 @@ export default async function Home() {
             <Link href="/evenementen" className="flex h-[232px] w-[60vw] shrink-0 flex-col items-center justify-center rounded-[20px] bg-gradient-to-br from-[#E0685F] to-[#FFD8B0] p-6 text-center transition-all hover:-translate-y-1 hover:shadow-lg sm:w-auto">
               <span className="text-[32px]">📆</span>
               <p className="mt-2 text-[15px] font-extrabold leading-snug text-white sm:text-[16px]">
-                Alle evenementen
+                {tHome("allEvents")}
               </p>
               <span className="mt-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/30 text-[14px] text-white">
                 →

@@ -1,16 +1,18 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getAllKidsFilms } from "@/data/programming-loader";
 
-export default function FilmVanDeWeek() {
+export default async function FilmVanDeWeek() {
   const films = getAllKidsFilms();
+  const t = await getTranslations("films");
 
   if (films.length === 0) return null;
 
   return (
     <section>
       <h2 className="mb-3 text-lg font-extrabold text-[#2D2D2D]">
-        🎬 Kinderfilms deze week
+        {t("title")}
       </h2>
       <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none">
         {films.map((film) => (

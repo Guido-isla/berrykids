@@ -1,16 +1,19 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { getAllTheaterShows } from "@/data/programming-loader";
 import { formatShortDate } from "@/lib/dates";
 
-export default function TheaterAgenda() {
+export default async function TheaterAgenda() {
   const upcoming = getAllTheaterShows().slice(0, 6);
+  const t = await getTranslations("theater");
+  const tHome = await getTranslations("home");
 
   if (upcoming.length === 0) return null;
 
   return (
     <section>
       <h2 className="mb-3 text-lg font-extrabold text-[#2D2D2D]">
-        🎭 Theater &amp; concerten
+        {t("title")}
       </h2>
       <div className="overflow-hidden rounded-[20px] bg-white shadow-sm">
         {upcoming.map((show, i) => (
@@ -60,7 +63,7 @@ export default function TheaterAgenda() {
               <div className="mt-1 flex items-center gap-2">
                 <span className="text-[11px] font-semibold text-[#2D2D2D]">{show.price}</span>
                 {show.ticketUrl && (
-                  <span className="text-[11px] font-semibold text-[#E0685F]">Tickets →</span>
+                  <span className="text-[11px] font-semibold text-[#E0685F]">{tHome("tickets")}</span>
                 )}
               </div>
             </div>

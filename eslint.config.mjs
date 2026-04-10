@@ -18,7 +18,7 @@ const eslintConfig = defineConfig([
           noStrings: true,
           allowedStrings: [
             "·", "→", "←", "✕", "—", " — ", " · ", ":", ": ",
-            "📍", "🕐", "💡", "🏠", "🎯", "📅", "🌷",
+            "📍", "🕐", "💡", "🏠", "🎯", "📅", "🌷", "📆", "🍪",
             "Berry Kids", "NL", "EN", "Berry",
             "Tip",
           ],
