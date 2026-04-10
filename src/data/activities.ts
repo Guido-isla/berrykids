@@ -1455,7 +1455,7 @@ export const activities: Activity[] = [
     website: "https://www.patronaat.nl",
     phone: "023-5175858",
     openingHours: "Kassa ma-vr 10:00 – 17:00",
-    image: "/berry-icon.png",
+    image: "/photos/patronaat-haarlem.jpg",
     verified: true,
   },
   {
