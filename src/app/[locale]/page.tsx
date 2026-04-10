@@ -175,9 +175,9 @@ export default async function Home() {
     weekendSeenTitles.add(e.title);
     return true;
   });
-  const weekendEvents = weekendUnique.length >= 4
-    ? weekendUnique.slice(0, 4)
-    : weekendEventsRaw.slice(0, 4);
+  const weekendEvents = weekendUnique.length >= 5
+    ? weekendUnique.slice(0, 5)
+    : weekendEventsRaw.slice(0, 5);
 
   // "Binnenkort" — events 2+ days from now, excluding weekend events already shown
   const twoDaysOut = new Date();
@@ -220,75 +220,80 @@ export default async function Home() {
         </div>
       )}
 
-      {/* ===== 2. DIT WEEKEND — 1 hero + 2-col grid ===== */}
+      {/* ===== 2. DIT WEEKEND — newspaper grid: 1 big + 2x2 small ===== */}
       {weekendEvents.length > 0 && (() => {
         const [heroEvent, ...restEvents] = weekendEvents;
+        const smallEvents = restEvents.slice(0, 4);
         return (
           <section className="mx-auto max-w-[1200px] px-4 pt-10 sm:px-8">
             <div className="mb-4">
               <h2 className="text-[20px] font-extrabold tracking-tight text-[#2D2D2D] sm:text-[22px]">{tHome("weekendTitle")}</h2>
               <p className="mt-1 text-[14px] font-semibold text-[#6B6B6B]">{tHome("weekendSub")}</p>
             </div>
-            {/* Hero card */}
-            <Link
-              href={`/event/${heroEvent.slug}`}
-              className="group block overflow-hidden rounded-[24px] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all hover:-translate-y-1"
-            >
-              <div className="relative aspect-[16/10] overflow-hidden sm:aspect-[16/8]">
-                <Image
-                  src={heroEvent.resolvedImage || heroEvent.image}
-                  alt={heroEvent.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 1200px"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  priority
-                />
-                {/* Date badge */}
-                <div className="absolute left-4 top-4 flex flex-col items-center rounded-[14px] bg-white/95 px-3 py-2 text-center backdrop-blur-sm">
-                  <span className="text-[11px] font-bold uppercase text-[#E0685F]">
-                    {["zo","ma","di","wo","do","vr","za"][new Date(heroEvent.date + "T00:00:00").getDay()]}
-                  </span>
-                  <span className="text-[22px] font-black leading-none text-[#2D2D2D]">
-                    {new Date(heroEvent.date + "T00:00:00").getDate()}
-                  </span>
-                </div>
-                {heroEvent.featured ? (
-                  <span className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#E0685F] to-[#FFB347] px-3 py-1 text-[11px] font-extrabold text-white shadow-md">
-                    <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2l2.39 7.36h7.74l-6.26 4.55 2.39 7.36L12 16.71l-6.26 4.56 2.39-7.36L1.87 9.36h7.74L12 2z" />
-                    </svg>
-                    {tHome("ourTip")}
-                  </span>
-                ) : heroEvent.free && (
-                  <span className="absolute right-4 top-4 rounded-full bg-[#4A8060] px-3 py-1 text-[11px] font-bold text-white shadow-sm">{tHome("gratis")}</span>
-                )}
-                {/* Title overlay */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent px-5 pb-5 pt-12">
-                  <h3 className="text-[22px] font-black leading-tight text-white sm:text-[26px]">{heroEvent.title}</h3>
-                  <p className="mt-1 text-[13px] font-semibold text-white/85">📍 {heroEvent.location}{heroEvent.time ? ` · ${heroEvent.time}` : ""}</p>
-                </div>
-              </div>
-            </Link>
-            {/* Grid of remaining events */}
-            {restEvents.length > 0 && (
-              <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                {restEvents.map((e) => (
-                  <MediaCard
-                    key={e.slug}
-                    href={`/event/${e.slug}`}
-                    slug={e.slug}
-                    image={e.resolvedImage || e.image}
-                    title={e.title}
-                    date={e.date}
-                    free={e.free}
-                    freeLabel={tHome("gratis")}
-                    featured={e.featured}
-                    featuredLabel={tHome("ourTip")}
-                    meta={`📍 ${e.location}${e.time ? ` · ${e.time}` : ""}`}
+
+            <div className="grid grid-cols-1 gap-3 lg:grid-cols-4 lg:grid-rows-2">
+              {/* Big hero card — spans 2 cols x 2 rows on desktop */}
+              <Link
+                href={`/event/${heroEvent.slug}`}
+                className="group relative block overflow-hidden rounded-[24px] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all hover:-translate-y-1 lg:col-span-2 lg:row-span-2"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden lg:aspect-auto lg:h-full">
+                  <Image
+                    src={heroEvent.resolvedImage || heroEvent.image}
+                    alt={heroEvent.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 600px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    priority
                   />
-                ))}
-              </div>
-            )}
+                  {/* Date badge */}
+                  <div className="absolute left-4 top-4 flex flex-col items-center rounded-[14px] bg-white/95 px-3 py-2 text-center backdrop-blur-sm">
+                    <span className="text-[11px] font-bold uppercase text-[#E0685F]">
+                      {["zo","ma","di","wo","do","vr","za"][new Date(heroEvent.date + "T00:00:00").getDay()]}
+                    </span>
+                    <span className="text-[22px] font-black leading-none text-[#2D2D2D]">
+                      {new Date(heroEvent.date + "T00:00:00").getDate()}
+                    </span>
+                  </div>
+                  {heroEvent.featured ? (
+                    <span className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#E0685F] to-[#FFB347] px-3 py-1 text-[11px] font-extrabold text-white shadow-md">
+                      <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l2.39 7.36h7.74l-6.26 4.55 2.39 7.36L12 16.71l-6.26 4.56 2.39-7.36L1.87 9.36h7.74L12 2z" />
+                      </svg>
+                      {tHome("ourTip")}
+                    </span>
+                  ) : heroEvent.free && (
+                    <span className="absolute right-4 top-4 rounded-full bg-[#4A8060] px-3 py-1 text-[11px] font-bold text-white shadow-sm">{tHome("gratis")}</span>
+                  )}
+                  {/* Title overlay */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/35 to-transparent px-5 pb-5 pt-16 lg:px-6 lg:pb-6">
+                    <h3 className="text-[22px] font-black leading-tight text-white sm:text-[26px] lg:text-[28px]">{heroEvent.title}</h3>
+                    <p className="mt-1 text-[13px] font-semibold text-white/85">📍 {heroEvent.location}{heroEvent.time ? ` · ${heroEvent.time}` : ""}</p>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Small grid — 2 cols on mobile, 2x2 on desktop within the parent grid */}
+              {smallEvents.length > 0 && (
+                <div className="grid grid-cols-2 gap-3 lg:col-span-2 lg:row-span-2 lg:grid-cols-2 lg:grid-rows-2">
+                  {smallEvents.map((e) => (
+                    <MediaCard
+                      key={e.slug}
+                      href={`/event/${e.slug}`}
+                      slug={e.slug}
+                      image={e.resolvedImage || e.image}
+                      title={e.title}
+                      date={e.date}
+                      free={e.free}
+                      freeLabel={tHome("gratis")}
+                      featured={e.featured}
+                      featuredLabel={tHome("ourTip")}
+                      meta={`📍 ${e.location}${e.time ? ` · ${e.time}` : ""}`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           </section>
         );
       })()}
