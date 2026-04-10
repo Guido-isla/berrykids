@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function SaveButton({ slug, className = "" }: { slug: string; className?: string }) {
   const [saved, setSaved] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const iconRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -24,10 +25,18 @@ export default function SaveButton({ slug, className = "" }: { slug: string; cla
       const next = saved ? saves.filter((s) => s !== slug) : [...saves, slug];
       localStorage.setItem("berry-saves", JSON.stringify(next));
       setSaved(!saved);
-      // Dispatch event so /opgeslagen page can react
       window.dispatchEvent(new CustomEvent("berry-saves-changed"));
     } catch {
       // localStorage may be blocked
+    }
+
+    // Trigger pop animation by re-adding the class
+    const icon = iconRef.current;
+    if (icon) {
+      icon.classList.remove("heart-pop");
+      // Force reflow so the animation restarts
+      void icon.getBoundingClientRect();
+      icon.classList.add("heart-pop");
     }
   }
 
@@ -39,6 +48,7 @@ export default function SaveButton({ slug, className = "" }: { slug: string; cla
       className={`flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur-sm transition-all hover:scale-110 hover:bg-white active:scale-95 ${className}`}
     >
       <svg
+        ref={iconRef}
         viewBox="0 0 24 24"
         className={`h-5 w-5 transition-colors ${saved ? "fill-[#E0685F] stroke-[#E0685F]" : "fill-none stroke-[#2D2D2D]/60"}`}
         strokeWidth={2}

@@ -178,8 +178,14 @@ export default async function EvenementenPage() {
                 </span>
               </div>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {group.events.map((e) => (
-                  <EventCard key={e.slug} event={e} />
+                {group.events.map((e, i) => (
+                  <div
+                    key={e.slug}
+                    className="stagger-reveal"
+                    style={{ ["--stagger-i" as string]: i }}
+                  >
+                    <EventCard event={e} />
+                  </div>
                 ))}
               </div>
             </section>

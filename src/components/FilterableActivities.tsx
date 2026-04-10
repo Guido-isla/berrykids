@@ -69,10 +69,17 @@ const PILL_COLORS: Record<string, { bg: string; text: string }> = {
 
 function Pill({ label, value, active, onClick }: { label: string; value: string; active: boolean; onClick: () => void }) {
   const color = PILL_COLORS[value] || PILL_COLORS.all;
+  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+    const btn = e.currentTarget;
+    btn.classList.remove("pill-spring");
+    void btn.offsetWidth;
+    btn.classList.add("pill-spring");
+    onClick();
+  }
   return (
     <button
-      onClick={onClick}
-      className={`shrink-0 rounded-full px-4 py-2 text-[13px] font-bold transition-all ${
+      onClick={handleClick}
+      className={`shrink-0 rounded-full px-4 py-2 text-[13px] font-bold transition-colors ${
         active
           ? "shadow-sm"
           : "bg-white text-[#2D2D2D] shadow-[0_0_0_1px_#E8E0D8] hover:shadow-[0_0_0_1px_#CCC]"

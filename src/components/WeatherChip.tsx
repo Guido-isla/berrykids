@@ -32,7 +32,7 @@ export default function WeatherChip({
     >
       {/* Chip */}
       <button className="flex items-center gap-1.5 rounded-full bg-white/50 px-3.5 py-1.5 text-[13px] font-bold text-[#2D2D2D] shadow-sm backdrop-blur-sm transition-all hover:bg-white/70 hover:shadow-md">
-        {icon} {temp}°C
+        <span className="weather-drift">{icon}</span> {temp}°C
         <svg className={`h-3 w-3 text-[#6B6B6B] transition-transform ${open ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
         </svg>

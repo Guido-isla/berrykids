@@ -11,8 +11,14 @@ type Pill = {
 export default function EventFilterBar({ pills }: { pills: Pill[] }) {
   const [active, setActive] = useState<string>(pills[0]?.id ?? "");
 
-  function scrollTo(id: string) {
+  function scrollTo(id: string, e: React.MouseEvent<HTMLButtonElement>) {
     setActive(id);
+    // Trigger pill spring animation
+    const btn = e.currentTarget;
+    btn.classList.remove("pill-spring");
+    void btn.offsetWidth;
+    btn.classList.add("pill-spring");
+
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -25,8 +31,8 @@ export default function EventFilterBar({ pills }: { pills: Pill[] }) {
         {pills.map((pill) => (
           <button
             key={pill.id}
-            onClick={() => scrollTo(pill.id)}
-            className={`shrink-0 rounded-full px-4 py-2 text-[13px] font-bold transition-all ${
+            onClick={(e) => scrollTo(pill.id, e)}
+            className={`shrink-0 rounded-full px-4 py-2 text-[13px] font-bold transition-colors ${
               active === pill.id
                 ? "bg-[#E0685F] text-white shadow-sm"
                 : "bg-white text-[#6B6B6B] hover:bg-[#F0ECE8]"
