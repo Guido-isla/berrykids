@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { events as mockEvents } from "@/data/events";
 import { getScrapedEvents } from "@/data/events-loader";
 import { formatLongDate } from "@/lib/dates";
@@ -40,6 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function EventPage({ params }: Props) {
   const { slug } = await params;
+  const t = await getTranslations("eventDetail");
   const allEvents = getAllEvents();
   const event = allEvents.find((e) => e.slug === slug);
 
@@ -81,7 +83,7 @@ export default async function EventPage({ params }: Props) {
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
           </svg>
-          Alle uitjes
+          {t("back")}
         </Link>
 
         {/* Hero image */}
@@ -96,7 +98,7 @@ export default async function EventPage({ params }: Props) {
           />
           {attribution && (
             <span className="absolute bottom-2 right-2 rounded bg-black/40 px-2 py-1 text-xs text-white/80">
-              Foto: {attribution}
+              {t("photo")}: {attribution}
             </span>
           )}
         </div>
@@ -112,12 +114,12 @@ export default async function EventPage({ params }: Props) {
                   <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2l2.39 7.36h7.74l-6.26 4.55 2.39 7.36L12 16.71l-6.26 4.56 2.39-7.36L1.87 9.36h7.74L12 2z" />
                   </svg>
-                  Onze tip
+                  {t("ourTip")}
                 </span>
               )}
               {event.free ? (
                 <span className="rounded-full bg-[#8BC34A]/15 px-3 py-1 text-sm font-semibold text-[#6FAF3A]">
-                  Gratis
+                  {t("free")}
                 </span>
               ) : (
                 <span className="rounded-full bg-[#FDDCDA] px-3 py-1 text-sm font-semibold text-[#E0685F]">
@@ -128,7 +130,7 @@ export default async function EventPage({ params }: Props) {
                 {event.ageLabel}
               </span>
               <span className="rounded-full bg-[#F0E6E0] px-3 py-1 text-sm text-[#6B6B6B]">
-                {event.indoor ? "Binnen" : "Buiten"}
+                {event.indoor ? t("indoor") : t("outdoor")}
               </span>
               <span className="rounded-full bg-[#F0E6E0] px-3 py-1 text-sm text-[#6B6B6B]">
                 {event.category}
@@ -146,7 +148,7 @@ export default async function EventPage({ params }: Props) {
                 <Image src="/berry-wink.png" alt="" width={36} height={36} className="h-9 w-auto shrink-0" />
                 <div>
                   <p className="text-[11px] font-bold uppercase tracking-[1px] text-[#E0685F]">
-                    Berry zegt
+                    {t("berrySays")}
                   </p>
                   <p className="mt-0.5 text-[14px] font-semibold leading-snug text-[#2D2D2D]">
                     {event.featuredNote}
@@ -189,7 +191,7 @@ export default async function EventPage({ params }: Props) {
             {event.tip && (
               <div className="mt-4 rounded-xl bg-[#FDF1EA] px-4 py-3">
                 <p className="text-sm text-[#6B6B6B]">
-                  <span className="font-bold text-[#2D2D2D]">Tip</span> — {event.tip}
+                  <span className="font-bold text-[#2D2D2D]">{t("tipLabel")}</span> — {event.tip}
                 </p>
               </div>
             )}
@@ -203,7 +205,7 @@ export default async function EventPage({ params }: Props) {
                   rel="noopener noreferrer"
                   className="rounded-full bg-[#E0685F] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#D05A52]"
                 >
-                  Meer info & tickets →
+                  {t("moreInfo")}
                 </a>
               )}
               <a
@@ -216,7 +218,7 @@ export default async function EventPage({ params }: Props) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z" />
                 </svg>
-                Route
+                {t("route")}
               </a>
               <ShareButton title={event.title} slug={event.slug} />
             </div>
@@ -241,35 +243,35 @@ export default async function EventPage({ params }: Props) {
             {/* Quick info card */}
             <div className="rounded-2xl bg-white p-5 shadow-sm">
               <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#6B6B6B]">
-                Details
+                {t("details")}
               </h3>
               <dl className="space-y-2 text-sm">
                 <div>
-                  <dt className="font-semibold text-[#2D2D2D]">Datum</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">{t("date")}</dt>
                   <dd className="text-[#6B6B6B]">
                     {formatLongDate(event.date)}
                     {event.endDate && ` – ${formatLongDate(event.endDate)}`}
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2D2D2D]">Tijd</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">{t("time")}</dt>
                   <dd className="text-[#6B6B6B]">{event.time}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2D2D2D]">Locatie</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">{t("location")}</dt>
                   <dd className="text-[#6B6B6B]">{event.location}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2D2D2D]">Prijs</dt>
-                  <dd className="text-[#6B6B6B]">{event.free ? "Gratis" : event.price}</dd>
+                  <dt className="font-semibold text-[#2D2D2D]">{t("price")}</dt>
+                  <dd className="text-[#6B6B6B]">{event.free ? t("free") : event.price}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2D2D2D]">Leeftijd</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">{t("age")}</dt>
                   <dd className="text-[#6B6B6B]">{event.ageLabel}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2D2D2D]">Binnen/Buiten</dt>
-                  <dd className="text-[#6B6B6B]">{event.indoor ? "Binnen" : "Buiten"}</dd>
+                  <dt className="font-semibold text-[#2D2D2D]">{t("indoorOutdoor")}</dt>
+                  <dd className="text-[#6B6B6B]">{event.indoor ? t("indoor") : t("outdoor")}</dd>
                 </div>
               </dl>
             </div>
@@ -279,7 +281,7 @@ export default async function EventPage({ params }: Props) {
         {/* Related events */}
         <section className="mt-14 border-t border-[#F0E6E0] pt-8">
           <h2 className="mb-5 text-lg font-bold text-[#2D2D2D]">
-            Meer in {event.area}
+            {t("moreIn", { area: event.area })}
           </h2>
           <div className="grid gap-3 sm:gap-5 sm:grid-cols-3">
             {related.map((e) => (
@@ -291,10 +293,10 @@ export default async function EventPage({ params }: Props) {
         {/* Newsletter */}
         <section className="mt-14 rounded-2xl bg-[#FDF1EA] px-6 py-8 text-center">
           <h2 className="text-xl font-extrabold text-[#2D2D2D]">
-            Elke week de beste tips
+            {t("newsletterTitle")}
           </h2>
           <p className="mt-1 text-sm text-[#6B6B6B]">
-            Wekelijks een kort overzicht van leuke dingen met kinderen bij jou in de buurt.
+            {t("newsletterSub")}
           </p>
           <div className="mx-auto mt-4 max-w-sm">
             <NewsletterForm />

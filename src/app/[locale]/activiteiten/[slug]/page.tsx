@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { activities } from "@/data/activities";
 import { getEventImage, resolveEventImages } from "@/lib/photos";
 import Footer from "@/components/Footer";
@@ -31,6 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ActivityPage({ params }: Props) {
   const { slug } = await params;
+  const t = await getTranslations("activityDetail");
   const activity = activities.find((a) => a.slug === slug);
 
   if (!activity) notFound();
@@ -53,7 +55,7 @@ export default async function ActivityPage({ params }: Props) {
   // Season label
   const seasonLabel = activity.availableMonths
     ? `${MONTH_NAMES[activity.availableMonths[0] - 1]} – ${MONTH_NAMES[activity.availableMonths[activity.availableMonths.length - 1] - 1]}`
-    : "Het hele jaar";
+    : t("yearRound");
 
   return (
     <div className="min-h-screen">
@@ -66,7 +68,7 @@ export default async function ActivityPage({ params }: Props) {
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
           </svg>
-          Alle activiteiten
+          {t("back")}
         </Link>
 
         {/* Hero image */}
@@ -81,7 +83,7 @@ export default async function ActivityPage({ params }: Props) {
           />
           {attribution && (
             <span className="absolute bottom-2 right-2 rounded bg-black/40 px-2 py-1 text-xs text-white/80">
-              Foto: {attribution}
+              {t("photo")}: {attribution}
             </span>
           )}
         </div>
@@ -97,7 +99,7 @@ export default async function ActivityPage({ params }: Props) {
               </span>
               {activity.free ? (
                 <span className="rounded-full bg-[#8BC34A]/15 px-3 py-1 text-sm font-semibold text-[#6FAF3A]">
-                  Gratis
+                  {t("free")}
                 </span>
               ) : (
                 <span className="rounded-full bg-[#F0E6E0] px-3 py-1 text-sm text-[#6B6B6B]">
@@ -158,7 +160,7 @@ export default async function ActivityPage({ params }: Props) {
                   rel="noopener noreferrer"
                   className="rounded-full bg-[#E0685F] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#D05A52]"
                 >
-                  Website →
+                  {t("website")}
                 </a>
               )}
               <a
@@ -171,7 +173,7 @@ export default async function ActivityPage({ params }: Props) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z" />
                 </svg>
-                Route
+                {t("route")}
               </a>
               <ShareButton title={activity.title} slug={`activiteiten/${activity.slug}`} />
             </div>
@@ -196,29 +198,29 @@ export default async function ActivityPage({ params }: Props) {
             {/* Details card */}
             <div className="rounded-2xl bg-white p-5 shadow-sm">
               <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#6B6B6B]">
-                Details
+                {t("details")}
               </h3>
               <dl className="space-y-2 text-sm">
                 <div>
-                  <dt className="font-semibold text-[#2D2D2D]">Locatie</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">{t("location")}</dt>
                   <dd className="text-[#6B6B6B]">{activity.location}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2D2D2D]">Prijs</dt>
-                  <dd className="text-[#6B6B6B]">{activity.free ? "Gratis" : activity.price}</dd>
+                  <dt className="font-semibold text-[#2D2D2D]">{t("price")}</dt>
+                  <dd className="text-[#6B6B6B]">{activity.free ? t("free") : activity.price}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#2D2D2D]">Leeftijd</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">{t("age")}</dt>
                   <dd className="text-[#6B6B6B]">{activity.ageLabel}</dd>
                 </div>
                 {activity.openingHours && (
                   <div>
-                    <dt className="font-semibold text-[#2D2D2D]">Openingstijden</dt>
+                    <dt className="font-semibold text-[#2D2D2D]">{t("openingHours")}</dt>
                     <dd className="text-[#6B6B6B]">{activity.openingHours}</dd>
                   </div>
                 )}
                 <div>
-                  <dt className="font-semibold text-[#2D2D2D]">Seizoen</dt>
+                  <dt className="font-semibold text-[#2D2D2D]">{t("season")}</dt>
                   <dd className="text-[#6B6B6B]">{seasonLabel}</dd>
                 </div>
               </dl>
@@ -229,7 +231,7 @@ export default async function ActivityPage({ params }: Props) {
         {/* Related activities */}
         <section className="mt-14 border-t border-[#F0E6E0] pt-8">
           <h2 className="mb-5 text-lg font-bold text-[#2D2D2D]">
-            Meer {activity.subcategory.toLowerCase()}
+            {t("moreOf", { subcategory: activity.subcategory.toLowerCase() })}
           </h2>
           <div className="grid gap-3 sm:gap-5 sm:grid-cols-3">
             {related.map((a) => (
@@ -241,10 +243,10 @@ export default async function ActivityPage({ params }: Props) {
         {/* Newsletter */}
         <section className="mt-14 rounded-2xl bg-[#FDF1EA] px-6 py-8 text-center">
           <h2 className="text-xl font-extrabold text-[#2D2D2D]">
-            Elke week de beste tips
+            {t("newsletterTitle")}
           </h2>
           <p className="mt-1 text-sm text-[#6B6B6B]">
-            Wekelijks een kort overzicht van leuke dingen met kinderen bij jou in de buurt.
+            {t("newsletterSub")}
           </p>
           <div className="mx-auto mt-4 max-w-sm">
             <NewsletterForm />
