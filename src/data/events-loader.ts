@@ -160,10 +160,10 @@ export function getWeekendEvents(): Event[] {
 }
 
 /**
- * Events for Berry's dagplan: today on weekdays, this weekend on Fri-Sun.
+ * Events for Berry's dagplan: only events happening literally TODAY.
+ * The "Dit weekend" section on the homepage covers Saturday/Sunday separately,
+ * so this stays accurate to the "vandaag" label.
  */
 export function getDayPlanEvents(): Event[] {
-  const day = new Date().getDay();
-  const isWeekend = day === 0 || day === 5 || day === 6;
-  return isWeekend ? getWeekendEvents() : getTodayEvents();
+  return getTodayEvents();
 }
