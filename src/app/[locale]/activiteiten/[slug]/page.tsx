@@ -57,60 +57,63 @@ export default async function ActivityPage({ params }: Props) {
 
   return (
     <div className="min-h-screen">
-      <main className="mx-auto max-w-4xl px-5 py-8 sm:px-8">
-        {/* Back link */}
+      {/* Full-width hero image */}
+      <div className="relative h-[280px] sm:h-[380px]">
+        <Image
+          src={src}
+          alt={activity.title}
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority
+        />
+        {attribution && (
+          <span className="absolute bottom-3 right-4 rounded-full bg-black/40 px-2.5 py-1 text-[11px] text-white/80">
+            Foto: {attribution}
+          </span>
+        )}
         <Link
           href="/activiteiten"
-          className="mb-6 inline-flex items-center gap-1 text-sm text-[#6B6B6B] transition-colors hover:text-[#2D2D2D]"
+          className="absolute left-4 top-4 inline-flex items-center gap-1 rounded-full bg-white/90 px-3 py-1.5 text-[13px] font-bold text-[#2D2D2D] backdrop-blur-sm transition-colors hover:bg-white sm:left-8"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
           </svg>
-          Alle activiteiten
+          Terug
         </Link>
-
-        {/* Hero image */}
-        <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
-          <Image
-            src={src}
-            alt={activity.title}
-            fill
-            sizes="(max-width: 768px) 100vw, 896px"
-            className="object-cover"
-            priority
-          />
-          {attribution && (
-            <span className="absolute bottom-2 right-2 rounded bg-black/40 px-2 py-1 text-xs text-white/80">
-              Foto: {attribution}
-            </span>
-          )}
+        <div className="absolute right-4 top-4 sm:right-8">
+          <ShareButton title={activity.title} slug={`activiteiten/${activity.slug}`} />
         </div>
+      </div>
 
+      {/* Colored bar with category + badges */}
+      <section className="bg-gradient-to-r from-[#E0685F] to-[#FFD8B0]">
+        <div className="mx-auto flex max-w-4xl flex-wrap items-center gap-2 px-5 py-3 sm:px-8">
+          <span className="rounded-full bg-white/20 px-3 py-1 text-[13px] font-bold text-white">
+            {activity.subcategory}
+          </span>
+          {activity.free ? (
+            <span className="rounded-full bg-white/90 px-3 py-1 text-[13px] font-bold text-[#4A8060]">
+              Gratis
+            </span>
+          ) : activity.price ? (
+            <span className="rounded-full bg-white/90 px-3 py-1 text-[13px] font-bold text-[#E0685F]">
+              {activity.price}
+            </span>
+          ) : null}
+          <span className="rounded-full bg-white/20 px-3 py-1 text-[13px] font-bold text-white">
+            {activity.ageLabel}
+          </span>
+        </div>
+      </section>
+
+      <main className="mx-auto max-w-4xl px-5 py-8 sm:px-8">
         {/* Content grid */}
-        <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_300px]">
+        <div className="grid gap-8 lg:grid-cols-[1fr_300px]">
           {/* Main content */}
           <div>
-            {/* Badges */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-full bg-[#FDDCDA] px-3 py-1 text-sm font-semibold text-[#E0685F]">
-                {activity.subcategory}
-              </span>
-              {activity.free ? (
-                <span className="rounded-full bg-[#8BC34A]/15 px-3 py-1 text-sm font-semibold text-[#6FAF3A]">
-                  Gratis
-                </span>
-              ) : (
-                <span className="rounded-full bg-[#F0E6E0] px-3 py-1 text-sm text-[#6B6B6B]">
-                  {activity.price}
-                </span>
-              )}
-              <span className="rounded-full bg-[#F0E6E0] px-3 py-1 text-sm text-[#6B6B6B]">
-                {activity.ageLabel}
-              </span>
-            </div>
-
             {/* Title */}
-            <h1 className="mt-4 text-xl font-extrabold leading-snug text-[#2D2D2D] sm:text-2xl md:text-3xl">
+            <h1 className="text-[24px] font-extrabold leading-snug text-[#2D2D2D] sm:text-[28px] md:text-[32px]">
               {activity.title}
             </h1>
 
@@ -142,10 +145,9 @@ export default async function ActivityPage({ params }: Props) {
 
             {/* Tip */}
             {activity.tip && (
-              <div className="mt-4 rounded-xl bg-[#FDF1EA] px-4 py-3">
-                <p className="text-sm text-[#6B6B6B]">
-                  <span className="font-bold text-[#2D2D2D]">Tip</span> — {activity.tip}
-                </p>
+              <div className="mt-4 flex items-start gap-2 rounded-[14px] bg-[#FDF1EA] px-4 py-3">
+                <Image src="/berry-icon.png" alt="" width={16} height={16} className="mt-0.5 h-4 w-4 shrink-0" />
+                <p className="text-[13px] font-semibold text-[#6B6B6B]">{activity.tip}</p>
               </div>
             )}
 
@@ -173,7 +175,6 @@ export default async function ActivityPage({ params }: Props) {
                 </svg>
                 Route
               </a>
-              <ShareButton title={activity.title} slug={`activiteiten/${activity.slug}`} />
             </div>
           </div>
 
