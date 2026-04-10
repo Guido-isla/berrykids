@@ -62,7 +62,7 @@ function scrapedToEvent(s: ScrapedEvent): Event {
     ageMax: parseAgeMax(s.ageLabel),
     indoor: guessIndoor(s),
     image: resolveImageUrl(s.imageUrl, s.ticketUrl),
-    category: mapCategory(s.category),
+    category: mapCategory(s.category, s.title),
     url: s.ticketUrl,
   };
 }
@@ -99,7 +99,12 @@ function guessIndoor(s: ScrapedEvent): boolean {
   return true; // default to indoor
 }
 
-function mapCategory(category?: string): string {
+function mapCategory(category?: string, title?: string): string {
+  // Title overrides — strong signals like "Festival" in title take priority
+  const t = (title || "").toLowerCase();
+  if (t.includes("festival")) return "Festival";
+  if (t.includes("markt") || t.includes("market")) return "Markt";
+
   if (!category) return "Event";
   const c = category.toLowerCase();
   if (c.includes("film")) return "Film";

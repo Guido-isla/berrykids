@@ -73,7 +73,14 @@ export default async function Home() {
   const verifiedAvailable = activities.filter(
     (a) => a.verified && (!a.availableMonths || a.availableMonths.includes(currentMonth))
   );
-  const scoredEvents = todayWithImg.map((e) => ({ item: e, score: scoreEvent(e, ctx), isEvent: true as const }));
+  // Dedupe events by title — multi-day films/shows shouldn't count twice
+  const eventSeenTitles = new Set<string>();
+  const uniqueTodayEvents = todayWithImg.filter((e) => {
+    if (eventSeenTitles.has(e.title)) return false;
+    eventSeenTitles.add(e.title);
+    return true;
+  });
+  const scoredEvents = uniqueTodayEvents.map((e) => ({ item: e, score: scoreEvent(e, ctx), isEvent: true as const }));
   const scoredActivities = resolveAct(verifiedAvailable).map((a) => ({ item: a, score: scoreActivity(a, ctx), isEvent: false as const }));
   const allScored = [...scoredEvents, ...scoredActivities]
     .filter((s) => s.item.image && s.item.image !== "/berry-icon.png")

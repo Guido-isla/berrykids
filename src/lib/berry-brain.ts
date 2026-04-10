@@ -33,7 +33,17 @@ function dailySeed(slug: string): number {
   return Math.abs(hash) % 5;
 }
 
-/** Score an event based on weather fit, cost, and data quality */
+/** Category bonus — prioritize one-off events over recurring films */
+const CATEGORY_BONUS: Record<string, number> = {
+  Festival: 6,
+  Markt: 5,
+  Event: 4,
+  Concert: 3,
+  Theater: 2,
+  Film: 0,
+};
+
+/** Score an event based on weather fit, cost, data quality, and event type */
 export function scoreEvent(event: Event, ctx: SiteContext): number {
   let score = 0;
   if (ctx.weather.isRainy && event.indoor) score += 4;
@@ -42,6 +52,7 @@ export function scoreEvent(event: Event, ctx: SiteContext): number {
   if (event.free) score += 3;
   if (event.image !== "/berry-icon.png") score += 2;
   if (event.time) score += 1;
+  score += CATEGORY_BONUS[event.category] ?? 1; // unique event types beat films
   score += dailySeed(event.slug); // 0–4 daily variety
   return score;
 }
