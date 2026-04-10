@@ -165,8 +165,8 @@ export default function TopFiveHero({
                 key={p.slug}
                 href={itemHref}
                 data-focal-card
-                style={{ transformOrigin: "center center", transition: "none" }}
-                className={`pick-reveal pick-reveal-${i} block w-[86vw] max-w-[360px] shrink-0 snap-center overflow-hidden rounded-[20px] bg-white shadow-[0_4px_16px_rgba(0,0,0,0.08)] active:scale-[0.98]`}
+                style={{ transformOrigin: "center center", transition: "none", willChange: "transform, opacity" }}
+                className="block w-[86vw] max-w-[360px] shrink-0 snap-center overflow-hidden rounded-[20px] bg-white shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
               >
                 {/* Photo */}
                 <div className="relative h-[260px] overflow-hidden">
