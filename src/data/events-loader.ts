@@ -45,7 +45,14 @@ function slugify(text: string): string {
 }
 
 function scrapedToEvent(s: ScrapedEvent): Event {
-  const isFree = !s.price || s.price === "0" || s.price?.toLowerCase().includes("gratis");
+  // Only flag as free if explicitly stated. Missing price ≠ free.
+  const priceText = (s.price || "").toLowerCase();
+  const tagText = (s.tags || []).join(" ").toLowerCase();
+  const isFree =
+    s.price === "0" ||
+    priceText.includes("gratis") ||
+    priceText.includes("free") ||
+    tagText.includes("gratis");
 
   return {
     slug: slugify(s.title) + "-" + s.date.slice(5),
