@@ -112,14 +112,14 @@ export default function FilterableActivities({ activities }: { activities: Activ
           <>
             {/* Glow */}
             <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full blur-3xl" style={{ background: illustration.glow }} />
-            {/* Illustration — big, centered */}
-            <div className="flex items-end justify-center">
+            {/* Illustration — big, centered both axes */}
+            <div className="flex h-[200px] items-center justify-center pt-3 sm:h-[230px] sm:pt-4">
               <Image
                 src={illustration.src}
                 alt=""
-                width={500}
-                height={375}
-                className="h-[130px] w-auto max-w-[90%] object-contain sm:h-[150px]"
+                width={600}
+                height={450}
+                className="h-full w-auto max-w-[85%] object-contain"
                 priority
               />
             </div>
