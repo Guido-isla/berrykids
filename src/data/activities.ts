@@ -347,7 +347,7 @@ export const activities: Activity[] = [
     area: "Zandvoort",
     ageLabel: "Alle leeftijden",
     free: true,
-    image: "https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=800&q=80",
+    image: "/photos/zandvoort-strand.jpg",
     availableMonths: [4, 5, 6, 7, 8, 9, 10],
     verified: true,
   },
