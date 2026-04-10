@@ -38,10 +38,10 @@ const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; gradient: string; gl
     deep: "#4D3B89",
   },
   indoor: {
-    src: "/illustrations/berry-zwemmen-v2.png",
-    gradient: "linear-gradient(180deg, #FFF9F0 0%, #BFE5F2 60%, #88D2DA 100%)",
-    glow: "rgba(79,175,190,0.2)",
-    deep: "#2C7886",
+    src: "/illustrations/berry-indoor-v2.png",
+    gradient: "linear-gradient(180deg, #FFF9F0 0%, #FFE0B0 55%, #FFB88A 100%)",
+    glow: "rgba(255,140,80,0.25)",
+    deep: "#C4582D",
   },
 };
 
