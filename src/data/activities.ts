@@ -1472,7 +1472,7 @@ export const activities: Activity[] = [
     free: false,
     price: "Lessen vanaf €10",
     website: "https://www.hart-haarlem.nl",
-    image: "/berry-icon.png",
+    image: "/photos/hart-haarlem.jpg",
     verified: true,
   },
   {
@@ -1488,7 +1488,7 @@ export const activities: Activity[] = [
     ageLabel: "Alle leeftijden",
     free: true,
     website: "http://www.mosterdzaadje.nl",
-    image: "/berry-icon.png",
+    image: "/photos/mosterdzaadje-santpoort.jpg",
     verified: true,
   },
   {
