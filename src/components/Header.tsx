@@ -157,6 +157,24 @@ export default function Header() {
                 ))}
               </nav>
 
+              {/* Newsletter CTA */}
+              <div className="px-3 pb-3">
+                <Link
+                  href="/#newsletter"
+                  className="block rounded-[16px] bg-gradient-to-br from-[#E0685F] to-[#FFD8B0] p-4 text-white shadow-[0_4px_16px_rgba(224,104,95,0.2)]"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Image src="/berry-wink.png" alt="" width={36} height={36} className="h-9 w-auto shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[14px] font-extrabold leading-tight">Weekend sorted</p>
+                      <p className="mt-0.5 text-[12px] font-semibold leading-tight text-white/90">
+                        Elke vrijdag in je inbox →
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+
               {/* Footer: locale + location */}
               <div className="border-t border-[#F0ECE8] px-5 py-4">
                 <div className="mb-3 flex items-center gap-1 text-[12px] font-semibold text-[#6B6B6B]">
