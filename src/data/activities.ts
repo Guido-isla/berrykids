@@ -1179,6 +1179,25 @@ export const activities: Activity[] = [
     verified: true,
   },
   {
+    slug: "meneer-paprika",
+    title: "Meneer Paprika",
+    description:
+      "De grootste speelgoedwinkel van Haarlem met het kindvriendelijkste café van de stad. Speelhoek, kindermenu, gratis koffie voor ouders en eindeloos snuffelen tussen het speelgoed.",
+    tip: "Reserveren in het café kan niet — kom op tijd, vooral op woensdag en in het weekend.",
+    category: "indoor",
+    subcategory: "Horeca & Speeltuin",
+    location: "Koningstraat 19-21, Haarlem",
+    area: "Haarlem",
+    ageLabel: "Alle leeftijden",
+    free: false,
+    price: "Café à la carte",
+    website: "https://meneerpaprika.nl",
+    phone: "023-2023268",
+    openingHours: "Café ma-vr 08:30 – 17:00, za 09:00 – 17:00, zo 10:00 – 17:00",
+    image: "https://i0.wp.com/meneerpaprika.nl/wp-content/uploads/2023/06/MrPaprik_Front.jpg?fit=2000%2C960&ssl=1",
+    verified: true,
+  },
+  {
     slug: "ontdekplek",
     title: "Ontdekplek",
     description:
