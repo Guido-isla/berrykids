@@ -39,9 +39,9 @@ const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; gradient: string; gl
   },
   indoor: {
     src: "/illustrations/berry-indoor-v2.png",
-    gradient: "linear-gradient(180deg, #FFF9F0 0%, #FFE0B0 55%, #FFB88A 100%)",
-    glow: "rgba(255,140,80,0.25)",
-    deep: "#C4582D",
+    gradient: "linear-gradient(180deg, #FFF9F0 0%, #FFE9B0 55%, #FFD96A 100%)",
+    glow: "rgba(255,200,40,0.25)",
+    deep: "#A07A1A",
   },
   all: {
     src: "/illustrations/berry-alles-v2.png",
@@ -63,7 +63,7 @@ const PILL_COLORS: Record<string, { bg: string; text: string }> = {
   sport: { bg: "#E0685F", text: "#FFFFFF" },
   natuur: { bg: "#54B76E", text: "#FFFFFF" },
   dieren: { bg: "#8BD8A8", text: "#2F7D46" },
-  indoor: { bg: "#4FAFBE", text: "#FFFFFF" },
+  indoor: { bg: "#E8B521", text: "#FFFFFF" },
   all: { bg: "#6B6B6B", text: "#FFFFFF" },
 };
 
