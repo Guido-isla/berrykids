@@ -9,6 +9,37 @@ html {
   overflow-x: hidden;
 }
 
+/* Accessibility — visible focus ring on keyboard navigation only */
+*:focus {
+  outline: none;
+}
+*:focus-visible {
+  outline: 2px solid #E0685F;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+button:focus-visible,
+a:focus-visible {
+  outline-offset: 3px;
+}
+
+/* Skip-to-content link — visible only when focused */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: #E0685F;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 0 0 12px 0;
+  font-weight: 700;
+  text-decoration: none;
+}
+.skip-to-content:focus {
+  left: 0;
+}
+
 body {
   background: #FFF9F0;
   color: #2D2D2D;

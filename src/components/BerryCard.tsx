@@ -33,7 +33,7 @@ export default function BerryCard({
             sizes="(max-width: 768px) 80vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
-          <SaveButton slug={slug} />
+          <span className="absolute right-3 top-3 z-10"><SaveButton slug={slug} /></span>
           {/* Berry tip overlay — bottom of image */}
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent px-3 pb-2.5 pt-6">
             <p className="flex items-center gap-1 text-[12px] font-bold leading-snug text-white sm:text-[13px]">

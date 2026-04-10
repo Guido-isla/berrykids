@@ -24,7 +24,7 @@ export default function EventCard({ event, berryTip }: { event: EventWithImage; 
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
-          <SaveButton slug={event.slug} />
+          <span className="absolute right-3 top-3 z-10"><SaveButton slug={event.slug} /></span>
           {event.featured && (
             <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#E0685F] to-[#FFB347] px-2.5 py-1 text-[10px] font-extrabold text-white shadow-md">
               <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor">

@@ -22,7 +22,7 @@ export default function ActivityCard({ activity }: { activity: ActivityWithImage
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
-          <SaveButton slug={activity.slug} />
+          <span className="absolute right-3 top-3 z-10"><SaveButton slug={activity.slug} /></span>
           {activity.free && (
             <span className="absolute left-3 top-3 rounded-full bg-[#8BC34A]/90 px-2.5 py-1 text-[10px] font-bold text-white shadow-sm">
               Gratis
