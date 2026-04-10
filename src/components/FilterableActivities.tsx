@@ -43,6 +43,12 @@ const CATEGORY_ILLUSTRATIONS: Record<string, { src: string; gradient: string; gl
     glow: "rgba(255,140,80,0.25)",
     deep: "#C4582D",
   },
+  all: {
+    src: "/illustrations/berry-alles-v2.png",
+    gradient: "linear-gradient(180deg, #FFF9F0 0%, #FFD0CB 55%, #FFB5AA 100%)",
+    glow: "rgba(224,104,95,0.22)",
+    deep: "#B33A30",
+  },
 };
 
 /** Map mood query params to category filters */
@@ -96,7 +102,7 @@ export default function FilterableActivities({ activities }: { activities: Activ
     ? activities.filter((a) => a.category === "natuur" || a.category === "dieren")
     : activities.filter((a) => a.category === category);
 
-  const illustration = category !== "all" ? CATEGORY_ILLUSTRATIONS[category] : null;
+  const illustration = CATEGORY_ILLUSTRATIONS[category] || null;
 
   return (
     <>
