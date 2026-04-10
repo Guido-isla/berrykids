@@ -81,10 +81,12 @@ export default function TopFiveHero({
         // Normalize distance: 0 when centered, 1 when one card-width away
         const maxDistance = rect.width;
         const t = Math.min(distance / maxDistance, 1);
-        // Scale: 1.0 when centered, 0.88 at edges
-        const scale = 1 - t * 0.12;
-        // Opacity: 1.0 when centered, 0.55 at edges
-        const opacity = 1 - t * 0.45;
+        // Ease: squared curve makes the active card dominant
+        const eased = t * t;
+        // Scale: 1.0 when centered, 0.78 at edges (22% smaller — clearly visible)
+        const scale = 1 - eased * 0.22;
+        // Opacity: 1.0 when centered, 0.4 at edges
+        const opacity = 1 - eased * 0.6;
         card.style.transform = `scale(${scale})`;
         card.style.opacity = String(opacity);
       });
