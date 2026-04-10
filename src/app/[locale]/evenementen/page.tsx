@@ -6,6 +6,7 @@ import { resolveEventImages } from "@/lib/photos";
 import { getSchoolVacation } from "@/data/dutch-calendar";
 import Footer from "@/components/Footer";
 import EventCard from "@/components/EventCard";
+import EmptyState from "@/components/EmptyState";
 import EventFilterBar from "./EventFilterBar";
 
 export const metadata: Metadata = {
@@ -172,7 +173,7 @@ export default async function EvenementenPage() {
                 {group.sublabel && (
                   <span className="text-[13px] font-bold text-[#E0685F]">{group.sublabel}</span>
                 )}
-                <span className="text-[13px] font-semibold text-[#999]">
+                <span className="text-[13px] font-semibold text-[#888]">
                   {group.events.length} {t("events", { count: group.events.length })}
                 </span>
               </div>
@@ -186,10 +187,12 @@ export default async function EvenementenPage() {
         </div>
 
         {groups.length === 0 && (
-          <div className="py-20 text-center">
-            <p className="text-[18px] font-bold text-[#2D2D2D]">{t("empty")}</p>
-            <p className="mt-1 text-[14px] text-[#6B6B6B]">{t("emptySub")}</p>
-          </div>
+          <EmptyState
+            title={t("empty")}
+            subtitle={t("emptySub")}
+            ctaLabel={t("emptyCta")}
+            ctaHref="/activiteiten"
+          />
         )}
       </main>
 

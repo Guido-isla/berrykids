@@ -313,7 +313,8 @@
     "restOfMonth": "Rest of {month}",
     "events": "{count, plural, one {event} other {events}}",
     "empty": "No events found",
-    "emptySub": "Check back later"
+    "emptySub": "Berry will check again later. In the meantime, browse our regular spots.",
+    "emptyCta": "Browse activities →"
   },
   "vakantie": {
     "dateRange": "26 April – 9 May 2026",

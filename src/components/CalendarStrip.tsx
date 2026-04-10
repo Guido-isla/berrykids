@@ -51,7 +51,7 @@ export default function CalendarStrip({ days }: { days: CalendarDay[] }) {
                     ? "text-white/80"
                     : day.isHoliday
                     ? "text-[#E0685F]"
-                    : "text-[#999]"
+                    : "text-[#888]"
                 }`}
               >
                 {day.isToday ? "nu" : day.dayName}
@@ -83,7 +83,7 @@ export default function CalendarStrip({ days }: { days: CalendarDay[] }) {
                       ? "text-[#7BA0C4]"
                       : day.tempMax >= 18
                       ? "text-[#E0685F]"
-                      : "text-[#999]"
+                      : "text-[#888]"
                   }`}
                 >
                   {day.tempMax}°

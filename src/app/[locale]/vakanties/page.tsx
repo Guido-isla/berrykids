@@ -295,13 +295,13 @@ export default async function VakantiesPage() {
               <span className="text-[24px]">🍂</span>
               <h3 className="mt-2 font-extrabold text-[#2D2D2D]">{t("autumnTitle")}</h3>
               <p className="text-[13px] text-[#6B6B6B]">{t("autumnDate")}</p>
-              <p className="mt-1 text-[13px] text-[#999]">{t("autumnSub")}</p>
+              <p className="mt-1 text-[13px] text-[#888]">{t("autumnSub")}</p>
             </div>
             <div className="rounded-[20px] bg-white p-5 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
               <span className="text-[24px]">❄️</span>
               <h3 className="mt-2 font-extrabold text-[#2D2D2D]">{t("winterTitle")}</h3>
               <p className="text-[13px] text-[#6B6B6B]">{t("winterDate")}</p>
-              <p className="mt-1 text-[13px] text-[#999]">{t("winterSub")}</p>
+              <p className="mt-1 text-[13px] text-[#888]">{t("winterSub")}</p>
             </div>
           </div>
         </section>

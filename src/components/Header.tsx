@@ -32,6 +32,16 @@ export default function Header() {
     setTappedHref(null);
   }, [pathname]);
 
+  // Close menu on Escape key
+  useEffect(() => {
+    if (!menuOpen) return;
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setMenuOpen(false);
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [menuOpen]);
+
   const navLinks = [
     { href: "/activiteiten", label: t("activities"), match: (p: string) => p.startsWith("/activiteiten") },
     { href: "/evenementen", label: t("events"), match: (p: string) => p.startsWith("/evenementen") || p.startsWith("/event") },

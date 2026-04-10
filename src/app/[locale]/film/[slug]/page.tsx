@@ -76,7 +76,7 @@ export default async function FilmPage({ params }: Props) {
 
             {/* Showtimes */}
             <div className="mt-4">
-              <p className="text-[11px] font-bold uppercase tracking-[1px] text-[#A09488]">Speeltijden</p>
+              <p className="text-[11px] font-bold uppercase tracking-[1px] text-[#888]">Speeltijden</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {film.times.map((time) => (
                   <span

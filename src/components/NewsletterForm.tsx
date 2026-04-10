@@ -266,7 +266,7 @@ export default function NewsletterForm({ variant = "default" }: { variant?: Vari
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="je@email.nl"
-        className="min-w-0 flex-1 rounded-full border border-[#F0E6E0] bg-white px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#999] focus:border-[#E0685F]"
+        className="min-w-0 flex-1 rounded-full border border-[#F0E6E0] bg-white px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#888] focus:border-[#E0685F]"
       />
       <button
         type="submit"

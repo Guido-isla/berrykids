@@ -74,7 +74,7 @@ export default function EventSubmitForm() {
               type="text"
               required
               placeholder="bv. Paasmarkt op de Grote Markt"
-              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E0685F]"
+              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#888] focus:border-[#E0685F]"
             />
           </div>
 
@@ -140,7 +140,7 @@ export default function EventSubmitForm() {
               type="text"
               required
               placeholder="bv. Grote Markt, Haarlem"
-              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E0685F]"
+              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#888] focus:border-[#E0685F]"
             />
           </div>
 
@@ -154,7 +154,7 @@ export default function EventSubmitForm() {
               required
               rows={4}
               placeholder="Kort en wervend — wat maakt dit event leuk voor gezinnen?"
-              className="w-full resize-none rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E0685F]"
+              className="w-full resize-none rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#888] focus:border-[#E0685F]"
             />
           </div>
 
@@ -186,7 +186,7 @@ export default function EventSubmitForm() {
                 name="price"
                 type="text"
                 placeholder="Gratis / €7,50"
-                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E0685F]"
+                className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#888] focus:border-[#E0685F]"
               />
             </div>
             <div>
@@ -214,7 +214,7 @@ export default function EventSubmitForm() {
               name="website"
               type="url"
               placeholder="https://"
-              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E0685F]"
+              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#888] focus:border-[#E0685F]"
             />
           </div>
 
@@ -239,11 +239,11 @@ export default function EventSubmitForm() {
                 />
               ) : (
                 <>
-                  <svg className="mb-2 h-8 w-8 text-[#BBB]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <svg className="mb-2 h-8 w-8 text-[#888]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z" />
                   </svg>
                   <span className="text-sm text-[#6B6B6B]">Klik om een foto te uploaden</span>
-                  <span className="text-xs text-[#BBB]">JPG, PNG — max 5MB</span>
+                  <span className="text-xs text-[#888]">JPG, PNG — max 5MB</span>
                 </>
               )}
               <input
@@ -301,7 +301,7 @@ export default function EventSubmitForm() {
               name="organization"
               type="text"
               placeholder="bv. Stichting Haarlemse Markten"
-              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#BBB] focus:border-[#E0685F]"
+              className="w-full rounded-xl border border-[#E0D8D2] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#888] focus:border-[#E0685F]"
             />
           </div>
         </div>

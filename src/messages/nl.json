@@ -313,7 +313,8 @@
     "restOfMonth": "Rest van {month}",
     "events": "{count, plural, one {event} other {events}}",
     "empty": "Geen evenementen gevonden",
-    "emptySub": "Check later terug"
+    "emptySub": "Berry kijkt later weer voor je. Probeer ondertussen onze vaste plekken.",
+    "emptyCta": "Bekijk activiteiten →"
   },
   "vakantie": {
     "dateRange": "26 april – 9 mei 2026",

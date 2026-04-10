@@ -23,9 +23,12 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
+      <a href="#main-content" className="skip-to-content">
+        Skip to content
+      </a>
       <NewsTicker />
       <Header />
-      {children}
+      <div id="main-content">{children}</div>
       <CookieNotice />
     </NextIntlClientProvider>
   );
