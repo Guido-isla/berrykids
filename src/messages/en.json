@@ -236,7 +236,7 @@
     "section2List2": "Cookie notice — a flag confirming you've seen our cookie notice.",
     "section3Title": "3. Third-party content (only on action)",
     "section3Text": "Some pages offer third-party content that requires manual loading:",
-    "section3List1": "Google Maps — on event and activity detail pages you'll see a \"Load map\" button. Only when you click it do we load the Google Maps iframe, at which point Google sets cookies (NID, CONSENT). No communication with Google happens before that point.",
+    "section3List1": "Google Maps — on event and activity detail pages you'll see a \"Load map\" button. Only when you click it do we load the Google Maps iframe, at which point Google sets cookies (NID, CONSENT). No communication with Google happens before that point. Your choice is remembered in your browser so we don't ask again for every map — clear your localStorage to reset.",
     "section3GoogleNote": "Google LLC is based in the US. By clicking \"Load map\" you consent to data being transferred to Google. Read Google's privacy policy at",
     "section4Title": "4. No analytics or advertising cookies",
     "section4Text": "Berry Kids does not currently use Google Analytics, Google Ads, Facebook Pixel or similar services. If that changes, we'll ask for your consent first via a cookie banner.",

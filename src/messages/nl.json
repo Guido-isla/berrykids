@@ -236,7 +236,7 @@
     "section2List2": "Cookiekennisgeving — een vinkje dat je onze cookiekennisgeving hebt gezien.",
     "section3Title": "3. Externe inhoud (alleen na actie)",
     "section3Text": "Sommige pagina's bieden externe inhoud aan die je handmatig moet laden:",
-    "section3List1": "Google Maps — op de detailpagina van een evenement of activiteit zie je een knop \"Kaart laden\". Pas als je daarop klikt, laden we de Google Maps iframe en plaatst Google cookies (NID, CONSENT). Tot dat moment vindt er geen communicatie met Google plaats.",
+    "section3List1": "Google Maps — op de detailpagina van een evenement of activiteit zie je een knop \"Kaart laden\". Pas als je daarop klikt, laden we de Google Maps iframe en plaatst Google cookies (NID, CONSENT). Tot dat moment vindt er geen communicatie met Google plaats. Je keuze wordt onthouden in je browser zodat we het niet voor elke kaart opnieuw vragen — je kunt het wissen door je localStorage te legen.",
     "section3GoogleNote": "Google LLC is gevestigd in de VS. Door op \"Kaart laden\" te klikken, ga je akkoord met de overdracht van gegevens naar Google. Lees Google's privacybeleid op",
     "section4Title": "4. Geen analyse- of advertentiecookies",
     "section4Text": "Berry Kids gebruikt op dit moment geen Google Analytics, Google Ads, Facebook Pixel of vergelijkbare diensten. Als dit verandert, vragen we eerst om je toestemming via een cookiebanner.",

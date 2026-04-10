@@ -1,14 +1,55 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 
 const GOOGLE_MAPS_KEY = "AIzaSyBN-CNaX3zejJ6YsxStrVgLt2tBwfxod5k";
+const CONSENT_KEY = "berry-maps-consent";
 
 export default function MapEmbed({ location }: { location: string }) {
   const [loaded, setLoaded] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const t = useTranslations("mapEmbed");
   const mapQuery = encodeURIComponent(location);
+
+  // On mount: read persisted consent. If user previously agreed, auto-load.
+  useEffect(() => {
+    setMounted(true);
+    try {
+      if (localStorage.getItem(CONSENT_KEY) === "1") {
+        setLoaded(true);
+      }
+    } catch {
+      // localStorage may be blocked
+    }
+  }, []);
+
+  function handleLoad() {
+    setLoaded(true);
+    try {
+      localStorage.setItem(CONSENT_KEY, "1");
+      // Notify other MapEmbeds on the page so they auto-load too
+      window.dispatchEvent(new CustomEvent("berry-maps-consent-given"));
+    } catch {
+      // localStorage may be blocked
+    }
+  }
+
+  // Listen for consent given by another MapEmbed on the same page
+  useEffect(() => {
+    function handleConsent() {
+      setLoaded(true);
+    }
+    window.addEventListener("berry-maps-consent-given", handleConsent);
+    return () => window.removeEventListener("berry-maps-consent-given", handleConsent);
+  }, []);
+
+  // Avoid hydration mismatch — render placeholder until mounted
+  if (!mounted) {
+    return (
+      <div className="h-[220px] w-full animate-pulse rounded-2xl border border-[#F0E6E0] bg-gradient-to-br from-[#FDF1EA] via-[#FFF6E8] to-[#F5F0EB]" />
+    );
+  }
 
   if (loaded) {
     return (
@@ -30,7 +71,7 @@ export default function MapEmbed({ location }: { location: string }) {
   return (
     <button
       type="button"
-      onClick={() => setLoaded(true)}
+      onClick={handleLoad}
       className="group relative flex h-[220px] w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl border border-[#F0E6E0] bg-gradient-to-br from-[#FDF1EA] via-[#FFF6E8] to-[#F5F0EB] p-5 text-center transition-all hover:from-[#FFE9D0] hover:to-[#F0E6E0]"
     >
       {/* Pin icon */}
