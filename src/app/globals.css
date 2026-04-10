@@ -59,53 +59,6 @@ body {
   display: none;
 }
 
-/* ============================================
-   Focal Carousel — Strava-style snap with scale tween
-   Used only ATF (above the fold) on mobile for Berry's picks.
-   ============================================ */
-.focal-carousel > * {
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
-  flex: 0 0 86vw;
-  max-width: 360px;
-}
-
-/* Scroll-driven scale tween (modern browsers).
-   Cards smoothly scale to 100% as they enter the centre. */
-@supports (animation-timeline: view()) {
-  @media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
-    .focal-carousel > * {
-      animation: focal-scale linear both;
-      animation-timeline: view(inline);
-      animation-range: cover 0% cover 100%;
-      transform-origin: center center;
-    }
-    @keyframes focal-scale {
-      0%,
-      100% {
-        transform: scale(0.88);
-        opacity: 0.55;
-      }
-      45%,
-      55% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-  }
-}
-
-/* On desktop the focal-carousel resets all carousel styles */
-@media (min-width: 1024px) {
-  .focal-carousel > * {
-    flex: initial;
-    max-width: none;
-    scroll-snap-align: none;
-    transform: none;
-    opacity: 1;
-    animation: none;
-  }
-}
 
 
 /* Berry mascot bob */

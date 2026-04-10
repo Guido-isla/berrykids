@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -59,6 +59,53 @@ export default function TopFiveHero({
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const [progressKey, setProgressKey] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Focal scale tween: update each card's scale based on distance from container center
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+
+    let rafId: number | null = null;
+
+    const update = () => {
+      rafId = null;
+      const containerRect = el.getBoundingClientRect();
+      const containerCenter = containerRect.left + containerRect.width / 2;
+      const cards = el.querySelectorAll<HTMLElement>("[data-focal-card]");
+
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const distance = Math.abs(cardCenter - containerCenter);
+        // Normalize distance: 0 when centered, 1 when one card-width away
+        const maxDistance = rect.width;
+        const t = Math.min(distance / maxDistance, 1);
+        // Scale: 1.0 when centered, 0.88 at edges
+        const scale = 1 - t * 0.12;
+        // Opacity: 1.0 when centered, 0.55 at edges
+        const opacity = 1 - t * 0.45;
+        card.style.transform = `scale(${scale})`;
+        card.style.opacity = String(opacity);
+      });
+    };
+
+    const onScroll = () => {
+      if (rafId === null) {
+        rafId = requestAnimationFrame(update);
+      }
+    };
+
+    update(); // Initial
+    el.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
+  }, [picks.length]);
 
   const goTo = useCallback((i: number) => {
     setCurrent(i);
@@ -107,14 +154,19 @@ export default function TopFiveHero({
         </div>
 
         {/* Focal carousel — Strava-style scale tween on scroll */}
-        <div className="focal-carousel -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-4 pl-4 pr-[14vw] scrollbar-none">
+        <div
+          ref={carouselRef}
+          className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-4 pl-4 pr-[14vw] scrollbar-none"
+        >
           {picks.map((p, i) => {
             const itemHref = p.isEvent ? `/event/${p.slug}` : `/activiteiten/${p.slug}`;
             return (
               <Link
                 key={p.slug}
                 href={itemHref}
-                className={`pick-reveal pick-reveal-${i} block overflow-hidden rounded-[20px] bg-white shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all active:scale-[0.98]`}
+                data-focal-card
+                style={{ transformOrigin: "center center", transition: "none" }}
+                className={`pick-reveal pick-reveal-${i} block w-[86vw] max-w-[360px] shrink-0 snap-center overflow-hidden rounded-[20px] bg-white shadow-[0_4px_16px_rgba(0,0,0,0.08)] active:scale-[0.98]`}
               >
                 {/* Photo */}
                 <div className="relative h-[260px] overflow-hidden">
