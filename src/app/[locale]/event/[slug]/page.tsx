@@ -107,6 +107,14 @@ export default async function EventPage({ params }: Props) {
           <div>
             {/* Badges */}
             <div className="flex flex-wrap items-center gap-2">
+              {event.featured && (
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#E0685F] to-[#FFB347] px-3 py-1 text-sm font-extrabold text-white shadow-md">
+                  <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l2.39 7.36h7.74l-6.26 4.55 2.39 7.36L12 16.71l-6.26 4.56 2.39-7.36L1.87 9.36h7.74L12 2z" />
+                  </svg>
+                  Onze tip
+                </span>
+              )}
               {event.free ? (
                 <span className="rounded-full bg-[#8BC34A]/15 px-3 py-1 text-sm font-semibold text-[#6FAF3A]">
                   Gratis
@@ -131,6 +139,21 @@ export default async function EventPage({ params }: Props) {
             <h1 className="mt-4 text-xl font-extrabold leading-snug text-[#2D2D2D] sm:text-2xl md:text-3xl">
               {event.title}
             </h1>
+
+            {/* Berry's editorial note */}
+            {event.featured && event.featuredNote && (
+              <div className="mt-4 flex items-start gap-3 rounded-[16px] border border-[#FFD8B0] bg-gradient-to-r from-[#FDF1EA] to-[#FFF6E8] px-4 py-3">
+                <Image src="/berry-wink.png" alt="" width={36} height={36} className="h-9 w-auto shrink-0" />
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-[1px] text-[#E0685F]">
+                    Berry zegt
+                  </p>
+                  <p className="mt-0.5 text-[14px] font-semibold leading-snug text-[#2D2D2D]">
+                    {event.featuredNote}
+                  </p>
+                </div>
+              </div>
+            )}
 
             {/* Date, time, location */}
             <div className="mt-4 space-y-2">
