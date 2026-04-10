@@ -61,12 +61,13 @@ body {
 
 /* ============================================
    Focal Carousel — Strava-style snap with scale tween
+   Used only ATF (above the fold) on mobile for Berry's picks.
    ============================================ */
 .focal-carousel > * {
   scroll-snap-align: center;
   scroll-snap-stop: always;
-  flex: 0 0 78vw;
-  max-width: 320px;
+  flex: 0 0 86vw;
+  max-width: 360px;
 }
 
 /* Scroll-driven scale tween (modern browsers).
@@ -82,8 +83,8 @@ body {
     @keyframes focal-scale {
       0%,
       100% {
-        transform: scale(0.92);
-        opacity: 0.7;
+        transform: scale(0.88);
+        opacity: 0.55;
       }
       45%,
       55% {
@@ -94,7 +95,7 @@ body {
   }
 }
 
-/* On desktop the focal-carousel becomes a grid — reset all carousel styles */
+/* On desktop the focal-carousel resets all carousel styles */
 @media (min-width: 1024px) {
   .focal-carousel > * {
     flex: initial;

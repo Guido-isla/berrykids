@@ -13,7 +13,6 @@ import NewsletterForm from "@/components/NewsletterForm";
 import EventCard from "@/components/EventCard";
 import MapEmbed from "@/components/MapEmbed";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import FocalCarousel from "@/components/FocalCarousel";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -279,11 +278,11 @@ export default async function EventPage({ params }: Props) {
           <h2 className="mb-5 text-lg font-bold text-[#2D2D2D]">
             {t("moreIn", { area: event.area })}
           </h2>
-          <FocalCarousel desktopGrid="lg:grid lg:grid-cols-3 lg:gap-5">
+          <div className="grid gap-3 sm:gap-5 sm:grid-cols-3">
             {related.map((e) => (
               <EventCard key={e.slug} event={e} />
             ))}
-          </FocalCarousel>
+          </div>
         </section>
 
         {/* Newsletter */}

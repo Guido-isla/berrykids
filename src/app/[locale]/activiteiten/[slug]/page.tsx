@@ -11,7 +11,6 @@ import NewsletterForm from "@/components/NewsletterForm";
 import ActivityCard from "@/components/ActivityCard";
 import MapEmbed from "@/components/MapEmbed";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import FocalCarousel from "@/components/FocalCarousel";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -245,11 +244,11 @@ export default async function ActivityPage({ params }: Props) {
           <h2 className="mb-5 text-lg font-bold text-[#2D2D2D]">
             {t("moreOf", { subcategory: localizedSubcategory.toLowerCase() })}
           </h2>
-          <FocalCarousel desktopGrid="lg:grid lg:grid-cols-3 lg:gap-5">
+          <div className="grid gap-3 sm:gap-5 sm:grid-cols-3">
             {related.map((a) => (
               <ActivityCard key={a.slug} activity={a} />
             ))}
-          </FocalCarousel>
+          </div>
         </section>
 
         {/* Newsletter */}

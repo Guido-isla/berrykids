@@ -106,45 +106,44 @@ export default function TopFiveHero({
           </div>
         </div>
 
-        {/* Card carousel — uniform cards, #1 slightly bigger */}
-        <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-none">
+        {/* Focal carousel — Strava-style scale tween on scroll */}
+        <div className="focal-carousel -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-4 pl-4 pr-[14vw] scrollbar-none">
           {picks.map((p, i) => {
             const itemHref = p.isEvent ? `/event/${p.slug}` : `/activiteiten/${p.slug}`;
-            const isFirst = i === 0;
             return (
               <Link
                 key={p.slug}
                 href={itemHref}
-                className={`pick-reveal pick-reveal-${i} block w-[78vw] shrink-0 overflow-hidden rounded-[20px] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all active:scale-[1.03]`}
+                className={`pick-reveal pick-reveal-${i} block overflow-hidden rounded-[20px] bg-white shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all active:scale-[0.98]`}
               >
                 {/* Photo */}
-                <div className="relative h-[200px] overflow-hidden">
+                <div className="relative h-[260px] overflow-hidden">
                   <Image
                     src={p.image}
                     alt={p.title}
                     fill
-                    sizes="78vw"
+                    sizes="86vw"
                     className="object-cover"
                     priority={i < 2}
                   />
                   {/* Number badge */}
-                  <span className={`absolute left-3 top-3 flex h-8 w-8 items-center justify-center rounded-[10px] text-[15px] font-black shadow-sm ${NUM_COLORS[i]}`}>
+                  <span className={`absolute left-3 top-3 flex h-9 w-9 items-center justify-center rounded-[12px] text-[16px] font-black shadow-sm ${NUM_COLORS[i]}`}>
                     {i + 1}
                   </span>
                   {/* Berry tip — on every card */}
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-3 pb-2.5 pt-6">
-                    <p className="flex items-center gap-1 text-[12px] font-bold leading-snug text-white">
-                      <Image src="/berry-icon.png" alt="" width={14} height={14} className="h-3.5 w-3.5 shrink-0" />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent px-4 pb-3 pt-8">
+                    <p className="flex items-center gap-1.5 text-[13px] font-bold leading-snug text-white">
+                      <Image src="/berry-icon.png" alt="" width={16} height={16} className="h-4 w-4 shrink-0" />
                       {p.whyNow}
                     </p>
                   </div>
                 </div>
-                {/* Info — same for all cards */}
-                <div className="px-3.5 py-3">
-                  <h3 className="text-[16px] font-extrabold leading-snug tracking-[-0.3px] text-[#1A1A1A]">
+                {/* Info */}
+                <div className="px-4 py-3.5">
+                  <h3 className="text-[17px] font-extrabold leading-snug tracking-[-0.3px] text-[#1A1A1A]">
                     {p.title}
                   </h3>
-                  <p className="mt-0.5 text-[13px] font-normal text-[#888]">
+                  <p className="mt-1 text-[13px] font-medium text-[#888]">
                     {p.location}{p.free ? ` · ${t("free")}` : ""}
                   </p>
                 </div>
