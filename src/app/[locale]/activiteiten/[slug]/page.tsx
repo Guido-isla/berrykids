@@ -10,6 +10,7 @@ import ShareButton from "@/components/ShareButton";
 import NewsletterForm from "@/components/NewsletterForm";
 import ActivityCard from "@/components/ActivityCard";
 import MapEmbed from "@/components/MapEmbed";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -77,16 +78,13 @@ export default async function ActivityPage({ params }: Props) {
   return (
     <div className="min-h-screen">
       <main className="mx-auto max-w-4xl px-5 py-8 sm:px-8">
-        {/* Back link */}
-        <Link
-          href="/activiteiten"
-          className="mb-6 inline-flex items-center gap-1 text-sm text-[#6B6B6B] transition-colors hover:text-[#2D2D2D]"
-        >
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-          </svg>
-          {t("back")}
-        </Link>
+        <Breadcrumbs
+          items={[
+            { label: "Berry Kids", href: "/" },
+            { label: t("activitiesCrumb"), href: "/activiteiten" },
+            { label: activity.title },
+          ]}
+        />
 
         {/* Hero image */}
         <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
@@ -152,6 +150,11 @@ export default async function ActivityPage({ params }: Props) {
               )}
             </div>
 
+            {/* Mobile-only inline map (sidebar map shown on desktop) */}
+            <div className="mt-4 lg:hidden">
+              <MapEmbed location={activity.location} />
+            </div>
+
             {/* Description */}
             <div className="mt-6">
               <p className="text-base leading-relaxed text-[#2D2D2D]">
@@ -196,10 +199,12 @@ export default async function ActivityPage({ params }: Props) {
             </div>
           </div>
 
-          {/* Sidebar */}
+          {/* Sidebar (desktop only — mobile inline above) */}
           <div className="space-y-4">
             {/* Privacy-friendly click-to-load map */}
-            <MapEmbed location={activity.location} />
+            <div className="hidden lg:block">
+              <MapEmbed location={activity.location} />
+            </div>
 
             {/* Details card */}
             <div className="rounded-2xl bg-white p-5 shadow-sm">

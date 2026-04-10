@@ -109,7 +109,9 @@
         "familie",
         "gratis",
         "bloemen"
-      ]
+      ],
+      "featured": true,
+      "featuredNote": "Het grootste lentefeest — praalwagens vol bloemen rijden door de Bollenstreek tot Haarlem"
     },
     {
       "source": "haventheater",
@@ -156,7 +158,9 @@
         "kermis",
         "familie",
         "gratis"
-      ]
+      ],
+      "featured": true,
+      "featuredNote": "De jaarlijkse kermis — botsauto's, suikerspinnen en gillen op de achtbaan"
     },
     {
       "source": "visithaarlemmermeer",
@@ -322,7 +326,9 @@
         "kermis",
         "familie",
         "gratis"
-      ]
+      ],
+      "featured": true,
+      "featuredNote": "De jaarlijkse kermis — botsauto's, suikerspinnen en gillen op de achtbaan"
     },
     {
       "source": "philharmonie",
@@ -665,7 +671,9 @@
         "jeugd",
         "sport",
         "creatief"
-      ]
+      ],
+      "featured": true,
+      "featuredNote": "Een hele dag sport, dans en knutselen — perfect voor de meivakantie"
     },
     {
       "source": "hart-haarlem",

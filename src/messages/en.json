@@ -136,14 +136,20 @@
     "searchFor": "for \"{query}\""
   },
   "footer": {
-    "tagline": "The best family outings in the Haarlem area.",
+    "tagline": "Berry picks the best family outings in the Haarlem area each week.",
+    "discoverHeading": "Discover",
+    "aboutHeading": "About",
+    "legalHeading": "Legal",
+    "home": "Home",
+    "aboutLink": "About Berry Kids",
     "thisWeekend": "This weekend",
     "submitEvent": "Submit an event",
     "contact": "Contact",
     "privacy": "Privacy",
     "cookies": "Cookies",
     "terms": "Terms",
-    "copyright": "© 2026 Berry Kids"
+    "copyright": "© 2026 Berry Kids",
+    "madeIn": "Made in Haarlem with 🍓"
   },
   "activiteitenPage": {
     "title": "Activities",
@@ -166,6 +172,7 @@
     "age": "Age",
     "indoorOutdoor": "Indoor/Outdoor",
     "tipLabel": "Tip",
+    "eventsCrumb": "Events",
     "moreIn": "More in {area}",
     "newsletterTitle": "The best tips every week",
     "newsletterSub": "A short weekly digest of fun things to do with kids near you.",
@@ -279,6 +286,7 @@
     "8+ jaar": "Ages 8+"
   },
   "activityDetail": {
+    "activitiesCrumb": "Activities",
     "back": "Back",
     "free": "Free",
     "ourTip": "Our pick",

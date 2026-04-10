@@ -136,14 +136,20 @@
     "searchFor": "voor \"{query}\""
   },
   "footer": {
-    "tagline": "De leukste uitjes voor gezinnen in Haarlem e.o.",
+    "tagline": "Berry kiest elke week de leukste uitjes voor gezinnen in Haarlem en omgeving.",
+    "discoverHeading": "Ontdek",
+    "aboutHeading": "Over",
+    "legalHeading": "Juridisch",
+    "home": "Home",
+    "aboutLink": "Over Berry Kids",
     "thisWeekend": "Dit weekend",
     "submitEvent": "Event insturen",
     "contact": "Contact",
     "privacy": "Privacy",
     "cookies": "Cookies",
     "terms": "Voorwaarden",
-    "copyright": "© 2026 Berry Kids"
+    "copyright": "© 2026 Berry Kids",
+    "madeIn": "Gemaakt in Haarlem met 🍓"
   },
   "activiteitenPage": {
     "title": "Activiteiten",
@@ -166,6 +172,7 @@
     "age": "Leeftijd",
     "indoorOutdoor": "Binnen/Buiten",
     "tipLabel": "Tip",
+    "eventsCrumb": "Evenementen",
     "moreIn": "Meer in {area}",
     "newsletterTitle": "Elke week de beste tips",
     "newsletterSub": "Wekelijks een kort overzicht van leuke dingen met kinderen bij jou in de buurt.",
@@ -279,6 +286,7 @@
     "8+ jaar": "8+ jaar"
   },
   "activityDetail": {
+    "activitiesCrumb": "Activiteiten",
     "back": "Terug",
     "free": "Gratis",
     "ourTip": "Onze tip",

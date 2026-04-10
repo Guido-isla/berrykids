@@ -48,7 +48,7 @@ export default function Header() {
           <button
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[#2D2D2D] shadow-[0_1px_4px_rgba(0,0,0,0.06)] transition-colors hover:bg-[#FFF3E0] sm:hidden"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#2D2D2D] shadow-[0_1px_4px_rgba(0,0,0,0.06)] transition-colors hover:bg-[#FFF3E0] sm:hidden"
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -127,7 +127,7 @@ export default function Header() {
                 <button
                   onClick={() => setMenuOpen(false)}
                   aria-label="Close menu"
-                  className="flex h-9 w-9 items-center justify-center rounded-full text-[#6B6B6B] hover:bg-[#FFF3E0]"
+                  className="flex h-11 w-11 items-center justify-center rounded-full text-[#6B6B6B] hover:bg-[#FFF3E0]"
                 >
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
