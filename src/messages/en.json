@@ -119,8 +119,13 @@
     "terms": "Terms",
     "copyright": "© 2026 Berry Kids"
   },
+  "activiteitenPage": {
+    "title": "Activities",
+    "heroSub": "Playgrounds, museums, farms and more. The places to take the kids any day."
+  },
   "evenementen": {
     "title": "Events",
+    "heroSub": "All the best things to do with kids — filtered by when they happen.",
     "count": "{count} events in the Haarlem area",
     "thisWeek": "This week",
     "thisWeekend": "This weekend",

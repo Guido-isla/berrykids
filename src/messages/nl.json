@@ -119,8 +119,13 @@
     "terms": "Voorwaarden",
     "copyright": "© 2026 Berry Kids"
   },
+  "activiteitenPage": {
+    "title": "Activiteiten",
+    "heroSub": "Speeltuinen, musea, boerderijen en meer. De vaste plekken om met de kids naartoe te gaan."
+  },
   "evenementen": {
     "title": "Evenementen",
+    "heroSub": "Alle leuke dingen om te doen met de kids — gefilterd op wanneer ze zijn.",
     "count": "{count} evenementen in Haarlem en omgeving",
     "thisWeek": "Deze week",
     "thisWeekend": "Dit weekend",
