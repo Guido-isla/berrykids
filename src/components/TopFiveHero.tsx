@@ -71,22 +71,23 @@ export default function TopFiveHero({
     const update = () => {
       rafId = null;
       const containerRect = el.getBoundingClientRect();
-      const containerCenter = containerRect.left + containerRect.width / 2;
+      // The active card's left edge snaps to this point (scrollPaddingLeft = 16px)
+      const snapLeft = containerRect.left + 16;
       const cards = el.querySelectorAll<HTMLElement>("[data-focal-card]");
 
       cards.forEach((card) => {
         const rect = card.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
-        const distance = Math.abs(cardCenter - containerCenter);
-        // Normalize distance: 0 when centered, 1 when one card-width away
+        const distance = Math.abs(rect.left - snapLeft);
+        // Normalize: 0 when active (left edge at snap point), 1 when one card-width away
         const maxDistance = rect.width;
         const t = Math.min(distance / maxDistance, 1);
-        // Ease: squared curve makes the active card dominant
         const eased = t * t;
-        // Scale: 1.0 when centered, 0.78 at edges (22% smaller — clearly visible)
-        const scale = 1 - eased * 0.22;
-        // Opacity: 1.0 when centered, 0.4 at edges
-        const opacity = 1 - eased * 0.6;
+        // Scale: 1.0 active, 0.82 at edges
+        const scale = 1 - eased * 0.18;
+        // Opacity: 1.0 active, 0.45 at edges
+        const opacity = 1 - eased * 0.55;
+        // Set transform-origin to left center so shrinking doesn't move the card away from its snap position
+        card.style.transformOrigin = "left center";
         card.style.transform = `scale(${scale})`;
         card.style.opacity = String(opacity);
       });
@@ -155,10 +156,11 @@ export default function TopFiveHero({
           </div>
         </div>
 
-        {/* Focal carousel — Strava-style scale tween on scroll */}
+        {/* Focal carousel — Strava-style snap-start with peek */}
         <div
           ref={carouselRef}
-          className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-4 pl-4 pr-[14vw] scrollbar-none"
+          className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-4 scrollbar-none"
+          style={{ scrollPaddingLeft: "16px", paddingLeft: "16px", paddingRight: "16px" }}
         >
           {picks.map((p, i) => {
             const itemHref = p.isEvent ? `/event/${p.slug}` : `/activiteiten/${p.slug}`;
@@ -168,7 +170,7 @@ export default function TopFiveHero({
                 href={itemHref}
                 data-focal-card
                 style={{ transformOrigin: "center center", transition: "none", willChange: "transform, opacity" }}
-                className="block w-[86vw] max-w-[360px] shrink-0 snap-center overflow-hidden rounded-[20px] bg-white shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
+                className="block w-[82vw] max-w-[340px] shrink-0 snap-start overflow-hidden rounded-[20px] bg-white shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
               >
                 {/* Photo */}
                 <div className="relative h-[260px] overflow-hidden">
